@@ -66,7 +66,7 @@ const Home = () => {
   }, [])
 
   return (
-    <div className='flex flex-col gap-10'>
+    <div className='flex flex-col gap-10 p-32'>
       <h1 className='text-center text-xl font-bold'>This is the Home Page</h1>
       <div>
         <p className='py-5'>Example env variable (VITE_EXAMPLE_ENV):</p>
