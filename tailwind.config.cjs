@@ -20,6 +20,7 @@ module.exports = {
       },
       white: "#D3DAF4",
       error: "#de3535",
+      transparent: "transparent",
     },
     fontFamily: {
       title: ["StretchPro"],
@@ -28,5 +29,5 @@ module.exports = {
       subtext: ["Andale Mono"],
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 }

@@ -17,6 +17,7 @@ import ApplicationApplicant from "./views/portal/applicant/ApplicationApplicant"
 import PortalApplicant from "./views/portal/applicant"
 import DashboardApplicant from "./views/portal/applicant/DashboardApplicant"
 import useAuth from "./hooks/useAuth"
+import Apply from "./views/apply"
 
 const App: React.FC = () => {
   const {
@@ -35,6 +36,7 @@ const App: React.FC = () => {
       <Route element={<UnauthenticatedRoute />}>
         <Route path='login' element={<Login />} />
         <Route path='signup' element={<Signup />} />
+        <Route path='apply' element={<Apply />} />
       </Route>
 
       {/* You must be logged in to access these routes*/}

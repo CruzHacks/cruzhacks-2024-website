@@ -1,0 +1,65 @@
+import React from "react"
+import { classNames } from "../../utils/string"
+import { ExclamationCircleIcon } from "@heroicons/react/24/solid"
+
+type Icon = React.ForwardRefExoticComponent<
+  Omit<React.SVGProps<SVGSVGElement>, "ref"> & {
+    title?: string | undefined
+    titleId?: string | undefined
+  } & React.RefAttributes<SVGSVGElement>
+>
+
+interface TextInputProps {
+  Icon?: Icon
+  error?: string
+  inputProps?: any
+}
+
+// TODO: Fix wack autofill styling
+const TextInput = ({ Icon, error, inputProps }: TextInputProps) => {
+  return (
+    <div>
+      <div
+        className={classNames(
+          error
+            ? "bg-error/10 text-error ring-error/10 focus-within:ring-error/50"
+            : "bg-white/10 text-white ring-white/5 focus-within:ring-white/40",
+          "relative mt-2 flex gap-3 rounded-md p-4 shadow-sm ring ring-inset"
+        )}
+      >
+        {Icon ? (
+          <Icon
+            className={classNames(error ? "text-error" : "text-white", "w-8")}
+          />
+        ) : (
+          <div className='w-8'></div>
+        )}
+        <input
+          {...inputProps}
+          aria-invalid={error ? "true" : "false"}
+          className={classNames(
+            error
+              ? "border-error/60 text-error placeholder:text-error/60 focus:border-error/80"
+              : "border-white/40 text-white placeholder:text-white/60 focus:border-white/80",
+            "mr-5 block w-full border-0 border-b-2 bg-transparent p-0 pr-10 font-subtext ring-0 focus:ring-0 sm:text-lg"
+          )}
+        />
+        {error && (
+          <div className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-8'>
+            <ExclamationCircleIcon className='h-5 w-5' aria-hidden='true' />
+          </div>
+        )}
+      </div>
+      {error && (
+        <p
+          className='mt-2 text-sm text-error'
+          id={inputProps["aria-describedby"] || ""}
+        >
+          {error}
+        </p>
+      )}
+    </div>
+  )
+}
+
+export default TextInput
