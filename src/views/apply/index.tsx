@@ -104,51 +104,51 @@ const Apply = () => {
             error={error ? "Not a valid person." : undefined}
           />
         </div>
-      </div>
 
-      <div className='w-full'>
-        <h3 className='text-lg'>Radio Options</h3>
-        <RadioInput
-          items={radioOptions}
-          selectedItem={radioSelectedItem1}
-          setSelectedItem={setRadioSelectedItem1}
-        />
-      </div>
+        <div className='w-full'>
+          <h3 className='text-lg'>Radio Options</h3>
+          <RadioInput
+            items={radioOptions}
+            selectedItem={radioSelectedItem1}
+            setSelectedItem={setRadioSelectedItem1}
+          />
+        </div>
 
-      <div className='w-full'>
-        <h3 className='text-lg'>Radio Options w other</h3>
-        <RadioInput
-          items={radioOptions}
-          selectedItem={radioSelectedItem2}
-          setSelectedItem={setRadioSelectedItem2}
-          other
-        />
-      </div>
+        <div className='w-full'>
+          <h3 className='text-lg'>Radio Options w other</h3>
+          <RadioInput
+            items={radioOptions}
+            selectedItem={radioSelectedItem2}
+            setSelectedItem={setRadioSelectedItem2}
+            other
+          />
+        </div>
 
-      <div className='w-full'>
-        <h3 className='text-lg'>Radio Options Wrap</h3>
-        <RadioInput
-          items={radioOptions}
-          selectedItem={radioSelectedItem3}
-          setSelectedItem={setRadioSelectedItem3}
-          arrange='vertical-inline'
-        />
-      </div>
+        <div className='w-full'>
+          <h3 className='text-lg'>Radio Options Wrap</h3>
+          <RadioInput
+            items={radioOptions}
+            selectedItem={radioSelectedItem3}
+            setSelectedItem={setRadioSelectedItem3}
+            arrange='vertical-inline'
+          />
+        </div>
 
-      <div className='w-full'>
-        <h3 className='text-lg'>Short Answer no count</h3>
-        <TextareaInput
-          error={error ? "Not a valid answer." : undefined}
-          showCount={false}
-        />
-      </div>
+        <div className='w-full'>
+          <h3 className='text-lg'>Short Answer no count</h3>
+          <TextareaInput
+            error={error ? "Not a valid answer." : undefined}
+            showCount={false}
+          />
+        </div>
 
-      <div className='w-full'>
-        <h3 className='text-lg'>Short Answer tall</h3>
-        <TextareaInput
-          rows={12}
-          error={error ? "Not a valid answer." : undefined}
-        />
+        <div className='w-full'>
+          <h3 className='text-lg'>Short Answer tall</h3>
+          <TextareaInput
+            rows={12}
+            error={error ? "Not a valid answer." : undefined}
+          />
+        </div>
       </div>
     </div>
   )
