@@ -87,7 +87,10 @@ const UsersAdmin = () => {
                               userIdx !== users.length - 1
                                 ? "border-b border-white/20"
                                 : "",
-                              user.displayName ? "" : "text-white/50",
+                              user.displayName
+                                ? user.email === currentUser?.email &&
+                                    "text-orange"
+                                : "text-white/50",
                               "hidden whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:table-cell sm:pl-6 lg:pl-8"
                             )}
                           >

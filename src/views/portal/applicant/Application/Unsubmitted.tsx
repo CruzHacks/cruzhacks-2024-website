@@ -1,17 +1,71 @@
 import React, { useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { classNames } from "../../../utils/string"
+import { classNames } from "../../../../utils/string"
 import { ExclamationCircleIcon } from "@heroicons/react/24/solid"
-import { submitApplication } from "../../../utils/functionsApi"
-import useAuth from "../../../hooks/useAuth"
-import { ApplicationSchema } from "../../../utils/types"
+import { submitApplicationAuthed } from "../../../../utils/apis/cloudFunctions"
+import useAuth from "../../../../hooks/useAuth"
+import { ApplicationSchema } from "../../../../utils/types"
+
+const app: ApplicationSchema = {
+  email: "",
+  password: "",
+  demographics: {
+    first_name: "John",
+    last_name: "Doe",
+    phone_number: "1231231234",
+    age: 21,
+    country: "United State of America",
+    school: "University of California, Santa Cruz",
+    year_in_school: "Junior",
+    education_level: "Undergraduate",
+    ucsc_student: true,
+    ucsc_college_affiliation: "Crown",
+    graduation_year: 2025,
+    area_of_study: ["Computer Science"],
+    first_hackathon: true,
+    hackathon_experience: "2",
+    tech_experience:
+      "I have experience with React and Node.js. I have made a few different side projects creating API layers and simple dashboards.",
+    ethnic_background: ["White", "Chinese"],
+    pronouns: "He/Him",
+    gender: "Male",
+    sexual_orientation: "Straight",
+    underepresented_group: "true",
+  },
+  short_responses: {
+    responses: [
+      {
+        question: "Why do you want to attend CruzHacks?",
+        answer:
+          "I want to attend CruzHacks because I want to learn more about the tech industry and meet new people.",
+      },
+    ],
+  },
+  logistics: {
+    need_travel_reimbursement: "I don't know",
+    need_charter_bus: "I don't know",
+    attendence_possible_wo_reimbursement: "Yes",
+    need_campus_parking_permit: "Yes",
+    travel_plan: "I will be driving to the event.",
+    tshirt_size: "M",
+    dietary_restrictions: "None",
+  },
+  socials: {
+    resume_drop_form: false,
+    linked_in: "https://www.linkedin.com/in/john-doe/",
+    github: "https://github.com/johndoe",
+    discord: "johndoe#1234",
+    cruzhacks_referral: "From a friend",
+    cruzhacks_refferal_email: "george@ucsc.edu",
+  },
+}
 
 // This component uses react-hook-form to handle data validation and input
 // specific errors. Follow this tutorial to learn more about how Zod is used in
 // react-hook-form to validate the schema:
 // https://react-hook-form.com/get-started#SchemaValidation
-const ApplicationApplicant = () => {
+const Unsubmitted = () => {
   const {
     auth: { user },
   } = useAuth()
@@ -34,12 +88,29 @@ const ApplicationApplicant = () => {
     }
 
     setLoading(true)
-    const { message } = await submitApplication({ user, application: data })
-    alert(message)
+    // const { message } = await submitApplication({ user, application: data })
+    // alert(message)
+  }
+
+  const testSubmitApplication = async () => {
+    if (!user) {
+      console.error("User not logged in")
+      return
+    }
+
+    try {
+      const message = await submitApplicationAuthed(user, app)
+      console.log(message)
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   return (
-    <div className='max-w-xl border-2 p-10'>
+    <div className=''>
+      <button onClick={testSubmitApplication} className='border-2 bg-pink p-5'>
+        Test Submit Application
+      </button>
       <form
         onSubmit={handleSubmit(handleApplicationSubmit)}
         className='space-y-6'
@@ -54,20 +125,20 @@ const ApplicationApplicant = () => {
           <div className='relative mt-2 rounded-md shadow-sm'>
             <input
               type='text'
-              {...register("first_name")}
+              {...register("demographics.first_name")}
               name='first_name'
               id='first_name'
               className={classNames(
-                errors.first_name
+                errors.demographics?.first_name
                   ? "text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500"
                   : "",
                 "ring-gray-300 placeholder:text-gray-400 focus:ring-green-800 block w-full rounded-md border-0 px-3 py-1.5 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
               )}
               placeholder='you@example.com'
-              aria-invalid={errors.first_name ? "true" : "false"}
+              aria-invalid={errors.demographics?.first_name ? "true" : "false"}
               aria-describedby='password-error'
             />
-            {errors.first_name && (
+            {errors.demographics?.first_name && (
               <div className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3'>
                 <ExclamationCircleIcon
                   className='text-red-500 h-5 w-5'
@@ -77,9 +148,9 @@ const ApplicationApplicant = () => {
             )}
           </div>
 
-          {errors.first_name && (
+          {errors.demographics?.first_name && (
             <p className='text-red-600 mt-2 text-sm' id='email-error'>
-              {errors.first_name.message}
+              {errors.demographics.first_name.message}
             </p>
           )}
         </div>
@@ -123,4 +194,4 @@ const ApplicationApplicant = () => {
   )
 }
 
-export default ApplicationApplicant
+export default Unsubmitted
