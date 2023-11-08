@@ -6,8 +6,8 @@ const Submitted = () => {
   const {
     auth: { user },
   } = useAuth()
-  // NOTE: Type is any because we don't know what the application will adhere to
-  // the most recent schema version
+  // NOTE: Type is any because we don't know that the application will adhere to
+  // the most updated schema
   const [application, setApplication] = useState<any>()
 
   useEffect(() => {

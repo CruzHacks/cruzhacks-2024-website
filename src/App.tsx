@@ -18,6 +18,7 @@ import PortalApplicant from "./views/portal/applicant"
 import DashboardApplicant from "./views/portal/applicant/DashboardApplicant"
 import useAuth from "./hooks/useAuth"
 import Apply from "./views/apply"
+import { Toaster } from "react-hot-toast"
 
 const App: React.FC = () => {
   const {
@@ -29,42 +30,56 @@ const App: React.FC = () => {
   }
 
   return (
-    <Routes>
-      <Route index element={<Home />} />
+    <>
+      <Toaster
+        toastOptions={{
+          className: "font-subtext",
+          position: "bottom-right",
+          success: {
+            className: "bg-[#4BB543] text-white font-subtext text-md",
+          },
+          error: {
+            className: "bg-error text-white font-subtext text-md",
+          },
+        }}
+      />
+      <Routes>
+        <Route index element={<Home />} />
 
-      {/* You cannot be logged in to access these routes*/}
-      <Route element={<UnauthenticatedRoute />}>
-        <Route path='login' element={<Login />} />
-        <Route path='signup' element={<Signup />} />
-        <Route path='apply' element={<Apply />} />
-      </Route>
-
-      {/* You must be logged in to access these routes*/}
-      <Route path='portal' element={<PortalRedirectRoute />} />
-
-      <Route element={<RoleProtectedRoute allowedRole='applicant' />}>
-        <Route path='portal/applicant' element={<PortalApplicant />}>
-          <Route index element={<DashboardApplicant />} />
-          <Route path='application' element={<ApplicationApplicant />} />
+        {/* You cannot be logged in to access these routes*/}
+        <Route element={<UnauthenticatedRoute />}>
+          <Route path='login' element={<Login />} />
+          <Route path='signup' element={<Signup />} />
+          <Route path='apply' element={<Apply />} />
         </Route>
-      </Route>
 
-      <Route element={<RoleProtectedRoute allowedRole='hacker' />}>
-        <Route path='portal/hacker' element={<HackerPortal />}>
-          {/* Hacker Portal sub-routes go here*/}
-        </Route>
-      </Route>
-      <Route element={<RoleProtectedRoute allowedRole='admin' />}>
-        <Route path='portal/admin' element={<AdminPortal />}>
-          <Route index element={<DashboardAdmin />} />
-          <Route path='applications' element={<ApplicationsAdmin />} />
-          <Route path='teams' element={<TeamsAdmin />} />
-          <Route path='users' element={<UsersAdmin />} />
-        </Route>
-      </Route>
+        {/* You must be logged in to access these routes*/}
+        <Route path='portal' element={<PortalRedirectRoute />} />
 
-      <Route path='*' element={<NotFound />} />
-    </Routes>
+        <Route element={<RoleProtectedRoute allowedRole='applicant' />}>
+          <Route path='portal/applicant' element={<PortalApplicant />}>
+            <Route index element={<DashboardApplicant />} />
+            <Route path='application' element={<ApplicationApplicant />} />
+          </Route>
+        </Route>
+
+        <Route element={<RoleProtectedRoute allowedRole='hacker' />}>
+          <Route path='portal/hacker' element={<HackerPortal />}>
+            {/* Hacker Portal sub-routes go here*/}
+          </Route>
+        </Route>
+        <Route element={<RoleProtectedRoute allowedRole='admin' />}>
+          <Route path='portal/admin' element={<AdminPortal />}>
+            <Route index element={<DashboardAdmin />} />
+            <Route path='applications' element={<ApplicationsAdmin />} />
+            <Route path='teams' element={<TeamsAdmin />} />
+            <Route path='users' element={<UsersAdmin />} />
+          </Route>
+        </Route>
+
+        <Route path='*' element={<NotFound />} />
+      </Routes>
+    </>
   )
 }
 

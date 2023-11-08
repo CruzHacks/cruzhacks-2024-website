@@ -10,6 +10,7 @@ import RadioInput from "../../components/inputs/RadioInput"
 import TextareaInput from "../../components/inputs/TextareaInput"
 import { ApplicationSchema } from "../../utils/types"
 import { submitApplicationUnauthed } from "../../utils/apis/cloudFunctions"
+import toast from "react-hot-toast"
 
 const app: ApplicationSchema = {
   email: `test${Math.floor(Math.random() * 100)}@gmail.com`,
@@ -85,7 +86,11 @@ const Apply = () => {
 
   const handleApplicationSubmit = async () => {
     try {
-      const message = await submitApplicationUnauthed(app)
+      const message = await toast.promise(submitApplicationUnauthed(app), {
+        loading: "Submitting application...",
+        success: "Application submitted!",
+        error: "Error submitting application",
+      })
       console.log(message)
     } catch (err) {
       console.error(err)

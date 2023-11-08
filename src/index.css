@@ -23,3 +23,10 @@
     src: url("./assets/fonts/Stretch Pro.woff") format("woff");
   }
 }
+
+/* making firebase emulator warning less intrusive */
+.firebase-emulator-warning {
+  background-color: transparent !important;
+  border: none !important;
+  color: rgba(245, 66, 66, 0.3) !important;
+}
