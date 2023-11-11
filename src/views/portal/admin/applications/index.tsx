@@ -1,65 +1,42 @@
 import React from "react"
-import { classNames, toUrlFriendly } from "../../../../utils/string"
+import { classNames } from "../../../../utils/string"
 import { useNavigate } from "react-router-dom"
+import useApplications from "../../../../hooks/useApplications"
+import type { ApplicationStatus } from "../../../../utils/types"
 
-type ApplicationStatus = "NEEDS REVIEW" | "DENIED" | "ACCEPTED"
-
-const applications = [
-  {
-    appId: 1,
-    status: "NEEDS REVIEW" as const,
-    email: "monkey@gmail.com",
-    timeSubmitted: "2021-09-01T12:00:00Z",
-  },
-  {
-    appId: 2,
-    status: "DENIED" as const,
-    email: "test@gmail.com",
-    timeSubmitted: "2021-09-01T12:00:00Z",
-  },
-  {
-    appId: 3,
-    status: "ACCEPTED" as const,
-    email: "thedog@gmail.com",
-    timeSubmitted: "2021-09-01T12:00:00Z",
-  },
-]
-
-const formatTime = (time: string) => {
-  const d = new Date(time)
+const formatTime = (time: any) => {
+  const d = time.toDate()
 
   return `${d.toLocaleDateString()} at ${d.toLocaleTimeString()}`
 }
 
 const AppStatus = ({ status }: { status: ApplicationStatus }) => {
-  if (status === "DENIED") {
+  if (status === "rejected") {
     return (
-      <span className='inline-flex items-center rounded-md bg-error/50 px-2 py-1 text-xs font-medium text-error ring-1 ring-inset ring-error/20'>
-        Denied
+      <span className='inline-flex items-center rounded-md bg-error/10 px-2 py-1 text-xs font-medium text-error ring-1 ring-inset ring-error/20'>
+        Rejected
       </span>
     )
   }
 
-  if (status === "ACCEPTED") {
+  if (status === "accepted") {
     return (
-      <span className='inline-flex items-center rounded-md bg-success/50 px-2 py-1 text-xs font-medium text-success ring-1 ring-inset ring-success/20'>
+      <span className='inline-flex items-center rounded-md bg-success/10 px-2 py-1 text-xs font-medium text-success ring-1 ring-inset ring-success/20'>
         Accepted
       </span>
     )
   }
 
   return (
-    <span className='inline-flex items-center rounded-md bg-gold/50 px-2 py-1 text-xs font-medium text-gold ring-1 ring-inset ring-gold/20'>
+    <span className='inline-flex items-center rounded-md bg-gold/10 px-2 py-1 text-xs font-medium text-gold ring-1 ring-inset ring-gold/20'>
       Needs Review
     </span>
   )
 }
 
 const ApplicationsAdmin = () => {
-  const isError = false
-  const error = false
-  const isLoading = false
   const navigate = useNavigate()
+  const { data: applications, error, isLoading, isError } = useApplications()
 
   const handleReviewApplication = (email: string) => {
     const email_friendly = encodeURIComponent(email)
@@ -86,21 +63,15 @@ const ApplicationsAdmin = () => {
                 <tr>
                   <th
                     scope='col'
-                    className='sticky top-0 z-10 border-b border-white/20 bg-blue-imperial/50 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white backdrop-blur sm:pl-6 lg:pl-8'
+                    className='sticky top-0 z-10 hidden border-b border-white/20 bg-blue-imperial/50 py-3.5 pl-4 pr-3 text-left text-sm font-semibold backdrop-blur sm:table-cell'
                   >
-                    Id
+                    Email
                   </th>
                   <th
                     scope='col'
                     className='sticky top-0 z-10 border-b border-white/20 bg-blue-imperial/50 px-3 py-3.5 text-left text-sm font-semibold text-white backdrop-blur'
                   >
                     Status
-                  </th>
-                  <th
-                    scope='col'
-                    className='sticky top-0 z-10 hidden border-b border-white/20 bg-blue-imperial/50 px-3 py-3.5 text-left text-sm font-semibold backdrop-blur sm:table-cell'
-                  >
-                    Email
                   </th>
                   <th
                     scope='col'
@@ -127,10 +98,10 @@ const ApplicationsAdmin = () => {
                               applicationIdx !== applications.length - 1
                                 ? "border-b border-white/20"
                                 : "",
-                              "whitespace-nowrap py-4 pl-4 pr-3 font-subtext text-sm sm:pl-6 lg:pl-8"
+                              "hidden whitespace-nowrap py-4 pl-4 pr-3 font-subtext text-sm md:table-cell"
                             )}
                           >
-                            {application.appId}
+                            {application.email}
                           </td>
                           <td
                             className={classNames(
@@ -147,20 +118,10 @@ const ApplicationsAdmin = () => {
                               applicationIdx !== applications.length - 1
                                 ? "border-b border-white/20"
                                 : "",
-                              "hidden whitespace-nowrap px-3 py-4 font-subtext text-sm md:table-cell"
-                            )}
-                          >
-                            {application.email}
-                          </td>
-                          <td
-                            className={classNames(
-                              applicationIdx !== applications.length - 1
-                                ? "border-b border-white/20"
-                                : "",
                               "hidden whitespace-nowrap px-3 py-4 text-sm md:table-cell"
                             )}
                           >
-                            {formatTime(application.timeSubmitted)}
+                            {formatTime(application._submitted)}
                           </td>
                           <td
                             className={classNames(
@@ -171,7 +132,7 @@ const ApplicationsAdmin = () => {
                             )}
                           >
                             <button
-                              className='cursor-not-allowed text-pink/50'
+                              className='text-pink'
                               onClick={() =>
                                 handleReviewApplication(application.email)
                               }

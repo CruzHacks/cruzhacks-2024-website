@@ -8,17 +8,19 @@ import ComboboxInput, {
 } from "../../components/inputs/ComboboxInput"
 import RadioInput from "../../components/inputs/RadioInput"
 import TextareaInput from "../../components/inputs/TextareaInput"
-import { ApplicationSchema } from "../../utils/types"
+import { ApplicationSchemaDto } from "../../utils/types"
 import { submitApplicationUnauthed } from "../../utils/apis/cloudFunctions"
 import toast from "react-hot-toast"
 
-const app: ApplicationSchema = {
-  email: `test${Math.floor(Math.random() * 100)}@gmail.com`,
-  password: "password123",
-  demographics: {
+const app: ApplicationSchemaDto = {
+  user: {
+    email: `test${Math.floor(Math.random() * 100)}@gmail.com`,
+    password: "password123",
     first_name: "John",
     last_name: "Doe",
     phone_number: "" + Math.floor(Math.random() * 1000000000),
+  },
+  demographics: {
     age: 21,
     country: "United State of America",
     school: "University of California, Santa Cruz",

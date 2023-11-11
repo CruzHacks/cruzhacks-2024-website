@@ -1,6 +1,6 @@
 import type { User } from "@firebase/auth"
 import {
-  ApplicationSchema,
+  ApplicationSchemaDto,
   CheckRoleSynced,
   ErrorResponse,
   UserBasics,
@@ -87,14 +87,14 @@ export const getUsers = async (user: User, pageToken?: string) => {
  */
 export const submitApplicationAuthed = async (
   user: User,
-  application: ApplicationSchema
+  application: ApplicationSchemaDto
 ) => {
   try {
     if (!user) throw new Error("No user provided")
     if (!application) throw new Error("No application provided")
 
     // Validate the application data (throws error if invalid)
-    const applicationParsed = ApplicationSchema.parse(application)
+    const applicationParsed = ApplicationSchemaDto.parse(application)
 
     const idToken = await user.getIdToken(false)
     const response = await axios.post(
@@ -127,13 +127,13 @@ export const submitApplicationAuthed = async (
  * @returns Success message if successful, otherwise an error message
  */
 export const submitApplicationUnauthed = async (
-  application: ApplicationSchema
+  application: ApplicationSchemaDto
 ) => {
   try {
     if (!application) throw new Error("No application provided")
 
     // Validate the application data (throws error if invalid)
-    const applicationParsed = ApplicationSchema.parse(application)
+    const applicationParsed = ApplicationSchemaDto.parse(application)
 
     const response = await axios.post(
       `${API_URL}/application/unauthenticated`,

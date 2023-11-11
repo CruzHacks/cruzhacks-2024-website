@@ -14,10 +14,6 @@ const UsersAdmin = () => {
     alert("This feature is not yet implemented.")
   }
 
-  const handleEditUser = () => {
-    alert("This feature is not yet implemented.")
-  }
-
   return (
     <div className='px-4 sm:px-6 lg:px-8'>
       <div className='sm:flex sm:items-center'>

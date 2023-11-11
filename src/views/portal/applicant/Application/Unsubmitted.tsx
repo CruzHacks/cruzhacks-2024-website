@@ -5,15 +5,17 @@ import { classNames } from "../../../../utils/string"
 import { ExclamationCircleIcon } from "@heroicons/react/24/solid"
 import { submitApplicationAuthed } from "../../../../utils/apis/cloudFunctions"
 import useAuth from "../../../../hooks/useAuth"
-import { ApplicationSchema } from "../../../../utils/types"
+import { ApplicationSchemaDto } from "../../../../utils/types"
 
-const app: ApplicationSchema = {
-  email: "",
-  password: "",
-  demographics: {
+const app: ApplicationSchemaDto = {
+  user: {
+    email: "",
+    password: "",
     first_name: "John",
     last_name: "Doe",
     phone_number: "1231231234",
+  },
+  demographics: {
     age: 21,
     country: "United State of America",
     school: "University of California, Santa Cruz",
@@ -77,10 +79,12 @@ const Unsubmitted = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ApplicationSchema>({ resolver: zodResolver(ApplicationSchema) })
+  } = useForm<ApplicationSchemaDto>({
+    resolver: zodResolver(ApplicationSchemaDto),
+  })
 
   const handleApplicationSubmit: SubmitHandler<
-    ApplicationSchema
+    ApplicationSchemaDto
   > = async data => {
     if (!user) {
       setError("User not logged in")
@@ -125,20 +129,20 @@ const Unsubmitted = () => {
           <div className='relative mt-2 rounded-md shadow-sm'>
             <input
               type='text'
-              {...register("demographics.first_name")}
+              {...register("user.first_name")}
               name='first_name'
               id='first_name'
               className={classNames(
-                errors.demographics?.first_name
+                errors.user?.first_name
                   ? "text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500"
                   : "",
                 "ring-gray-300 placeholder:text-gray-400 focus:ring-green-800 block w-full rounded-md border-0 px-3 py-1.5 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
               )}
               placeholder='you@example.com'
-              aria-invalid={errors.demographics?.first_name ? "true" : "false"}
+              aria-invalid={errors.user?.first_name ? "true" : "false"}
               aria-describedby='password-error'
             />
-            {errors.demographics?.first_name && (
+            {errors.user?.first_name && (
               <div className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3'>
                 <ExclamationCircleIcon
                   className='text-red-500 h-5 w-5'
@@ -148,9 +152,9 @@ const Unsubmitted = () => {
             )}
           </div>
 
-          {errors.demographics?.first_name && (
+          {errors.user?.first_name && (
             <p className='text-red-600 mt-2 text-sm' id='email-error'>
-              {errors.demographics.first_name.message}
+              {errors.user.first_name.message}
             </p>
           )}
         </div>
