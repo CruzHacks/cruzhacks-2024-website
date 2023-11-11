@@ -19,6 +19,7 @@ import DashboardApplicant from "./views/portal/applicant/DashboardApplicant"
 import useAuth from "./hooks/useAuth"
 import Apply from "./views/apply"
 import { Toaster } from "react-hot-toast"
+import ApplicationsReviewAdmin from "./views/portal/admin/applications/Review"
 
 const App: React.FC = () => {
   const {
@@ -72,6 +73,10 @@ const App: React.FC = () => {
           <Route path='portal/admin' element={<AdminPortal />}>
             <Route index element={<DashboardAdmin />} />
             <Route path='applications' element={<ApplicationsAdmin />} />
+            <Route
+              path='applications/review/:email'
+              element={<ApplicationsReviewAdmin />}
+            />
             <Route path='teams' element={<TeamsAdmin />} />
             <Route path='users' element={<UsersAdmin />} />
           </Route>
