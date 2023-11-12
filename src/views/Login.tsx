@@ -87,16 +87,16 @@ export default function Login() {
                     id='email'
                     className={classNames(
                       errors.email
-                        ? "text-error ring-error placeholder:text-red-300 focus:ring-red-500"
+                        ? "text-error placeholder:text-red-300"
                         : "",
-                      "text-lg placeholder-white text-white font-subtext block w-full border-b-2 px-3 py-1.5 shadow-sm sm:text-sm sm:leading-6 bg-white/0 focus:outline-none"
+                      "text-lg placeholder-white font-subtext block w-full border-b-2 px-3 py-1.5 shadow-sm sm:text-lg sm:leading-6 bg-white/0 focus:outline-none"
                     )}
                     placeholder='Username'
                     aria-invalid={errors.email ? "true" : "false"}
                     aria-describedby='password-error'
                   />
                   {errors.email && (
-                    <div className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3'>
+                    <div className='pointer-events-none inset-y-0 right-0 flex items-center pr-3'>
                       <ExclamationCircleIcon
                         className='text-error h-5 w-5'
                         aria-hidden='true'
@@ -129,18 +129,18 @@ export default function Login() {
                     id='password'
                     className={classNames(
                       errors.password
-                        ? "text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500"
+                        ? "text-error placeholder:text-red-300"
                         : "",
-                      "text-lg placeholder-white font-subtext block w-full border-b-2 px-3 py-1.5 shadow-sm sm:text-sm sm:leading-6 bg-white/0 focus:outline-none"
+                      "text-lg placeholder-white font-subtext block w-full border-b-2 px-3 py-1.5 shadow-sm sm:text-lg sm:leading-6 bg-white/0 focus:outline-none"
                     )}
                     placeholder='Password'
                     aria-invalid={errors.password ? "true" : "false"}
                     aria-describedby='password-error'
                   />
                   {errors.password && (
-                    <div className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3'>
+                    <div className='pointer-events-none inset-y-0 right-0 flex items-center pr-3'>
                       <ExclamationCircleIcon
-                        className='text-red-500 h-5 w-5'
+                        className='text-error h-5 w-5'
                         aria-hidden='true'
                       />
                     </div>

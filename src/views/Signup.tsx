@@ -3,7 +3,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { ExclamationCircleIcon } from "@heroicons/react/24/solid"
+import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 import { classNames } from "../utils/string"
 import { Link } from "react-router-dom"
 import { auth } from "../utils/firebaseapp"
@@ -51,14 +51,14 @@ export default function SignUp() {
   }
 
   return (
-    <div className='flex min-h-full flex-1'>
+    <div className='min-w-screen flex min-h-screen flex-1 items-center justify-center'>
+      <Link to='/' className='fixed left-5 top-5'>
+        {/* <image className='h-10 w-auto' src={logo} alt='StudentStay' /> */}
+        <ArrowLeftIcon className='h-8 w-auto' />
+      </Link>
       <div className='flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24'>
         <div className='mx-auto w-full max-w-sm lg:w-96'>
           <div>
-            <Link to='/'>
-              Home
-              {/* <image className='h-10 w-auto' src={logo} alt='StudentStay' /> */}
-            </Link>
             <h2 className='mt-8 font-title text-5xl leading-10 py-6'>
               Sign Up
             </h2>
@@ -89,18 +89,18 @@ export default function SignUp() {
                       id='email'
                       className={classNames(
                         errors.email
-                          ? "text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500"
+                          ? "text-error placeholder:text-red-300"
                           : "",
-                        "text-lg placeholder-white font-subtext block w-full border-b-2 px-3 py-1.5 shadow-sm sm:text-sm sm:leading-6 bg-white/0 focus:outline-none"
+                        "text-lg placeholder-white font-subtext block w-full border-b-2 px-3 py-1.5 shadow-sm sm:text-lg sm:leading-6 bg-white/0 focus:outline-none"
                       )}
                       placeholder='Username'
                       aria-invalid={errors.email ? "true" : "false"}
                       aria-describedby='password-error'
                     />
                     {errors.email && (
-                      <div className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3'>
+                      <div className='pointer-events-none inset-y-0 right-0 flex items-center pr-3'>
                         <ExclamationCircleIcon
-                          className='text-red-500 h-5 w-5'
+                          className='text-error h-5 w-5'
                           aria-hidden='true'
                         />
                       </div>
@@ -124,17 +124,17 @@ export default function SignUp() {
                       placeholder="Password"
                       className={classNames(
                         errors.password
-                          ? "text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500"
+                          ? "text-error placeholder:text-red-300"
                           : "",
-                        "text-lg placeholder-white font-subtext block w-full border-b-2 px-3 py-1.5 shadow-sm sm:text-sm sm:leading-6 bg-white/0 focus:outline-none"
+                        "text-lg placeholder-white font-subtext block w-full border-b-2 px-3 py-1.5 shadow-sm sm:text-lg sm:leading-6 bg-white/0 focus:outline-none"
                       )}
                       aria-invalid={errors.password ? "true" : "false"}
                       aria-describedby='password-error'
                     />
                     {errors.password && (
-                      <div className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3'>
+                      <div className='pointer-events-none inset-y-0 right-0 flex items-center pr-3'>
                         <ExclamationCircleIcon
-                          className='text-red-500 h-5 w-5'
+                          className='text-error h-5 w-5'
                           aria-hidden='true'
                         />
                       </div>
@@ -159,7 +159,7 @@ export default function SignUp() {
                 </div>
               </div>
 
-              
+
                 <div>
                 <button
                   type='submit'
