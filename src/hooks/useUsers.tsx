@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query"
 const useUsers = (user?: User | null, pageToken?: string) => {
   if (!user) throw new Error("No user provided")
   return useQuery({
-    queryKey: ["users", { uid: user.uid }],
+    queryKey: ["users", { email: user.email }],
     queryFn: () => getUsers(user, pageToken),
   })
 }

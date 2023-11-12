@@ -14,10 +14,6 @@ const UsersAdmin = () => {
     alert("This feature is not yet implemented.")
   }
 
-  const handleEditUser = () => {
-    alert("This feature is not yet implemented.")
-  }
-
   return (
     <div className='px-4 sm:px-6 lg:px-8'>
       <div className='sm:flex sm:items-center'>
@@ -130,7 +126,7 @@ const UsersAdmin = () => {
                               user.email === currentUser?.email
                                 ? "text-orange"
                                 : "",
-                              "hidden whitespace-nowrap px-3 py-4 text-sm sm:table-cell"
+                              "hidden whitespace-nowrap px-3 py-4 font-subtext text-sm sm:table-cell"
                             )}
                           >
                             {user.uid}
@@ -174,10 +170,7 @@ const UsersAdmin = () => {
                             <div className='h-6 w-60 animate-pulse rounded bg-white/30 '></div>
                           </td>
                           <td className='relative py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-8 lg:pr-8'>
-                            <button
-                              onClick={handleEditUser}
-                              className='cursor-not-allowed text-pink/50'
-                            >
+                            <button className='cursor-not-allowed text-pink/50'>
                               Edit
                             </button>
                           </td>

@@ -1,6 +1,15 @@
 import type { User } from "@firebase/auth"
-import { collection, doc, getDoc, getDocs } from "firebase/firestore"
+import {
+  collection,
+  collectionGroup,
+  doc,
+  getDoc,
+  getDocs,
+  orderBy,
+  query,
+} from "firebase/firestore"
 import { db } from "../firebaseapp"
+import { AppShortResponseSchema, ApplicationSchema } from "../types"
 
 /**
  * Function using Firebase sdk for checking if an application is
@@ -23,11 +32,11 @@ export const checkApplicationSubmitted = async (user: User) => {
  * @param user Firebase User
  * @returns An application if successful
  */
-export const getApplication = async (user: User) => {
-  if (!user) throw new Error("No user provided")
+export const getApplication = async (email: string) => {
+  if (!email) throw new Error("No user provided")
 
   const querySnapshot = await getDocs(
-    collection(db, `users/${user.email}/user_items/application/sections`)
+    collection(db, `users/${email}/user_items/application/sections`)
   )
 
   // Convert array of documents to object
@@ -37,4 +46,36 @@ export const getApplication = async (user: User) => {
   )
 
   return application
+}
+
+/**
+ * Function using Firebase sdk to retrieve an application
+ * @param user Firebase User
+ * @returns An application if successful
+ */
+export const getApplicationShortResponses = async (email: string) => {
+  if (!email) throw new Error("No user provided")
+
+  const querySnapshot = await getDoc(
+    doc(db, `users/${email}/user_items/application/sections`, "short_responses")
+  )
+
+  if (!querySnapshot.exists())
+    throw new Error("No short responses found for applicant")
+
+  const shortResponses = querySnapshot.data()
+
+  return shortResponses as AppShortResponseSchema
+}
+
+/**
+ * Function using Firebase sdk to retrieve information about all applications
+ */
+export const getApplications = async () => {
+  const q = query(collectionGroup(db, "user_items"), orderBy("email"))
+  const querySnapshot = await getDocs(q)
+
+  const applications = querySnapshot.docs.map(doc => doc.data())
+
+  return applications as ApplicationSchema[]
 }
