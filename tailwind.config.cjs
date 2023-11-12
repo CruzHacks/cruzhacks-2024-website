@@ -8,6 +8,7 @@ module.exports = {
         imperial: "#071162",
         button: "#1795EB",
         chinese: "#3A65D7",
+        
       },
       turquoise: "#13E4CA",
       gold: "#F9D318",
@@ -27,6 +28,7 @@ module.exports = {
       body: ["Proxima Nova"],
       sans: ["Proxima Nova"],
       subtext: ["Andale Mono"],
+      roboto: ["Roboto"],
     },
   },
   plugins: [require("@tailwindcss/forms")],
