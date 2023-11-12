@@ -19,6 +19,13 @@ import DashboardApplicant from "./views/portal/applicant/DashboardApplicant"
 import useAuth from "./hooks/useAuth"
 import Apply from "./views/apply"
 import { Toaster } from "react-hot-toast"
+import UserSection from "./views/apply/UserSection"
+import DemographicsSection from "./views/apply/DemographicsSection"
+import ShortResponseSection from "./views/apply/ShortResponseSection"
+import LogisticsSection from "./views/apply/LogisticsSection"
+import SocialsSection from "./views/apply/SocialsSection"
+import WaviersSection from "./views/apply/WaviersSection"
+import ReviewSection from "./views/apply/ReviewSection"
 
 const App: React.FC = () => {
   const {
@@ -50,7 +57,15 @@ const App: React.FC = () => {
         <Route element={<UnauthenticatedRoute />}>
           <Route path='login' element={<Login />} />
           <Route path='signup' element={<Signup />} />
-          <Route path='apply' element={<Apply />} />
+          <Route path='apply' element={<Apply />}>
+            <Route path='user' element={<UserSection />} />
+            <Route path='demographics' element={<DemographicsSection />} />
+            <Route path='short_response' element={<ShortResponseSection />} />
+            <Route path='logistics' element={<LogisticsSection />} />
+            <Route path='socials' element={<SocialsSection />} />
+            <Route path='waivers' element={<WaviersSection />} />
+            <Route path='review' element={<ReviewSection />} />
+          </Route>
         </Route>
 
         {/* You must be logged in to access these routes*/}
