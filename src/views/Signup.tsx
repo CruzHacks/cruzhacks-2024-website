@@ -7,6 +7,7 @@ import { ExclamationCircleIcon } from "@heroicons/react/24/solid"
 import { classNames } from "../utils/string"
 import { Link } from "react-router-dom"
 import { auth } from "../utils/firebaseapp"
+import { ArrowLeftIcon, LockClosedIcon, UsersIcon } from "@heroicons/react/24/outline"
 
 // This component uses react-hook-form to handle data validation and input
 // specific errors. Follow this tutorial to learn more about how Zod is used in
@@ -58,17 +59,17 @@ export default function SignUp() {
               Home
               {/* <image className='h-10 w-auto' src={logo} alt='StudentStay' /> */}
             </Link>
-            <h2 className='text-gray-900 mt-8 text-2xl font-bold leading-9 tracking-tight'>
-              Create an account
+            <h2 className='mt-8 font-title text-5xl leading-10 py-6'>
+              Sign Up
             </h2>
-            <p className='text-gray-500 mt-2 text-sm leading-6'>
-              Already a member?{" "}
-              <Link
+            <p className='font-subtext'>
+              Please sign up to continue
+              {/* <Link
                 to='/login'
                 className='text-green-800 hover:text-green-700 font-semibold'
               >
                 Login
-              </Link>
+              </Link> */}
             </p>
           </div>
 
@@ -79,13 +80,8 @@ export default function SignUp() {
                 className='space-y-6'
               >
                 <div>
-                  <label
-                    htmlFor='email'
-                    className='text-gray-900 block text-sm font-medium leading-6'
-                  >
-                    Email
-                  </label>
-                  <div className='relative mt-2 rounded-md shadow-sm'>
+                  <div className='flex mt-2 border px-4 py-6 rounded-xl shadow-sm gap-3 bg-white/20'>
+                    <UsersIcon className = 'w-8' />
                     <input
                       type='email'
                       {...register("email")}
@@ -95,9 +91,9 @@ export default function SignUp() {
                         errors.email
                           ? "text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500"
                           : "",
-                        "ring-gray-300 placeholder:text-gray-400 focus:ring-green-800 block w-full rounded-md border-0 px-3 py-1.5 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                        "text-lg placeholder-white font-subtext block w-full border-b-2 px-3 py-1.5 shadow-sm sm:text-sm sm:leading-6 bg-white/0 focus:outline-none"
                       )}
-                      placeholder='you@example.com'
+                      placeholder='Username'
                       aria-invalid={errors.email ? "true" : "false"}
                       aria-describedby='password-error'
                     />
@@ -118,23 +114,19 @@ export default function SignUp() {
                   )}
                 </div>
                 <div>
-                  <label
-                    htmlFor='password'
-                    className='text-gray-900 block text-sm font-medium leading-6'
-                  >
-                    Password
-                  </label>
-                  <div className='relative mt-2 rounded-md shadow-sm'>
+                  <div className='flex mt-2 border px-4 py-6 rounded-xl shadow-sm gap-3 bg-white/20'>
+                    <LockClosedIcon className = 'w-8' />
                     <input
                       type='password'
                       {...register("password")}
                       name='password'
                       id='password'
+                      placeholder="Password"
                       className={classNames(
                         errors.password
                           ? "text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500"
                           : "",
-                        "ring-gray-300 placeholder:text-gray-400 focus:ring-green-800 block w-full rounded-md border-0 px-3 py-1.5 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                        "text-lg placeholder-white font-subtext block w-full border-b-2 px-3 py-1.5 shadow-sm sm:text-sm sm:leading-6 bg-white/0 focus:outline-none"
                       )}
                       aria-invalid={errors.password ? "true" : "false"}
                       aria-describedby='password-error'
@@ -155,64 +147,31 @@ export default function SignUp() {
                     </p>
                   )}
                 </div>
-                <div>
-                  <label
-                    htmlFor='password-confirm'
-                    className='text-gray-900 block text-sm font-medium leading-6'
-                  >
-                    Confirm Password
-                  </label>
-                  <div className='relative mt-2 rounded-md shadow-sm'>
-                    <input
-                      type='password'
-                      {...register("passwordConfirm")}
-                      name='passwordConfirm'
-                      id='password-confirm'
-                      className={classNames(
-                        errors.passwordConfirm
-                          ? "text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500"
-                          : "",
-                        "ring-gray-300 placeholder:text-gray-400 focus:ring-green-800 block w-full rounded-md border-0 px-3 py-1.5 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-                      )}
-                      aria-invalid={errors.passwordConfirm ? "true" : "false"}
-                      aria-describedby='password-error'
-                    />
-                    {errors.passwordConfirm && (
-                      <div className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3'>
-                        <ExclamationCircleIcon
-                          className='text-red-500 h-5 w-5'
-                          aria-hidden='true'
-                        />
-                      </div>
-                    )}
-                  </div>
 
-                  {errors.passwordConfirm && (
-                    <p className='text-red-600 mt-2 text-sm' id='email-error'>
-                      {errors.passwordConfirm.message}
-                    </p>
-                  )}
-                </div>
-
-                <div>
-                  <button
-                    type='submit'
-                    className='bg-green-800 hover:bg-green-700 focus-visible:outline-indigo-600 mt-10 flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2'
+                <div className='flex items-center justify-between'>
+                <div className='text-sm leading-6'>
+                  <a
+                    href='/'
+                    className='text-green-800 hover:text-green-700 font-semibold'
                   >
-                    Register
-                  </button>
+                    Forgot password?
+                  </a>
                 </div>
+              </div>
+
+              
+                <div>
+                <button
+                  type='submit'
+                  className='flex h-16 w-full items-center justify-center rounded-md bg-white px-3 py-1.5 font-subtext text-2xl leading-6 text-blue-imperial shadow-sm transition-colors hover:bg-white/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-royal disabled:bg-white/50'
+                >
+                Sign Up
+                </button>
+              </div>
               </form>
             </div>
           </div>
         </div>
-      </div>
-      <div className='relative hidden w-0 flex-1 lg:block'>
-        <img
-          className='absolute inset-0 h-full w-full object-cover'
-          src='https://images.unsplash.com/photo-1496917756835-20cb06e75b4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1908&q=80'
-          alt=''
-        />
       </div>
     </div>
   )

@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { ArrowLeftIcon, ExclamationCircleIcon } from "@heroicons/react/24/solid"
+import { ArrowLeftIcon, ExclamationCircleIcon, LockClosedIcon, UsersIcon } from "@heroicons/react/24/outline"
 import { classNames } from "../utils/string"
 import { Link } from "react-router-dom"
 import React, { useState } from "react"
@@ -76,9 +76,10 @@ export default function Login() {
                   htmlFor='email'
                   className='text-gray-900 block text-sm font-medium leading-6'
                 >
-                  Email
+          
                 </label>
-                <div className='relative mt-2 rounded-md shadow-sm'>
+                <div className='flex mt-2 border px-4 py-6 rounded-xl shadow-sm gap-3 bg-white/20'>
+                  <UsersIcon className = 'w-8' />
                   <input
                     type='email'
                     {...register("email")}
@@ -86,18 +87,18 @@ export default function Login() {
                     id='email'
                     className={classNames(
                       errors.email
-                        ? "text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500"
+                        ? "text-error ring-error placeholder:text-red-300 focus:ring-red-500"
                         : "",
-                      "ring-gray-300 placeholder:text-gray-400 focus:ring-green-800 block w-full rounded-md border-0 px-3 py-1.5 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                      "text-lg placeholder-white text-white font-subtext block w-full border-b-2 px-3 py-1.5 shadow-sm sm:text-sm sm:leading-6 bg-white/0 focus:outline-none"
                     )}
-                    placeholder='you@example.com'
+                    placeholder='Username'
                     aria-invalid={errors.email ? "true" : "false"}
                     aria-describedby='password-error'
                   />
                   {errors.email && (
                     <div className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3'>
                       <ExclamationCircleIcon
-                        className='text-red-500 h-5 w-5'
+                        className='text-error h-5 w-5'
                         aria-hidden='true'
                       />
                     </div>
@@ -110,14 +111,17 @@ export default function Login() {
                   </p>
                 )}
               </div>
+
+              {/* Password */}
               <div>
                 <label
                   htmlFor='password'
                   className='text-gray-900 block text-sm font-medium leading-6'
                 >
-                  Password
+                  
                 </label>
-                <div className='relative mt-2 rounded-md shadow-sm'>
+                <div className='flex mt-2 border px-4 py-6 rounded-xl shadow-sm gap-3 bg-white/20'>
+                  <LockClosedIcon className = 'w-8' />
                   <input
                     type='password'
                     {...register("password")}
@@ -127,8 +131,9 @@ export default function Login() {
                       errors.password
                         ? "text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500"
                         : "",
-                      "ring-gray-300 placeholder:text-gray-400 focus:ring-green-800 block w-full rounded-md border-0 px-3 py-1.5 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                      "text-lg placeholder-white font-subtext block w-full border-b-2 px-3 py-1.5 shadow-sm sm:text-sm sm:leading-6 bg-white/0 focus:outline-none"
                     )}
+                    placeholder='Password'
                     aria-invalid={errors.password ? "true" : "false"}
                     aria-describedby='password-error'
                   />
@@ -148,6 +153,9 @@ export default function Login() {
                   </p>
                 )}
               </div>
+
+
+
               <div className='flex items-center justify-between'>
                 <div className='text-sm leading-6'>
                   <a
