@@ -2,7 +2,7 @@ import React from "react"
 import { classNames } from "../../utils/string"
 import { ExclamationCircleIcon } from "@heroicons/react/24/solid"
 
-type Icon = React.ForwardRefExoticComponent<
+export type Icon = React.ForwardRefExoticComponent<
   Omit<React.SVGProps<SVGSVGElement>, "ref"> & {
     title?: string | undefined
     titleId?: string | undefined
