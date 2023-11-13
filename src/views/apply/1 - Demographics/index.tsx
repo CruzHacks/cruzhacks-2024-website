@@ -5,6 +5,9 @@ import { AppDemographicsSchema } from "../../../utils/types"
 import { z } from "zod"
 import toast from "react-hot-toast"
 import Step01 from "./Step01"
+import Step02 from "./Step02"
+import Step03 from "./Step03"
+import Step04 from "./Step04"
 
 export interface StepProps {
   isFirstStep: boolean
@@ -13,7 +16,7 @@ export interface StepProps {
   navBackward: () => void
 }
 
-const steps = [Step01]
+const steps = [Step01, Step02, Step03, Step04]
 
 const DemographicsSection = () => {
   const navigate = useNavigate()
@@ -23,7 +26,7 @@ const DemographicsSection = () => {
     // Merge form data with existing user data
     const demographicsData =
       appState && appState.demographics
-        ? { demographics: { ...appState.user, ...data } }
+        ? { demographics: { ...appState.demographics, ...data } }
         : { demographics: data }
     const _appState = { ...appState, ...demographicsData }
 

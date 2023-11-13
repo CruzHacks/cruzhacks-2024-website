@@ -1,4 +1,3 @@
-import validator from "validator"
 import { z } from "zod"
 
 export type ErrorResponse = { message: string }
@@ -42,8 +41,11 @@ export const AppUserSchema = z.object({
     .email("Invalid email address."),
   phone_number: z
     .string()
-    .min(1, "Please include a phone number.")
-    .refine(validator.isMobilePhone, "Invalid phone number."),
+    .min(1, "Phone number is required")
+    .refine(
+      value => /^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$/.test(value),
+      "Please format digits as 000-000-0000"
+    ),
   password: z.string().min(1, "Please include a password."),
   first_name: z.string().min(1, "Please include a first name."),
   last_name: z.string().min(1, "Please include a last name."),
@@ -71,7 +73,7 @@ export const AppDemographicsSchema = z.object({
 
   area_of_study: z.string().array(),
 
-  first_hackathon: z.boolean(),
+  first_hackathon: z.string(),
   hackathon_experience: z.string(),
   tech_experience: z.string().max(1500, "Character limit exceeded."),
 

@@ -1,6 +1,6 @@
 import React from "react"
 import TextInput from "../../../components/inputs/TextInput"
-import { EnvelopeIcon, UserIcon } from "@heroicons/react/24/outline"
+import { EnvelopeIcon, PhoneIcon, UserIcon } from "@heroicons/react/24/outline"
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -12,7 +12,13 @@ const Step01Schema = z.object({
   email: z.string().email("Invalid email address").min(1, "Email is required"),
   first_name: z.string().min(1, "First name is required"),
   last_name: z.string().min(1, "Last name is required"),
-  phone_number: z.string().min(1, "Phone number is required"),
+  phone_number: z
+    .string()
+    .min(1, "Phone number is required")
+    .refine(
+      value => /^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$/.test(value),
+      "Please format digits as 000-000-0000"
+    ),
 })
 
 type Step01Schema = z.infer<typeof Step01Schema>
@@ -74,12 +80,13 @@ const Step01 = ({
         />
 
         <TextInput
-          Icon={UserIcon}
+          Icon={PhoneIcon}
           inputProps={{
             ...register("phone_number"),
-            placeholder: "phone_number",
+            type: "tel",
+            placeholder: "000-000-0000",
           }}
-          error={errors.last_name ? errors.last_name.message : undefined}
+          error={errors.phone_number ? errors.phone_number.message : undefined}
         />
       </div>
 

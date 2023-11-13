@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { z } from "zod"
 import {
   AppDemographicsSchema,
@@ -69,6 +69,13 @@ const ProgressBarWrapper = () => {
 
     navigate(`/apply/${section}`)
   }
+
+  // // Navigate to beginning of form if section is empty on first render
+  // useEffect(() => {
+  //   if (currentSection != sections[0] && isSectionEmpty(currentSection)) {
+  //     navigate(`/apply/${sections[0]}`)
+  //   }
+  // }, [])
 
   return (
     <div className='flex items-center justify-between'>

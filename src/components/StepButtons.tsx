@@ -5,14 +5,12 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid"
 interface StepButtonsProps {
   isFirstStep: boolean
   isLastStep: boolean
-  navForward?: () => void
   navBackward: () => void
 }
 
 export const StepButtons = ({
   isFirstStep,
   isLastStep,
-  navForward,
   navBackward,
 }: StepButtonsProps) => {
   return (
@@ -34,7 +32,6 @@ export const StepButtons = ({
         <button
           className='flex h-12 w-24 items-center justify-center gap-1 rounded-md border-2 border-none bg-white font-subtext text-blue-royal'
           type='submit'
-          onClick={navForward}
         >
           <p>Next</p>
           <ChevronRightIcon className='h-4 w-4' />
@@ -43,7 +40,6 @@ export const StepButtons = ({
         <button
           className='flex h-12 w-40 items-center justify-center gap-1 rounded-md border-2 border-none bg-white font-subtext text-blue-royal'
           type='submit'
-          onClick={navForward}
         >
           <p>Next Section</p>
           <ChevronRightIcon className='h-4 w-4' />
