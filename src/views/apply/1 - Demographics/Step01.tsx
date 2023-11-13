@@ -8,7 +8,12 @@ import { useAppState } from "../../../hooks/useAppState"
 import { StepProps } from "."
 
 const Step01Schema = z.object({
-  age: z.number().max(120, "Invalid age").min(1, "Invalid age"),
+  age: z
+
+    .number({ invalid_type_error: "Please include an age" })
+    .min(1, "Please include an age")
+    .min(12, "Must be at least 12 years old")
+    .max(120, "Invalid age"),
 })
 
 type Step01Schema = z.infer<typeof Step01Schema>
