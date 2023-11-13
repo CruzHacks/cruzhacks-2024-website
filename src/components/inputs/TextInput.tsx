@@ -23,8 +23,8 @@ const TextInput = ({ Icon, error, inputProps }: TextInputProps) => {
         className={classNames(
           error
             ? "bg-error/10 text-error ring-error/10 focus-within:ring-error/50"
-            : "bg-white/10 text-white ring-white/5 focus-within:ring-white/40",
-          "relative mt-2 flex gap-3 rounded-md p-4 shadow-sm ring ring-inset"
+            : "mb-7 bg-white/10 text-white ring-white/5 focus-within:ring-white/40",
+          "relative mt-7 flex gap-3 rounded-md p-4 shadow-sm ring ring-inset"
         )}
       >
         {Icon ? (
@@ -39,9 +39,9 @@ const TextInput = ({ Icon, error, inputProps }: TextInputProps) => {
           aria-invalid={error ? "true" : "false"}
           className={classNames(
             error
-              ? "border-error/60 text-error placeholder:text-error/60 focus:border-error/80"
-              : "border-white/40 text-white placeholder:text-white/60 focus:border-white/80",
-            "mr-5 block w-full border-0 border-b-2 bg-transparent p-0 pr-10 font-subtext ring-0 focus:ring-0 sm:text-lg"
+              ? "border-error/60 pr-5 text-error placeholder:text-error/60 focus:border-error/80 "
+              : "border-white/40 pr-0 text-white placeholder:text-white/60 focus:border-white/80",
+            "mr-5 block w-full border-0 border-b-2 bg-transparent p-0 font-subtext ring-0 focus:ring-0 sm:text-lg"
           )}
         />
         {error && (
@@ -52,7 +52,7 @@ const TextInput = ({ Icon, error, inputProps }: TextInputProps) => {
       </div>
       {error && (
         <p
-          className='mt-2 text-sm text-error'
+          className='mt-2 h-5 text-sm text-error'
           id={inputProps["aria-describedby"] || ""}
         >
           {error}

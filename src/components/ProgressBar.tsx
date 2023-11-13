@@ -1,54 +1,58 @@
 import React from "react"
-import { CheckIcon } from "@heroicons/react/24/solid"
-import { Link, useLocation } from "react-router-dom"
+import { CheckIcon, XMarkIcon } from "@heroicons/react/24/solid"
+import { classNames } from "../utils/string"
 
-interface SegmentProps {
-  completed: boolean
-  active: boolean
+const LineSegment = ({ active }: { active: boolean }) => {
+  return (
+    <div
+      className={classNames(
+        active ? "bg-[#06F]" : "bg-[#676D84]",
+        "flex h-0.5 w-full "
+      )}
+    />
+  )
 }
 
-const LineSegment = ({ completed, active }: SegmentProps) => {
-  if (completed || active) {
-    return <div className='flex h-0.5 w-full bg-[#06F]' />
-  } else {
-    return <div className='flex h-0.5 w-full bg-[#676D84]' />
-  }
-}
-
-const BubbleSegment = ({ completed, active }: SegmentProps) => {
-  if (completed) {
-    return (
-      <div className='text-black h-5 w-5 rounded-full border-2 border-[#06F] bg-[#06F]'>
+const BubbleSegment = ({
+  valid,
+  current,
+}: {
+  valid?: boolean
+  current: boolean
+}) => {
+  return (
+    <div
+      className={classNames(
+        valid !== undefined
+          ? valid
+            ? current
+              ? "border-white bg-[#06F]"
+              : "border-[#06F] bg-[#06F]"
+            : "border-error bg-error"
+          : current
+          ? "border-[#06F] bg-[#31375E]"
+          : "border-[#676D84] bg-[#31375E]",
+        "text-black h-5 w-5  rounded-full border-2"
+      )}
+    >
+      {valid == undefined ? (
+        <div className='h-4 w-4' />
+      ) : valid ? (
         <CheckIcon className='h-4 w-4' aria-hidden='true' />
-      </div>
-    )
-  } else if (active) {
-    return (
-      <div className='text-black h-5 w-5  rounded-full border-2 border-[#06F] bg-[#31375E]'>
-        <div className='h-4 w-4' />
-      </div>
-    )
-  } else {
-    return (
-      <div className='h-5 w-5 rounded-full border-2 border-[#676D84] bg-[#31375E]'>
-        <div className='h-4 w-4' />
-      </div>
-    )
-  }
+      ) : (
+        <XMarkIcon className='h-4 w-4' aria-hidden='true' />
+      )}
+    </div>
+  )
 }
 
 interface ProgressBarProps {
-  steps: string[]
+  steps: { name: string; valid?: boolean }[]
+  activeStep: number
+  navStep?: (section: string) => void
 }
 
-const ProgressBar = ({ steps }: ProgressBarProps) => {
-  const location = useLocation()
-  const slugSplit = location.pathname.split("/")
-  const currentSection = slugSplit[slugSplit.length - 1]
-  // translate url page to progress step
-  const activeStep =
-    currentSection === "review" ? steps.length : steps.indexOf(currentSection)
-
+const ProgressBar = ({ steps, activeStep, navStep }: ProgressBarProps) => {
   return (
     <div className='relative flex w-full flex-row flex-nowrap items-center'>
       {steps.map((step, index) => (
@@ -62,16 +66,19 @@ const ProgressBar = ({ steps }: ProgressBarProps) => {
         >
           {index !== 0 && (
             <LineSegment
-              completed={index < activeStep}
-              active={index === activeStep}
+              active={step.valid !== undefined || index == activeStep}
             />
           )}
-          <Link to={`/apply/${step}`}>
-            <BubbleSegment
-              completed={index < activeStep}
-              active={index === activeStep}
-            />
-          </Link>
+          {navStep ? (
+            <button
+              onClick={() => navStep(step.name)}
+              disabled={step.valid == undefined && index !== activeStep}
+            >
+              <BubbleSegment valid={step.valid} current={index == activeStep} />
+            </button>
+          ) : (
+            <BubbleSegment valid={step.valid} current={index == activeStep} />
+          )}
         </div>
       ))}
     </div>

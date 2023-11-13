@@ -6,6 +6,15 @@
   html {
     @apply text-white;
   }
+
+  /* Remove number spin buttons */
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+      /* Font imports */
   @font-face {
     font-family: Andaleo Mono;
     src: url("./assets/fonts/Andaleo Mono.woff") format("woff");

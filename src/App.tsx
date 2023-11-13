@@ -1,5 +1,5 @@
 import React from "react"
-import { Route, Routes } from "react-router-dom"
+import { Navigate, Route, Routes } from "react-router-dom"
 import RoleProtectedRoute from "./components/protectedRoutes/RoleProtectedRoute"
 import PortalRedirectRoute from "./components/protectedRoutes/PortalRedirectRoute"
 import UnauthenticatedRoute from "./components/protectedRoutes/UnauthenticatedRoute"
@@ -19,8 +19,8 @@ import DashboardApplicant from "./views/portal/applicant/DashboardApplicant"
 import useAuth from "./hooks/useAuth"
 import Apply from "./views/apply"
 import { Toaster } from "react-hot-toast"
-import UserSection from "./views/apply/UserSection"
-import DemographicsSection from "./views/apply/DemographicsSection"
+import UserSection from "./views/apply/userSection"
+import DemographicsSection from "./views/apply/demographicsSection"
 import ShortResponseSection from "./views/apply/ShortResponseSection"
 import LogisticsSection from "./views/apply/LogisticsSection"
 import SocialsSection from "./views/apply/SocialsSection"
@@ -59,6 +59,7 @@ const App: React.FC = () => {
           <Route path='login' element={<Login />} />
           <Route path='signup' element={<Signup />} />
           <Route path='apply' element={<Apply />}>
+            <Route index element={<Navigate replace to='/apply/user' />} />
             <Route path='user' element={<UserSection />} />
             <Route path='demographics' element={<DemographicsSection />} />
             <Route path='short_response' element={<ShortResponseSection />} />

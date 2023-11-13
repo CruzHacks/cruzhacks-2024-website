@@ -1,31 +1,126 @@
 import React from "react"
 import ProgressBar from "../../components/ProgressBar"
-import { Outlet } from "react-router-dom"
+import { Outlet, useLocation, useNavigate } from "react-router-dom"
+import { AppStateProvider } from "../../contexts/applicationState"
+import {
+  AppDemographicsSchema,
+  AppLogisticsSchema,
+  AppShortResponseSchema,
+  AppSocialsSchema,
+  AppUserSchema,
+} from "../../utils/types"
+import { z } from "zod"
+import { useAppState } from "../../hooks/useAppState"
 
-const sections = [
-  "user",
-  "demographics",
-  "short_response",
-  "logistics",
-  "socials",
-  "waivers",
-]
+const appSchemas = {
+  user: AppUserSchema,
+  demographics: AppDemographicsSchema,
+  short_response: AppShortResponseSchema,
+  logistics: AppLogisticsSchema,
+  socials: AppSocialsSchema,
+  waivers: z.string(),
+}
 
-const Apply = () => {
+const ProgressBarWrapper = () => {
+  const location = useLocation()
+  const [appState] = useAppState()
+
+  // Determine current application section
+  const slugSplit = location.pathname.split("/")
+  const currentSection = slugSplit[slugSplit.length - 1]
+
+  const sections = Object.keys(appSchemas)
+
+  const activeStep =
+    currentSection === "review"
+      ? sections.length
+      : sections.indexOf(currentSection)
+
+  const steps = sections.map(key => {
+    return {
+      name: key,
+      valid:
+        appState && key in appState && key !== currentSection
+          ? true
+          : undefined,
+    }
+  })
+
+  const navigate = useNavigate()
+
+  const navSection = (section: string) => {
+    if (sections.indexOf(section) == -1) {
+      console.error(
+        `Can't navigate to section "${section}": Section does not exist`
+      )
+      return
+    }
+
+    if (section == currentSection) return
+
+    navigate(`/apply/${section}`)
+  }
+
   return (
-    <div className='flex h-screen flex-col items-center'>
-      <div className='w-full max-w-4xl p-8 md:px-20 md:py-16'>
-        <ProgressBar steps={sections} />
-      </div>
-
-      <div className='h-full w-full max-w-4xl rounded-t-3xl bg-[#4659FF]/10 p-10 lg:mb-16 lg:rounded-3xl'>
-        <Outlet />
-      </div>
+    <div className='flex items-center justify-between'>
+      <ProgressBar steps={steps} activeStep={activeStep} navStep={navSection} />
     </div>
   )
 }
 
+const Apply = () => {
+  return (
+    <AppStateProvider>
+      <div className='flex h-full min-h-screen flex-col items-center md:h-screen'>
+        <div className='w-full max-w-4xl p-8 md:px-20 md:py-16'>
+          <ProgressBarWrapper />
+        </div>
+
+        <div className='relative h-full w-full max-w-4xl grow rounded-t-3xl bg-[#4659FF]/10 px-10 py-5 md:p-10 lg:mb-16 lg:rounded-3xl'>
+          <Outlet />
+        </div>
+      </div>
+    </AppStateProvider>
+  )
+}
+
 export default Apply
+
+// const validateSection = ({
+//   name,
+//   schema,
+// }: {
+//   name: string
+//   schema: z.AnyZodObject
+// }) => {
+//   try {
+//     if (!appState)
+//       throw new Error("Can't validateSection, No global appState found")
+
+//     if (appState[name as keyof typeof appState] === undefined)
+//       throw new Error(
+//         "ProgressBar: navSection: Section name not found in appState"
+//       )
+
+//     schema.parse(appState[name as keyof typeof appState])
+//     return true
+//   } catch (err) {
+//     if (err instanceof z.ZodError) {
+//       console.log(err)
+//       err.issues.forEach(issue => {
+//         toast.error(`Field "${issue.path}" is required.`)
+//       })
+//       return false
+//     }
+//     if (err instanceof Error) {
+//       console.log(err.message)
+//       toast.error(err.message)
+//       return false
+//     }
+//     console.log(err)
+//     return false
+//   }
+// }
 
 // const sections: Section[] = [
 // {

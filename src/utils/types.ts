@@ -28,7 +28,7 @@ export type ApplicationStatus = (typeof ApplicationStatuses)[number]
 
 export const ApplicationSchema = z.object({
   status: z.enum(ApplicationStatuses),
-  email: z.string(),
+  email: z.string().email("Invalid email address."),
   _submitted: z.any(),
   _last_committed: z.any(),
 })
@@ -36,13 +36,17 @@ export type ApplicationSchema = z.infer<typeof ApplicationSchema>
 
 // Section 0 - User Information
 export const AppUserSchema = z.object({
-  email: z.string(),
+  email: z
+    .string()
+    .min(1, "Please include an email.")
+    .email("Invalid email address."),
   phone_number: z
     .string()
+    .min(1, "Please include a phone number.")
     .refine(validator.isMobilePhone, "Invalid phone number."),
-  password: z.string(),
-  first_name: z.string().min(1, "First name must be at least 1 character."),
-  last_name: z.string(),
+  password: z.string().min(1, "Please include a password."),
+  first_name: z.string().min(1, "Please include a first name."),
+  last_name: z.string().min(1, "Please include a last name."),
 })
 export type AppUserSchema = z.infer<typeof AppUserSchema>
 
@@ -50,6 +54,7 @@ export type AppUserSchema = z.infer<typeof AppUserSchema>
 export const AppDemographicsSchema = z.object({
   age: z
     .number()
+    .min(1, "Please include an age.")
     .min(12, "Must be at least 12 years old.")
     .max(120, "Invalid age."),
   country: z.string(),

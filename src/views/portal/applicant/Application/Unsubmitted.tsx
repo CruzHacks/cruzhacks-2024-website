@@ -85,7 +85,7 @@ const Unsubmitted = () => {
 
   const handleApplicationSubmit: SubmitHandler<
     ApplicationSchemaDto
-  > = async data => {
+  > = async () => {
     if (!user) {
       setError("User not logged in")
       return
