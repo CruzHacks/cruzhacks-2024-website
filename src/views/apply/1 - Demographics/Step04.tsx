@@ -6,15 +6,18 @@ import { StepButtons } from "../../../components/StepButtons"
 import { useAppState } from "../../../hooks/useAppState"
 import { StepProps } from "."
 import ComboboxInput from "../../../components/inputs/ComboboxInput"
+import TextareaInput from "../../../components/inputs/TextareaInput"
 
 const StepSchema = z.object({
-  first_hackathon: z.string(),
+  first_cruzhacks: z.string(),
   hackathon_experience: z.string(),
   tech_experience: z.string().max(1500, "Character limit exceeded."),
 })
 type StepSchema = z.infer<typeof StepSchema>
 
 const yesNo = ["Yes", "No"]
+
+const numberOfHackathons = ["First Hackathon", "1-3", "4-6", "7+"]
 
 const Step04 = ({
   isFirstStep,
@@ -28,6 +31,7 @@ const Step04 = ({
   const {
     handleSubmit,
     control,
+    register,
     formState: { errors },
   } = useForm<StepSchema>({
     defaultValues,
@@ -51,7 +55,7 @@ const Step04 = ({
       onSubmit={handleSubmit(refineForm(navForward))}
     >
       <div className='flex flex-col items-center justify-center md:justify-start md:gap-5'>
-        <div className='py-5'>
+        <div className='flex flex-col items-center justify-center gap-5'>
           <p className='text-center font-subtext'>
             Will this be your first time attending CruzHacks?
           </p>
@@ -59,17 +63,50 @@ const Step04 = ({
             query={queryFirstTime}
             setQuery={setQueryFirstTime}
             items={yesNo}
-            name='first_hackathon'
+            name='first_cruzhacks'
             control={control}
             error={
-              errors.first_hackathon
-                ? errors.first_hackathon.message
+              errors.first_cruzhacks
+                ? errors.first_cruzhacks.message
+                : undefined
+            }
+          />
+        </div>
+
+        <div className='flex flex-col items-center justify-center gap-5'>
+          <p className='text-center font-subtext'>
+            Have you attended any hackathons before? If so, how many?
+          </p>
+          <ComboboxInput
+            query={queryFirstTime}
+            setQuery={setQueryFirstTime}
+            items={numberOfHackathons}
+            name='hackathon_experience'
+            control={control}
+            error={
+              errors.hackathon_experience
+                ? errors.hackathon_experience.message
+                : undefined
+            }
+          />
+        </div>
+
+        <div className='flex flex-col items-center justify-center gap-5'>
+          <p className='text-center font-subtext'>
+            Do you have prior tech experience? If so, in what context (i.e.
+            classes, internships, personal projects)?
+          </p>
+          <TextareaInput
+            inputProps={{ ...register("tech_experience") }}
+            showCount={false}
+            error={
+              errors.hackathon_experience
+                ? errors.hackathon_experience.message
                 : undefined
             }
           />
         </div>
       </div>
-
       <StepButtons
         isFirstStep={isFirstStep}
         isLastStep={isLastStep}

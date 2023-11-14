@@ -4,23 +4,53 @@ import { useAppState } from "../../../hooks/useAppState"
 import { AppDemographicsSchema } from "../../../utils/types"
 import { z } from "zod"
 import toast from "react-hot-toast"
-import Step01 from "./Step01"
-import Step02 from "./Step02"
-import Step03 from "./Step03"
-import Step04 from "./Step04"
+import RenderStep, { Step } from "../RenderStep"
 
-export interface StepProps {
-  isFirstStep: boolean
-  isLastStep: boolean
-  navForward: (data: any) => void
-  navBackward: () => void
-}
+const steps: Step[] = [
+  // Step 1
+  [
+    [
+      { text: "Demograhpic Information", type: "title" },
+      <h2
+        key={"demographic_note"}
+        className='text-center text-xs md:w-2/3 md:text-sm'
+      >
+        The information collected here will be used for statistical purposes
+        only. In accordance with the{" "}
+        <a href='https://mlh.io/privacy' className='text-blue-button'>
+          MLH Privacy Polich
+        </a>
+      </h2>,
+    ],
+    [
+      { text: "What's your age?" },
+      {
+        inputType: "text",
+        field: "age",
+        additionalInputProps: {
+          type: "number",
+          placeholder: "How old are you?",
+        },
+      },
+    ],
+    [
+      { text: "Where do you reside?" },
+      { inputType: "combo", field: "country", options: ["USA", "Canada"] },
+    ],
+  ],
 
-const steps = [Step01, Step02, Step03, Step04]
+  // Step 2
+  // [],
+]
 
 const DemographicsSection = () => {
   const navigate = useNavigate()
   const [appState, setAppState] = useAppState()
+
+  const [step, setStep] = useState(0)
+
+  const isFirstStep = step === 0
+  const isLastStep = step === steps.length - 1
 
   const navForward = (data: any) => {
     // Merge form data with existing user data
@@ -60,19 +90,14 @@ const DemographicsSection = () => {
     setStep(step + 1)
   }
 
-  const [step, setStep] = useState(0)
-  const CurrentStep = steps[step]
-
-  const isFirstStep = step === 0
-  const isLastStep = step === steps.length - 1
-
   return (
     <div className='h-full'>
       <p className='mb-2 font-subtext uppercase text-white/50'>
         Step {step + 1} of {steps.length}
       </p>
       <div className='h-full pb-10'>
-        <CurrentStep
+        <RenderStep
+          step={steps[step]}
           isFirstStep={isFirstStep}
           isLastStep={isLastStep}
           navForward={navForward}

@@ -55,11 +55,11 @@ export type AppUserSchema = z.infer<typeof AppUserSchema>
 // Section 1 - Demographics
 export const AppDemographicsSchema = z.object({
   age: z
-    .number()
-    .min(1, "Please include an age.")
-    .min(12, "Must be at least 12 years old.")
-    .max(120, "Invalid age."),
-  country: z.string(),
+    .number({ invalid_type_error: "Please include an age" })
+    .min(1, "Please include an age")
+    .min(12, "Must be at least 12 years old")
+    .max(120, "Invalid age"),
+  country: z.string().min(1, "Please include a country."),
   school: z.string(),
 
   year_in_school: z.string(),
@@ -73,7 +73,7 @@ export const AppDemographicsSchema = z.object({
 
   area_of_study: z.string().array(),
 
-  first_hackathon: z.string(),
+  first_cruzhacks: z.string(),
   hackathon_experience: z.string(),
   tech_experience: z.string().max(1500, "Character limit exceeded."),
 

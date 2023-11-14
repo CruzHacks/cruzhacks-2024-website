@@ -3,7 +3,7 @@ import { classNames } from "../../utils/string"
 
 interface TextareaInputProps {
   rows?: number
-  inputStyling?: string
+  inputProps?: any
   showCount?: boolean
   error?: string
   maxLength?: number
@@ -12,6 +12,7 @@ interface TextareaInputProps {
 const TextareaInput = ({
   rows = 4,
   error,
+  inputProps,
   showCount = true,
   maxLength = 1500,
 }: TextareaInputProps) => {
@@ -31,8 +32,7 @@ const TextareaInput = ({
       >
         <textarea
           rows={rows}
-          name='comment'
-          id='comment'
+          {...inputProps}
           className={classNames(
             error
               ? "text-error placeholder:text-error/60"

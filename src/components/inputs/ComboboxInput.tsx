@@ -8,7 +8,7 @@ import { ChevronDownIcon } from "@heroicons/react/24/outline"
 interface ComboboxInputProps {
   query: string
   setQuery: (query: string) => void
-  items: string[]
+  options: string[]
 
   name: string
   control: any
@@ -18,17 +18,17 @@ interface ComboboxInputProps {
 const ComboboxInput = ({
   query,
   setQuery,
-  items,
+  options,
 
   name,
   control,
   error,
 }: ComboboxInputProps) => {
-  const filteredItems =
+  const filteredoptions =
     query === ""
-      ? items
-      : items.filter(item => {
-          return item.toLowerCase().includes(query.toLowerCase())
+      ? options
+      : options.filter(options => {
+          return options.toLowerCase().includes(query.toLowerCase())
         })
 
   return (
@@ -54,7 +54,7 @@ const ComboboxInput = ({
                 )}
                 placeholder='Choose'
                 onChange={event => setQuery(event.target.value)}
-                displayValue={(item: string) => item}
+                displayValue={(options: string) => options}
               />
               <Combobox.Button className='absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none'>
                 <ChevronDownIcon
@@ -66,9 +66,9 @@ const ComboboxInput = ({
                 />
               </Combobox.Button>
 
-              {filteredItems.length > 0 && (
+              {filteredoptions.length > 0 && (
                 <Combobox.Options className='absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-blue-imperial py-1 shadow-lg ring-1 ring-white/5 focus:outline-none sm:text-sm'>
-                  {filteredItems.map(person => (
+                  {filteredoptions.map(person => (
                     <Combobox.Option
                       key={person}
                       value={person}
@@ -96,7 +96,7 @@ const ComboboxInput = ({
                             <span
                               className={classNames(
                                 selected && "text-pink",
-                                "absolute inset-y-0 right-0 flex items-center pr-4"
+                                "options-center absolute inset-y-0 right-0 flex pr-4"
                               )}
                             >
                               <CheckIcon

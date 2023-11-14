@@ -59,7 +59,8 @@ const Step03 = ({
     >
       <div className='flex flex-col items-center justify-center md:justify-start md:gap-5'>
         <h1 className='text-center font-subtext text-2xl md:text-3xl'>
-          What year are you in?
+          In what type of educational institution are you{" "}
+          <p className='font-bold'>currently enrolled</p> in?
         </h1>
 
         <div className='h-0 md:h-10'></div>

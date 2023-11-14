@@ -1,19 +1,19 @@
-import { RadioGroup } from "@headlessui/react"
 import React, { useState } from "react"
+import { RadioGroup } from "@headlessui/react"
 import { classNames } from "../../utils/string"
 import { Controller } from "react-hook-form"
 
 interface RadioInputProps {
-  items: string[]
+  options: string[]
   other?: boolean
-  noAnswer?: boolean
   arrange?: "vertical" | "vertical-inline"
+
   name: string
   control: any
 }
 
 const RadioInput = ({
-  items,
+  options,
   other,
   arrange = "vertical",
 
@@ -32,8 +32,8 @@ const RadioInput = ({
         <>
           <RadioGroup
             value={otherSelected ? null : value}
-            onChange={item => {
-              onChange(item || "")
+            onChange={option => {
+              onChange(option || "")
               setOtherSelected(false)
             }}
             className='mt-2'
@@ -44,10 +44,10 @@ const RadioInput = ({
                 arrange === "vertical-inline" && "flex flex-row flex-wrap gap-5"
               )}
             >
-              {items.map(item => (
+              {options.map(option => (
                 <RadioGroup.Option
-                  key={item}
-                  value={item}
+                  key={option}
+                  value={option}
                   className={({ active, checked }) =>
                     classNames(
                       arrange === "vertical" && "w-full",
@@ -56,11 +56,11 @@ const RadioInput = ({
                       checked
                         ? "bg-gradient-to-r from-[#00D1FF] to-[#0029FF] text-white"
                         : "bg-white/10 hover:bg-white/20",
-                      "flex items-center justify-center rounded-full px-5 py-3 font-subtext text-sm font-semibold ring ring-inset ring-white/5"
+                      "options-center flex justify-center rounded-full px-5 py-3 font-subtext text-sm font-semibold ring ring-inset ring-white/5"
                     )
                   }
                 >
-                  <RadioGroup.Label as='span'>{item}</RadioGroup.Label>
+                  <RadioGroup.Label as='span'>{option}</RadioGroup.Label>
                 </RadioGroup.Option>
               ))}
             </div>
@@ -71,7 +71,7 @@ const RadioInput = ({
                 otherSelected
                   ? "bg-gradient-to-r from-[#00D1FF] to-[#0029FF] text-white"
                   : "bg-white/10 hover:bg-white/20",
-                "mt-5 flex w-full items-center justify-center gap-3 rounded-full px-3 py-3 font-subtext text-sm font-semibold ring ring-inset ring-white/5 focus-within:ring-white/5 focus-within:ring-offset-2"
+                "options-center mt-5 flex w-full justify-center gap-3 rounded-full px-3 py-3 font-subtext text-sm font-semibold ring ring-inset ring-white/5 focus-within:ring-white/5 focus-within:ring-offset-2"
               )}
               onClick={() => {
                 setOtherSelected(true)
