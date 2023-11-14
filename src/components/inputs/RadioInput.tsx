@@ -9,6 +9,7 @@ interface RadioInputProps {
   arrange?: "vertical" | "vertical-inline"
 
   name: string
+  defaultValue?: string
   control: any
   error?: string
 }
@@ -19,6 +20,7 @@ const RadioInput = ({
   arrange = "vertical",
 
   name,
+  defaultValue,
   control,
   error,
 }: RadioInputProps) => {
@@ -30,13 +32,13 @@ const RadioInput = ({
       <Controller
         name={name}
         control={control}
-        defaultValue=''
+        defaultValue={defaultValue}
         render={({ field: { onChange, value } }) => (
           <>
             <RadioGroup
               value={otherSelected ? null : value}
               onChange={option => {
-                onChange(option || "")
+                onChange(option)
                 setOtherSelected(false)
               }}
               className='mt-2'

@@ -1,21 +1,21 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAppState } from "../../../hooks/useAppState"
-import { AppDemographicsSchema } from "../../../utils/types"
-import { demographicSteps } from "./form"
+import { AppLogisticsSchema } from "../../../utils/types"
 import {
   mergeAppState,
   notifyValidationErrors,
 } from "../../../utils/hackerapplication"
 import ApplicationRenderStep from "../ApplicationRenderStep"
+import { logisticsStep } from "./form"
 
 // NOTE: Form sections are routed to using react-dom-router. Routes are defined
-// in src/App.tsx. The route for this section is "/apply/demographics"
+// in src/App.tsx. The route for this section is "/apply/short_response"
 
-const section = "demographics"
-const sectionSchema = AppDemographicsSchema
+const section = "logistics"
+const sectionSchema = AppLogisticsSchema
 
-const DemographicsSection = () => {
+const ShortResponseSection = () => {
   const navigate = useNavigate()
   const [appState, setAppState] = useAppState()
 
@@ -23,7 +23,7 @@ const DemographicsSection = () => {
 
   // RenderStep props
   const isFirstStep = step === 0
-  const isLastStep = step === demographicSteps.length - 1
+  const isLastStep = step === logisticsStep.length - 1
 
   const navForward = (data: any) => {
     const _appState = mergeAppState(section, data, appState)
@@ -33,7 +33,7 @@ const DemographicsSection = () => {
     if (isLastStep) {
       try {
         sectionSchema.parse(_appState[section])
-        navigate("/apply/short_response")
+        navigate("/apply/socials")
       } catch (err) {
         notifyValidationErrors(err)
       }
@@ -50,13 +50,13 @@ const DemographicsSection = () => {
   return (
     <div className='h-full'>
       <p className='mb-2 font-subtext uppercase text-white/50'>
-        Step {step + 1} of {demographicSteps.length}
+        Step {step + 1} of {logisticsStep.length}
       </p>
       <div className='h-full pb-10'>
         <ApplicationRenderStep
-          step={demographicSteps[step]}
+          step={logisticsStep[step]}
           section={section}
-          sectionSchema={AppDemographicsSchema}
+          sectionSchema={sectionSchema}
           isFirstStep={isFirstStep}
           isLastStep={isLastStep}
           navForward={navForward}
@@ -67,4 +67,4 @@ const DemographicsSection = () => {
   )
 }
 
-export default DemographicsSection
+export default ShortResponseSection

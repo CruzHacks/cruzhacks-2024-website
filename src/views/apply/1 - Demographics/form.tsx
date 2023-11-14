@@ -1,7 +1,7 @@
 import React from "react"
-import { Step } from "../../../utils/hackerapplication"
+import { FormTemplate } from "../../../utils/hackerapplication"
 
-export const demographicSteps: Step[] = [
+export const demographicSteps: FormTemplate[] = [
   // Step 1
   [
     [

@@ -2,6 +2,7 @@ import { ReactElement } from "react"
 import toast from "react-hot-toast"
 import { z } from "zod"
 import { HeroIcon } from "./types"
+import { useLocation } from "react-router-dom"
 
 /**
  * Utility types for the Hacker Application.
@@ -46,16 +47,18 @@ type ComboboxInput = {
 }
 
 type FormInput = TextInput | TextareaInput | RadioInput | ComboboxInput
-type BlockElement = Text | FormInput | ReactElement<any, any>
-type Block = BlockElement[]
-export type Step = Block[]
+type FormBlockElement = Text | FormInput | ReactElement<any, any>
+type FormBlock = FormBlockElement[]
+export type FormTemplate = FormBlock[]
 
 /**
  * Check if a block element is text.
  * @param blockElement a block is an array of block elements (text, input, jsx)
  * @returns true if the block element is text
  */
-export const isText = (blockElement: BlockElement): blockElement is Text => {
+export const isText = (
+  blockElement: FormBlockElement
+): blockElement is Text => {
   return (blockElement as any as Text).text !== undefined
 }
 
@@ -65,7 +68,7 @@ export const isText = (blockElement: BlockElement): blockElement is Text => {
  * @returns true if the block element is an input
  */
 export const isInput = (
-  blockElement: BlockElement
+  blockElement: FormBlockElement
 ): blockElement is FormInput => {
   return (blockElement as any as FormInput).inputType !== undefined
 }
@@ -76,7 +79,7 @@ export const isInput = (
  * @returns true if the block element is a text input
  */
 export const isTextInput = (
-  blockElement: BlockElement
+  blockElement: FormBlockElement
 ): blockElement is TextInput => {
   return isInput(blockElement) && blockElement.inputType == "text"
 }
@@ -87,7 +90,7 @@ export const isTextInput = (
  * @returns true if the block element is a textarea input
  */
 export const isTextareaInput = (
-  blockElement: BlockElement
+  blockElement: FormBlockElement
 ): blockElement is TextareaInput => {
   return isInput(blockElement) && blockElement.inputType == "textarea"
 }
@@ -98,7 +101,7 @@ export const isTextareaInput = (
  * @returns true if the block element is a radio input
  */
 export const isRadio = (
-  blockElement: BlockElement
+  blockElement: FormBlockElement
 ): blockElement is RadioInput => {
   return isInput(blockElement) && blockElement.inputType == "radio"
 }
@@ -109,7 +112,7 @@ export const isRadio = (
  * @returns true if the block element is a combobox input
  */
 export const isCombo = (
-  blockElement: BlockElement
+  blockElement: FormBlockElement
 ): blockElement is ComboboxInput => {
   return isInput(blockElement) && blockElement.inputType == "combo"
 }
@@ -119,7 +122,7 @@ export const isCombo = (
  * @param step a Hacker Application section step
  * @returns an array of field names from the step
  */
-export const getFieldsFromStep = (step: Step) => {
+export const getFieldsFromStep = (step: FormTemplate) => {
   const fields = []
 
   for (const block of step) {
@@ -145,7 +148,7 @@ export const createSchemaFromFields = (
 ) => {
   const stepSchema = fields.reduce((acc, field) => {
     if (!(field in sectionSchema.shape))
-      throw new Error("Could not construct step schema: invalid field" + field)
+      console.error("Could not construct step schema: invalid field " + field)
 
     return {
       ...acc,
@@ -154,6 +157,29 @@ export const createSchemaFromFields = (
   }, {})
 
   return z.object(stepSchema)
+}
+
+export const createDefaultStateFromFields = (
+  section: string,
+  appState: any,
+  fields: string[]
+) => {
+  if (!appState || !(section in appState)) {
+    return {}
+  }
+
+  const sectionData = appState[section]
+
+  const defaultState = fields.reduce((acc, field) => {
+    if (!(field in sectionData)) return acc
+
+    return {
+      ...acc,
+      [field]: sectionData[field],
+    }
+  }, {})
+
+  return defaultState
 }
 
 /**
@@ -194,4 +220,25 @@ export const notifyValidationErrors = (err: any) => {
     return
   }
   toast.error(JSON.stringify(err))
+}
+
+/**
+ * Get the current section of the application from the url
+ * @returns The current section of the application
+ */
+export const getCurrentSection = () => {
+  const location = useLocation()
+  const slugSplit = location.pathname.split("/")
+  return slugSplit[slugSplit.length - 1]
+}
+
+/**
+ * Check if a section is valid according to its schema
+ * @param schema validation schema
+ * @param data section data to validate
+ * @returns returns true if the section data is valid, false otherwise
+ */
+export const isSectionValid = (schema: z.AnyZodObject, data: any) => {
+  const res = schema.safeParse(data)
+  return res.success
 }

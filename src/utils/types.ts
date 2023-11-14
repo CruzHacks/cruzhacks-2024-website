@@ -37,8 +37,8 @@ export type ApplicationSchema = z.infer<typeof ApplicationSchema>
 export const AppUserSchema = z.object({
   email: z
     .string()
-    .min(1, "Please include an email.")
-    .email("Invalid email address."),
+    .min(1, "Please include an email")
+    .email("Invalid email address"),
   phone_number: z
     .string()
     .min(1, "Phone number is required")
@@ -46,9 +46,9 @@ export const AppUserSchema = z.object({
       value => /^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$/.test(value),
       "Please format digits as 000-000-0000"
     ),
-  password: z.string().min(1, "Please include a password."),
-  first_name: z.string().min(1, "Please include a first name."),
-  last_name: z.string().min(1, "Please include a last name."),
+  password: z.string().min(1, "Please include a password"),
+  first_name: z.string().min(1, "Please include a first name"),
+  last_name: z.string().min(1, "Please include a last name"),
 })
 export type AppUserSchema = z.infer<typeof AppUserSchema>
 
@@ -59,21 +59,21 @@ export const AppDemographicsSchema = z.object({
     .min(1, "Please include an age")
     .min(12, "Must be at least 12 years old")
     .max(120, "Invalid age"),
-  country: z.string().min(1, "Please include a country."),
-  school: z.string(),
+  country: z.string().min(1, "Please include a country"),
+  school: z.string().min(1, "Please include a school"),
 
-  ucsc_college_affiliation: z.string().optional(),
+  ucsc_college_affiliation: z.string().min(1, "Please Answer"),
 
-  year_in_school: z.string(),
+  year_in_school: z.string().min(5, "Please specify your year in school"),
 
-  education_level: z.string(),
+  education_level: z.string().min(1, "Please specify your education level"),
 
-  graduation_year: z.string(),
+  graduation_year: z.string().min(1, "Please specify your graduation year"),
 
-  area_of_study: z.string(),
+  area_of_study: z.string().min(1, "Please specify your area of study"),
 
-  first_cruzhacks: z.string(),
-  hackathon_experience: z.string(),
+  first_cruzhacks: z.string().min(1, "Please Answer"),
+  hackathon_experience: z.string().min(1, "Please Answer"),
   tech_experience: z.string().max(1500, "Character limit exceeded."),
 
   // ethnic_background: z.string().array(),
