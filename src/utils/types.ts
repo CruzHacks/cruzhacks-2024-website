@@ -62,22 +62,22 @@ export const AppDemographicsSchema = z.object({
   country: z.string().min(1, "Please include a country."),
   school: z.string(),
 
+  ucsc_college_affiliation: z.string().optional(),
+
   year_in_school: z.string(),
 
   education_level: z.string(),
 
-  ucsc_student: z.boolean(),
-  ucsc_college_affiliation: z.string().optional(),
+  graduation_year: z.string(),
 
-  graduation_year: z.number().optional(),
-
-  area_of_study: z.string().array(),
+  area_of_study: z.string(),
 
   first_cruzhacks: z.string(),
   hackathon_experience: z.string(),
   tech_experience: z.string().max(1500, "Character limit exceeded."),
 
-  ethnic_background: z.string().array(),
+  // ethnic_background: z.string().array(),
+  ethnic_background: z.string(),
 
   pronouns: z.string(),
 
@@ -142,3 +142,11 @@ export const ApplicationSchemaDto = z.object({
   socials: AppSocialsSchema,
 })
 export type ApplicationSchemaDto = z.infer<typeof ApplicationSchemaDto>
+
+// Tailwindcss Heroicon
+export type HeroIcon = React.ForwardRefExoticComponent<
+  Omit<React.SVGProps<SVGSVGElement>, "ref"> & {
+    title?: string | undefined
+    titleId?: string | undefined
+  } & React.RefAttributes<SVGSVGElement>
+>

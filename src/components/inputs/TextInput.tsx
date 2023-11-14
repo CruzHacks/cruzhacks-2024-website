@@ -1,16 +1,10 @@
 import React from "react"
 import { classNames } from "../../utils/string"
 import { ExclamationCircleIcon } from "@heroicons/react/24/solid"
-
-export type Icon = React.ForwardRefExoticComponent<
-  Omit<React.SVGProps<SVGSVGElement>, "ref"> & {
-    title?: string | undefined
-    titleId?: string | undefined
-  } & React.RefAttributes<SVGSVGElement>
->
+import { HeroIcon } from "../../utils/types"
 
 interface TextInputProps {
-  Icon?: Icon
+  Icon?: HeroIcon
   error?: string
   inputProps?: any
 }

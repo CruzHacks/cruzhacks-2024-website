@@ -16,6 +16,7 @@ export const StepButtons = ({
   return (
     <div className='flex w-full flex-row justify-between md:justify-center md:gap-10'>
       <button
+        type='button'
         className={classNames(
           !isFirstStep
             ? "border-white text-white"

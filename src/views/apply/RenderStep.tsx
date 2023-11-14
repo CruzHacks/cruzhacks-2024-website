@@ -1,4 +1,4 @@
-import React, { ReactElement, isValidElement, useState } from "react"
+import React, { isValidElement, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -9,108 +9,19 @@ import ComboboxInput from "../../components/inputs/ComboboxInput"
 import TextInput from "../../components/inputs/TextInput"
 import RadioInput from "../../components/inputs/RadioInput"
 import TextareaInput from "../../components/inputs/TextareaInput"
+import {
+  Step,
+  createSchemaFromFields,
+  getFieldsFromStep,
+  isCombo,
+  isInput,
+  isRadio,
+  isText,
+  isTextInput,
+  isTextareaInput,
+} from "../../utils/hackerapplication"
 
-type Text = {
-  text: string
-  type?: "title" | "subtitle" | "body" // default: body
-}
-
-type TextInput = {
-  inputType: "text"
-  field: string
-  additionalInputProps?: any
-}
-
-type TextareaInput = {
-  inputType: "textarea"
-
-  rows?: number
-  showCount?: boolean
-  maxLength?: number
-
-  field: string
-}
-
-type RadioInput = {
-  inputType: "radio"
-
-  options: string[]
-  other?: boolean
-  arrange?: "vertical" | "vertical-inline"
-
-  field: string
-}
-
-type ComboboxInput = {
-  inputType: "combo"
-  field: string
-  options: string[]
-}
-
-type FormInput = TextInput | TextareaInput | RadioInput | ComboboxInput
-
-type BlockElement = Text | FormInput | ReactElement<any, any>
-
-type Block = BlockElement[]
-
-export type Step = Block[]
-
-const isText = (block: BlockElement): block is Text => {
-  return (block as any as Text).text !== undefined
-}
-
-const isInput = (block: BlockElement): block is FormInput => {
-  return (block as any as FormInput).inputType !== undefined
-}
-
-const isTextInput = (block: BlockElement): block is TextInput => {
-  return isInput(block) && block.inputType == "text"
-}
-
-const isTextareaInput = (block: BlockElement): block is TextareaInput => {
-  return isInput(block) && block.inputType == "textarea"
-}
-
-const isRadio = (block: BlockElement): block is RadioInput => {
-  return isInput(block) && block.inputType == "radio"
-}
-
-const isCombo = (block: BlockElement): block is ComboboxInput => {
-  return isInput(block) && block.inputType == "combo"
-}
-
-const getFieldsFromStep = (step: Step) => {
-  const fields = []
-
-  for (const block of step) {
-    for (const blockElement of block) {
-      if (isInput(blockElement)) {
-        fields.push(blockElement.field)
-      }
-    }
-  }
-
-  return fields
-}
-
-const createSchemaFromFields = (
-  sectionSchema: z.AnyZodObject,
-  fields: string[]
-) => {
-  const stepSchema = fields.reduce((acc, field) => {
-    if (!(field in sectionSchema.shape))
-      throw new Error("Could not construct step schema: invalid field" + field)
-
-    return {
-      ...acc,
-      [field]: sectionSchema.shape[field as keyof typeof sectionSchema],
-    }
-  }, {})
-
-  return z.object(stepSchema)
-}
-
-export interface StepProps {
+interface StepProps {
   step: Step
   isFirstStep: boolean
   isLastStep: boolean
@@ -135,6 +46,7 @@ const RenderStep = ({
   const StepSchema = createSchemaFromFields(AppDemographicsSchema, fields)
   type StepSchema = z.infer<typeof StepSchema>
 
+  // Validation/state with react-hook-form
   const {
     register,
     handleSubmit,
@@ -145,6 +57,7 @@ const RenderStep = ({
     resolver: zodResolver(StepSchema),
   })
 
+  // State for ComboboxInput queries
   const [state, setState] = useState({})
 
   return (
@@ -167,10 +80,11 @@ const RenderStep = ({
                 : undefined
 
               if (isTextInput(blockElement)) {
-                const { field, additionalInputProps } = blockElement
+                const { field, Icon, additionalInputProps } = blockElement
                 return (
                   <TextInput
                     key={"" + i + j}
+                    Icon={Icon}
                     inputProps={{
                       ...register(
                         field as never,
@@ -207,6 +121,7 @@ const RenderStep = ({
                     key={"" + i + j}
                     name={field}
                     control={control}
+                    error={error}
                     {...rest}
                   />
                 )
@@ -222,6 +137,8 @@ const RenderStep = ({
                   />
                 )
               }
+
+              throw new Error("Invalid form element")
             }
             // JSX
             if (isValidElement(blockElement)) {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { z } from "zod"
 import {
   AppDemographicsSchema,
@@ -69,6 +69,9 @@ const ProgressBarWrapper = () => {
 
     navigate(`/apply/${section}`)
   }
+
+  console.log("currentSection", currentSection)
+  console.log(activeStep)
 
   // // Navigate to beginning of form if section is empty on first render
   // useEffect(() => {
