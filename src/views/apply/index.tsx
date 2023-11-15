@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { AppStateProvider } from "../../contexts/applicationState"
 import ProgressBarWrapper from "./ApplicationProgressBar"
 import { Outlet } from "react-router-dom"
@@ -14,13 +14,34 @@ import { demographicSteps } from "./sectionForms/demographics"
 import { shortResponseSteps } from "./sectionForms/shortResponse"
 import { logisticsStep } from "./sectionForms/logistics"
 import { socialsSteps } from "./sectionForms/socials"
-import { z } from "zod"
 import { waiversSteps } from "./sectionForms/waivers"
+import WillLoseProgressModal from "../../components/WillLoseProgressModal"
+
+const WillLoseProgressWrapper = () => {
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", alertUser)
+
+    return () => {
+      window.removeEventListener("beforeunload", alertUser)
+    }
+  })
+
+  const alertUser = (e: BeforeUnloadEvent) => {
+    e.preventDefault()
+    e.returnValue = ""
+    setOpen(true)
+  }
+
+  return <WillLoseProgressModal open={open} setOpen={setOpen} />
+}
 
 // Apply routes wrapper
 const Apply = () => {
   return (
     <AppStateProvider>
+      <WillLoseProgressWrapper />
       <div className='flex min-h-screen flex-col items-center'>
         <div className='w-full max-w-4xl p-8 md:px-20 md:py-16'>
           <ProgressBarWrapper />

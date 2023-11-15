@@ -13,6 +13,11 @@ type Text = {
   type?: "title" | "body" | "disclaimer"
 }
 
+type LinkBox = {
+  link: string
+  name: string
+}
+
 type TextInput = {
   inputType: "text"
   field: string
@@ -47,7 +52,7 @@ type ComboboxInput = {
 }
 
 type FormInput = TextInput | TextareaInput | RadioInput | ComboboxInput
-type FormBlockElement = Text | FormInput | ReactElement<any, any>
+type FormBlockElement = Text | LinkBox | FormInput | ReactElement<any, any>
 type FormBlock = FormBlockElement[]
 export type FormTemplate = FormBlock[]
 
@@ -60,6 +65,17 @@ export const isText = (
   blockElement: FormBlockElement
 ): blockElement is Text => {
   return (blockElement as any as Text).text !== undefined
+}
+
+/**
+ * Check if a block element is a link box
+ * @param blockElement a block is an array of block elements (text, input, jsx)
+ * @returns true if the block element is a link box
+ */
+export const isLinkBox = (
+  blockElement: FormBlockElement
+): blockElement is LinkBox => {
+  return (blockElement as any as LinkBox).link !== undefined
 }
 
 /**

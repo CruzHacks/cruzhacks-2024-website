@@ -15,11 +15,13 @@ import {
   getFieldsFromStep,
   isCombo,
   isInput,
+  isLinkBox,
   isRadio,
   isText,
   isTextInput,
   isTextareaInput,
 } from "../../utils/hackerapplication"
+import LinkBox from "../../components/LinkBox"
 
 interface StepProps {
   step: FormTemplate
@@ -78,7 +80,7 @@ const ApplicationRenderStep = ({
         setState({})
       })}
     >
-      <div className='flex h-full flex-col items-center justify-center gap-10 md:justify-start'>
+      <div className='flex h-full grow flex-col items-stretch justify-center gap-10 md:items-center md:justify-start'>
         {step.map((block, i) => (
           <div
             className='flex w-full flex-col items-stretch justify-center sm:items-center'
@@ -116,6 +118,11 @@ const ApplicationRenderStep = ({
                     {text}
                   </p>
                 )
+              }
+              // Link Box
+              if (isLinkBox(blockElement)) {
+                const { link, name } = blockElement
+                return <LinkBox key={"" + i + j} text={name} to={link} />
               }
               // Input
               if (isInput(blockElement)) {

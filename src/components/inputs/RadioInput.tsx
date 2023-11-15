@@ -62,7 +62,7 @@ const RadioInput = ({
                         checked
                           ? "bg-gradient-to-r from-[#00D1FF] to-[#0029FF] text-white"
                           : "bg-white/10 hover:bg-white/20",
-                        "options-center flex justify-center rounded-full px-5 py-3 font-subtext text-sm font-semibold ring ring-inset ring-white/5"
+                        "flex items-center justify-center rounded-full px-5 py-3 text-center font-subtext text-sm font-semibold ring ring-inset ring-white/5"
                       )
                     }
                   >

@@ -84,5 +84,110 @@ export const waiversSteps: FormTemplate[] = [
   ],
 
   // Step 3
-  [[]],
+  [
+    [
+      {
+        text: "CruzHacks 2024 Participation & Release Agreement",
+        type: "title",
+      },
+    ],
+    [
+      {
+        text: "To participate in CruzHacks 2023, you must agree to our Participation and Release Agreement",
+      },
+      {
+        // TODO: find link
+        link: "",
+        name: "Participation and Release Agreement",
+      },
+    ],
+    [
+      {
+        inputType: "radio",
+        field: "cruzhacks_conduct",
+        options: [
+          "I have read and agree to the CruzHacks 2023 Participation and Release Agreement",
+        ],
+      },
+    ],
+  ],
+
+  // Step 4
+  [
+    [
+      {
+        text: "Communication from MLH",
+        type: "title",
+      },
+    ],
+    [
+      <p
+        key='waiver_step_mlh'
+        className='max-w-md space-y-5 rounded-3xl bg-white/10 p-5 text-center font-subtext text-sm ring-2 ring-inset ring-white/10'
+      >
+        I authorize MLH to send me an email where I can further opt into the MLH
+        Hacker, Events, or Organizer Newsletters and other communications from
+        MLH.
+      </p>,
+    ],
+    [{ inputType: "radio", field: "comm_from_mlh", options: ["Yes"] }],
+  ],
+
+  // Step 5
+  [
+    [{ text: "Communication from CruzHacks", type: "title" }],
+    [
+      {
+        text: "I authorize the Organizers of CruzHacks 2024 to send me updates and information regarding CruzHacks 2023 and future CruzHacks events.",
+      },
+      { inputType: "radio", field: "comm_from_cruzhacks", options: ["Yes"] },
+    ],
+  ],
+
+  // Step 6
+  [
+    [{ text: "CruzHacks 2024 COVID Safety Policy", type: "title" }],
+    [
+      {
+        text: "To participate in CruzHacks 2024, you must agree to our COVID Safety Policy",
+      },
+      // TODO: Find link
+      {
+        link: "",
+        name: "COVID Safety Policy",
+      },
+    ],
+    [
+      {
+        inputType: "radio",
+        field: "covid_safety",
+        options: ["I have read and agree to the CruzHacks 2024 Safety Policy"],
+      },
+    ],
+  ],
+
+  // Step 7
+  [
+    [{ text: "Parent Release and Consent Form", type: "title" }],
+    [
+      {
+        text: "If you are a minor (under 18), please fill out the CruzHacks 2023 Parental Release and Consent Form.",
+      },
+      // TODO: Find link
+      { link: "", name: "Form" },
+    ],
+    [
+      {
+        text: "Applications for minors will not be reviewed if we do not find a corresponding Parental Release and Consent Form.",
+      },
+      {
+        inputType: "radio",
+        field: "parental_consent",
+        options: [
+          "I am not a minor",
+          "Yes, I will visit the link above and fill out the form",
+        ],
+      },
+    ],
+  ],
 ]
