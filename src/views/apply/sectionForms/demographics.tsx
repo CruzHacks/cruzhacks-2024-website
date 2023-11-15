@@ -8,7 +8,7 @@ export const demographicSteps: FormTemplate[] = [
       { text: "Demograhpic Information", type: "title" },
       <h2
         key={"demographic_note"}
-        className='text-center text-xs md:w-2/3 md:text-sm'
+        className='self-center text-center text-xs md:w-2/3 md:text-sm'
       >
         The information collected here will be used for statistical purposes
         only. In accordance with the{" "}

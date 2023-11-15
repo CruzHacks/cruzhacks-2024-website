@@ -54,13 +54,6 @@ const ApplicationRenderStep = ({
 
   // Get default values from appState
   const defaultValues = createDefaultStateFromFields(section, appState, fields)
-  console.log(
-    `section "${section}" (fields: ${fields}, appState: ${JSON.stringify(
-      appState,
-      null,
-      2
-    )}, defaultValues: ${JSON.stringify(defaultValues, null, 2)}))`
-  )
 
   // Validation/state with react-hook-form
   const {
@@ -78,114 +71,121 @@ const ApplicationRenderStep = ({
 
   return (
     <form
+      className='flex h-full grow flex-col justify-between gap-10'
       onSubmit={handleSubmit(data => {
-        console.log("submiting form data:", data)
         navForward(data)
         setState({})
       })}
     >
-      {step.map((block, i) => (
-        <div key={i}>
-          {block.map((blockElement, j) => {
-            // Text
-            if (isText(blockElement)) {
-              const { text, type } = blockElement
-              if (type && type === "title") {
+      <div className='flex h-full flex-col items-center justify-center gap-10 md:justify-start'>
+        {step.map((block, i) => (
+          <div
+            className='flex w-full flex-col items-stretch justify-center sm:items-center'
+            key={i}
+          >
+            {block.map((blockElement, j) => {
+              // Text
+              if (isText(blockElement)) {
+                const { text, type } = blockElement
+                if (type && type === "title") {
+                  return (
+                    <h1
+                      key={"" + i + j}
+                      className='pb-2 text-center font-title text-xl md:text-2xl lg:text-4xl'
+                    >
+                      {text}
+                    </h1>
+                  )
+                }
                 return (
-                  <h1
+                  <p
                     key={"" + i + j}
-                    className='text-center font-title md:text-2xl lg:text-4xl'
+                    className='max-w-xl pb-5 text-center font-subtext'
                   >
                     {text}
-                  </h1>
+                  </p>
                 )
               }
-              return (
-                <p key={"" + i + j} className='text-center font-subtext'>
-                  {text}
-                </p>
-              )
-            }
-            // Input
-            if (isInput(blockElement)) {
-              const error = (errors as any)[blockElement.field]
-                ? ((errors as any)[blockElement.field]?.message as string)
-                : undefined
+              // Input
+              if (isInput(blockElement)) {
+                const error = (errors as any)[blockElement.field]
+                  ? ((errors as any)[blockElement.field]?.message as string)
+                  : undefined
 
-              if (isTextInput(blockElement)) {
-                const { field, Icon, additionalInputProps } = blockElement
-                return (
-                  <TextInput
-                    key={"" + i + j}
-                    Icon={Icon}
-                    inputProps={{
-                      ...register(
-                        field as never,
-                        // input type number
-                        additionalInputProps &&
-                          additionalInputProps.type === "number" && {
-                            valueAsNumber: true,
-                          }
-                      ),
-                      ...additionalInputProps,
-                    }}
-                    error={error}
-                  />
-                )
+                if (isTextInput(blockElement)) {
+                  const { field, Icon, additionalInputProps } = blockElement
+                  return (
+                    <TextInput
+                      key={"" + i + j}
+                      Icon={Icon}
+                      inputProps={{
+                        ...register(
+                          field as never,
+                          // input type number
+                          additionalInputProps &&
+                            additionalInputProps.type === "number" && {
+                              valueAsNumber: true,
+                            }
+                        ),
+                        ...additionalInputProps,
+                      }}
+                      error={error}
+                    />
+                  )
+                }
+                if (isCombo(blockElement)) {
+                  const { field, options } = blockElement
+                  return (
+                    <ComboboxInput
+                      key={"" + i + j}
+                      query={state[field as keyof typeof state] || ""}
+                      setQuery={val => setState({ ...state, [field]: val })}
+                      name={field}
+                      options={options}
+                      control={control}
+                      error={error}
+                    />
+                  )
+                }
+                if (isRadio(blockElement)) {
+                  const { field, ...rest } = blockElement
+                  return (
+                    <RadioInput
+                      key={"" + i + j}
+                      name={field}
+                      // defaultValue={
+                      //   defaultValues[field as keyof StepSchema] || ""
+                      // }
+                      control={control}
+                      error={error}
+                      {...rest}
+                    />
+                  )
+                }
+                if (isTextareaInput(blockElement)) {
+                  const { field, ...rest } = blockElement
+                  return (
+                    <TextareaInput
+                      key={"textarea" + i + j}
+                      inputProps={{ ...register(field as never) }}
+                      error={error}
+                      {...rest}
+                    />
+                  )
+                }
+
+                console.error("RenderStep: Invalid form element")
               }
-              if (isCombo(blockElement)) {
-                const { field, options } = blockElement
-                return (
-                  <ComboboxInput
-                    key={"" + i + j}
-                    query={state[field as keyof typeof state] || ""}
-                    setQuery={val => setState({ ...state, [field]: val })}
-                    name={field}
-                    options={options}
-                    control={control}
-                    error={error}
-                  />
-                )
-              }
-              if (isRadio(blockElement)) {
-                const { field, ...rest } = blockElement
-                console.log("field:", field)
-                return (
-                  <RadioInput
-                    key={"" + i + j}
-                    name={field}
-                    // defaultValue={
-                    //   defaultValues[field as keyof StepSchema] || ""
-                    // }
-                    control={control}
-                    error={error}
-                    {...rest}
-                  />
-                )
-              }
-              if (isTextareaInput(blockElement)) {
-                const { field, ...rest } = blockElement
-                return (
-                  <TextareaInput
-                    key={"textarea" + i + j}
-                    inputProps={{ ...register(field as never) }}
-                    error={error}
-                    {...rest}
-                  />
-                )
+              // JSX
+              if (isValidElement(blockElement)) {
+                return blockElement
               }
 
-              console.error("RenderStep: Invalid form element")
-            }
-            // JSX
-            if (isValidElement(blockElement)) {
-              return blockElement
-            }
-
-            console.error("RenderStep: Invalid block")
-          })}
-        </div>
-      ))}
+              console.error("RenderStep: Invalid block")
+            })}
+          </div>
+        ))}
+      </div>
 
       <StepButtons
         isFirstStep={isFirstStep}

@@ -5,6 +5,7 @@ export const shortResponseSteps: FormTemplate[] = [
   [
     [
       <svg
+        className='my-10 self-center'
         key={"short_response_pen_and_paper"}
         xmlns='http://www.w3.org/2000/svg'
         width='214'

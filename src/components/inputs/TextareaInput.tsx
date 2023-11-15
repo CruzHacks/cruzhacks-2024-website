@@ -21,7 +21,7 @@ const TextareaInput = ({
   // react-hook-form
   const currentLength = 0
   return (
-    <>
+    <div className='self-stretch'>
       <div
         className={classNames(
           error
@@ -54,7 +54,7 @@ const TextareaInput = ({
       </div>
 
       {error && <p className='mt-2 text-sm text-error'>{error}</p>}
-    </>
+    </div>
   )
 }
 

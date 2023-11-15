@@ -54,11 +54,11 @@ const ApplicationSection = ({
   }
 
   return (
-    <div className='h-full'>
+    <div className='flex h-full grow flex-col md:gap-5'>
       <p className='mb-2 font-subtext uppercase text-white/50'>
         Step {step + 1} of {steps.length}
       </p>
-      <div className='h-full pb-10'>
+      <div className='flex h-full grow flex-col pb-10'>
         {/* Super Important! Key must be unique so each react-hook-form instance on step is initliazed fresh */}
         <ApplicationRenderStep
           key={new Date().getTime()}

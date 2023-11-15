@@ -32,7 +32,7 @@ const ComboboxInput = ({
         })
 
   return (
-    <>
+    <div className='self-center'>
       <Controller
         name={name}
         control={control}
@@ -116,7 +116,7 @@ const ComboboxInput = ({
         )}
       />
       {error && <p className='mt-2 text-sm text-error'>{error}</p>}
-    </>
+    </div>
   )
 }
 

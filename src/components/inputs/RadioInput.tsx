@@ -28,7 +28,7 @@ const RadioInput = ({
   const [otherValue, setOtherValue] = useState("")
 
   return (
-    <>
+    <div className='self-stretch'>
       <Controller
         name={name}
         control={control}
@@ -73,6 +73,7 @@ const RadioInput = ({
             </RadioGroup>
             {other && (
               <button
+                type='button'
                 className={classNames(
                   otherSelected
                     ? "bg-gradient-to-r from-[#00D1FF] to-[#0029FF] text-white"
@@ -100,7 +101,7 @@ const RadioInput = ({
         )}
       />
       {error && <p className='mt-2 text-sm text-error'>{error}</p>}
-    </>
+    </div>
   )
 }
 
