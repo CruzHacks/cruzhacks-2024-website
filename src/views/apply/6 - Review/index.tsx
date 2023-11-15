@@ -1,13 +1,17 @@
 import { ChevronRightIcon } from "@heroicons/react/24/solid"
-import React from "react"
+import React, { useState } from "react"
 import { useAppState } from "../../../hooks/useAppState"
+import ConfettiExplosion from "react-confetti-explosion"
+import toast from "react-hot-toast"
 
 // TODO: printout responses
 const ReviewSection = () => {
   const [appState] = useAppState()
+  const [isExploding, setIsExploding] = useState(false)
 
   const submitApplication = () => {
-    alert("Application Submitted")
+    setIsExploding(true)
+    toast("Application Submitted")
     console.log(appState)
   }
 
@@ -39,7 +43,7 @@ const ReviewSection = () => {
             </div>
           </div>
           {/* navButton */}
-          <div className='flex w-full flex-row justify-center md:gap-10'>
+          <div className='flex w-full flex-col items-center justify-center md:gap-10'>
             <button
               className='w-30 flex h-10 items-center justify-between gap-1 rounded-2xl border-2 border-none bg-gradient-to-r from-[#00D1FF] to-[#0029FF] px-4 font-subtext text-white'
               type='button'
@@ -48,6 +52,8 @@ const ReviewSection = () => {
               <p>Submit</p>
               <ChevronRightIcon className='ml-2 h-4 w-4' />
             </button>
+
+            {isExploding && <ConfettiExplosion className='fixed' />}
           </div>
         </div>
       </div>

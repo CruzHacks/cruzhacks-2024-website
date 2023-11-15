@@ -64,7 +64,7 @@ export const demographicSteps: FormTemplate[] = [
           "College 9",
           "College 10",
           "Graduate Student",
-          "N/A (I do not attend UCSC",
+          "N/A (I do not attend UCSC)",
         ],
         arrange: "vertical-inline",
       },
@@ -72,25 +72,6 @@ export const demographicSteps: FormTemplate[] = [
   ],
 
   // Step 3
-  [
-    [{ text: "What year are in?" }],
-    [
-      {
-        inputType: "radio",
-        field: "year_in_school",
-        options: [
-          "HighSchool",
-          "Freshman",
-          "Sophomore",
-          "Junior",
-          "Senior",
-          "Graduate Student",
-        ],
-      },
-    ],
-  ],
-
-  // Step 4
   [
     [
       {
@@ -111,6 +92,25 @@ export const demographicSteps: FormTemplate[] = [
           "Not currently a student",
           "Prefer not to answer",
           "Other",
+        ],
+      },
+    ],
+  ],
+
+  // Step 4
+  [
+    [{ text: "What year are in?" }],
+    [
+      {
+        inputType: "radio",
+        field: "year_in_school",
+        options: [
+          "HighSchool",
+          "Freshman",
+          "Sophomore",
+          "Junior",
+          "Senior",
+          "Graduate Student",
         ],
       },
     ],
@@ -520,7 +520,7 @@ export const demographicSteps: FormTemplate[] = [
   [
     [
       { text: "Pronouns" },
-      { text: "Select all that apply", type: "subtitle" },
+      { text: "Select all that apply", type: "disclaimer" },
       {
         inputType: "radio",
         field: "pronouns",
@@ -540,7 +540,7 @@ export const demographicSteps: FormTemplate[] = [
   [
     [
       { text: "What is your gender identy?" },
-      { text: "Select as many as you'd like", type: "subtitle" },
+      { text: "Select as many as you'd like", type: "disclaimer" },
       // TODO: multiple selections
       {
         inputType: "radio",
