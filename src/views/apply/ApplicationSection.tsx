@@ -1,21 +1,27 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { useAppState } from "../../../hooks/useAppState"
-import { AppLogisticsSchema } from "../../../utils/types"
+import { useAppState } from "../../hooks/useAppState"
+import { AppDemographicsSchema } from "../../utils/types"
 import {
   mergeAppState,
   notifyValidationErrors,
-} from "../../../utils/hackerapplication"
-import ApplicationRenderStep from "../ApplicationRenderStep"
-import { logisticsStep } from "./form"
+} from "../../utils/hackerapplication"
+import ApplicationRenderStep from "./ApplicationRenderStep"
+import { z } from "zod"
 
-// NOTE: Form sections are routed to using react-dom-router. Routes are defined
-// in src/App.tsx. The route for this section is "/apply/short_response"
+interface SectionProps {
+  section: string
+  sectionSchema: z.AnyZodObject
+  steps: any[]
+  nextSection: string
+}
 
-const section = "logistics"
-const sectionSchema = AppLogisticsSchema
-
-const ShortResponseSection = () => {
+const ApplicationSection = ({
+  section,
+  sectionSchema,
+  steps,
+  nextSection,
+}: SectionProps) => {
   const navigate = useNavigate()
   const [appState, setAppState] = useAppState()
 
@@ -23,7 +29,7 @@ const ShortResponseSection = () => {
 
   // RenderStep props
   const isFirstStep = step === 0
-  const isLastStep = step === logisticsStep.length - 1
+  const isLastStep = step === steps.length - 1
 
   const navForward = (data: any) => {
     const _appState = mergeAppState(section, data, appState)
@@ -33,7 +39,7 @@ const ShortResponseSection = () => {
     if (isLastStep) {
       try {
         sectionSchema.parse(_appState[section])
-        navigate("/apply/socials")
+        navigate(`/apply/${nextSection}`)
       } catch (err) {
         notifyValidationErrors(err)
       }
@@ -50,13 +56,15 @@ const ShortResponseSection = () => {
   return (
     <div className='h-full'>
       <p className='mb-2 font-subtext uppercase text-white/50'>
-        Step {step + 1} of {logisticsStep.length}
+        Step {step + 1} of {steps.length}
       </p>
       <div className='h-full pb-10'>
+        {/* Super Important! Key must be unique so each react-hook-form instance on step is initliazed fresh */}
         <ApplicationRenderStep
-          step={logisticsStep[step]}
+          key={new Date().getTime()}
+          step={steps[step]}
           section={section}
-          sectionSchema={sectionSchema}
+          sectionSchema={AppDemographicsSchema}
           isFirstStep={isFirstStep}
           isLastStep={isLastStep}
           navForward={navForward}
@@ -67,4 +75,4 @@ const ShortResponseSection = () => {
   )
 }
 
-export default ShortResponseSection
+export default ApplicationSection

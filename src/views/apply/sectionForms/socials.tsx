@@ -1,7 +1,7 @@
 import React from "react"
 import { FormTemplate } from "../../../utils/hackerapplication"
 
-export const socialsStep: FormTemplate[] = [
+export const socialsSteps: FormTemplate[] = [
   [
     [
       <p key='title'>TODO: logistics logo</p>,

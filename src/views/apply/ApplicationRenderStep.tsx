@@ -67,7 +67,6 @@ const ApplicationRenderStep = ({
     register,
     handleSubmit,
     control,
-    reset,
     formState: { errors },
   } = useForm<StepSchema>({
     defaultValues,
@@ -82,8 +81,7 @@ const ApplicationRenderStep = ({
       onSubmit={handleSubmit(data => {
         console.log("submiting form data:", data)
         navForward(data)
-        setState({}) // reset(state)
-        // reset(defaultValues)
+        setState({})
       })}
     >
       {step.map((block, i) => (

@@ -17,16 +17,17 @@ import ApplicationApplicant from "./views/portal/applicant/Application"
 import PortalApplicant from "./views/portal/applicant"
 import DashboardApplicant from "./views/portal/applicant/DashboardApplicant"
 import useAuth from "./hooks/useAuth"
-import Apply from "./views/apply"
+import Apply, {
+  DemographicsSection,
+  LogisticsSection,
+  ShortResponseSection,
+  SocialsSection,
+  WaviersSection,
+} from "./views/apply"
 import { Toaster } from "react-hot-toast"
 import UserSection from "./views/apply/0 - User"
-import DemographicsSection from "./views/apply/1 - Demographics"
-import ShortResponseSection from "./views/apply/2 - ShortResponse"
-import LogisticsSection from "./views/apply/3 - Logistics"
-import SocialsSection from "./views/apply/4 - Socials"
-import WaviersSection from "./views/apply/5 - Waivers"
-import ReviewSection from "./views/apply/6 - Review"
 import ApplicationsReviewAdmin from "./views/portal/admin/applications/Review"
+import ReviewSection from "./views/apply/6 - Review"
 
 const App: React.FC = () => {
   const {
