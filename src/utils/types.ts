@@ -91,15 +91,11 @@ export type AppDemographicsSchema = z.infer<typeof AppDemographicsSchema>
 
 // Section 2 - short response
 export const AppShortResponseSchema = z.object({
-  responses: z
-    .object({
-      question: z.string().max(1500, "Question supplied is too long."),
-      answer: z
-        .string()
-        .min(0, "Please provide an answer.")
-        .max(1500, "Charater limit exceeded."),
-    })
-    .array(),
+  why_cruzhacks: z.string().max(1500, "Character limit exceeded."),
+  what_would_you_like_to_see: z.string().max(1500, "Character limit exceeded."),
+  grand_invention: z.string().max(1500, "Character limit exceeded."),
+  back_in_time_invention: z.string().max(1500, "Character limit exceeded."),
+  one_plane_ticket_anywhere: z.string().max(1500, "Character limit exceeded."),
 })
 
 export type AppShortResponseSchema = z.infer<typeof AppShortResponseSchema>
@@ -120,18 +116,52 @@ export type AppLogisticsSchema = z.infer<typeof AppLogisticsSchema>
 
 // Section 4 - socials
 export const AppSocialsSchema = z.object({
-  resume_drop_form: z.boolean(),
+  resume_drop_form: z.string(),
 
-  linked_in: z.string().url().optional(),
-  github: z.string().url().optional(),
+  linkedin: z.string().optional(),
+  github: z.string().optional(),
   discord: z.string().optional(),
 
   cruzhacks_referral: z.string().optional(), // how did you hear about CruzHacks
   // email of person who referred
   cruzhacks_refferal_email: z.string().optional(),
-  cruzhacks_refferal_organization: z.string().optional(),
+  cruzhacks_refferal_organization: z
+    .string()
+    .max(200, "Character limit exceeded.")
+    .optional(),
+  anything_else: z.string().max(1500, "Character limit exceeded."),
 })
 export type AppSocialsSchema = z.infer<typeof AppSocialsSchema>
+
+// Section 5 - waivers
+const required_error = "Sorry, you must agree to continue"
+export const AppWaiversSchema = z.object({
+  mlh_code_conduct: z.string({
+    required_error,
+  }),
+  mlh_data_sharing: z.string({
+    required_error,
+  }),
+  cruzhacks_conduct: z.string({
+    required_error,
+  }),
+  comm_from_mlh: z.string({
+    required_error,
+  }),
+  comm_from_cruzhacks: z.string({
+    required_error,
+  }),
+  cruzhacks_release: z.string({
+    required_error,
+  }),
+  covid_safety: z.string({
+    required_error,
+  }),
+  parental_consent: z.string({
+    required_error,
+  }),
+})
+export type AppWaiversSchema = z.infer<typeof AppWaiversSchema>
 
 // Application Transfer Schema, used for sending application data to the server
 export const ApplicationSchemaDto = z.object({

@@ -21,29 +21,29 @@ export const StepButtons = ({
           !isFirstStep
             ? "border-white text-white"
             : "cursor-not-allowed border-white/20 text-white/20",
-          "flex h-12 w-24 items-center justify-center gap-1 rounded-md border-2 border-white bg-transparent"
+          "flex h-10 w-24 items-center justify-between gap-1 rounded-2xl border-2 border-white bg-transparent px-4"
         )}
         onClick={navBackward}
         disabled={isFirstStep}
       >
-        <ChevronLeftIcon className='h-4 w-4' />
+        <ChevronLeftIcon className='mr-2 h-4 w-4' />
         <p>Back</p>
       </button>
       {!isLastStep ? (
         <button
-          className='flex h-12 w-24 items-center justify-center gap-1 rounded-md border-2 border-none bg-white font-subtext text-blue-royal'
+          className='flex h-10 w-24 items-center justify-between gap-1 rounded-2xl border-2 border-none bg-white px-4 font-subtext text-blue-royal'
           type='submit'
         >
           <p>Next</p>
-          <ChevronRightIcon className='h-4 w-4' />
+          <ChevronRightIcon className='ml-2 h-4 w-4' />
         </button>
       ) : (
         <button
-          className='flex h-12 w-40 items-center justify-center gap-1 rounded-md border-2 border-none bg-white font-subtext text-blue-royal'
+          className='flex h-10 w-44 items-center justify-between gap-1 rounded-2xl border-2 border-none bg-white px-4 font-subtext text-blue-royal'
           type='submit'
         >
           <p>Next Section</p>
-          <ChevronRightIcon className='h-4 w-4' />
+          <ChevronRightIcon className='ml-2 h-4 w-4' />
         </button>
       )}
     </div>

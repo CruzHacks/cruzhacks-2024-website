@@ -10,7 +10,7 @@ import { useLocation } from "react-router-dom"
 
 type Text = {
   text: string
-  type?: "title" | "subtitle" | "body" // default: body
+  type?: "title" | "body" | "disclaimer"
 }
 
 type TextInput = {
@@ -148,7 +148,13 @@ export const createSchemaFromFields = (
 ) => {
   const stepSchema = fields.reduce((acc, field) => {
     if (!(field in sectionSchema.shape))
-      console.error("Could not construct step schema: invalid field " + field)
+      console.error(
+        `Could not construct step schema: field "${field}" not found in section schema "${JSON.stringify(
+          sectionSchema.shape,
+          null,
+          2
+        )}"`
+      )
 
     return {
       ...acc,

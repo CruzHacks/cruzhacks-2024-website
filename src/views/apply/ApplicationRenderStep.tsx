@@ -60,6 +60,7 @@ const ApplicationRenderStep = ({
     register,
     handleSubmit,
     control,
+    watch,
     formState: { errors },
   } = useForm<StepSchema>({
     defaultValues,
@@ -95,6 +96,16 @@ const ApplicationRenderStep = ({
                     >
                       {text}
                     </h1>
+                  )
+                }
+                if (type && type === "disclaimer") {
+                  return (
+                    <p
+                      key={"" + i + j}
+                      className='max-w-md self-center text-center font-subtext text-xs'
+                    >
+                      {text}
+                    </p>
                   )
                 }
                 return (
@@ -169,6 +180,7 @@ const ApplicationRenderStep = ({
                       key={"textarea" + i + j}
                       inputProps={{ ...register(field as never) }}
                       error={error}
+                      characterCount={watch(field as never)?.length}
                       {...rest}
                     />
                   )

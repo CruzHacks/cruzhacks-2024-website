@@ -8,12 +8,14 @@ import {
   AppLogisticsSchema,
   AppShortResponseSchema,
   AppSocialsSchema,
+  AppWaiversSchema,
 } from "../../utils/types"
 import { demographicSteps } from "./sectionForms/demographics"
 import { shortResponseSteps } from "./sectionForms/shortResponse"
 import { logisticsStep } from "./sectionForms/logistics"
 import { socialsSteps } from "./sectionForms/socials"
 import { z } from "zod"
+import { waiversSteps } from "./sectionForms/waivers"
 
 // Apply routes wrapper
 const Apply = () => {
@@ -53,7 +55,6 @@ export const DemographicsSection = () => {
 }
 
 // ROUTE: /apply/short_response
-// TODO: Fix this section application schema
 export const ShortResponseSection = () => {
   return (
     <ApplicationSection
@@ -95,8 +96,8 @@ export const WaviersSection = () => {
   return (
     <ApplicationSection
       section={"waivers"}
-      sectionSchema={z.object({})}
-      steps={socialsSteps}
+      sectionSchema={AppWaiversSchema}
+      steps={waiversSteps}
       nextSection={"review"}
     />
   )

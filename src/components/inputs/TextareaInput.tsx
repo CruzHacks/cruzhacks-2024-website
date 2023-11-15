@@ -5,6 +5,7 @@ interface TextareaInputProps {
   rows?: number
   inputProps?: any
   showCount?: boolean
+  characterCount?: number
   error?: string
   maxLength?: number
 }
@@ -14,12 +15,9 @@ const TextareaInput = ({
   error,
   inputProps,
   showCount = true,
+  characterCount,
   maxLength = 1500,
 }: TextareaInputProps) => {
-  // TODO: When integrating with react-hook-form there will be a way to get the
-  // current length, similarly the maxLength will be validated with zod and
-  // react-hook-form
-  const currentLength = 0
   return (
     <div className='self-stretch'>
       <div
@@ -48,7 +46,7 @@ const TextareaInput = ({
               "w-full text-right font-subtext"
             )}
           >
-            {currentLength}/{maxLength}
+            {characterCount || "0"}/{maxLength}
           </p>
         )}
       </div>
