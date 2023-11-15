@@ -37,6 +37,9 @@ const Apply = () => {
  * in src/App.tsx.
  */
 
+// ROUTE: /apply/user
+// ./0 - User/index.tsx
+
 // ROUTE: /apply/demographics
 export const DemographicsSection = () => {
   return (
