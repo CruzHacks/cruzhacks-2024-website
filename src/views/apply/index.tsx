@@ -20,6 +20,12 @@ import WillLoseProgressModal from "../../components/WillLoseProgressModal"
 const WillLoseProgressWrapper = () => {
   const [open, setOpen] = useState(false)
 
+  const alertUser = (e: BeforeUnloadEvent) => {
+    e.preventDefault()
+    e.returnValue = ""
+    setOpen(true)
+  }
+
   useEffect(() => {
     window.addEventListener("beforeunload", alertUser)
 
@@ -27,12 +33,6 @@ const WillLoseProgressWrapper = () => {
       window.removeEventListener("beforeunload", alertUser)
     }
   })
-
-  const alertUser = (e: BeforeUnloadEvent) => {
-    e.preventDefault()
-    e.returnValue = ""
-    setOpen(true)
-  }
 
   return <WillLoseProgressModal open={open} setOpen={setOpen} />
 }

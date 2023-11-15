@@ -51,43 +51,62 @@ const Step01 = ({
 
   return (
     <form
-      className='flex h-full flex-col items-center justify-between gap-5'
+      className='flex h-full grow flex-col justify-between gap-10'
       onSubmit={handleSubmit(refineForm(navForward))}
     >
-      <div className='flex flex-col items-center justify-center md:justify-start md:gap-3'>
-        <h1 className='mb-2 font-title text-4xl'>Welcome!</h1>
-        <h2 className='text-center font-subtext text-sm md:w-2/3 md:text-base'>
-          We&apos;re so excited to have you! Let&apos;s get started with
-          registration.
-        </h2>
+      <div className='flex h-full grow flex-col items-stretch justify-center gap-10 md:items-center md:justify-start'>
+        {/* Block */}
+        <div className='flex w-full flex-col items-stretch justify-center sm:items-center'>
+          <h1 className='pb-2 text-center font-title text-xl md:text-4xl'>
+            Welcome!
+          </h1>
+          <p className='max-w-xl pb-5 text-center font-subtext'>
+            We&apos;re so excited to have you! Let&apos;s get started with
+            registration.
+          </p>
+        </div>
 
-        <TextInput
-          Icon={EnvelopeIcon}
-          inputProps={{ ...register("email"), placeholder: "Email" }}
-          error={errors.email ? errors.email.message : undefined}
-        />
+        {/* Block */}
+        <div className='flex w-full flex-col items-stretch justify-center sm:items-center'>
+          <TextInput
+            Icon={EnvelopeIcon}
+            inputProps={{ ...register("email"), placeholder: "Email" }}
+            error={errors.email ? errors.email.message : undefined}
+          />
+        </div>
 
-        <TextInput
-          Icon={UserIcon}
-          inputProps={{ ...register("first_name"), placeholder: "First Name" }}
-          error={errors.first_name ? errors.first_name.message : undefined}
-        />
+        <div className='flex w-full flex-col items-stretch justify-center sm:items-center'>
+          <TextInput
+            Icon={UserIcon}
+            inputProps={{
+              ...register("first_name"),
+              placeholder: "First Name",
+            }}
+            error={errors.first_name ? errors.first_name.message : undefined}
+          />
+        </div>
 
-        <TextInput
-          Icon={UserIcon}
-          inputProps={{ ...register("last_name"), placeholder: "Last Name" }}
-          error={errors.last_name ? errors.last_name.message : undefined}
-        />
+        <div className='flex w-full flex-col items-stretch justify-center sm:items-center'>
+          <TextInput
+            Icon={UserIcon}
+            inputProps={{ ...register("last_name"), placeholder: "Last Name" }}
+            error={errors.last_name ? errors.last_name.message : undefined}
+          />
+        </div>
 
-        <TextInput
-          Icon={PhoneIcon}
-          inputProps={{
-            ...register("phone_number"),
-            type: "tel",
-            placeholder: "000-000-0000",
-          }}
-          error={errors.phone_number ? errors.phone_number.message : undefined}
-        />
+        <div className='flex w-full flex-col items-stretch justify-center sm:items-center'>
+          <TextInput
+            Icon={PhoneIcon}
+            inputProps={{
+              ...register("phone_number"),
+              type: "tel",
+              placeholder: "000-000-0000",
+            }}
+            error={
+              errors.phone_number ? errors.phone_number.message : undefined
+            }
+          />
+        </div>
       </div>
 
       <StepButtons

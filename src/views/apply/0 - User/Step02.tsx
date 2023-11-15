@@ -2,7 +2,7 @@ import React from "react"
 import TextInput from "../../../components/inputs/TextInput"
 import { LockClosedIcon } from "@heroicons/react/24/outline"
 import { z } from "zod"
-import { useForm } from "react-hook-form"
+import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { StepButtons } from "../../../components/StepButtons"
 import { useAppState } from "../../../hooks/useAppState"
@@ -45,36 +45,47 @@ const Step02 = ({
    * @param data form data from schema
    * @returns valid Application Schema properties
    */
-  const refineForm = (data: any) => {
-    return data
+  const refineForm: SubmitHandler<Step02Schema> = data => {
+    const { password } = data
+    navForward({ password })
   }
 
   return (
     <form
-      className='flex h-full grow flex-col items-center justify-between gap-5'
-      onSubmit={handleSubmit(refineForm(navForward))}
+      className='flex h-full grow flex-col justify-between gap-10'
+      onSubmit={handleSubmit(refineForm)}
     >
-      <div className='flex flex-col items-center justify-center md:justify-start md:gap-3'>
-        <h1 className='mb-2 font-title text-4xl'>Password</h1>
-        <TextInput
-          Icon={LockClosedIcon}
-          inputProps={{
-            ...register("password"),
-            type: "password",
-            placeholder: "Password",
-          }}
-          error={errors.password && errors.password.message}
-        />
+      <div className='flex h-full grow flex-col items-stretch justify-center gap-10 md:items-center md:justify-start'>
+        {/* Block */}
+        <div className='flex w-full flex-col items-stretch justify-center sm:items-center'>
+          <h1 className='mb-2 font-title text-4xl'>Password</h1>
+        </div>
 
-        <TextInput
-          Icon={LockClosedIcon}
-          inputProps={{
-            ...register("confirm_password"),
-            type: "password",
-            placeholder: "Confirm Password",
-          }}
-          error={errors.confirm_password && errors.confirm_password.message}
-        />
+        {/* Block */}
+        <div className='flex w-full flex-col items-stretch justify-center sm:items-center'>
+          <TextInput
+            Icon={LockClosedIcon}
+            inputProps={{
+              ...register("password"),
+              type: "password",
+              placeholder: "Password",
+            }}
+            error={errors.password && errors.password.message}
+          />
+        </div>
+
+        {/* Block */}
+        <div className='flex w-full flex-col items-stretch justify-center sm:items-center'>
+          <TextInput
+            Icon={LockClosedIcon}
+            inputProps={{
+              ...register("confirm_password"),
+              type: "password",
+              placeholder: "Confirm Password",
+            }}
+            error={errors.confirm_password && errors.confirm_password.message}
+          />
+        </div>
       </div>
 
       <StepButtons

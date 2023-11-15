@@ -115,7 +115,7 @@ const ComboboxInput = ({
           </Combobox>
         )}
       />
-      {error && <p className='mt-2 text-sm text-error'>{error}</p>}
+      {error && <p className='mt-2 text-error'>{error}</p>}
     </div>
   )
 }

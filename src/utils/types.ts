@@ -39,6 +39,8 @@ export const AppUserSchema = z.object({
     .string()
     .min(1, "Please include an email")
     .email("Invalid email address"),
+  first_name: z.string().min(1, "Please include a first name"),
+  last_name: z.string().min(1, "Please include a last name"),
   phone_number: z
     .string()
     .min(1, "Phone number is required")
@@ -47,12 +49,12 @@ export const AppUserSchema = z.object({
       "Please format digits as 000-000-0000"
     ),
   password: z.string().min(1, "Please include a password"),
-  first_name: z.string().min(1, "Please include a first name"),
-  last_name: z.string().min(1, "Please include a last name"),
 })
 export type AppUserSchema = z.infer<typeof AppUserSchema>
 
 // Section 1 - Demographics
+const prefer__not_to_answer =
+  'Prefer not Please specify "Prefer not to answer" if you do not want to answer this question.o answer'
 export const AppDemographicsSchema = z.object({
   age: z
     .number({ invalid_type_error: "Please include an age" })
@@ -79,9 +81,11 @@ export const AppDemographicsSchema = z.object({
   // ethnic_background: z.string().array(),
   ethnic_background: z.string(),
 
-  pronouns: z.string(),
+  pronouns: z.string({
+    required_error: prefer__not_to_answer,
+  }),
 
-  gender: z.string(),
+  gender: z.string({ required_error: prefer__not_to_answer }),
 
   sexual_orientation: z.string().optional(),
 

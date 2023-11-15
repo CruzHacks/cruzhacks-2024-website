@@ -50,7 +50,7 @@ export default function WillLoseProgressModal({
                       as='h3'
                       className='text-base font-semibold leading-6 text-white'
                     >
-                      About to Lose Application Progress
+                      Submit Application Before Leaving
                     </Dialog.Title>
                     <div className='mt-2'>
                       <p className='text-sm text-white/70'>

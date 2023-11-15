@@ -6,6 +6,10 @@ import { z } from "zod"
 import toast from "react-hot-toast"
 import Step01 from "./Step01"
 import Step02 from "./Step02"
+import {
+  mergeAppState,
+  notifyValidationErrors,
+} from "../../../utils/hackerapplication"
 
 export interface StepProps {
   isFirstStep: boolean
@@ -14,62 +18,46 @@ export interface StepProps {
   navBackward: () => void
 }
 
+const section = "user"
+const sectionSchema = AppUserSchema
 const steps = [Step01, Step02]
+const nextSection = "demographics"
 
 const UserSection = () => {
   const navigate = useNavigate()
   const [appState, setAppState] = useAppState()
 
-  const navForward = (data: any) => {
-    // Merge form data with existing user data
-    const userData =
-      appState && appState.user
-        ? { user: { ...appState.user, ...data } }
-        : { user: data }
-    const _appState = { ...appState, ...userData }
+  const [step, setStep] = useState(0)
+  const CurrentStep = steps[step]
 
+  // RenderStep props
+  const isFirstStep = step === 0
+  const isLastStep = step === steps.length - 1
+
+  const navForward = (data: any) => {
+    const _appState = mergeAppState(section, data, appState)
+    setAppState(_appState)
+
+    // Navigate to next section if this is the last step
     if (isLastStep) {
       try {
-        setAppState(_appState)
-        AppUserSchema.parse(_appState.user)
-        navigate("/apply/demographics")
+        sectionSchema.parse(_appState[section])
+        navigate(`/apply/${nextSection}`)
       } catch (err) {
-        console.error(err)
-        if (err instanceof z.ZodError) {
-          err.issues.forEach(issue => {
-            toast.error(
-              issue.message === "Required"
-                ? `Field "${issue.path}" is required.`
-                : issue.message
-            )
-          })
-          return
-        }
-        if (err instanceof Error) {
-          toast.error(JSON.stringify(err.message))
-          return
-        }
-        toast.error(JSON.stringify(err))
+        notifyValidationErrors(err)
       }
       return
     }
 
-    setAppState(_appState)
     setStep(step + 1)
   }
 
-  const [step, setStep] = useState(0)
-  const CurrentStep = steps[step]
-
-  const isFirstStep = step === 0
-  const isLastStep = step === steps.length - 1
-
   return (
-    <div className='h-full'>
+    <div className='flex h-full grow flex-col md:gap-5'>
       <p className='mb-2 font-subtext uppercase text-white/50'>
         Step {step + 1} of {steps.length}
       </p>
-      <div className='h-full pb-10'>
+      <div className='flex h-full grow flex-col pb-10'>
         <CurrentStep
           isFirstStep={isFirstStep}
           isLastStep={isLastStep}

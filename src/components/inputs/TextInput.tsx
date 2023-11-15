@@ -46,7 +46,7 @@ const TextInput = ({ Icon, error, inputProps }: TextInputProps) => {
       </div>
       {error && (
         <p
-          className='mt-2 h-5 text-sm text-error'
+          className='text mt-2 h-5 text-error'
           id={inputProps["aria-describedby"] || ""}
         >
           {error}
