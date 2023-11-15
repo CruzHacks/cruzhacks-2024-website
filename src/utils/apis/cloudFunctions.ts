@@ -149,6 +149,6 @@ export const submitApplicationUnauthed = async (
       console.error(err)
       throw err.message
     }
-    return err as Error
+    throw err as Error
   }
 }

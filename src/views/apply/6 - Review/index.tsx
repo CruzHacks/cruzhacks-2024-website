@@ -3,16 +3,25 @@ import React, { useState } from "react"
 import { useAppState } from "../../../hooks/useAppState"
 import ConfettiExplosion from "react-confetti-explosion"
 import toast from "react-hot-toast"
+import { submitApplicationUnauthed } from "../../../utils/apis/cloudFunctions"
 
 // TODO: printout responses
 const ReviewSection = () => {
   const [appState] = useAppState()
   const [isExploding, setIsExploding] = useState(false)
 
-  const submitApplication = () => {
-    setIsExploding(true)
-    toast("Application Submitted")
+  const submitApplication = async () => {
     console.log(appState)
+    try {
+      await toast.promise(submitApplicationUnauthed(appState), {
+        loading: "Submitting application...",
+        success: "Application submitted!",
+        error: "Error submitting application",
+      })
+      setIsExploding(true)
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   return (
