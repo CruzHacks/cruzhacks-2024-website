@@ -54,7 +54,7 @@ export type AppUserSchema = z.infer<typeof AppUserSchema>
 
 // Section 1 - Demographics
 const prefer__not_to_answer =
-  'Prefer not Please specify "Prefer not to answer" if you do not want to answer this question.o answer'
+  'Please specify "Prefer not to answer" if you do not want to answer this question'
 export const AppDemographicsSchema = z.object({
   age: z
     .number({ invalid_type_error: "Please include an age" })
@@ -81,11 +81,10 @@ export const AppDemographicsSchema = z.object({
   // ethnic_background: z.string().array(),
   ethnic_background: z.string(),
 
-  pronouns: z.string({
-    required_error: prefer__not_to_answer,
-  }),
+  pronouns: z.string(),
 
-  gender: z.string({ required_error: prefer__not_to_answer }),
+  gender_identity_one: z.string({ required_error: prefer__not_to_answer }),
+  gender_identity_two: z.string({ required_error: prefer__not_to_answer }),
 
   sexual_orientation: z.string().optional(),
 
@@ -167,9 +166,9 @@ export type AppWaiversSchema = z.infer<typeof AppWaiversSchema>
 
 // Application Transfer Schema, used for sending application data to the server
 export const ApplicationSchemaDto = z.object({
-  user: AppUserSchema.optional(),
+  user: AppUserSchema,
   demographics: AppDemographicsSchema,
-  short_responses: AppShortResponseSchema,
+  short_response: AppShortResponseSchema,
   logistics: AppLogisticsSchema,
   socials: AppSocialsSchema,
 })

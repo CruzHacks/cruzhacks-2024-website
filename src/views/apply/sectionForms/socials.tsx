@@ -9,7 +9,11 @@ export const socialsSteps: FormTemplate[] = [
       {
         text: "Do you Do you consent to sharing your resume and/or contact information with current and future CruzHacks sponsors?",
       },
-      // TODO: Resume dropoff form button
+      {
+        // TODO: Resume Drop Form
+        link: "https://forms.gle/aKYMP4zifmYtWCmH6",
+        name: "Resume Drop Form",
+      },
     ],
     [
       {

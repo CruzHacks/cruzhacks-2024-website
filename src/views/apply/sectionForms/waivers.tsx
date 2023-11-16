@@ -96,8 +96,7 @@ export const waiversSteps: FormTemplate[] = [
         text: "To participate in CruzHacks 2023, you must agree to our Participation and Release Agreement",
       },
       {
-        // TODO: find link
-        link: "",
+        link: "https://docs.google.com/document/d/1298VyEqrSIvbzM3U8nvLQsLtY78Vi2mbndr3d5w0UKk/edit?usp=sharing",
         name: "Participation and Release Agreement",
       },
     ],
@@ -151,9 +150,8 @@ export const waiversSteps: FormTemplate[] = [
       {
         text: "To participate in CruzHacks 2024, you must agree to our COVID Safety Policy",
       },
-      // TODO: Find link
       {
-        link: "",
+        link: "https://docs.google.com/document/d/1aq7xN3c8t8AWS-yDBcvqu4EMYmw0025HAoCFuOVld7c/edit?usp=sharing",
         name: "COVID Safety Policy",
       },
     ],
@@ -173,8 +171,7 @@ export const waiversSteps: FormTemplate[] = [
       {
         text: "If you are a minor (under 18), please fill out the CruzHacks 2023 Parental Release and Consent Form.",
       },
-      // TODO: Find link
-      { link: "", name: "Form" },
+      { link: "https://forms.gle/uttfNsfpx2BNpEVs8", name: "Form" },
     ],
     [
       {

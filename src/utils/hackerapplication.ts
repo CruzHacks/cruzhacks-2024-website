@@ -1,6 +1,6 @@
 import { ReactElement } from "react"
 import toast from "react-hot-toast"
-import { z } from "zod"
+import { ZodObject, z } from "zod"
 import { HeroIcon } from "./types"
 import { useLocation } from "react-router-dom"
 
@@ -41,6 +41,7 @@ type RadioInput = {
   options: string[]
   other?: boolean
   arrange?: "vertical" | "vertical-inline"
+  multiple?: boolean
 
   field: string
 }
@@ -134,7 +135,7 @@ export const isCombo = (
 }
 
 /**
- * Get the Hacker Application field name from a given step
+ * Get the Hacker Application field names from a given step
  * @param step a Hacker Application section step
  * @returns an array of field names from the step
  */
@@ -153,6 +154,17 @@ export const getFieldsFromStep = (step: FormTemplate) => {
 }
 
 /**
+ * Get the Hacker Application field names from a given schema
+ * @param schema a zod schema for a Hacker Application section
+ * @returns an array of field names from the schema
+ */
+export const getFieldsFromSchema = (schema: z.AnyZodObject) => {
+  if (!schema instanceof ZodObject) {
+  }
+  return schema.shapkoue.keys()
+}
+
+/**
  * Creates an object schema from a list of fields and a section schema
  * @param sectionSchema a zod schema for a Hacker Application section to pull validation from
  * @param fields feilds to include in the schema
@@ -166,7 +178,7 @@ export const createSchemaFromFields = (
     if (!(field in sectionSchema.shape))
       console.error(
         `Could not construct step schema: field "${field}" not found in section schema "${JSON.stringify(
-          sectionSchema.shape,
+          getFieldsFromSchema(sectionSchema),
           null,
           2
         )}"`

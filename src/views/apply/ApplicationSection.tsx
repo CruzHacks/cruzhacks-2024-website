@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAppState } from "../../hooks/useAppState"
-import { AppDemographicsSchema } from "../../utils/types"
 import {
   mergeAppState,
   notifyValidationErrors,
@@ -60,6 +59,7 @@ const ApplicationSection = ({
       </p>
       <div className='flex h-full grow flex-col pb-10'>
         {/* Super Important! Key must be unique so each react-hook-form instance on step is initliazed fresh */}
+        {/* TODO: Better key would be constructed from fields */}
         <ApplicationRenderStep
           key={new Date().getTime()}
           step={steps[step]}

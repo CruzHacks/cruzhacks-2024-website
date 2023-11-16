@@ -11,7 +11,6 @@ const ReviewSection = () => {
   const [isExploding, setIsExploding] = useState(false)
 
   const submitApplication = async () => {
-    console.log(appState)
     try {
       await toast.promise(submitApplicationUnauthed(appState), {
         loading: "Submitting application...",

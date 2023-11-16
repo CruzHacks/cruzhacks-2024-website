@@ -2,8 +2,6 @@ import React, { useState } from "react"
 import { AppUserSchema } from "../../../utils/types"
 import { useNavigate } from "react-router-dom"
 import { useAppState } from "../../../hooks/useAppState"
-import { z } from "zod"
-import toast from "react-hot-toast"
 import Step01 from "./Step01"
 import Step02 from "./Step02"
 import {

@@ -16,6 +16,67 @@ export const API_URL = import.meta.env.DEV
   : `https://us-central1-${PROJECT_ID}.cloudfunctions.net`
 
 /**
+ * CruzHacks-2024-Backend API endpoint for checking if an email is taken
+ * @param email Email to check
+ * @returns Whether or not the email is taken as a boolean if successful
+ */
+export const checkEmailTaken = async (email: string) => {
+  try {
+    if (!email) throw new Error("No email provided")
+
+    const response = await axios.get(`${API_URL}/auth/emailTaken`, {
+      params: {
+        email,
+      },
+    })
+
+    const { data, error } = response.data
+
+    if (error) {
+      throw new Error(error)
+    }
+
+    return data.exists as boolean
+  } catch (err) {
+    if (isAxiosError(err)) {
+      throw err.message
+    }
+    throw err as Error
+  }
+}
+
+/**
+ * CruzHacks-2024-Backend API endpoint for checking if a phone number is taken
+ * @param phoneNumber Phone number to check
+ * @returns Whether or not the phone number is taken as a boolean if successful
+ */
+export const checkPhoneNumberTaken = async (phoneNumber: string) => {
+  try {
+    if (!phoneNumber) throw new Error("No phone number provided")
+
+    const response = await axios.get(`${API_URL}/auth/phoneNumberTaken`, {
+      params: {
+        phoneNumber,
+      },
+    })
+
+    const { data, error } = response.data
+
+    if (error) {
+      throw new Error(error)
+    }
+    console.log("data", data)
+
+    return data.exists as boolean
+  } catch (err) {
+    if (isAxiosError(err)) {
+      throw err.message
+    }
+    throw err as Error
+  }
+}
+
+/**
  * CruzHacks-2024-Backend API endpoint for checking if a user's custom claim
  * role is synced with their corresponding Firestore user/:uid role
  * @param user Firebase User
@@ -39,7 +100,7 @@ export const checkRoleSynced = async (user: User) => {
     return data
   } catch (err) {
     console.error(err)
-    return err as Error
+    throw err as Error
   }
 }
 
@@ -146,6 +207,9 @@ export const submitApplicationUnauthed = async (
     return data.message as string
   } catch (err) {
     if (isAxiosError(err)) {
+      if (err.response?.data?.data?.message) {
+        throw err.response.data.data.message
+      }
       console.error(err)
       throw err.message
     }
