@@ -5,7 +5,6 @@ import ConfettiExplosion from "react-confetti-explosion"
 import toast from "react-hot-toast"
 import { submitApplicationUnauthed } from "../../../utils/apis/cloudFunctions"
 import AllDoneModal from "../../../components/AllDoneModal"
-import { set } from "react-hook-form"
 
 // TODO: printout responses
 const ReviewSection = () => {
