@@ -60,7 +60,7 @@ export default function AllDoneModal({ open, setOpen }: AllDoneModalProps) {
                 </div>
                 <div className='mt-5 sm:mt-6'>
                   <a
-                    href='https://discord.gg/5XZt8ZQ'
+                    href='https://discord.gg/tBHmBbBX7C'
                     className='inline-flex w-full justify-center rounded-md bg-blue-button/50 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-button/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-button'
                     onClick={() => setOpen(false)}
                   >
