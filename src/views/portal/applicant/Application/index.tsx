@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import Submitted from "./Submitted"
-import Unsubmitted from "./Unsubmitted"
 import { checkApplicationSubmitted } from "../../../../utils/apis/firebase"
 import useAuth from "../../../../hooks/useAuth"
 
@@ -39,7 +38,7 @@ const ApplicationApplicant = () => {
   return (
     <div className='space-y-10'>
       <h1 className='font-title text-xl'>My Application</h1>
-      {isApplicationSubmitted ? <Submitted /> : <Unsubmitted />}
+      {isApplicationSubmitted && <Submitted />}
     </div>
   )
 }

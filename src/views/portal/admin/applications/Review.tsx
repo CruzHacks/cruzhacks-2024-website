@@ -7,10 +7,14 @@ const ApplicationsReviewAdmin = () => {
   if (!email) {
     return <div>No Email provided</div>
   }
+
+  // TODO: Response schema was updated since this dashboard was implemented, so
+  // update rendering to match
+
   const {
-    data: shortResponses,
+    // data: shortResponses,
     error,
-    isLoading,
+    // isLoading,
     isError,
   } = useApplicationShortResponses(email)
 
@@ -22,7 +26,7 @@ const ApplicationsReviewAdmin = () => {
       {!isError ? (
         <div className='flex w-full items-center justify-center'>
           <div className='w-full max-w-4xl space-y-10 rounded-lg bg-white/10 p-10 ring ring-inset ring-white/20'>
-            {!isLoading
+            {/* {!isLoading
               ? shortResponses?.responses.map((response, i) => (
                   <div key={i} className='space-y-2'>
                     <h2 className='font-title text-lg leading-7'>
@@ -38,7 +42,7 @@ const ApplicationsReviewAdmin = () => {
                     <p className='h-5 animate-pulse rounded bg-white/10'></p>
                     <p className='h-5 w-1/3 animate-pulse rounded bg-white/10'></p>
                   </div>
-                ))}
+                ))} */}
           </div>
         </div>
       ) : (
