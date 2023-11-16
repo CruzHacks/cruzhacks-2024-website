@@ -20,12 +20,12 @@ const ReviewSection = () => {
       await submitApplicationUnauthed(appState)
       setIsExploding(true)
       setAppState({ ...appState, form_submitted: true })
+      setOpenModal(true)
     } catch (err) {
       console.error(err)
       if (err instanceof Error) toast.error(err.message)
     } finally {
       setIsLoading(false)
-      setOpenModal(true)
     }
   }
 
