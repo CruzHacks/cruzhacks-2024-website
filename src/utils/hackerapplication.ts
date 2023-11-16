@@ -41,7 +41,6 @@ type RadioInput = {
   options: string[]
   other?: boolean
   arrange?: "vertical" | "vertical-inline"
-  multiple?: boolean
 
   field: string
 }
@@ -159,9 +158,10 @@ export const getFieldsFromStep = (step: FormTemplate) => {
  * @returns an array of field names from the schema
  */
 export const getFieldsFromSchema = (schema: z.AnyZodObject) => {
-  if (!schema instanceof ZodObject) {
+  if (!(schema instanceof ZodObject)) {
+    return []
   }
-  return schema.shapkoue.keys()
+  return schema.shape.keys()
 }
 
 /**
@@ -178,7 +178,8 @@ export const createSchemaFromFields = (
     if (!(field in sectionSchema.shape))
       console.error(
         `Could not construct step schema: field "${field}" not found in section schema "${JSON.stringify(
-          getFieldsFromSchema(sectionSchema),
+          sectionSchema.shape,
+          // getFieldsFromSchema(sectionSchema),
           null,
           2
         )}"`

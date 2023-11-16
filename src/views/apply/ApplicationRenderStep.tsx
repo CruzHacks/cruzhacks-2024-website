@@ -22,7 +22,6 @@ import {
   isTextareaInput,
 } from "../../utils/hackerapplication"
 import LinkBox from "../../components/LinkBox"
-import MultipleRadioInput from "../../components/inputs/MultipleRadioInput"
 
 interface StepProps {
   step: FormTemplate
@@ -167,21 +166,7 @@ const ApplicationRenderStep = ({
                   )
                 }
                 if (isRadio(blockElement)) {
-                  const { field, multiple, ...rest } = blockElement
-                  if (multiple) {
-                    return (
-                      <MultipleRadioInput
-                        key={"" + i + j}
-                        name={field}
-                        // defaultValue={
-                        //   defaultValues[field as keyof StepSchema] || ""
-                        // }
-                        control={control}
-                        error={error}
-                        {...rest}
-                      />
-                    )
-                  }
+                  const { field, ...rest } = blockElement
                   return (
                     <RadioInput
                       key={"" + i + j}
