@@ -16,8 +16,9 @@ import { logisticsStep } from "./sectionForms/logistics"
 import { socialsSteps } from "./sectionForms/socials"
 import { waiversSteps } from "./sectionForms/waivers"
 import WillLoseProgressModal from "../../components/WillLoseProgressModal"
+import { useAppState } from "../../hooks/useAppState"
 
-const WillLoseProgressWrapper = () => {
+const WillLoseProgress = () => {
   const [open, setOpen] = useState(false)
 
   const alertUser = (e: BeforeUnloadEvent) => {
@@ -35,6 +36,16 @@ const WillLoseProgressWrapper = () => {
   })
 
   return <WillLoseProgressModal open={open} setOpen={setOpen} />
+}
+
+const WillLoseProgressWrapper = () => {
+  const [appState] = useAppState()
+
+  if (!(appState && appState.form_submitted)) {
+    return <WillLoseProgress />
+  }
+
+  return <></>
 }
 
 // Apply routes wrapper

@@ -93,7 +93,7 @@ export const waiversSteps: FormTemplate[] = [
     ],
     [
       {
-        text: "To participate in CruzHacks 2023, you must agree to our Participation and Release Agreement",
+        text: "To participate in CruzHacks 2024, you must agree to our Participation and Release Agreement",
       },
       {
         link: "https://docs.google.com/document/d/1298VyEqrSIvbzM3U8nvLQsLtY78Vi2mbndr3d5w0UKk/edit?usp=sharing",
@@ -105,7 +105,7 @@ export const waiversSteps: FormTemplate[] = [
         inputType: "radio",
         field: "cruzhacks_conduct",
         options: [
-          "I have read and agree to the CruzHacks 2023 Participation and Release Agreement",
+          "I have read and agree to the CruzHacks 2024 Participation and Release Agreement",
         ],
       },
     ],
@@ -137,7 +137,7 @@ export const waiversSteps: FormTemplate[] = [
     [{ text: "Communication from CruzHacks", type: "title" }],
     [
       {
-        text: "I authorize the Organizers of CruzHacks 2024 to send me updates and information regarding CruzHacks 2023 and future CruzHacks events.",
+        text: "I authorize the Organizers of CruzHacks 2024 to send me updates and information regarding CruzHacks 2024 and future CruzHacks events.",
       },
       { inputType: "radio", field: "comm_from_cruzhacks", options: ["Yes"] },
     ],
@@ -169,7 +169,7 @@ export const waiversSteps: FormTemplate[] = [
     [{ text: "Parent Release and Consent Form", type: "title" }],
     [
       {
-        text: "If you are a minor (under 18), please fill out the CruzHacks 2023 Parental Release and Consent Form.",
+        text: "If you are a minor (under 18), please fill out the CruzHacks 2024 Parental Release and Consent Form.",
       },
       { link: "https://forms.gle/uttfNsfpx2BNpEVs8", name: "Form" },
     ],

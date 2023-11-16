@@ -50,7 +50,7 @@ const ComboboxInput = ({
                   error
                     ? "bg-error/10 text-error ring-error/10 placeholder:text-error/60 focus:ring-error/50"
                     : "bg-white/10 text-white ring-white/5 placeholder:text-white/50 focus:ring-white/40",
-                  "w-full rounded-md border-0 py-5 pl-3 pr-10 text-center font-subtext shadow-sm ring ring-inset focus:ring sm:text-lg sm:leading-6"
+                  "w-full truncate rounded-md border-0 py-5 pl-3 pr-10 text-center font-subtext shadow-sm ring ring-inset focus:ring sm:leading-6"
                 )}
                 placeholder='Choose'
                 onChange={event => setQuery(event.target.value)}
