@@ -39,7 +39,7 @@ export const checkEmailTaken = async (email: string) => {
     return data.exists as boolean
   } catch (err) {
     if (isAxiosError(err)) {
-      throw err.message
+      throw new Error(err.message)
     }
     throw err as Error
   }
@@ -70,7 +70,7 @@ export const checkPhoneNumberTaken = async (phoneNumber: string) => {
     return data.exists as boolean
   } catch (err) {
     if (isAxiosError(err)) {
-      throw err.message
+      throw new Error(err.message)
     }
     throw err as Error
   }
@@ -132,7 +132,7 @@ export const getUsers = async (user: User, pageToken?: string) => {
     return data.users as UserBasics[]
   } catch (err) {
     if (isAxiosError(err)) {
-      throw err.message
+      throw new Error(err.message)
     }
 
     throw err
@@ -175,7 +175,7 @@ export const submitApplicationAuthed = async (
   } catch (err) {
     if (isAxiosError(err)) {
       console.error(err)
-      throw err.message
+      throw new Error(err.message)
     }
     return err as Error
   }
@@ -208,10 +208,10 @@ export const submitApplicationUnauthed = async (
   } catch (err) {
     if (isAxiosError(err)) {
       if (err.response?.data?.data?.message) {
-        throw err.response.data.data.message
+        throw new Error(err.response.data.data.message)
       }
       console.error(err)
-      throw err.message
+      throw new Error(err.message)
     }
     throw err as Error
   }

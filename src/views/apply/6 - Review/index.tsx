@@ -54,7 +54,7 @@ const ReviewSection = () => {
                   Decisions will be sent in late December or January to the
                   email address you provided. Make sure to read the email, as it
                   will contain instructions on confirming your spot at CruzHacks
-                  2023.
+                  2024.
                 </p>
               </div>
             </div>

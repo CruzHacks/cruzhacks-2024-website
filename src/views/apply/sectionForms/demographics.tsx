@@ -751,8 +751,6 @@ export const demographicSteps: FormTemplate[] = [
   [
     [
       { text: "Do you identify as Transgender, Cisgender, or Non-binary?" },
-      // TODO: multiple selections
-      // { text: "Select as many as you'd like", type: "disclaimer" },
       {
         inputType: "radio",
         field: "gender_identity_one",
@@ -763,19 +761,15 @@ export const demographicSteps: FormTemplate[] = [
           "Prefer not to answer",
         ],
         other: true,
-        // multiple: true,
       },
     ],
     [
       { text: "How do you identify?" },
-      // TODO: multiple selections
-      // { text: "Select as many as you'd like", type: "disclaimer" },
       {
         inputType: "radio",
         field: "gender_identity_two",
         options: ["Man", "Woman", "Non-binary", "Prefer not to answer"],
         other: true,
-        // multiple: true,
       },
     ],
   ],

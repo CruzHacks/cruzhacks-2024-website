@@ -16,7 +16,6 @@ import { logisticsStep } from "./sectionForms/logistics"
 import { socialsSteps } from "./sectionForms/socials"
 import { waiversSteps } from "./sectionForms/waivers"
 import WillLoseProgressModal from "../../components/WillLoseProgressModal"
-import { useAppState } from "../../hooks/useAppState"
 
 const WillLoseProgress = () => {
   const [open, setOpen] = useState(false)
@@ -27,32 +26,24 @@ const WillLoseProgress = () => {
     setOpen(true)
   }
 
+  // TODO: remove beforeunload event listener when form submitted so discord
+  // link doesn't trigger it
   useEffect(() => {
     window.addEventListener("beforeunload", alertUser)
 
     return () => {
       window.removeEventListener("beforeunload", alertUser)
     }
-  })
+  }, [])
 
   return <WillLoseProgressModal open={open} setOpen={setOpen} />
-}
-
-const WillLoseProgressWrapper = () => {
-  const [appState] = useAppState()
-
-  if (!(appState && appState.form_submitted)) {
-    return <WillLoseProgress />
-  }
-
-  return <></>
 }
 
 // Apply routes wrapper
 const Apply = () => {
   return (
     <AppStateProvider>
-      <WillLoseProgressWrapper />
+      <WillLoseProgress />
       <div className='flex min-h-screen flex-col items-center'>
         <div className='w-full max-w-4xl p-8 md:px-20 md:py-16'>
           <ProgressBarWrapper />

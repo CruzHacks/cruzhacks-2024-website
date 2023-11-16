@@ -7,7 +7,7 @@ export const socialsSteps: FormTemplate[] = [
     [{ text: "Get Connected!", type: "title" }],
     [
       {
-        text: "Do you Do you consent to sharing your resume and/or contact information with current and future CruzHacks sponsors?",
+        text: "Do you consent to sharing your resume and/or contact information with current and future CruzHacks sponsors?",
       },
       {
         // TODO: Resume Drop Form

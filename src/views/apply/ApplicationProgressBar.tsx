@@ -67,11 +67,11 @@ const ProgressBarWrapper = () => {
   }
 
   // Navigate to beginning of form if section is empty on first render
-  // useEffect(() => {
-  //   if (currentSection != sections[0] && isSectionEmpty(currentSection)) {
-  //     navigate(`/apply/${sections[0]}`)
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (currentSection != sections[0] && isSectionEmpty(currentSection)) {
+      navigate(`/apply/${sections[0]}`)
+    }
+  }, [])
 
   return (
     <div className='flex items-center justify-between'>
