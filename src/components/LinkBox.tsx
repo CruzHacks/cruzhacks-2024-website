@@ -10,13 +10,15 @@ interface LinkBoxProps {
 
 const LinkBox = ({ text, to }: LinkBoxProps) => {
   return (
-    <Link
-      to={to}
+    <a
+      href={to}
       className='rint-inset right-white/30 flex items-center justify-center gap-5 rounded-md bg-white/20 px-5 py-3 ring-2 ring-white/50'
+      target='_blank'
+      rel='noreferrer'
     >
       <LinkIcon className='h-8 w-8' />
       <p>{text}</p>
-    </Link>
+    </a>
   )
 }
 
