@@ -301,12 +301,12 @@ export const demographicSteps: FormTemplate[] = [
 
   // Step 4
   [
-    [{ text: "What year are in?" }],
+    [{ text: "What year are you in?" }],
     [
       {
         inputType: "radio",
         field: "year_in_school",
-        options: ["Freshman", "Sophomore", "Junior", "Senior"],
+        options: ["Freshman", "Sophomore", "Junior", "Senior", "N/A"],
       },
     ],
   ],
@@ -318,7 +318,15 @@ export const demographicSteps: FormTemplate[] = [
       {
         inputType: "radio",
         field: "graduation_year",
-        options: ["2023", "2024", "2025", "2026", "2027", "2027 and beyond"],
+        options: [
+          "2023",
+          "2024",
+          "2025",
+          "2026",
+          "2027",
+          "2028 and beyond",
+          "N/A",
+        ],
       },
     ],
   ],
