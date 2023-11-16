@@ -241,7 +241,7 @@ export const demographicSteps: FormTemplate[] = [
       {
         inputType: "radio",
         field: "school",
-        options: ["UCSC"],
+        options: ["University of California, Santa Cruz"],
         other: true,
       },
     ],
