@@ -177,7 +177,7 @@ export const submitApplicationAuthed = async (
       console.error(err)
       throw new Error(err.message)
     }
-    return err as Error
+    throw err as Error
   }
 }
 
@@ -205,6 +205,30 @@ export const submitApplicationUnauthed = async (
     if (error) throw new Error(error)
 
     return data.message as string
+  } catch (err) {
+    if (isAxiosError(err)) {
+      if (err.response?.data?.data?.message) {
+        throw new Error(err.response.data.data.message)
+      }
+      console.error(err)
+      throw new Error(err.message)
+    }
+    throw err as Error
+  }
+}
+
+/**
+ * CruzHacks-2024-Backend API endpoint for genereating and retrieving statistics
+ */
+export const generateStatistics = async () => {
+  try {
+    const response = await axios.post(`${API_URL}/statistics/generate`)
+    const { data, error } = response.data
+
+    if (error) throw new Error(error)
+
+    // TODO: type
+    return data
   } catch (err) {
     if (isAxiosError(err)) {
       if (err.response?.data?.data?.message) {
