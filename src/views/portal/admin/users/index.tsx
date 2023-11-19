@@ -2,6 +2,9 @@ import React from "react"
 import { classNames } from "../../../../utils/string"
 import useUsers from "../../../../hooks/useUsers"
 import useAuth from "../../../../hooks/useAuth"
+import { auth } from "../../../../utils/firebaseapp"
+import { sendPasswordResetEmail } from "firebase/auth"
+import toast from "react-hot-toast"
 
 const UsersAdmin = () => {
   const {
@@ -14,8 +17,15 @@ const UsersAdmin = () => {
     alert("This feature is not yet implemented.")
   }
 
-  const handleEditUser = () => {
-    alert("This feature is not yet implemented.")
+  const sendPasswordReset = (email: string) => {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        toast.success("Password reset email sent")
+      })
+      .catch(err => {
+        console.error(err)
+        toast.error(err.message)
+      })
   }
 
   return (
@@ -28,7 +38,7 @@ const UsersAdmin = () => {
             email and role.
           </p>
         </div>
-        <div className='mt-4 sm:ml-16 sm:mt-0 sm:flex-none'>
+        {/* <div className='mt-4 sm:ml-16 sm:mt-0 sm:flex-none'>
           <button
             type='button'
             className='block cursor-not-allowed rounded-md bg-pink px-3 py-2 text-center font-subtext text-sm font-semibold text-white shadow-sm hover:bg-pink/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white'
@@ -36,7 +46,7 @@ const UsersAdmin = () => {
           >
             Add user
           </button>
-        </div>
+        </div> */}
       </div>
       <div className='mt-8 flow-root'>
         <div className='-mx-4 -my-2 sm:-mx-6 lg:-mx-8'>
@@ -46,33 +56,33 @@ const UsersAdmin = () => {
                 <tr>
                   <th
                     scope='col'
-                    className='sticky top-0 z-10 hidden border-b border-white/20 bg-blue-imperial/50 px-3 py-3.5 text-left text-sm font-semibold backdrop-blur sm:table-cell'
+                    className='sticky top-0 z-10 hidden border-b border-white/20 bg-blue-imperial/50 py-3.5 pl-4 pr-3 text-left text-sm font-semibold backdrop-blur sm:table-cell sm:pl-6 lg:pl-8'
                   >
                     Name
                   </th>
                   <th
                     scope='col'
-                    className='sticky top-0 z-10 border-b border-white/20 bg-blue-imperial/50 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white backdrop-blur sm:pl-6 lg:pl-8'
+                    className='sticky top-0 z-10 border-b border-white/20 bg-blue-imperial/50 px-3 py-3.5 text-left text-sm font-semibold text-white backdrop-blur'
                   >
                     Email
                   </th>
                   <th
                     scope='col'
-                    className='sticky top-0 z-10 border-b border-white/20 bg-blue-imperial/50 px-3 py-3.5 text-left text-sm font-semibold backdrop-blur'
+                    className='sticky top-0 z-10 border-b border-white/20 bg-blue-imperial/50  py-3.5 pl-3 pr-4 text-left text-sm font-semibold backdrop-blur md:px-3'
                   >
                     Role
                   </th>
                   <th
                     scope='col'
-                    className='sticky top-0 z-10 hidden border-b border-white/20 bg-blue-imperial/50 px-3 py-3.5 text-left text-sm font-semibold backdrop-blur sm:table-cell'
+                    className='sticky top-0 z-10 hidden border-b border-white/20 bg-blue-imperial/50 py-3.5 pl-3 pr-4 text-left text-sm font-semibold backdrop-blur md:px-3 lg:table-cell'
                   >
                     UID
                   </th>
                   <th
                     scope='col'
-                    className='sticky top-0 z-10 border-b border-white/20 bg-blue-imperial/50 py-3.5 pl-3 pr-4 backdrop-blur sm:pr-6 lg:pr-8'
+                    className='sticky top-0 z-10 hidden border-b border-white/20 bg-blue-imperial/50 py-3.5 backdrop-blur sm:table-cell sm:pr-6 lg:pr-8'
                   >
-                    <span className='sr-only'>Edit</span>
+                    <span className='sr-only'>Send Password Reset</span>
                   </th>
                 </tr>
               </thead>
@@ -87,7 +97,10 @@ const UsersAdmin = () => {
                               userIdx !== users.length - 1
                                 ? "border-b border-white/20"
                                 : "",
-                              user.displayName ? "" : "text-white/50",
+                              user.displayName
+                                ? user.email === currentUser?.email &&
+                                    "text-orange"
+                                : "text-white/50",
                               "hidden whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:table-cell sm:pl-6 lg:pl-8"
                             )}
                           >
@@ -114,7 +127,7 @@ const UsersAdmin = () => {
                               user.email === currentUser?.email
                                 ? "text-orange"
                                 : "",
-                              "whitespace-nowrap px-3 py-4 text-sm"
+                              "whitespace-nowrap py-4 pl-3 pr-4 text-sm sm:px-3"
                             )}
                           >
                             {user.role}
@@ -127,7 +140,7 @@ const UsersAdmin = () => {
                               user.email === currentUser?.email
                                 ? "text-orange"
                                 : "",
-                              "hidden whitespace-nowrap px-3 py-4 text-sm sm:table-cell"
+                              "hidden whitespace-nowrap py-4 font-subtext text-sm md:px-3 lg:table-cell"
                             )}
                           >
                             {user.uid}
@@ -137,20 +150,22 @@ const UsersAdmin = () => {
                               userIdx !== users.length - 1
                                 ? "border-b border-white/20"
                                 : "",
-                              "relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-8 lg:pr-8"
+                              "relative hidden whitespace-nowrap py-4 text-right text-sm font-medium sm:table-cell sm:pr-8 lg:pr-8"
                             )}
                           >
-                            <p className='cursor-not-allowed text-pink/50'>
-                              Edit
-                              <span className='sr-only'>
-                                , {user.displayName}
-                              </span>
-                            </p>
+                            <button
+                              type='button'
+                              onClick={() => sendPasswordReset(user.email)}
+                              className='text-pink'
+                            >
+                              Send Password Reset
+                              <span className='sr-only'>, {user.email}</span>
+                            </button>
                           </td>
                         </tr>
                       ))
                     : // Loading State
-                      [...Array(5).keys()].map(i => (
+                      [...Array(20).keys()].map(i => (
                         <tr key={i}>
                           <td
                             key={i + 100}
@@ -166,16 +181,13 @@ const UsersAdmin = () => {
                           </td>
                           <td
                             key={i + 400}
-                            className='hidden px-3 py-4 sm:table-cell'
+                            className='hidden px-3 py-4 md:table-cell'
                           >
                             <div className='h-6 w-60 animate-pulse rounded bg-white/30 '></div>
                           </td>
                           <td className='relative py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-8 lg:pr-8'>
-                            <button
-                              onClick={handleEditUser}
-                              className='cursor-not-allowed text-pink/50'
-                            >
-                              Edit
+                            <button className='cursor-not-allowed text-pink/50'>
+                              Send Password Reset
                             </button>
                           </td>
                         </tr>
