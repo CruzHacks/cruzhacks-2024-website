@@ -13,6 +13,7 @@ export type UserBasics = {
   displayName?: string
   email: string
   role: string
+  pronouns?: string
 }
 
 // Schema pulled from 2023 Hacker Application form:

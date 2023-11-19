@@ -59,7 +59,7 @@ export const getApplicationShortResponses = async (email: string) => {
   if (!email) throw new Error("No user provided")
 
   const querySnapshot = await getDoc(
-    doc(db, `users/${email}/user_items/application/sections`, "short_responses")
+    doc(db, `users/${email}/user_items/application/sections`, "short_response")
   )
 
   if (!querySnapshot.exists())
@@ -74,12 +74,19 @@ export const getApplicationShortResponses = async (email: string) => {
  * Function using Firebase sdk to retrieve information about all applications
  */
 export const getApplications = async () => {
-  // NOTE: This query requires a Firestore index
-  // https://firebase.google.com/docs/firestore/query-data/queries#collection-group-query
-  const q = query(collectionGroup(db, "user_items"), orderBy("email"))
-  const querySnapshot = await getDocs(q)
+  // NOTE: using try catch to insure error is console logged, this is important
+  // for geting the index creation link for the query
+  try {
+    // NOTE: This query requires a Firestore index
+    // https://firebase.google.com/docs/firestore/query-data/queries#collection-group-query
+    const q = query(collectionGroup(db, "user_items"), orderBy("_submitted"))
+    const querySnapshot = await getDocs(q)
 
-  const applications = querySnapshot.docs.map(doc => doc.data())
+    const applications = querySnapshot.docs.map(doc => doc.data())
 
-  return applications as ApplicationSchema[]
+    return applications as ApplicationSchema[]
+  } catch (error) {
+    console.error(error)
+    throw error
+  }
 }
