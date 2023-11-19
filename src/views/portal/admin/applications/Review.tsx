@@ -1,8 +1,9 @@
 import React from "react"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import useApplicationShortResponses from "../../../../hooks/useApplicationShortResponses"
 import { AppShortResponseSchema } from "../../../../utils/types"
 import { z } from "zod"
+import { ArrowLeftIcon } from "@heroicons/react/24/outline"
 
 const ApplicationsReviewAdmin = () => {
   let { email } = useParams()
@@ -17,6 +18,12 @@ const ApplicationsReviewAdmin = () => {
 
   return (
     <div className='space-y-10'>
+      <Link
+        to='/portal/admin/applications'
+        className='text-md flex items-center gap-3 text-white/80'
+      >
+        <ArrowLeftIcon className='h-5 w-auto' /> Back
+      </Link>
       <h1 className='font-title text-xl'>
         Hacker Application - <span className='font-subtext'>{email}</span>
       </h1>
