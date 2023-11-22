@@ -1,10 +1,10 @@
 import React, { Fragment, useState } from "react"
 import { Dialog, Transition } from "@headlessui/react"
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"
-import { classNames } from "../../utils/string"
+import { classNames } from "../../../utils/string"
 import { Link, Outlet, useLocation } from "react-router-dom"
 import CruzHacksLogo from "../../assets/logos/CruzHacks.svg"
-import useAuth from "../../hooks/useAuth"
+import useAuth from "../../../hooks/useAuth"
 import AvatarButton from "./AvatarButton"
 
 // const teams = [
