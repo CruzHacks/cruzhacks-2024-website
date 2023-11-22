@@ -6,7 +6,7 @@ const Landing = () => {
   const { isAuthenticated } = useAuth()
 
   return (
-    <div className='-mb-28 flex min-h-screen flex-col items-center justify-center md:-mb-40 md:items-start'>
+    <div className='-mb-24 flex min-h-screen w-fit flex-col items-center justify-center md:items-start'>
       <h1 className='font-title text-6xl uppercase md:text-8xl lg:text-9xl'>
         Cruz
       </h1>

@@ -24,20 +24,22 @@ const Home = () => {
   const { isAuthenticated } = useAuth()
 
   return (
-    <div className='flex min-h-screen flex-col items-center justify-center gap-5 bg-[#040E5D] px-10'>
-      {!isAuthenticated && (
-        <p className='absolute right-10 top-10 ml-10 font-subtext text-sm'>
-          Already submitted an application?{" "}
-          <Link to='/login' className='text-blue-button'>
-            Login
-          </Link>
-        </p>
-      )}
-      <Landing />
-      <HeroBlurb />
-      <Milestones />
-      <Speakers />
-      <QA />
+    <div className='bg-[#040E5D]'>
+      <div className='m-auto flex min-h-screen max-w-7xl flex-col items-center px-10'>
+        {!isAuthenticated && (
+          <p className='absolute right-10 top-10 ml-10 font-subtext text-sm'>
+            Already submitted an application?{" "}
+            <Link to='/login' className='text-blue-button'>
+              Login
+            </Link>
+          </p>
+        )}
+        <Landing />
+        <HeroBlurb />
+        <Milestones />
+        <Speakers />
+        <QA />
+      </div>
     </div>
   )
 }
