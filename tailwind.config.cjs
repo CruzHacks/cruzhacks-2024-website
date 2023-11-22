@@ -31,6 +31,11 @@ module.exports = {
       sans: ["Proxima Nova", "Montserrat", ...defaultTheme.fontFamily.sans],
       subtext: ["Andale Mono", "Roboto Mono", ...defaultTheme.fontFamily.mono],
     },
+    extend: {
+      screens: {
+        "3xl": "140rem",
+      },
+    },
   },
   plugins: [require("@tailwindcss/forms")],
 }

@@ -15,7 +15,9 @@ const HeroBlurb = () => {
     <div className='mb-10 flex w-full justify-between gap-10'>
       <div className='space-y-6'>
         <div className='mb-10 w-20 border-2 text-white'></div>
-        <h2 className='font-title text-3xl uppercase'>Social Good</h2>
+        <h2 className='font-title text-3xl uppercase md:text-5xl'>
+          Social Good
+        </h2>
         <p className='text-lg lg:text-2xl'>
           CruzHacks is the largest hackathon in Santa Cruz. Each year, we invite
           hundreds of students to develop solutions to real-world problems,
@@ -24,12 +26,12 @@ const HeroBlurb = () => {
         <div className='max-w-md'>
           <EmailRegister />
         </div>
-        <div className='flex justify-between gap-8 pb-5 lg:justify-start'>
+        <div className='flex flex-wrap justify-between gap-8 pb-5 lg:justify-start'>
           <img src={Instagram} alt='Instagram Page' className='h-10 w-auto' />
           <img src={Facebook} alt='Facebook Page' className='h-10 w-auto' />
           <img src={LinkedIn} alt='LinkedIn Page' className='h-10 w-auto' />
           <img src={Twitter} alt='Twitter Page' className='h-10 w-auto' />
-          <EnvelopeIconOutline className='h-10 w-auto' />
+          <EnvelopeIconOutline className='h-10 w-auto shrink-0' />
           <img src={Discord} alt='Discord Page' className='h-10 w-auto' />
         </div>
       </div>
