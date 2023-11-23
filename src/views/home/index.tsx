@@ -9,6 +9,7 @@ import QA from "./5 - Q&A"
 
 import Binary from "../../assets/Binary.jpg"
 import TreesBackgroundSmall from "../../assets/illustrations/Trees Background - Small.png"
+import Lake from "../../assets/illustrations/Lake.svg"
 // import { auth } from "../../utils/firebaseapp"
 // import useAuth from "../../hooks/useAuth"
 
@@ -49,7 +50,7 @@ const Home = () => {
           </p>
         )} */}
         <Landing />
-        <div className='-mx-40 flex h-0 items-center'>
+        <div className='-mx-40 flex h-10 items-center'>
           <img src={TreesBackgroundSmall} alt='' className='-mt-96 w-screen' />
         </div>
         <HeroBlurb />
@@ -57,6 +58,8 @@ const Home = () => {
         <Speakers />
         <QA />
       </div>
+      {/* <img src={Lake} alt='' className='m-auto w-full max-w-7xl' /> */}
+      <img src={Lake} alt='' className='m-auto w-full' />
     </div>
   )
 }

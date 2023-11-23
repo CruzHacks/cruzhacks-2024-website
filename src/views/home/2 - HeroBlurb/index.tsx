@@ -12,7 +12,7 @@ import HandAndComputer from "../../../assets/illustrations/Hand & Computer.svg"
 
 const HeroBlurb = () => {
   return (
-    <div className='mb-10 flex w-full justify-between gap-10'>
+    <div className='flex w-full justify-between gap-10 pb-16'>
       <div className='space-y-6'>
         <div className='mb-10 w-20 border-2 text-white'></div>
         <h2 className='font-title text-3xl uppercase md:text-5xl'>
@@ -26,13 +26,33 @@ const HeroBlurb = () => {
         <div className='max-w-md'>
           <EmailRegister />
         </div>
-        <div className='flex flex-wrap justify-between gap-8 pb-5 lg:justify-start'>
-          <img src={Instagram} alt='Instagram Page' className='h-10 w-auto' />
-          <img src={Facebook} alt='Facebook Page' className='h-10 w-auto' />
-          <img src={LinkedIn} alt='LinkedIn Page' className='h-10 w-auto' />
-          <img src={Twitter} alt='Twitter Page' className='h-10 w-auto' />
-          <EnvelopeIconOutline className='h-10 w-auto shrink-0' />
-          <img src={Discord} alt='Discord Page' className='h-10 w-auto' />
+        <div className='flex flex-wrap justify-between gap-8 pb-5 md:justify-start'>
+          <img
+            src={Instagram}
+            alt='Instagram Page'
+            className='h-8 w-auto lg:h-10'
+          />
+          <img
+            src={Facebook}
+            alt='Facebook Page'
+            className='h-8 w-auto lg:h-10'
+          />
+          <img
+            src={LinkedIn}
+            alt='LinkedIn Page'
+            className='h-8 w-auto lg:h-10'
+          />
+          <img
+            src={Twitter}
+            alt='Twitter Page'
+            className='h-8 w-auto lg:h-10'
+          />
+          <EnvelopeIconOutline className='h-8 w-auto shrink-0 lg:h-10' />
+          <img
+            src={Discord}
+            alt='Discord Page'
+            className='h-8 w-auto lg:h-10'
+          />
         </div>
       </div>
       <img src={HandAndComputer} alt='' className='hidden w-1/2 md:flex' />

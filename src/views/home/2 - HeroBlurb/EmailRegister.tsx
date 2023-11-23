@@ -92,7 +92,7 @@ const EmailRegister = () => {
           )}
         </button>
       </form>
-      <p className='h-8 pt-2 font-subtext text-error'>
+      <p className='h-4 pt-2 font-subtext text-sm text-error'>
         {errors.email && errors.email.message}
       </p>
     </div>
