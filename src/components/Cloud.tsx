@@ -1,12 +1,15 @@
 import React from "react"
 import { classNames } from "../utils/string"
+import { Transition } from "@headlessui/react"
 
 const BounceCloud = ({
   i = 0,
+  leftSide,
   className,
   children,
 }: {
   i?: number
+  leftSide?: boolean
   className?: string
   children: React.ReactNode
 }) => {
@@ -18,14 +21,29 @@ const BounceCloud = ({
       )}
       style={{ animationDelay: `-${i * 2}s` }}
     >
-      {children}
+      {leftSide !== undefined ? (
+        <Transition
+          appear={true}
+          show={true}
+          enter='transition-all duration-[3s] ease-out'
+          enterFrom={classNames(
+            leftSide ? "-translate-x-full" : "translate-x-40",
+            "opacity-0 scale-[140%]"
+          )}
+          enterTo='opacity-100 scale-100'
+        >
+          {children}
+        </Transition>
+      ) : (
+        children
+      )}
     </div>
   )
 }
 
 // Top Left Cloud
 export const Cloud1 = ({ className }: { className?: string }) => (
-  <BounceCloud i={1} className={className}>
+  <BounceCloud i={1} leftSide={true} className={className}>
     <svg
       xmlns='http://www.w3.org/2000/svg'
       width='258'
@@ -43,7 +61,7 @@ export const Cloud1 = ({ className }: { className?: string }) => (
 
 // Top Right Clouds
 export const Cloud2 = ({ className }: { className?: string }) => (
-  <BounceCloud i={2} className={className}>
+  <BounceCloud i={2} leftSide={false} className={className}>
     <svg
       xmlns='http://www.w3.org/2000/svg'
       width='301'
@@ -73,7 +91,7 @@ export const Cloud2 = ({ className }: { className?: string }) => (
 )
 
 export const Cloud3 = ({ className }: { className?: string }) => (
-  <BounceCloud i={3} className={className}>
+  <BounceCloud i={3} leftSide={false} className={className}>
     <svg
       xmlns='http://www.w3.org/2000/svg'
       width='203'
