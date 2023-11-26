@@ -9,6 +9,7 @@ import QA from "./5 - Q&A"
 import Binary from "../../assets/Binary.jpg"
 import TreesBackgroundSmall from "../../assets/illustrations/Trees Background - Small.png"
 import Lake from "../../assets/illustrations/Lake.svg"
+import Sponsors from "./6 - Sponsors"
 // import { auth } from "../../utils/firebaseapp"
 // import useAuth from "../../hooks/useAuth"
 
@@ -56,6 +57,8 @@ const Home = () => {
         <Milestones />
         <Speakers />
         <QA />
+        <Sponsors />
+        <div className='h-40' />
       </div>
       {/* <img src={Lake} alt='' className='m-auto w-full max-w-7xl' /> */}
       <img src={Lake} alt='' className='m-auto w-full' />

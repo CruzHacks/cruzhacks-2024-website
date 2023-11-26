@@ -6,13 +6,14 @@ const faqs = [
       question: "What is CruzHacks?",
       answer: (
         <>
-          CruzHacks is UCSC’s largest hackathon. It is a three day event where
-          you can work with others on new software and/or hardware projects.
-          You’ll be able to build your ideas, network, and show off your talent.
-          Ideas can be formed through teams or individually. There are hundreds
-          of students, mentors, sponsors, and judges that can help push your
-          vision forward. The event also includes workshops geared towards
-          students of all levels to learn and improve their technical skills
+          CruzHacks is UCSC&apos;s largest hackathon. It is a three day event
+          where you can work with others on new software and/or hardware
+          projects. You&apos;ll be able to build your ideas, network, and show
+          off your talent. Ideas can be formed through teams or individually.
+          There are hundreds of students, mentors, sponsors, and judges that can
+          help push your vision forward. The event also includes workshops
+          geared towards students of all levels to learn and improve their
+          technical skills
         </>
       ),
     },
@@ -30,8 +31,8 @@ const faqs = [
       question: "Is CruzHacks 2024 fully in-person this year?",
       answer: (
         <>
-          Yes! We’ll be providing meals starting from dinner on Friday until
-          lunch on Sunday. There will also be a sleeping space set up for
+          Yes! We&apos;ll be providing meals starting from dinner on Friday
+          until lunch on Sunday. There will also be a sleeping space set up for
           non-local students to sleep (make sure to bring a sleeping bag or
           blankets!).
         </>
@@ -64,9 +65,9 @@ const faqs = [
       question: "Do I need any previous experience?",
       answer: (
         <>
-          Nope! No experience is required. We’re looking for applicants who are
-          passionate about learning something new and creating a vision. 25% of
-          hackers in 2021 and 47% in 2020 were first time hackers.
+          Nope! No experience is required. We&apos;re looking for applicants who
+          are passionate about learning something new and creating a vision. 25%
+          of hackers in 2021 and 47% in 2020 were first time hackers.
         </>
       ),
     },
@@ -83,7 +84,6 @@ const faqs = [
     },
     {
       question: "What rules do I need to follow?",
-      /* eslint-disable max-len */
       answer: (
         <>
           All CruzHacks 2024 participants will need to follow the{" "}
@@ -121,7 +121,6 @@ const faqs = [
           .
         </>
       ),
-      /* eslint-enable max-len */
     },
     {
       question: "What are the prize tracks?",
@@ -179,7 +178,6 @@ const faqs = [
     },
     {
       question:
-        /* eslint-disable-next-line max-len*/
         "Do I need to have a team to apply? Is there a limit to the size of each team?",
       answer: (
         <>
@@ -214,12 +212,11 @@ const faqs = [
     },
     {
       question:
-        /* eslint-disable-next-line max-len*/
-        "Can I help out another way if I don’t want to be a Hacker, but am not eligible to be a judge or mentor?",
+        "Can I help out another way if I don&apos;t want to be a Hacker, but am not eligible to be a judge or mentor?",
       answer: (
         <>
-          If you are a current UCSC student, you’re welcome to volunteer with
-          us! Volunteers are invaluable in helping us set up, clean up, and
+          If you are a current UCSC student, you&apos;re welcome to volunteer
+          with us! Volunteers are invaluable in helping us set up, clean up, and
           everything in between! Click{" "}
           <a
             target='_blank'
@@ -236,10 +233,9 @@ const faqs = [
     {
       question: "What are CruzPoints?",
       answer: (
-        /* eslint-disable max-len */
         <>
-          CruzPoints is CruzHacks 2024’s point reward system for Hackers! For
-          more information,{" "}
+          CruzPoints is CruzHacks 2024&apos;s point reward system for Hackers!
+          For more information,{" "}
           <a
             target='_blank'
             rel='noreferrer'
@@ -249,7 +245,6 @@ const faqs = [
           </a>
         </>
       ),
-      /* eslint-enable max-len */
     },
   ],
 ]
