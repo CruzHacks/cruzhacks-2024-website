@@ -61,7 +61,7 @@ const Navbar = () => {
             onClick={logout}
             className={classNames(
               authButtonStyle,
-              "font-title text-sm lowercase text-error md:bg-error md:text-base md:text-white"
+              "font-title text-sm lowercase text-pink md:bg-pink md:text-base md:text-white"
             )}
           >
             <span className='hidden md:block'>logout</span>
