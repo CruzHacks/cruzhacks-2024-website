@@ -29,7 +29,7 @@ const HeroBlurb = ({ id }: { id?: string }) => {
               <img
                 src={icon}
                 alt={`${name} Icon`}
-                className='h-8 w-auto lg:h-10'
+                className='h-7 w-auto md:h-8 lg:h-10'
               />
             </a>
           ))}
