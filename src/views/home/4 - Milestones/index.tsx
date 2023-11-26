@@ -17,7 +17,7 @@ const Milestone = ({
   children,
 }: MilestoneProps) => {
   return (
-    <div className='flex h-60 w-full shrink-0 flex-col items-center rounded-xl bg-blue-royal px-2 ring-2 ring-inset ring-white/20 hover:animate-twinkle md:h-40 md:w-36 lg:h-52 lg:w-52'>
+    <div className='flex h-60 w-full shrink-0 flex-col items-center rounded-xl bg-blue-royal px-2 ring-2 ring-inset ring-white/20 hover:animate-twinkle-slow md:h-40 md:w-36 lg:h-52 lg:w-52'>
       <p
         className={classNames(
           "flex h-1/2 grow items-end justify-center pb-3 font-title text-4xl md:text-xl lg:text-3xl",

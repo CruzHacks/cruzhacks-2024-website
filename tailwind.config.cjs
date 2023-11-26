@@ -35,7 +35,8 @@ module.exports = {
     extend: {
       animation: {
         "bounce-slow": "bounce-sideways 8s infinite ease-in-out",
-        twinkle: "wiggle-slow 2s infinite ease-in-out",
+        twinkle: "wiggle 2s infinite ease-in-out",
+        "twinkle-slow": "wiggle-slow 2s infinite ease-in-out",
       },
       keyframes: {
         "bounce-sideways": {
@@ -46,17 +47,23 @@ module.exports = {
             transform: "translateX(-10%)",
           },
         },
+        wiggle: {
+          "0%, 100%": {
+            transform: "rotate(-8deg)",
+          },
+          "50%": {
+            transform: "rotate(8deg)",
+          },
+        },
         "wiggle-slow": {
           "0%, 100%": {
             transform: "rotate(0deg)",
-            // animationTimingFunction: "cubic-bezier(0.8, 0, 1, 1)",
           },
           "33%": {
             transform: "rotate(8deg)",
           },
           "66%": {
             transform: "rotate(-8deg)",
-            // animationTimingFunction: "cubic-bezier(0, 0, 0.2, 1)",
           },
         },
       },
