@@ -23,7 +23,7 @@ const faqs = [
         <>
           CruzHacks 2024 will take place in CruzHacks is a 3 day event that
           starts Friday night and ends Sunday afternoon. This year, it will take
-          place on Feb 3-5, 2024 (the Friday-Sunday of MLK Weekend).
+          place on January 19-21, 2024.
         </>
       ),
     },
@@ -88,6 +88,7 @@ const faqs = [
             target='_blank'
             rel='noreferrer'
             href='https://docs.google.com/document/u/1/d/1298VyEqrSIvbzM3U8nvLQsLtY78Vi2mbndr3d5w0UKk/edit'
+            className='text-blue-button'
           >
             CruzHacks 2024 Participant and Release Agreement
           </a>
@@ -96,6 +97,7 @@ const faqs = [
             target='_blank'
             rel='noreferrer'
             href='https://github.com/CruzHacks/hackathon-rules/blob/master/Rules.md'
+            className='text-blue-button'
           >
             CruzHacks 2024 Rules
           </a>
@@ -104,6 +106,7 @@ const faqs = [
             target='_blank'
             rel='noreferrer'
             href='https://docs.google.com/document/u/1/d/1aq7xN3c8t8AWS-yDBcvqu4EMYmw0025HAoCFuOVld7c/edit'
+            className='text-blue-button'
           >
             CruzHacks 2024 COVID Safety Policy
           </a>
@@ -187,35 +190,34 @@ const faqs = [
           school or undergraduate college student. Mentors that are in the
           industry/working professionally are preferred, but we will still
           evaluate mentor applications from high school or undergraduate college
-          students based on their experience. Click{" "}
+          students based on their experience.{" "}
           <a
             target='_blank'
             rel='noreferrer'
             href='https://forms.gle/ofzoJ9VVkZAEhnPv8'
+            className='text-blue-button'
           >
-            here
-          </a>{" "}
-          to apply.
+            Click here to apply.
+          </a>
         </>
       ),
     },
     {
       question:
-        "Can I help out another way if I don&apos;t want to be a Hacker, but am not eligible to be a judge or mentor?",
+        "Can I help out another way if I don't want to be a Hacker, but am not eligible to be a judge or mentor?",
       answer: (
         <>
           If you are a current UCSC student, you&apos;re welcome to volunteer
           with us! Volunteers are invaluable in helping us set up, clean up, and
-          everything in between! Click{" "}
+          everything in between!{" "}
           <a
             target='_blank'
             rel='noreferrer'
             href='https://forms.gle/R9KtP8VMGGbfVTBx9'
+            className='text-blue-button'
           >
-            {" "}
-            here
-          </a>{" "}
-          to apply.
+            Click here to apply.
+          </a>
         </>
       ),
     },

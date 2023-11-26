@@ -3,7 +3,7 @@ import { socials } from "../utils/socials"
 
 const Footer: React.FC = () => {
   return (
-    <footer className='flex items-center justify-between bg-blue-imperial p-5 px-8 text-white'>
+    <footer className='flex items-center justify-between p-5 px-8 text-white backdrop-blur-md'>
       {/* Quick Looks hidden on Medium Screen Size*/}
       <div className='hidden grow gap-3 lg:flex'>
         <a

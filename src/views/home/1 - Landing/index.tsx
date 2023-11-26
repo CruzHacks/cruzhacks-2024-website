@@ -49,7 +49,7 @@ const Landing = () => {
         <img
           src={Fire}
           alt='Fire'
-          className='z-0 -mt-36 w-20 md:-mt-80 md:w-48'
+          className='z-0 -mr-8 -mt-36 w-20 md:-mt-80 md:mr-0 md:w-48'
         />
       </div>
     </div>

@@ -75,7 +75,7 @@ const SpeakerCard = ({ image, name, blurb }: Speaker) => {
 const Speakers = ({ id }: { id?: string }) => {
   return (
     <>
-      <div className='z-10 w-full text-clip'>
+      <div className='z-10 w-full' id={id}>
         <p className='pb-5 uppercase text-white/50'>Hear from the best</p>
         <h2 className='font-title text-3xl uppercase md:text-5xl'>Speakers</h2>
         <img
