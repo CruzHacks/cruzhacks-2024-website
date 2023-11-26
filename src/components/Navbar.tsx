@@ -27,7 +27,7 @@ const Navbar = () => {
   return (
     <div className='fixed z-[300] flex w-screen justify-center bg-blue-imperial/80 backdrop-blur-md'>
       <div className='flex h-10 w-full max-w-7xl items-center justify-between px-10 py-8 pt-10 font-subtext lowercase md:text-xl'>
-        <Link to='/'>
+        <Link to='/#landing'>
           <img
             className='hidden h-8 w-auto md:block'
             src={CruzHacksLogo}

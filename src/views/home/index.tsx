@@ -23,7 +23,7 @@ const Home = () => {
         }}
       >
         <Navbar />
-        <Landing />
+        <Landing id='landing' />
         <div className='-mx-40 flex h-10 items-center'>
           <img
             src={TreesBackgroundSmall}
