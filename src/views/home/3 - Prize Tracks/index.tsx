@@ -41,10 +41,10 @@ const CategoryPrizeCard = ({ Icon, color, title, blurb }: PrizeTrack) => {
 
 const PrizeTracks = ({ id }: { id?: string }) => {
   return (
-    <div
-      id={id}
-      className='relative flex flex-col items-center justify-center py-16'
-    >
+    <div className='relative flex flex-col items-center justify-center py-16'>
+      {/* Scroll Anchor*/}
+      <div className='absolute -top-20' id={id}></div>
+
       <Star
         i={4}
         className='-right-3 top-10 h-7 md:right-28 md:top-8 md:h-12 lg:right-36'

@@ -34,7 +34,10 @@ const sponsors = [
 
 const Sponsors = ({ id }: { id?: string }) => {
   return (
-    <div className='flex flex-col items-center gap-10 py-10' id={id}>
+    <div className='flex flex-col items-center gap-10 py-10'>
+      {/* Scroll Anchor*/}
+      <div className='absolute -mt-40' id={id}></div>
+
       <h2 className='text-center font-title text-2xl uppercase md:text-4xl'>
         thanks to our sponsors!
       </h2>

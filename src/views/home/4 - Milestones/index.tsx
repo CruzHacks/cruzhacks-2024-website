@@ -40,7 +40,10 @@ const Milestone = ({
 
 const Milestones = ({ id }: { id?: string }) => {
   return (
-    <div className='z-10 flex w-full flex-col items-end gap-10' id={id}>
+    <div className='z-10 flex w-full flex-col items-end gap-10'>
+      {/* Scroll Anchor*/}
+      <div className='absolute -mt-40' id={id}></div>
+
       <Star className='absolute left-6 -mt-16 h-5 md:left-32 md:-mt-10 md:h-8 lg:h-10' />
       <Cloud4 className='absolute left-0 -mt-20 md:left-20 md:mt-0' />
       <Star

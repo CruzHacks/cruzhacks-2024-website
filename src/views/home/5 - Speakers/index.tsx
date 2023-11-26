@@ -76,7 +76,10 @@ const SpeakerCard = ({ image, name, blurb }: Speaker) => {
 const Speakers = ({ id }: { id?: string }) => {
   return (
     <>
-      <div className='z-10 w-full' id={id}>
+      <div className='z-10 w-full'>
+        {/* Scroll Anchor*/}
+        <div className='absolute -mt-40' id={id}></div>
+
         <p className='pb-5 uppercase text-white/50'>Hear from the best</p>
         <h2 className='font-title text-3xl uppercase md:text-5xl'>Speakers</h2>
         <Star className='right-14 -mt-6 h-5 md:right-20 md:-mt-10 md:h-8 lg:h-10' />

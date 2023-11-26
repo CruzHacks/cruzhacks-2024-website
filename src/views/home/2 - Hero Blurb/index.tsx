@@ -6,7 +6,10 @@ import { socials } from "../../../utils/socials"
 
 const HeroBlurb = ({ id }: { id?: string }) => {
   return (
-    <div className='flex w-full justify-between gap-10' id={id}>
+    <div className='flex w-full justify-between gap-10'>
+      {/* Scroll Anchor*/}
+      <div className='absolute -mt-40' id={id}></div>
+
       <div className='space-y-6'>
         <div className='mb-10 w-20 border-2 text-white'></div>
         <h2 className='font-title text-3xl uppercase md:text-5xl'>

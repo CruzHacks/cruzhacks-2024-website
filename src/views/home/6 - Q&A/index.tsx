@@ -51,8 +51,10 @@ const QA = ({ id }: { id?: string }) => {
       style={{
         backgroundImage: `url(${Grid})`,
       }}
-      id={id}
     >
+      {/* Scroll Anchor*/}
+      <div className='absolute -mt-32' id={id}></div>
+
       <Star className='left-24 -mt-4 h-7 md:left-52 md:-mt-10 md:h-8 lg:left-72 lg:h-10' />
       <Star
         i={2}
