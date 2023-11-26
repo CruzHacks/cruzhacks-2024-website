@@ -13,8 +13,8 @@ const sponsors = [
       icon: EigthWall,
       url: "",
     },
-    { name: "Backbone", icon: Backbone, url: "" },
-    { name: "Balsamiq", icon: Balsamiq, url: "" },
+    { name: "Backbone1", icon: Backbone, url: "" },
+    { name: "Balsamiq1", icon: Balsamiq, url: "" },
   ],
 
   // Tier 2
@@ -24,11 +24,11 @@ const sponsors = [
       icon: EigthWall,
       url: "",
     },
-    { name: "Balsamiq", icon: Balsamiq, url: "" },
-    { name: "Backbone", icon: Backbone, url: "" },
-    { name: "Backbone", icon: Backbone, url: "" },
-    { name: "Balsamiq", icon: Balsamiq, url: "" },
-    { name: "Balsamiq", icon: Balsamiq, url: "" },
+    { name: "Balsamiq2", icon: Balsamiq, url: "" },
+    { name: "Backbone3", icon: Backbone, url: "" },
+    { name: "Backbone4", icon: Backbone, url: "" },
+    { name: "Balsamiq5", icon: Balsamiq, url: "" },
+    { name: "Balsamiq6", icon: Balsamiq, url: "" },
   ],
 ]
 
