@@ -27,7 +27,7 @@ const FAQItem = ({ question, answer }: FAQItemProps) => {
         <StarIcon
           className={classNames(
             !open ? "rotate-0 fill-none" : "rotate-45 fill-turquoise",
-            "h-6 w-6 shrink-0 fill-turquoise text-turquoise transition-all"
+            "h-6 w-6 shrink-0 text-turquoise transition-all"
           )}
         />
       </div>

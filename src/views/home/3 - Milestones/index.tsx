@@ -11,14 +11,14 @@ interface MilestoneProps {
 const Milestone = ({
   staisticStyling,
   statistic,
-  childrenTextSize = "text-xl lg:text-3xl",
+  childrenTextSize = "text-4xl md:text-xl lg:text-3xl",
   children,
 }: MilestoneProps) => {
   return (
-    <div className='flex h-40 w-36 shrink-0 flex-col items-center rounded-xl bg-blue-royal px-2 ring-2 ring-inset ring-white/20 lg:h-52 lg:w-52'>
+    <div className='flex h-60 w-full shrink-0 flex-col items-center rounded-xl bg-blue-royal px-2 ring-2 ring-inset ring-white/20 md:h-40 md:w-36 lg:h-52 lg:w-52'>
       <p
         className={classNames(
-          "flex h-1/2 grow items-end justify-center pb-3 font-title text-xl lg:text-3xl",
+          "flex h-1/2 grow items-end justify-center pb-3 font-title text-4xl md:text-xl lg:text-3xl",
           staisticStyling
         )}
       >
@@ -38,7 +38,7 @@ const Milestone = ({
 
 const Milestones = () => {
   return (
-    <div className='flex w-full flex-col items-end gap-10'>
+    <div className='z-10 flex w-full flex-col items-end gap-10'>
       <h2 className='text-right font-title text-3xl uppercase md:text-5xl'>
         Milestones
       </h2>
@@ -53,14 +53,14 @@ const Milestones = () => {
         <Milestone
           statistic='56%'
           staisticStyling='text-pink'
-          childrenTextSize='text-md lg:text-xl'
+          childrenTextSize='text-3xl md:text-base lg:text-xl'
         >
           first time hackers
         </Milestone>
         <Milestone
           statistic='27%'
           staisticStyling='text-purple'
-          childrenTextSize='text-md lg:text-xl'
+          childrenTextSize='text-3xl md:text-base lg:text-xl'
         >
           female and non binary hackers
         </Milestone>

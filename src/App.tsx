@@ -28,6 +28,7 @@ import { Toaster } from "react-hot-toast"
 import UserSection from "./views/apply/0 - User"
 import ApplicationsReviewAdmin from "./views/portal/admin/applications/Review"
 import ReviewSection from "./views/apply/6 - Review"
+import Footer from "./components/Footer"
 
 const App: React.FC = () => {
   const {
@@ -107,6 +108,7 @@ const App: React.FC = () => {
 
         <Route path='*' element={<NotFound />} />
       </Routes>
+      <Footer />
     </>
   )
 }

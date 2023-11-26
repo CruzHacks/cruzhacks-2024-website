@@ -1,14 +1,8 @@
 import React from "react"
-import { EnvelopeIcon as EnvelopeIconOutline } from "@heroicons/react/24/outline"
 import EmailRegister from "./EmailRegister"
 
-import Instagram from "../../../assets/icons/Instagram.svg"
-import Facebook from "../../../assets/icons/Facebook.svg"
-import LinkedIn from "../../../assets/icons/LinkedIn.svg"
-import Twitter from "../../../assets/icons/Twitter.svg"
-import Discord from "../../../assets/icons/Discord.svg"
-
 import HandAndComputer from "../../../assets/illustrations/Hand & Computer.svg"
+import { socials } from "../../../utils/socials"
 
 const HeroBlurb = () => {
   return (
@@ -27,7 +21,16 @@ const HeroBlurb = () => {
           <EmailRegister />
         </div>
         <div className='flex flex-wrap justify-between gap-8 pb-5 md:justify-start'>
-          <img
+          {socials.map(({ name, url, icon }) => (
+            <a key={name} target='_blank' rel='noopener noreferrer' href={url}>
+              <img
+                src={icon}
+                alt={`${name} Icon`}
+                className='h-8 w-auto lg:h-10'
+              />
+            </a>
+          ))}
+          {/* <img
             src={Instagram}
             alt='Instagram Page'
             className='h-8 w-auto lg:h-10'
@@ -52,7 +55,7 @@ const HeroBlurb = () => {
             src={Discord}
             alt='Discord Page'
             className='h-8 w-auto lg:h-10'
-          />
+          /> */}
         </div>
       </div>
       <img src={HandAndComputer} alt='' className='hidden w-1/2 md:flex' />

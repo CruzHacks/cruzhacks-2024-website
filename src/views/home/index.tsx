@@ -1,6 +1,5 @@
 import React from "react"
-import { Link } from "react-router-dom"
-import useAuth from "../../hooks/useAuth"
+// import useAuth from "../../hooks/useAuth"
 import Landing from "./1 - Landing"
 import HeroBlurb from "./2 - HeroBlurb"
 import Milestones from "./3 - Milestones"
@@ -25,7 +24,7 @@ import Lake from "../../assets/illustrations/Lake.svg"
 // }
 
 const Home = () => {
-  const { isAuthenticated } = useAuth()
+  // const { isAuthenticated } = useAuth()
 
   return (
     <div
