@@ -43,7 +43,7 @@ const FAQItem = ({ question, answer }: FAQItemProps) => {
   )
 }
 
-const QA = () => {
+const QA = ({ id }: { id?: string }) => {
   return (
     <div
       className='bg-repeat py-40'
@@ -51,7 +51,10 @@ const QA = () => {
         backgroundImage: `url(${Grid})`,
       }}
     >
-      <h2 className='py-10 text-center font-title text-3xl uppercase md:text-5xl'>
+      <h2
+        className='py-10 text-center font-title text-3xl uppercase md:text-5xl'
+        id={id}
+      >
         Q&A
       </h2>
       <div className='flex w-full flex-col items-stretch justify-stretch gap-3 md:flex-row'>

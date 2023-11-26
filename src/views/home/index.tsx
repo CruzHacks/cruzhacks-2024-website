@@ -10,6 +10,8 @@ import Binary from "../../assets/Binary.jpg"
 import TreesBackgroundSmall from "../../assets/illustrations/Trees Background - Small.png"
 import Lake from "../../assets/illustrations/Lake.svg"
 import Sponsors from "./6 - Sponsors"
+import Footer from "../../components/Footer"
+import { Link } from "react-router-dom"
 // import { auth } from "../../utils/firebaseapp"
 // import useAuth from "../../hooks/useAuth"
 
@@ -28,40 +30,37 @@ const Home = () => {
   // const { isAuthenticated } = useAuth()
 
   return (
-    <div
-      className='bg-[#0A1351]'
-      style={{
-        backgroundImage: `url(${Binary})`,
-        backgroundRepeat: "repeat-x",
-      }}
-    >
-      <div className='m-auto flex min-h-screen max-w-7xl flex-col items-center space-y-10 px-10'>
-        <div className='-mb-20 mt-10 flex h-10 w-full max-w-md items-center justify-evenly font-subtext uppercase md:text-xl'>
-          <p>Home</p>
-          <p>About</p>
-          <p>Milestones</p>
+    <div className='overflow-x-hidden bg-[#0A1351]'>
+      <div
+        className='relative m-auto flex min-h-screen max-w-7xl flex-col items-center space-y-10 px-10
+        
+        '
+        style={{
+          backgroundImage: `url(${Binary})`,
+          backgroundRepeat: "repeat-x",
+        }}
+      >
+        <div className='z-[300] -mb-20 mt-10 flex h-10 w-full max-w-md items-center justify-evenly font-subtext uppercase md:text-xl'>
+          <Link to='/#about'>About</Link>
+          <Link to='/#qa'>Q&A</Link>
         </div>
-        {/* {!isAuthenticated && (
-          <p className='absolute right-10 top-10 ml-10 font-subtext text-sm'>
-            Already submitted an application?{" "}
-            <Link to='/login' className='text-blue-button'>
-              Login
-            </Link>
-          </p>
-        )} */}
         <Landing />
         <div className='-mx-40 flex h-10 items-center'>
-          <img src={TreesBackgroundSmall} alt='' className='-mt-96 w-screen' />
+          <img
+            src={TreesBackgroundSmall}
+            alt=''
+            className='mt-[-16rem] w-screen md:mt-[-36rem]'
+          />
         </div>
-        <HeroBlurb />
+        <HeroBlurb id='about' />
         <Milestones />
         <Speakers />
-        <QA />
+        <QA id='qa' />
         <Sponsors />
         <div className='h-40' />
       </div>
-      {/* <img src={Lake} alt='' className='m-auto w-full max-w-7xl' /> */}
       <img src={Lake} alt='' className='m-auto w-full' />
+      <Footer />
     </div>
   )
 }

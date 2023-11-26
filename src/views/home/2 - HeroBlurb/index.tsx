@@ -4,9 +4,9 @@ import EmailRegister from "./EmailRegister"
 import HandAndComputer from "../../../assets/illustrations/Hand & Computer.svg"
 import { socials } from "../../../utils/socials"
 
-const HeroBlurb = () => {
+const HeroBlurb = ({ id }: { id?: string }) => {
   return (
-    <div className='flex w-full justify-between gap-10 pb-16'>
+    <div className='flex w-full justify-between gap-10 pb-16' id={id}>
       <div className='space-y-6'>
         <div className='mb-10 w-20 border-2 text-white'></div>
         <h2 className='font-title text-3xl uppercase md:text-5xl'>
@@ -30,32 +30,6 @@ const HeroBlurb = () => {
               />
             </a>
           ))}
-          {/* <img
-            src={Instagram}
-            alt='Instagram Page'
-            className='h-8 w-auto lg:h-10'
-          />
-          <img
-            src={Facebook}
-            alt='Facebook Page'
-            className='h-8 w-auto lg:h-10'
-          />
-          <img
-            src={LinkedIn}
-            alt='LinkedIn Page'
-            className='h-8 w-auto lg:h-10'
-          />
-          <img
-            src={Twitter}
-            alt='Twitter Page'
-            className='h-8 w-auto lg:h-10'
-          />
-          <EnvelopeIconOutline className='h-8 w-auto shrink-0 lg:h-10' />
-          <img
-            src={Discord}
-            alt='Discord Page'
-            className='h-8 w-auto lg:h-10'
-          /> */}
         </div>
       </div>
       <img src={HandAndComputer} alt='' className='hidden w-1/2 md:flex' />

@@ -36,9 +36,9 @@ const Milestone = ({
   )
 }
 
-const Milestones = () => {
+const Milestones = ({ id }: { id?: string }) => {
   return (
-    <div className='z-10 flex w-full flex-col items-end gap-10'>
+    <div className='z-10 flex w-full flex-col items-end gap-10' id={id}>
       <h2 className='text-right font-title text-3xl uppercase md:text-5xl'>
         Milestones
       </h2>

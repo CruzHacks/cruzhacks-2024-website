@@ -28,17 +28,6 @@ const faqs = [
       ),
     },
     {
-      question: "Is CruzHacks 2024 fully in-person this year?",
-      answer: (
-        <>
-          Yes! We&apos;ll be providing meals starting from dinner on Friday
-          until lunch on Sunday. There will also be a sleeping space set up for
-          non-local students to sleep (make sure to bring a sleeping bag or
-          blankets!).
-        </>
-      ),
-    },
-    {
       question: "Who can participate?",
       answer: (
         <>
@@ -227,22 +216,6 @@ const faqs = [
             here
           </a>{" "}
           to apply.
-        </>
-      ),
-    },
-    {
-      question: "What are CruzPoints?",
-      answer: (
-        <>
-          CruzPoints is CruzHacks 2024&apos;s point reward system for Hackers!
-          For more information,{" "}
-          <a
-            target='_blank'
-            rel='noreferrer'
-            href='https://docs.google.com/document/d/1kExaZxBGb4VveTr6TDdAOKWLCM7E22OmGRxP4htBTok/edit?usp=share_link'
-          >
-            click here.
-          </a>
         </>
       ),
     },

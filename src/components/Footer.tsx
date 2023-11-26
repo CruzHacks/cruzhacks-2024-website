@@ -24,7 +24,6 @@ const Footer: React.FC = () => {
         <span>|</span>
         <a
           target='_blank'
-          // eslint-disable-next-line max-len
           href='https://docs.google.com/document/d/1298VyEqrSIvbzM3U8nvLQsLtY78Vi2mbndr3d5w0UKk/edit?usp=sharing'
           rel='noopener noreferrer'
         >
@@ -34,7 +33,7 @@ const Footer: React.FC = () => {
 
       <div className='flex grow flex-col items-center justify-between gap-5 md:flex-row'>
         <div className='flex transition-all xl:-translate-x-1/2'>
-          <p>CRUZHACKS © 2023</p>
+          <p>CRUZHACKS © 2024</p>
         </div>
         <div className='flex justify-end gap-5'>
           {socials.map(({ name, url, icon }) => (

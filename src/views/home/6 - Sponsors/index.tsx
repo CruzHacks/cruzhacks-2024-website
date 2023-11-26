@@ -32,9 +32,9 @@ const sponsors = [
   ],
 ]
 
-const Sponsors = () => {
+const Sponsors = ({ id }: { id?: string }) => {
   return (
-    <div className='flex flex-col items-center gap-10 py-10'>
+    <div className='flex flex-col items-center gap-10 py-10' id={id}>
       <h2 className='text-center font-title text-2xl uppercase md:text-4xl'>
         thanks to our sponsors!
       </h2>
@@ -43,7 +43,7 @@ const Sponsors = () => {
           return (
             <div
               key={"tier" + i}
-              className='flex flex-row items-center justify-between gap-10'
+              className='flex flex-row items-center justify-between gap-3 md:gap-10'
             >
               {tier.map(({ name, url, icon }) => (
                 <a

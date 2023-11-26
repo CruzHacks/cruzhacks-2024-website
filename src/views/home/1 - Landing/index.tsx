@@ -46,7 +46,11 @@ const Landing = () => {
           alt='Hackers on Log'
           className='z-0 -ml-16 -mt-40 w-40 md:-ml-32 md:-mt-96 md:w-96'
         />
-        <img src={Fire} alt='Fire' className='z-0 -mt-40 w-20 md:w-40' />
+        <img
+          src={Fire}
+          alt='Fire'
+          className='z-0 -mt-36 w-20 md:-mt-80 md:w-48'
+        />
       </div>
     </div>
   )
