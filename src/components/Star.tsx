@@ -12,7 +12,10 @@ const TwinkleStar = ({
 }) => {
   return (
     <div
-      className={classNames(className, "absolute -z-20 animate-twinkle")}
+      className={classNames(
+        className,
+        "absolute -z-20 aspect-square animate-twinkle"
+      )}
       style={{ animationDelay: `-${i * 1.8}s` }}
     >
       {children}

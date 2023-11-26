@@ -34,7 +34,7 @@ const Landing = ({ id }: { id?: string }) => {
         enterFrom='opacity-0 scale-[90%]'
         enterTo='opacity-100 scale-100'
       >
-        <div className='z-10 -mb-24 flex min-h-screen w-fit flex-col items-center justify-center pb-20 md:items-start 3xl:min-h-[80rem]'>
+        <div className='z-10 -mb-24 flex h-[40rem] w-fit flex-col items-center justify-center pb-20 md:h-[60rem] md:items-start'>
           <h1 className='z-10 font-title text-6xl uppercase md:text-8xl lg:text-9xl'>
             Cruz
           </h1>
