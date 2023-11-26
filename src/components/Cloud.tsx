@@ -14,7 +14,7 @@ const BounceCloud = ({
     <div
       className={classNames(
         className,
-        "absolute -z-20 flex w-1/3 animate-bounce-slow md:w-fit"
+        "absolute -z-10 flex w-1/3 animate-bounce-slow md:w-fit"
       )}
       style={{ animationDelay: `-${i * 2}s` }}
     >

@@ -30,14 +30,14 @@ export type PrizeTrack = {
 export const TechCaresTracks: PrizeTrack[] = [
   {
     Icon: GlobeAmericasIcon,
-    color: "hover:bg-blue-button",
+    color: "hover:bg-blue-button/80",
     title: "SUSTAINABILITY",
     blurb:
       "This category is dedicated to supporting sustainability and conservation efforts. How can we live harmoniously with our planet?",
   },
   {
     Icon: HeartIcon,
-    color: "hover:bg-pink",
+    color: "hover:bg-pink/80",
     title: "HEALTH",
     blurb:
       "This category aspires to address healthcare disparities. How do we support mental & physical well-being with accessible services?",
@@ -51,7 +51,7 @@ export const TechCaresTracks: PrizeTrack[] = [
   },
   {
     Icon: CurrencyDollarIcon,
-    color: "hover:bg-purple",
+    color: "hover:bg-purple/80",
     title: "FINTECH",
     blurb:
       "This category is dedicated to driving innovation in financial technology for social good. How can we make finances and banking more accessible to the general public?",
@@ -69,21 +69,21 @@ export const CategoryTracks: PrizeTrack[] = [
   {
     Icon: BeakerIcon,
     title: "NEW TECHNOLOGIES",
-    color: "hover:bg-purple-han",
+    color: "hover:bg-purple-han/50",
     blurb:
       "Create a project using some of the newest technologies, such as AI/ML, AR/VR, or decentralized technology.",
   },
   {
     Icon: RectangleGroupIcon,
     title: "UI/UX",
-    color: "hover:bg-blue-chinese",
+    color: "hover:bg-blue-chinese/80",
     blurb:
       "Have a new paradigm for interaction design? Create a project that has an awesome user experience!",
   },
   {
     Icon: HomeIcon,
     title: "SLUGHACKS",
-    color: "hover:bg-orange/80",
+    color: "hover:bg-orange/70",
     blurb: "Create something that benefits the UC Santa Cruz campus community!",
   },
 ]
