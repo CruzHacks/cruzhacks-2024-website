@@ -3,10 +3,7 @@ import { auth } from "../utils/firebaseapp"
 import { Link } from "react-router-dom"
 import useAuth from "../hooks/useAuth"
 import CruzHacksLogo from "../assets/logos/CruzHacks.svg"
-import {
-  ArrowRightIcon,
-  ArrowRightOnRectangleIcon,
-} from "@heroicons/react/24/solid"
+import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/solid"
 import { classNames } from "../utils/string"
 import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/outline"
 
@@ -29,7 +26,7 @@ const Navbar = () => {
 
   return (
     <div className='fixed z-[300] flex w-screen justify-center bg-blue-imperial/80 backdrop-blur-md'>
-      <div className='flex h-10 w-full max-w-7xl items-center justify-between px-6 py-8 pt-10 font-subtext lowercase md:text-xl'>
+      <div className='flex h-10 w-full max-w-7xl items-center justify-between px-10 py-8 pt-10 font-subtext lowercase md:text-xl'>
         <Link to='/'>
           <img
             className='hidden h-8 w-auto md:block'
@@ -37,9 +34,16 @@ const Navbar = () => {
             alt='Your Company'
           />
         </Link>
-        <div className='flex grow items-center justify-evenly capitalize md:grow-0 md:gap-10'>
-          <Link to='/#about'>About</Link>
-          <Link to='/#qa'>Q&A</Link>
+        <div className='flex grow items-center justify-evenly uppercase md:grow-0 md:gap-10'>
+          <Link to='/#about' className='transition-all hover:text-pink'>
+            ABOUT
+          </Link>
+          <Link to='/#prize-tracks' className='transition-all hover:text-pink'>
+            Prize Tracks
+          </Link>
+          <Link to='/#qa' className='transition-all hover:text-pink'>
+            Q&A
+          </Link>
         </div>
         {!isAuthenticated ? (
           <Link

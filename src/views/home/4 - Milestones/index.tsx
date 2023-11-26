@@ -1,5 +1,6 @@
 import React from "react"
 import { classNames } from "../../../utils/string"
+import { Cloud4, Cloud5 } from "../../../components/Cloud"
 
 interface MilestoneProps {
   staisticStyling: string
@@ -39,10 +40,12 @@ const Milestone = ({
 const Milestones = ({ id }: { id?: string }) => {
   return (
     <div className='z-10 flex w-full flex-col items-end gap-10' id={id}>
+      <Cloud4 className='absolute left-0 -mt-20 md:left-20 md:mt-0' />
       <h2 className='text-right font-title text-3xl uppercase md:text-5xl'>
         Milestones
       </h2>
       <div className='w-20 border-2 text-white'></div>
+      <Cloud5 className='absolute -right-28 mt-20' />
       <div className='flex w-full flex-wrap justify-evenly gap-8 py-20'>
         <Milestone statistic='400+' staisticStyling='text-gold'>
           hackers

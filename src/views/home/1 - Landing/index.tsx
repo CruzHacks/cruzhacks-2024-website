@@ -2,15 +2,23 @@ import React from "react"
 import { Link } from "react-router-dom"
 import useAuth from "../../../hooks/useAuth"
 
+import { Cloud1, Cloud2, Cloud3 } from "../../../components/Cloud"
 import HackersOnLog from "../../../assets/illustrations/Hackers on Log.svg"
 import Fire from "../../../assets/illustrations/Fire.svg"
+import Star from "../../../components/Star"
 
-const Landing = () => {
+const Landing = ({ id }: { id?: string }) => {
   const { isAuthenticated } = useAuth()
 
   return (
-    <div className='flex w-full flex-col items-center'>
-      <div className='z-10 -mb-24 flex min-h-screen w-fit flex-col items-center justify-center md:items-start 3xl:min-h-[80rem]'>
+    <div className='flex w-full flex-col items-center' id={id}>
+      <Cloud1 className='left-0 top-28' />
+      <Star className='left-28 top-56 h-10' />
+      <Star i={2} className='right-16 top-32 h-10' />
+      <Star i={3} className='left-40 top-72 h-3' />
+      <Cloud2 className='right-0 top-40' />
+      <Cloud3 className='-right-20 top-60' />
+      <div className='z-10 -mb-24 flex min-h-screen w-fit flex-col items-center justify-center pb-20 md:items-start 3xl:min-h-[80rem]'>
         <h1 className='z-10 font-title text-6xl uppercase md:text-8xl lg:text-9xl'>
           Cruz
         </h1>
@@ -26,14 +34,14 @@ const Landing = () => {
         {!isAuthenticated ? (
           <Link
             to='/apply'
-            className='z-10 mt-10 flex h-12 w-64 items-center justify-center self-center rounded-full bg-gradient-to-r from-[#02D4BF] via-[#5156E4] to-[#7F37E2] font-title  text-xl leading-6 text-white shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white md:ml-20 md:self-start'
+            className='z-10 mt-6 flex h-12 w-64 items-center justify-center self-center rounded-full bg-gradient-to-r from-[#02D4BF] via-[#5156E4] to-[#7F37E2]  font-title text-xl leading-6 text-white shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white md:ml-20 md:self-start'
           >
             apply
           </Link>
         ) : (
           <Link
             to='/portal'
-            className='z-10 mt-10 flex h-12 w-64 items-center justify-center self-center rounded-full bg-gradient-to-r from-[#02D4BF] via-[#5156E4] to-[#7F37E2] font-title  text-xl leading-6 text-white shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white md:ml-20 md:self-start'
+            className='z-10 mt-6 flex h-12 w-64 items-center justify-center self-center rounded-full bg-gradient-to-r from-[#02D4BF] via-[#5156E4] to-[#7F37E2]  font-title text-xl leading-6 text-white shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white md:ml-20 md:self-start'
           >
             portal
           </Link>

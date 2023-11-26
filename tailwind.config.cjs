@@ -32,6 +32,32 @@ module.exports = {
       subtext: ["Andale Mono", "Roboto Mono", ...defaultTheme.fontFamily.mono],
     },
     extend: {
+      animation: {
+        "bounce-slow": "bounce-sideways 8s infinite linear",
+        twinkle: "wiggle-slow 2s infinite ease-in-out",
+      },
+      keyframes: {
+        "bounce-sideways": {
+          "0%, 100%": {
+            transform: "translateX(0)",
+            animationTimingFunction: "cubic-bezier(0.8, 0, 1, 1)",
+          },
+          "50%": {
+            transform: "translateX(-10%)",
+            animationTimingFunction: "cubic-bezier(0, 0, 0.2, 1)",
+          },
+        },
+        "wiggle-slow": {
+          "0%, 100%": {
+            transform: "rotate(5deg)",
+            animationTimingFunction: "cubic-bezier(0.8, 0, 1, 1)",
+          },
+          "50%": {
+            transform: "rotate(-5deg)",
+            animationTimingFunction: "cubic-bezier(0, 0, 0.2, 1)",
+          },
+        },
+      },
       screens: {
         "3xl": "140rem",
       },
