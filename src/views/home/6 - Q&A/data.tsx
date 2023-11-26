@@ -194,7 +194,7 @@ const faqs = [
           <a
             target='_blank'
             rel='noreferrer'
-            href='https://forms.gle/ofzoJ9VVkZAEhnPv8'
+            href='https://docs.google.com/forms/d/1sVqGzsxBtBCuByJk7MZjCzJ6llk707GgU6Ou_xvJqIA/edit'
             className='text-blue-button'
           >
             Click here to apply.

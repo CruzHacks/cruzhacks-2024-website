@@ -8,11 +8,11 @@ import Fire from "../../../assets/illustrations/Fire.svg"
 import Star from "../../../components/Star"
 import { Transition } from "@headlessui/react"
 
-const Landing = ({ id }: { id?: string }) => {
+const Landing = () => {
   const { isAuthenticated } = useAuth()
 
   return (
-    <div className='flex w-full flex-col items-center' id={id}>
+    <div className='flex w-full flex-col items-center'>
       <Cloud1 className='left-0 top-28' />
       <Star className='left-5 top-48 h-5 md:left-28 md:top-56 md:h-10' />
       <Star
