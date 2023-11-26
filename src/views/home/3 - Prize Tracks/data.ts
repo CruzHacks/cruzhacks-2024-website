@@ -1,17 +1,9 @@
 /* eslint-disable max-len */
-import Beginner from "../../../assets/tracks/Beginner.svg"
-import Healthcare from "../../../assets/tracks/Healthcare.svg"
-import Justice from "../../../assets/tracks/Justice.svg"
-import Sustainability from "../../../assets/tracks/Sustainability.svg"
-import UIUX from "../../../assets/tracks/UXIcon.svg"
-import Fintech from "../../../assets/tracks/Fintech.svg"
-import NewTech from "../../../assets/tracks/NewTech.svg"
-import Slug from "../../../assets/tracks/Slug.svg"
 import { HeroIcon } from "../../../utils/types"
 import {
+  AcademicCapIcon,
   ArrowTrendingUpIcon,
   BeakerIcon,
-  CurrencyDollarIcon,
   GlobeAmericasIcon,
   HeartIcon,
   HomeIcon,
@@ -38,37 +30,37 @@ export const TechCaresTracks: PrizeTrack[] = [
   {
     Icon: HeartIcon,
     color: "hover:bg-pink/80",
-    title: "HEALTH",
+    title: "Health",
     blurb:
       "This category aspires to address healthcare disparities. How do we support mental & physical well-being with accessible services?",
   },
   {
     Icon: ScaleIcon,
     color: "hover:bg-orange/80",
-    title: "JUSTICE",
+    title: "Justice",
     blurb:
       "This category aims to drive innovation for civil liberty and social justice. How can we uphold truth & order in a (mis)information age?",
   },
   {
-    Icon: CurrencyDollarIcon,
+    Icon: AcademicCapIcon,
     color: "hover:bg-purple/80",
-    title: "FINTECH",
+    title: "Education",
     blurb:
-      "This category is dedicated to driving innovation in financial technology for social good. How can we make finances and banking more accessible to the general public?",
+      "This track is suitable for teams working on solving real problems and challenges in the classroom. We encourage students to create apps that have a substantial impact on fostering a more effective and stimulating learning environment, or that look to connect with people from the worlds of education, technology, and the fusion of the two.",
   },
 ]
 
 export const CategoryTracks: PrizeTrack[] = [
   {
     Icon: ArrowTrendingUpIcon,
-    title: "BEGINNER",
+    title: "Beginner",
     color: "hover:bg-turquoise/50",
     blurb:
       "Hackathons are meant for everyone, especially our first-timers! We've created a prize category to reward teams composed of all first-time hackers.",
   },
   {
     Icon: BeakerIcon,
-    title: "NEW TECHNOLOGIES",
+    title: "New Technologies",
     color: "hover:bg-purple-han/50",
     blurb:
       "Create a project using some of the newest technologies, such as AI/ML, AR/VR, or decentralized technology.",
@@ -82,7 +74,7 @@ export const CategoryTracks: PrizeTrack[] = [
   },
   {
     Icon: HomeIcon,
-    title: "SLUGHACKS",
+    title: "SlugHacks",
     color: "hover:bg-orange/70",
     blurb: "Create something that benefits the UC Santa Cruz campus community!",
   },
