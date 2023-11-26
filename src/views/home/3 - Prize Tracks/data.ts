@@ -46,7 +46,7 @@ export const TechCaresTracks: PrizeTrack[] = [
     color: "hover:bg-purple/80",
     title: "Education",
     blurb:
-      "This track is suitable for teams working on solving real problems and challenges in the classroom. We encourage students to create apps that have a substantial impact on fostering a more effective and stimulating learning environment, or that look to connect with people from the worlds of education, technology, and the fusion of the two.",
+      "This track encourages students to create apps that have a substantial impact on fostering a more effective and stimulating learning environment, or that look to connect with people from the worlds of education, technology, and the fusion of the two.",
   },
 ]
 

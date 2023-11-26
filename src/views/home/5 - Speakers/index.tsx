@@ -10,6 +10,7 @@ import BrentHaddad from "../../../assets/speakers/BrentHaddad.jpg"
 import NadaMiljkovic from "../../../assets/speakers/NadaMilkovic.jpg"
 import GregorVebleMikic from "../../../assets/speakers/GregorVebleMikie.jpg"
 import AlexanderWolf from "../../../assets/speakers/AlexanderWolf.jpg"
+import Star from "../../../components/Star"
 
 type Speaker = {
   image: string
@@ -78,6 +79,11 @@ const Speakers = ({ id }: { id?: string }) => {
       <div className='z-10 w-full' id={id}>
         <p className='pb-5 uppercase text-white/50'>Hear from the best</p>
         <h2 className='font-title text-3xl uppercase md:text-5xl'>Speakers</h2>
+        <Star className='right-14 -mt-6 h-5 md:right-20 md:-mt-10 md:h-8 lg:h-10' />
+        <Star
+          i={3}
+          className='right-20 h-3 md:right-32 md:mt-0 md:h-4 lg:h-5'
+        />
         <img
           src={Mushrroms}
           alt=''

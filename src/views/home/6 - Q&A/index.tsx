@@ -4,6 +4,7 @@ import { StarIcon } from "@heroicons/react/24/outline"
 import faqs from "./data"
 
 import Grid from "../../../assets/illustrations/Grid.svg"
+import Star from "../../../components/Star"
 
 interface FAQItemProps {
   question: string
@@ -46,15 +47,22 @@ const FAQItem = ({ question, answer }: FAQItemProps) => {
 const QA = ({ id }: { id?: string }) => {
   return (
     <div
-      className='bg-repeat py-40'
+      className='-z-20 bg-repeat py-40'
       style={{
         backgroundImage: `url(${Grid})`,
       }}
+      id={id}
     >
-      <h2
-        className='py-10 text-center font-title text-3xl uppercase md:text-5xl'
-        id={id}
-      >
+      <Star className='left-24 -mt-4 h-7 md:left-52 md:-mt-10 md:h-8 lg:left-72 lg:h-10' />
+      <Star
+        i={2}
+        className='left-10 mt-8 h-4 md:left-12 md:mt-8 md:h-5 lg:h-7'
+      />
+      <Star
+        i={3}
+        className='left-20 mt-16 h-2 md:left-36 md:mt-16 md:h-4 lg:left-52 lg:h-4'
+      />
+      <h2 className='py-10 text-center font-title text-3xl uppercase md:text-5xl'>
         Q&A
       </h2>
       <div className='flex w-full flex-col items-stretch justify-stretch gap-3 md:flex-row'>
@@ -66,6 +74,14 @@ const QA = ({ id }: { id?: string }) => {
           </div>
         ))}
       </div>
+      <Star
+        i={5}
+        className='right-16 mt-16 h-8 md:right-20 md:mt-10 md:h-8 lg:h-10'
+      />
+      <Star
+        i={7}
+        className='right-28 mt-10 h-4 md:right-32 md:mt-16 md:h-4 lg:right-40 lg:mt-20 lg:h-6'
+      />
     </div>
   )
 }

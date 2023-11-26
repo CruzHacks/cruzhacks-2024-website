@@ -1,6 +1,7 @@
 import React from "react"
 import { classNames } from "../../../utils/string"
 import { Cloud4, Cloud5 } from "../../../components/Cloud"
+import Star from "../../../components/Star"
 
 interface MilestoneProps {
   staisticStyling: string
@@ -16,7 +17,7 @@ const Milestone = ({
   children,
 }: MilestoneProps) => {
   return (
-    <div className='flex h-60 w-full shrink-0 flex-col items-center rounded-xl bg-blue-royal px-2 ring-2 ring-inset ring-white/20 md:h-40 md:w-36 lg:h-52 lg:w-52'>
+    <div className='flex h-60 w-full shrink-0 flex-col items-center rounded-xl bg-blue-royal px-2 ring-2 ring-inset ring-white/20 hover:animate-twinkle md:h-40 md:w-36 lg:h-52 lg:w-52'>
       <p
         className={classNames(
           "flex h-1/2 grow items-end justify-center pb-3 font-title text-4xl md:text-xl lg:text-3xl",
@@ -40,7 +41,16 @@ const Milestone = ({
 const Milestones = ({ id }: { id?: string }) => {
   return (
     <div className='z-10 flex w-full flex-col items-end gap-10' id={id}>
+      <Star className='absolute left-6 -mt-16 h-5 md:left-32 md:-mt-10 md:h-8 lg:h-10' />
       <Cloud4 className='absolute left-0 -mt-20 md:left-20 md:mt-0' />
+      <Star
+        i={2}
+        className='absolute left-16 -mt-8 h-4 md:left-64 md:mt-20 md:h-5 lg:left-80 lg:h-7'
+      />
+      <Star
+        i={7}
+        className='absolute left-14 -mt-6 h-2 md:left-60 md:mt-16 md:h-2 lg:left-72 lg:h-4'
+      />
       <h2 className='text-right font-title text-3xl uppercase md:text-5xl'>
         Milestones
       </h2>
