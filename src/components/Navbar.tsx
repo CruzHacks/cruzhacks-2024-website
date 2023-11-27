@@ -6,6 +6,7 @@ import CruzHacksLogo from "../assets/logos/CruzHacks.svg"
 import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/solid"
 import { classNames } from "../utils/string"
 import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/outline"
+import AvatarButton from "./Sidebar/AvatarButton"
 
 const logout = async () => {
   await auth
@@ -22,7 +23,10 @@ const authButtonStyle =
   "z-10 flex items-center justify-center gap-2 shadow-lg px-3 md:w-36 py-1 rounded-full"
 
 const Navbar = () => {
-  const { isAuthenticated } = useAuth()
+  const {
+    isAuthenticated,
+    auth: { user },
+  } = useAuth()
 
   return (
     <div className='fixed z-[300] flex w-screen justify-center bg-blue-imperial/80 backdrop-blur-md'>
@@ -57,16 +61,21 @@ const Navbar = () => {
             <ArrowRightOnRectangleIcon className='inline h-5 w-auto' />
           </Link>
         ) : (
-          <button
-            onClick={logout}
-            className={classNames(
-              authButtonStyle,
-              "font-title text-sm lowercase text-pink md:bg-pink md:text-base md:text-white"
-            )}
-          >
-            <span className='hidden md:block'>logout</span>
-            <ArrowLeftOnRectangleIcon className='inline h-5 w-auto' />
-          </button>
+          <AvatarButton
+            nav={[{ name: "Portal", href: "/portal" }]}
+            email={user?.email || ""}
+            direction='down'
+          />
+          // <button
+          //   onClick={logout}
+          //   className={classNames(
+          //     authButtonStyle,
+          //     "font-title text-sm lowercase text-pink md:bg-pink md:text-base md:text-white"
+          //   )}
+          // >
+          //   <span className='hidden md:block'>logout</span>
+          //   <ArrowLeftOnRectangleIcon className='inline h-5 w-auto' />
+          // </button>
         )}
       </div>
     </div>
