@@ -5,6 +5,8 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { z } from "zod"
 import { ArrowRightIcon } from "@heroicons/react/24/outline"
 import { classNames } from "../../../utils/string"
+import { mailchimpSubscribe } from "../../../utils/apis/cloudFunctions"
+import toast from "react-hot-toast"
 
 const emailSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -21,10 +23,17 @@ const EmailRegister = () => {
   } = useForm<EmailSchema>({ resolver: zodResolver(emailSchema) })
 
   const registerEmail: SubmitHandler<EmailSchema> = async data => {
-    setLoading(true)
-    const email = data.email.toLowerCase()
-    alert(`TODO: Email Registered ${email}`)
-    setLoading(false)
+    try {
+      setLoading(true)
+      const email = data.email.toLowerCase()
+      await mailchimpSubscribe(email)
+      toast.success("Subscribed to mailing list")
+    } catch (err) {
+      console.error(err)
+      if (err instanceof Error) toast.error(err.message)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
