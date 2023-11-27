@@ -76,7 +76,7 @@ const AvatarButton = ({
                   to={item.href}
                   className={classNames(
                     active ? "bg-blue-royal/60" : "",
-                    "block border-b-2 border-white/10 px-4 py-2 text-sm capitalize text-white"
+                    "block border-b-2 border-white/5 px-4 py-2 text-sm capitalize text-white"
                   )}
                 >
                   {item.name}
