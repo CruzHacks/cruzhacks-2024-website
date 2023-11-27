@@ -7,6 +7,7 @@ import {
   getDocs,
   orderBy,
   query,
+  updateDoc,
 } from "firebase/firestore"
 import { db } from "../firebaseapp"
 import { AppShortResponseSchema, ApplicationSchema } from "../types"
@@ -89,4 +90,48 @@ export const getApplications = async () => {
     console.error(error)
     throw error
   }
+}
+
+/**
+ * Function using Firebase sdk for checking if an application is
+ * submitted.
+ * @param user Firebase User
+ * @returns True if application is submitted, false if not, otherwise an error
+ * message
+ */
+export const approveApplication = async (email: string) => {
+  if (!email) throw new Error("No user provided")
+
+  let docRef = doc(db, `users/${email}/user_items/application`)
+  await updateDoc(docRef, {
+    'status': 'approved'
+  })
+  docRef = doc(db, `users/${email}/user_items/role`)
+  updateDoc(docRef, {
+    'role': 'hacker'
+  })
+
+  console.log("docRef updated: ", docRef)
+
+  return docRef
+}
+
+/**
+ * Function using Firebase sdk for checking if an application is
+ * submitted.
+ * @param user Firebase User
+ * @returns True if application is submitted, false if not, otherwise an error
+ * message
+ */
+export const denyApplication = async (email: string) => {
+  if (!email) throw new Error("No user provided")
+
+  const docRef = doc(db, `users/${email}/user_items/application`)
+  await updateDoc(docRef, {
+    'status': 'denied'
+  })
+
+  console.log("docRef updated: ", docRef)
+
+  return docRef
 }

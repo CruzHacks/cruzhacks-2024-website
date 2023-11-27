@@ -4,11 +4,14 @@ import useApplicationShortResponses from "../../../../hooks/useApplicationShortR
 import { AppShortResponseSchema } from "../../../../utils/types"
 import { z } from "zod"
 import { ArrowLeftIcon } from "@heroicons/react/24/outline"
+import { AcceptButtons } from "../../../../components/AcceptButtons"
 
 const ApplicationsReviewAdmin = () => {
+  
   let { email } = useParams()
   if (!email) return <p className='text-error'>No Email provided</p>
   email = decodeURIComponent(email).replace(/ /g, ".")
+
 
   const {
     data: shortResponses,
@@ -43,6 +46,7 @@ const ApplicationsReviewAdmin = () => {
           </div>
         )}
       </div>
+      <AcceptButtons email={email}/>
     </div>
   )
 }
