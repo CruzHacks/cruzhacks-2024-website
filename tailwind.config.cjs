@@ -28,9 +28,9 @@ module.exports = {
     },
     fontFamily: {
       title: ["StretchPro"],
-      body: ["Proxima Nova", "Montserrat", ...defaultTheme.fontFamily.sans],
-      sans: ["Proxima Nova", "Montserrat", ...defaultTheme.fontFamily.sans],
-      subtext: ["Andale Mono", "Roboto Mono", ...defaultTheme.fontFamily.mono],
+      body: ["Montserrat", ...defaultTheme.fontFamily.sans],
+      sans: ["Montserrat", ...defaultTheme.fontFamily.sans],
+      subtext: ["Roboto Mono", ...defaultTheme.fontFamily.mono],
     },
     extend: {
       animation: {

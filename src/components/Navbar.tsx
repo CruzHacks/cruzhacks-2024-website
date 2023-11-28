@@ -25,7 +25,7 @@ const Navbar = () => {
             alt='Your Company'
           />
         </Link>
-        <div className='flex grow items-center justify-evenly uppercase md:grow-0 md:gap-10'>
+        <div className='flex grow items-center justify-evenly font-light uppercase md:grow-0 md:gap-10'>
           <Link to='/#about' className='transition-all hover:text-pink'>
             ABOUT
           </Link>
