@@ -1,10 +1,12 @@
-import React from "react"
+import React, { useState } from "react"
 import { classNames } from "../../../../utils/string"
 import useUsers from "../../../../hooks/useUsers"
 import useAuth from "../../../../hooks/useAuth"
 import { auth } from "../../../../utils/firebaseapp"
 import { sendPasswordResetEmail } from "firebase/auth"
 import toast from "react-hot-toast"
+import { ExclamationCircleIcon } from "@heroicons/react/24/solid"
+import Modal from "../../../../components/Modal"
 
 const UsersAdmin = () => {
   const {
@@ -13,12 +15,19 @@ const UsersAdmin = () => {
   // TODO: Pagination
   const { data: users, error, isLoading, isError } = useUsers(currentUser)
 
+  const [resetUserEmail, setResetUserEmail] = useState<string>()
+  const [openModal, setOpenModal] = useState(false)
   const handleNewUser = () => {
     alert("This feature is not yet implemented.")
   }
 
-  const sendPasswordReset = (email: string) => {
-    sendPasswordResetEmail(auth, email)
+  const sendPasswordReset = () => {
+    if (!resetUserEmail) {
+      toast.error("No user selected for reset")
+      return
+    }
+
+    sendPasswordResetEmail(auth, resetUserEmail)
       .then(() => {
         toast.success("Password reset email sent")
       })
@@ -30,6 +39,18 @@ const UsersAdmin = () => {
 
   return (
     <div className='px-4 sm:px-6 lg:px-8'>
+      <Modal
+          Icon = {ExclamationCircleIcon} 
+          iconStyling='text-error'
+          title = "Password Reset Confirm"
+          description = "Are you sure you want to reset your password?"
+
+          actionText="Confirm"
+          actionFunc={sendPasswordReset}
+          open={openModal}
+          setOpen={setOpenModal}
+        />
+
       <div className='sm:flex sm:items-center'>
         <div className='sm:flex-auto'>
           <h1 className='font-title text-2xl font-semibold leading-6'>Users</h1>
@@ -38,6 +59,7 @@ const UsersAdmin = () => {
             email and role.
           </p>
         </div>
+
         {/* <div className='mt-4 sm:ml-16 sm:mt-0 sm:flex-none'>
           <button
             type='button'
@@ -155,7 +177,7 @@ const UsersAdmin = () => {
                           >
                             <button
                               type='button'
-                              onClick={() => sendPasswordReset(user.email)}
+                              onClick={() => {setResetUserEmail(user.email); setOpenModal(true)}}
                               className='text-pink'
                             >
                               Send Password Reset
