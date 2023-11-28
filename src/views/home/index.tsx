@@ -12,10 +12,14 @@ import Binary from "../../assets/Binary.jpg"
 import TreesBackgroundSmall from "../../assets/illustrations/Trees Background - Small.png"
 import Lake from "../../assets/illustrations/Lake.svg"
 import PrizeTracks from "./3 - Prize Tracks"
+import ScrollToTop from "../../components/scrollControl/ScrollToTop"
 
 const Home = () => {
   return (
     <div className='overflow-x-hidden bg-[#0A1351]' id='landing'>
+      {/* Put scroll at top on navigation */}
+      <ScrollToTop />
+
       <div
         className='relative z-0 m-auto flex min-h-screen max-w-7xl flex-col items-center space-y-10 bg-repeat-x px-10'
         style={{

@@ -4,10 +4,14 @@ import Footer from "../../components/Footer"
 
 import Binary from "../../assets/Binary.jpg"
 import Lake from "../../assets/illustrations/Lake.svg"
+import ScrollToTop from "../../components/scrollControl/ScrollToTop"
 
 const Team = () => {
   return (
     <div className='overflow-x-hidden bg-[#0A1351]' id='landing'>
+      {/* Put scroll at top on navigation */}
+      <ScrollToTop />
+
       <div
         className='relative z-0 m-auto flex max-w-7xl flex-col items-center gap-20 bg-repeat-x px-10'
         style={{
