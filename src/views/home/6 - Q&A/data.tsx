@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 
 const faqs = [
   [
@@ -136,8 +137,21 @@ const faqs = [
       question: "How do I sign up?",
       answer: (
         <>
-          Applications are open now here and close on November 30th. To stay
-          updated, follow us on Instagram and Twitter @cruzhacks.
+          Applications are open now{" "}
+          <Link className='text-blue-button' to='/apply'>
+            here
+          </Link>{" "}
+          and close on December 15th. To stay updated, follow us on Instagram
+          and Twitter @cruzhacks and
+          <a
+            target='_blank'
+            rel='noreferrer'
+            href='https://discord.gg/rGjDTCk3Nx'
+            className='text-blue-button'
+          >
+            join our discord
+          </a>
+          .
         </>
       ),
     },
@@ -202,25 +216,25 @@ const faqs = [
         </>
       ),
     },
-    {
-      question:
-        "Can I help out another way if I don't want to be a Hacker, but am not eligible to be a judge or mentor?",
-      answer: (
-        <>
-          If you are a current UCSC student, you&apos;re welcome to volunteer
-          with us! Volunteers are invaluable in helping us set up, clean up, and
-          everything in between!{" "}
-          <a
-            target='_blank'
-            rel='noreferrer'
-            href='https://forms.gle/R9KtP8VMGGbfVTBx9'
-            className='text-blue-button'
-          >
-            Click here to apply.
-          </a>
-        </>
-      ),
-    },
+    // {
+    //   question:
+    //     "Can I help out another way if I don't want to be a Hacker, but am not eligible to be a judge or mentor?",
+    //   answer: (
+    //     <>
+    //       If you are a current UCSC student, you&apos;re welcome to volunteer
+    //       with us! Volunteers are invaluable in helping us set up, clean up, and
+    //       everything in between!{" "}
+    //       <a
+    //         target='_blank'
+    //         rel='noreferrer'
+    //         href='https://forms.gle/R9KtP8VMGGbfVTBx9'
+    //         className='text-blue-button'
+    //       >
+    //         Click here to apply.
+    //       </a>
+    //     </>
+    //   ),
+    // },
   ],
 ]
 export default faqs

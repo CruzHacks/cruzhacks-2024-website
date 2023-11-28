@@ -3,6 +3,8 @@ import EmailRegister from "./EmailRegister"
 
 import HandAndComputer from "../../../assets/illustrations/Hand & Computer.svg"
 import { socials } from "../../../utils/socials"
+import { ArrowRightIcon } from "@heroicons/react/24/outline"
+import { Link } from "react-router-dom"
 
 const HeroBlurb = ({ id }: { id?: string }) => {
   return (
@@ -15,11 +17,21 @@ const HeroBlurb = ({ id }: { id?: string }) => {
         <h2 className='font-title text-3xl uppercase md:text-5xl'>
           Social Good
         </h2>
-        <p className='text-lg lg:text-2xl'>
-          CruzHacks is the largest hackathon in Santa Cruz. Each year, we invite
-          hundreds of students to develop solutions to real-world problems,
-          pursue inclusion in tech, and kindle the spirit of innovation.
-        </p>
+        <div>
+          <p className='text-lg lg:text-2xl'>
+            CruzHacks is the largest hackathon in Santa Cruz. Each year, we
+            invite hundreds of students to develop solutions to real-world
+            problems, pursue inclusion in tech, and kindle the spirit of
+            innovation.
+          </p>
+          <Link
+            to='/team'
+            className='mt-2 flex items-center gap-2 text-blue-button'
+          >
+            Meet the CruzHacks team
+            <ArrowRightIcon className='h-4' />
+          </Link>
+        </div>
         <div className='max-w-md'>
           <EmailRegister />
         </div>

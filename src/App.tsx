@@ -29,6 +29,7 @@ import UserSection from "./views/apply/0 - User"
 import ApplicationsReviewAdmin from "./views/portal/admin/applications/Review"
 import ReviewSection from "./views/apply/6 - Review"
 import ScrollToAnchor from "./components/ScrollToAnchor"
+import Team from "./views/team"
 
 const App: React.FC = () => {
   const {
@@ -61,7 +62,9 @@ const App: React.FC = () => {
       />
       <ScrollToAnchor />
       <Routes>
+        {/* These routes are accessible to everyone*/}
         <Route index element={<Home />} />
+        <Route path='team' element={<Team />} />
 
         {/* You cannot be logged in to access these routes*/}
         <Route element={<UnauthenticatedRoute />}>
