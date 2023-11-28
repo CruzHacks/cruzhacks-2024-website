@@ -26,6 +26,14 @@ export const ApplicationStatuses = [
 ] as const
 export type ApplicationStatus = (typeof ApplicationStatuses)[number]
 
+export const UserRoles = [
+  "applicant", 
+  "hacker", 
+  "judge", 
+  "admin"
+] as const;
+export type UserRole = (typeof UserRoles)[number];
+
 export const ApplicationSchema = z.object({
   status: z.enum(ApplicationStatuses),
   email: z.string().email("Invalid email address."),

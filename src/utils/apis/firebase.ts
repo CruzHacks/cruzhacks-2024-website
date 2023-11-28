@@ -10,7 +10,7 @@ import {
   updateDoc,
 } from "firebase/firestore"
 import { db } from "../firebaseapp"
-import { AppShortResponseSchema, ApplicationSchema } from "../types"
+import { AppShortResponseSchema, ApplicationSchema, ApplicationStatus } from "../types"
 
 /**
  * Function using Firebase sdk for checking if an application is
@@ -100,38 +100,77 @@ export const getApplications = async () => {
  * message
  */
 export const approveApplication = async (email: string) => {
+  try {
+
   if (!email) throw new Error("No user provided")
 
-  let docRef = doc(db, `users/${email}/user_items/application`)
+  const status: ApplicationStatus = "accepted"
+
+  const docRef = doc(db, `users/${email}/user_items/application`)
   await updateDoc(docRef, {
-    'status': 'approved'
-  })
-  docRef = doc(db, `users/${email}/user_items/role`)
-  updateDoc(docRef, {
-    'role': 'hacker'
+    'status': status
   })
 
   console.log("docRef updated: ", docRef)
 
   return docRef
+} catch (error) {
+  console.error('application', error)
+  throw error as Error
+}
 }
 
 /**
  * Function using Firebase sdk for checking if an application is
- * submitted.
- * @param user Firebase User
+ * accepted.
+ * @param email Firebase User's Email
  * @returns True if application is submitted, false if not, otherwise an error
  * message
  */
 export const denyApplication = async (email: string) => {
+  try {
+
   if (!email) throw new Error("No user provided")
+
+  const status: ApplicationStatus = "rejected"
+
 
   const docRef = doc(db, `users/${email}/user_items/application`)
   await updateDoc(docRef, {
-    'status': 'denied'
+    'status': status
   })
 
   console.log("docRef updated: ", docRef)
 
   return docRef
+} catch (error) {
+  console.error('application', error)
+  throw error as Error
+}
+}
+
+/**
+ * Function using Firebase sdk for checking if an application is
+ * accepted.
+ * @param email Firebase User's Email
+ * @returns True if application is accepted, false if not, otherwise not reviewed
+ * 
+ */
+export const checkStatus = async (email: string) => {
+  try {
+    if (!email) throw new Error("No user provided")
+
+    const docRef = doc(db, `users/${email}/user_items/application`)
+    const docSnap = await getDoc(docRef)
+
+    const status = docSnap.data()?.status
+
+
+    console.log("docSnap status: ", status)
+
+    return status as any as ApplicationStatus
+  } catch (error) {
+    console.error(error)
+    throw error
+  }
 }

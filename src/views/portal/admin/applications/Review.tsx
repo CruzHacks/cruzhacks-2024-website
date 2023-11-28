@@ -1,10 +1,12 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import useApplicationShortResponses from "../../../../hooks/useApplicationShortResponses"
-import { AppShortResponseSchema } from "../../../../utils/types"
+import { AppShortResponseSchema, ApplicationStatus } from "../../../../utils/types"
 import { z } from "zod"
 import { ArrowLeftIcon } from "@heroicons/react/24/outline"
 import { AcceptButtons } from "../../../../components/AcceptButtons"
+import { checkStatus } from "../../../../utils/apis/firebase"
+
 
 const ApplicationsReviewAdmin = () => {
   
@@ -12,6 +14,42 @@ const ApplicationsReviewAdmin = () => {
   if (!email) return <p className='text-error'>No Email provided</p>
   email = decodeURIComponent(email).replace(/ /g, ".")
 
+  const [status, setStatus] = useState<ApplicationStatus>("submitted")
+  const [resetStatus, setResetStatus] = useState(false)
+
+  
+  useEffect(() => {
+    const checkStatusSub = async () => {
+      const _status = await checkStatus(email as string)
+      setStatus(_status)
+    }
+    checkStatusSub()
+  }, [resetStatus])
+
+
+  const AppStatus = ({ status }: { status: ApplicationStatus }) => {
+    if (status === "rejected") {
+      return (
+        <span className='inline-flex items-center rounded-md bg-error/10 px-2 py-1 text-xs font-medium text-error ring-1 ring-inset ring-error/20'>
+          Rejected
+        </span>
+      )
+    }
+  
+    if (status === "accepted") {
+      return (
+        <span className='inline-flex items-center rounded-md bg-success/10 px-2 py-1 text-xs font-medium text-success ring-1 ring-inset ring-success/20'>
+          Accepted
+        </span>
+      )
+    }
+  
+    return (
+      <span className='inline-flex items-center rounded-md bg-gold/10 px-2 py-1 text-xs font-medium text-gold ring-1 ring-inset ring-gold/20'>
+        Needs Review
+      </span>
+    )
+  }
 
   const {
     data: shortResponses,
@@ -27,9 +65,12 @@ const ApplicationsReviewAdmin = () => {
       >
         <ArrowLeftIcon className='h-5 w-auto' /> Back
       </Link>
-      <h1 className='font-title text-xl'>
-        Hacker Application - <span className='font-subtext'>{email}</span>
-      </h1>
+      <div className="flex flex-row justify-start gap-6">
+        <h1 className='font-title text-xl'>
+          Hacker Application - <span className='font-subtext'>{email}</span>
+        </h1>
+        <AppStatus status={status} />
+      </div>
       <div className='max-w-4xl'>
         {!isError ? (
           <ShortResponses responses={shortResponses} />
@@ -46,7 +87,9 @@ const ApplicationsReviewAdmin = () => {
           </div>
         )}
       </div>
-      <AcceptButtons email={email}/>
+      <AcceptButtons onClick={() => {
+        setResetStatus(!resetStatus)
+      }} email={email}/>
     </div>
   )
 }
