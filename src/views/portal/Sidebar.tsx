@@ -103,7 +103,7 @@ const Sidebar = ({ navigation }: SidebarProps) => {
                         <img
                           className='h-8 w-auto'
                           src={CruzHacksLogo}
-                          alt='Your Company'
+                          alt='CruzHacks logo'
                         />
                       </Link>
                     </div>
@@ -175,7 +175,7 @@ const Sidebar = ({ navigation }: SidebarProps) => {
                 <img
                   className='h-8 w-auto'
                   src={CruzHacksLogo}
-                  alt='Your Company'
+                  alt='CruzHacks logo'
                 />
               </Link>
             </div>

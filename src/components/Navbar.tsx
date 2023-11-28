@@ -18,7 +18,7 @@ const Navbar = () => {
           <img
             className='hidden h-8 w-auto md:block'
             src={CruzHacksLogo}
-            alt='Your Company'
+            alt='CruzHacks logo'
           />
         </Link>
         <div className='flex grow items-center justify-evenly font-light uppercase md:grow-0 md:gap-10'>
