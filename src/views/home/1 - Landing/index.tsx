@@ -39,7 +39,7 @@ const Landing = () => {
         enterFrom='opacity-0 scale-[90%]'
         enterTo='opacity-100 scale-100'
       >
-        <div className='-mb-24 flex h-[40rem] w-fit flex-col items-center justify-center pb-20 md:h-[60rem] md:items-start'>
+        <div className='-mb-24 flex h-[40rem] w-fit flex-col items-center justify-center pb-40 md:h-[60rem] md:items-start'>
           <h1 className='z-10 font-title text-6xl uppercase md:text-8xl lg:text-9xl'>
             Cruz
           </h1>
@@ -74,12 +74,12 @@ const Landing = () => {
         <img
           src={HackersOnLog}
           alt='Hackers on Log'
-          className='z-0 -ml-16 -mt-40 w-40 md:-ml-32 md:mt-[-25rem] md:w-[25rem] lg:mt-[-32rem] lg:w-[32rem]'
+          className='z-0 -ml-16 -mt-52 w-52 md:-ml-32 md:mt-[-29rem] md:w-[29rem] lg:mt-[-35rem] lg:w-[35rem]'
         />
         <img
           src={Fire}
           alt='Fire'
-          className='z-0 -mr-8 -mt-36 w-20 md:mr-0 md:mt-[-20rem] md:w-40 lg:w-64'
+          className='z-0 -mr-8 -mt-32 w-20 md:mr-0 md:mt-[-20rem] md:w-40 lg:w-64'
         />
       </div>
     </div>
