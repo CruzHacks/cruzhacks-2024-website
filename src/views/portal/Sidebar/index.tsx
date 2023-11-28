@@ -5,7 +5,7 @@ import { classNames } from "../../../utils/string"
 import { Link, Outlet, useLocation } from "react-router-dom"
 import CruzHacksLogo from "../../../assets/logos/CruzHacks.svg"
 import useAuth from "../../../hooks/useAuth"
-import AvatarButton from "./AvatarButton"
+import AvatarButton from "../../../components/AvatarButton"
 
 // const teams = [
 //   { id: 1, name: "Heroicons", href: "#", initial: "H", current: false },
