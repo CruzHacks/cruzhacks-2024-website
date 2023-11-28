@@ -13,14 +13,17 @@ const Landing = () => {
 
   return (
     <div className='flex w-full flex-col items-center'>
-      <Cloud1 className='-left-10 top-10 md:top-20' />
+      <Cloud1 className='-left-10 top-10 md:top-16' />
 
-      <Star className='left-5 top-48 h-5 md:left-28 md:top-56 md:h-10' />
       <Star
         i={2}
         className='right-10 top-28 h-5 md:right-16 md:top-32 md:h-10'
       />
-      <Star i={3} className='left-10 top-52 h-2 md:left-40 md:top-72 md:h-3' />
+      <Star className='left-5 top-48 h-5 md:left-10 md:top-56 md:h-10 lg:left-28' />
+      <Star
+        i={3}
+        className='left-10 top-52 h-2 md:left-20 md:top-72 md:h-3 lg:left-40'
+      />
 
       <Cloud2 className='-right-6 top-16 md:-right-20 md:top-44' />
 
