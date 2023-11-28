@@ -12,7 +12,7 @@ const HeroBlurb = ({ id }: { id?: string }) => {
       {/* Scroll Anchor*/}
       <div className='absolute -mt-28' id={id}></div>
 
-      <div className='w-full space-y-6'>
+      <div className='w-full space-y-6 pt-10'>
         <div className='mb-10 w-20 border-2 text-white'></div>
         <h2 className='font-title text-3xl uppercase md:text-5xl'>
           Social Good
