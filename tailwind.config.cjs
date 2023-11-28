@@ -38,6 +38,10 @@ module.exports = {
         twinkle: "wiggle 2s infinite ease-in-out",
         "twinkle-slow": "wiggle-slow 2s infinite ease-in-out",
       },
+      backgroundImage: {
+        "milestones-gradient":
+          "radial-gradient(60.38% 60.38% at 50% 50%, #04106C 39.06%, #080B94 100%)",
+      },
       keyframes: {
         "bounce-sideways": {
           "0%, 100%": {

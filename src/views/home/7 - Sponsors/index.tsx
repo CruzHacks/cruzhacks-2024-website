@@ -3,10 +3,7 @@ import React from "react"
 import UniversialAudio from "../../../assets/sponsors/UniversalAudio.png"
 import BaskinEngineering from "../../../assets/sponsors/BaskinEngineering.svg"
 import CIED from "../../../assets/sponsors/CIED.svg"
-import EigthWall from "../../../assets/sponsors/8thWall.svg"
 import SouthSwellVentures from "../../../assets/sponsors/SouthSwellVentures.png"
-import Backbone from "../../../assets/sponsors/Backbone.svg"
-import Balsamiq from "../../../assets/sponsors/Balsamiq.svg"
 
 // NOTE: these are last years sponsors, please update with this years sponsors
 const sponsors = [
@@ -36,11 +33,6 @@ const sponsors = [
       icon: undefined,
       url: "",
     },
-    { name: "Balsamiq2", icon: Balsamiq, url: "" },
-    { name: "Backbone3", icon: Backbone, url: "" },
-    { name: "Backbone4", icon: Backbone, url: "" },
-    { name: "Balsamiq5", icon: Balsamiq, url: "" },
-    { name: "Balsamiq6", icon: Balsamiq, url: "" },
   ],
 
   // Tier 3
