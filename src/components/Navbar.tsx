@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import useAuth from "../hooks/useAuth"
-import CruzHacksLogo from "../assets/logos/CruzHacks.svg"
+import CruzHacksLogo from "../assets/logos/CruzHacks - Blue.svg"
 import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/solid"
 import AvatarButton from "./AvatarButton"
 
