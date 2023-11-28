@@ -1,11 +1,21 @@
 import { Menu, Transition } from "@headlessui/react"
+import Avatar from "boring-avatars"
 import React, { Fragment } from "react"
 import { classNames } from "../../../utils/string"
 import { Link, useNavigate } from "react-router-dom"
 import { auth } from "../../../utils/firebaseapp"
-import Avatar from "../../../components/Avatar"
 
 const profileNavigation = [{ name: "Home", href: "/" }]
+
+const colors = [
+  "#190CA6",
+  "#13E4CA",
+  "#F9D318",
+  "#F9A318",
+  "#ECBC50",
+  "#E558F4",
+  "#8924F1",
+]
 
 interface AvatarButtonProps {
   email: string
@@ -35,7 +45,7 @@ const AvatarButton = ({ email, direction }: AvatarButtonProps) => {
         <Menu.Button className='relative flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2'>
           <span className='absolute -inset-1.5' />
           <span className='sr-only'>Open profile menu</span>
-          <Avatar email={email} />
+          <Avatar size={30} name={email} variant='beam' colors={colors} />
         </Menu.Button>
       </div>
       <Transition
