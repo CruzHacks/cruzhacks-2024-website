@@ -70,16 +70,16 @@ const Landing = () => {
         </div>
       </Transition>
 
-      <div className='z-0 flex h-10 w-full justify-between'>
+      <div className='-z-10 flex h-10 w-full justify-between'>
         <img
           src={HackersOnLog}
           alt='Hackers on Log'
-          className='z-0 -ml-16 -mt-40 w-40 md:-ml-32 md:mt-[-30rem] md:w-[30rem]'
+          className='z-0 -ml-16 -mt-40 w-40 md:-ml-32 md:mt-[-25rem] md:w-[25rem] lg:mt-[-32rem] lg:w-[32rem]'
         />
         <img
           src={Fire}
           alt='Fire'
-          className='z-0 -mr-8 -mt-36 w-20 md:mr-0 md:mt-[-20rem] md:w-60'
+          className='z-0 -mr-8 -mt-36 w-20 md:mr-0 md:mt-[-20rem] md:w-40 lg:w-64'
         />
       </div>
     </div>

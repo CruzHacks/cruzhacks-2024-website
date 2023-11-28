@@ -1,6 +1,10 @@
 import React from "react"
 
+import UniversialAudio from "../../../assets/sponsors/UniversalAudio.png"
+import BaskinEngineering from "../../../assets/sponsors/BaskinEngineering.svg"
+import CIED from "../../../assets/sponsors/CIED.svg"
 import EigthWall from "../../../assets/sponsors/8thWall.svg"
+import SouthSwellVentures from "../../../assets/sponsors/SouthSwellVentures.png"
 import Backbone from "../../../assets/sponsors/Backbone.svg"
 import Balsamiq from "../../../assets/sponsors/Balsamiq.svg"
 
@@ -9,19 +13,27 @@ const sponsors = [
   // Tier 1
   [
     {
-      name: "8th Wall",
-      icon: EigthWall,
-      url: "",
+      name: "Universal Audio",
+      icon: UniversialAudio,
+      url: "https://www.uaudio.com/",
     },
-    { name: "Backbone1", icon: Backbone, url: "" },
-    { name: "Balsamiq1", icon: Balsamiq, url: "" },
+    {
+      name: "Baskin Engineering",
+      icon: BaskinEngineering,
+      url: "https://www.soe.ucsc.edu/",
+    },
+    {
+      name: "CIED",
+      icon: CIED,
+      url: "https://cied.ucsc.edu/",
+    },
   ],
 
   // Tier 2
   [
     {
-      name: "8th Wall",
-      icon: EigthWall,
+      name: "qb3",
+      icon: undefined,
       url: "",
     },
     { name: "Balsamiq2", icon: Balsamiq, url: "" },
@@ -29,6 +41,18 @@ const sponsors = [
     { name: "Backbone4", icon: Backbone, url: "" },
     { name: "Balsamiq5", icon: Balsamiq, url: "" },
     { name: "Balsamiq6", icon: Balsamiq, url: "" },
+  ],
+
+  // Tier 3
+  [
+    {
+      name: "South Swell Ventures",
+      icon: SouthSwellVentures,
+      url: "",
+    },
+    {
+      name: "Insprit AI",
+    },
   ],
 ]
 
