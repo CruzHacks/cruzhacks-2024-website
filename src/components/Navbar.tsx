@@ -41,7 +41,7 @@ const Navbar = () => {
             to='/login'
             className={classNames(
               authButtonStyle,
-              "font-title text-sm text-gold md:bg-gold md:text-base md:text-blue-imperial"
+              "md:text-blue-white font-title text-sm text-white md:bg-[#3d30cb] md:text-turquoise"
             )}
           >
             <span className='hidden md:block'>Login</span>
