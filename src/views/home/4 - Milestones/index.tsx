@@ -60,7 +60,6 @@ const Milestones = ({ id }: { id?: string }) => {
       <h2 className='text-right font-title text-3xl uppercase md:text-5xl'>
         Milestones
       </h2>
-      <div className='w-20 border-2 text-white'></div>
 
       <Cloud5 className='absolute -right-16 mt-3 md:mt-16' />
 

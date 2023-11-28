@@ -1,10 +1,11 @@
 import React from "react"
 import { CategoryTracks, PrizeTrack, TechCaresTracks } from "./data"
 import Star from "../../../components/Star"
+import { Cloud1, CloudTrack1, CloudTrack2 } from "../../../components/Cloud"
 
 const PrizeTrackCard = ({ icon, title, blurb }: PrizeTrack) => {
   return (
-    <div className='group flex h-80 w-80 flex-col items-center overflow-hidden rounded-xl bg-milestones-gradient p-5 ring-2 ring-inset ring-white/20 transition-all hover:items-start md:w-64'>
+    <div className='group z-10 flex h-80 w-80 flex-col items-center overflow-hidden rounded-xl bg-milestones-gradient p-5 ring-2 ring-inset ring-white/20 transition-all hover:items-start md:w-64'>
       <img
         src={icon}
         alt={`${title} icon`}
@@ -42,9 +43,19 @@ const PrizeTracks = ({ id }: { id?: string }) => {
           <PrizeTrackCard key={track.title} {...track} />
         ))}
       </div>
-      <h2 className='inline-block bg-gradient-to-r from-[#FFB800] via-[#FFB800] to-[#CC00FF] bg-clip-text pt-10 text-center font-title text-2xl uppercase text-transparent md:text-4xl'>
+
+      <div className='h-10 md:h-52'>
+        <CloudTrack1 className='left-7 -mt-8 md:-left-40 md:mt-5' />
+        <CloudTrack2 className='-right-8 mt-3 md:-right-52 md:mt-32' />
+      </div>
+
+      <h2 className='z-10 inline-block bg-gradient-to-r from-[#FFB800] via-[#FFB800] to-[#CC00FF] bg-clip-text pt-10 text-center font-title text-2xl uppercase text-transparent md:text-4xl'>
         Category Prizes
       </h2>
+
+      <Star i={3} className='-right-5 mt-52 h-5 md:right-10 md:h-8' />
+      <Star i={5} className='right-2 mt-60 h-3 md:right-20 md:h-5' />
+
       <div className='flex flex-wrap justify-center gap-10 py-10 md:gap-5'>
         {CategoryTracks.map(track => (
           <PrizeTrackCard key={track.title} {...track} />
