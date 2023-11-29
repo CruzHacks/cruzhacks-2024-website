@@ -22,13 +22,22 @@ const Navbar = () => {
           />
         </Link>
         <div className='flex grow items-center justify-evenly font-light uppercase md:grow-0 md:gap-10'>
-          <Link to='/#about' className='transition-all hover:text-pink'>
+          <Link
+            to='/#about'
+            className='transition-all hover:font-bold hover:text-pink'
+          >
             ABOUT
           </Link>
-          <Link to='/#prize-tracks' className='transition-all hover:text-pink'>
+          <Link
+            to='/#prize-tracks'
+            className='transition-all hover:font-bold hover:text-pink'
+          >
             Prize Tracks
           </Link>
-          <Link to='/#qa' className='transition-all hover:text-pink'>
+          <Link
+            to='/#qa'
+            className='transition-all hover:font-bold hover:text-pink '
+          >
             Q&A
           </Link>
         </div>
