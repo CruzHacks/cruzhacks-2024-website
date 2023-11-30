@@ -1,6 +1,5 @@
 import React, { Dispatch, Fragment, SetStateAction } from "react"
 import { Dialog, Transition } from "@headlessui/react"
-import { Link } from "react-router-dom"
 import { HeroIcon } from "../utils/types"
 import { classNames } from "../utils/string"
 
