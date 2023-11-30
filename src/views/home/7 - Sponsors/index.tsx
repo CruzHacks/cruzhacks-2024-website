@@ -13,9 +13,10 @@ import HumanitiesInsititue from "../../../assets/sponsors/HumanitiesInstitute.sv
 import HumanitiesDivision from "../../../assets/sponsors/HumanitiesDivision.svg"
 
 // Tier 4
-import SouthSwell from "../../../assets/sponsors/SouthSwell.svg"
+import SUA from "../../../assets/sponsors/SUA.svg"
 
 // Tier 5
+import SouthSwell from "../../../assets/sponsors/SouthSwell.svg"
 import ArtsDivision from "../../../assets/sponsors/ArtsDivision.svg"
 import GenomicsInstitute from "../../../assets/sponsors/GenomicsInstitute.svg"
 import Citris from "../../../assets/sponsors/Citris.svg"
@@ -75,8 +76,7 @@ const sponsors = [
   ],
 
   // Tier 4
-  [],
-  // [{ name: "SUA", url: "https://sua.ucsc.edu/" }],
+  [{ name: "SUA", icon: SUA, url: "https://sua.ucsc.edu/" }],
 
   // Tier 5
   [
