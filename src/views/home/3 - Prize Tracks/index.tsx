@@ -49,7 +49,7 @@ const PrizeTracks = ({ id }: { id?: string }) => {
         <CloudTrack2 className='-right-8 mt-3 md:-right-52 md:mt-32' />
       </div>
 
-      <h2 className='z-10 inline-block bg-gradient-to-r from-[#FFB800] via-[#FFB800] to-[#CC00FF] bg-clip-text pt-10 text-center font-title text-2xl uppercase text-transparent md:text-4xl'>
+      <h2 className='z-10 inline-block bg-gradient-to-r from-[#C48841] via-[#DC6E3F] to-[#690EDD] bg-clip-text pt-10 text-center font-title text-2xl uppercase text-transparent md:text-4xl'>
         Category Prizes
       </h2>
 
