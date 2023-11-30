@@ -35,7 +35,7 @@ const HeroBlurb = ({ id }: { id?: string }) => {
         <div className='max-w-md'>
           <EmailRegister />
         </div>
-        <div className='flex flex-wrap justify-between gap-5 pb-5 md:justify-start md:gap-8'>
+        <div className='flex flex-wrap justify-between gap-5 pb-5 md:justify-start md:gap-5 lg:gap-8'>
           {socials.map(({ name, url, icon }) => (
             <a key={name} target='_blank' rel='noopener noreferrer' href={url}>
               <img
