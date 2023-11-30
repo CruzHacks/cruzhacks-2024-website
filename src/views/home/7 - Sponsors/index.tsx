@@ -129,7 +129,7 @@ const sponsors = [
 
 const Sponsors = ({ id }: { id?: string }) => {
   return (
-    <div className='flex flex-col items-center gap-10 py-10'>
+    <div className='flex flex-col items-center gap-10 py-20'>
       {/* Scroll Anchor*/}
       <div className='absolute -mt-40' id={id}></div>
 
@@ -141,7 +141,7 @@ const Sponsors = ({ id }: { id?: string }) => {
           return (
             <div
               key={"tier" + i}
-              className='flex flex-row items-center justify-between gap-3 md:gap-10'
+              className='flex flex-col items-center justify-between gap-10 md:flex-row'
             >
               {tier.map(({ name, url, icon }) => (
                 <a
@@ -155,7 +155,7 @@ const Sponsors = ({ id }: { id?: string }) => {
                     src={icon}
                     alt={`${name} Icon`}
                     className='h-auto w-full'
-                    style={{ maxHeight: `${30 - i * 5}rem` }} // bit of a magic resize, may need to adjust based on tier logos
+                    style={{ maxHeight: `${20 - i * 5}rem` }} // bit of a magic resize, may need to adjust based on tier logos
                   />
                 </a>
               ))}
