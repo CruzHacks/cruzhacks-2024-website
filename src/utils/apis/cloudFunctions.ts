@@ -1,5 +1,6 @@
 import type { User } from "@firebase/auth"
 import {
+  ApplicationSchema,
   ApplicationSchemaDto,
   CheckRoleSynced,
   ErrorResponse,
@@ -172,44 +173,38 @@ export const getUsers = async (user: User, pageToken?: string) => {
 }
 
 /**
- * CruzHacks-2024-Backend API endpoint for submitting an application for an
- * authenticated user
+ * CruzHacks-2024-Backend API endpoint for retrieving a list of users
  * @param user Firebase User
- * @param application Application data
- * @returns Success message if successful, otherwise an error message
+ * @param pageToken OPTIONAL - The page token (used for pagination)
+ * @returns The list of users if successful, otherwise an error message
  */
-export const submitApplicationAuthed = async (
-  user: User,
-  application: ApplicationSchemaDto
-) => {
+export const getSubmittedApplications = async (user: User) => {
   try {
-    if (!user) throw new Error("No user provided")
-    if (!application) throw new Error("No application provided")
-
-    // Validate the application data (throws error if invalid)
-    const applicationParsed = ApplicationSchemaDto.parse(application)
-
     const idToken = await user.getIdToken(false)
-    const response = await axios.post(
-      `${API_URL}/application/authenticated`,
-      applicationParsed,
-      {
-        headers: {
-          Authorization: `Bearer ${idToken}`,
-        },
-      }
-    )
+
+    const response = await axios.get(`${API_URL}/application/export`, {
+      headers: {
+        Authorization: `Bearer ${idToken}`,
+      },
+    })
+
     const { data, error } = response.data
 
-    if (error) throw new Error(error)
+    if (error) {
+      throw new Error(error)
+    }
 
-    return data.message as string
+    return data.submissions as {
+      name: string
+      email: string
+      submitted: Date
+    }[]
   } catch (err) {
     if (isAxiosError(err)) {
-      console.error(err)
       throw new Error(err.message)
     }
-    return err as Error
+
+    throw err
   }
 }
 
