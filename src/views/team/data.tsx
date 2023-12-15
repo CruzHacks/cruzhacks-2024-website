@@ -53,69 +53,25 @@ export const organizers: Organizer[] = [
     image: LiaFung,
     linkedIn: "https://www.linkedin.com/in/liafung/",
   },
-  {
-    name: "Anna Jansson",
-    role: "Logistics",
-    image: AnnaJansson,
-    linkedIn: "https://www.linkedin.com/in/anna-c-jansson",
-  },
-  {
-    name: "Edmund Xu",
-    role: "Logistics",
-    image: EdmunXu,
-    linkedIn: "https://www.linkedin.com/in/edmund-xu-22087623a/",
-  },
-  {
-    name: "Audrey Ostrom",
-    role: "Logistics",
-    image: AudreyOstrom,
-    linkedIn: "https://www.linkedin.com/in/audrey-ostrom/",
-  },
-  {
-    name: "Julia Ilada",
-    role: "Marketing ",
-    image: JuliaYsabel,
-    linkedIn: "https://www.linkedin.com/in/jules-ysabel-965221285/",
-  },
-  {
-    name: "Debi Majumdar",
-    role: "Sponsorship",
-    image: DebiMajumdar,
-    linkedIn: "https://www.linkedin.com/in/debi-majumdar/",
-  },
-  {
-    name: "Sohinee Saha",
-    role: "Sponsorship",
-    image: SohineeSaha,
-    linkedIn: "http://www.linkedin.com/in/%20sohinee-tiffany-saha",
-  },
+
+  // Design
   {
     name: "Ria Chockalingam",
-    role: "Design",
+    role: "Design Director",
     image: RiaChockalingam,
     linkedIn: "https://www.linkedin.com/in/ria-c-4b35351b1/",
   },
   {
-    name: "Maddison Lobo",
-    role: "Marketing",
-    image: MaddisonLobo,
-    linkedIn: "https://www.linkedin.com/in/maddison-lobo-007998285",
+    name: "Chris Hein",
+    role: "Design",
+    image: ChrisHein,
+    linkedIn: "https://www.linkedin.com/in/christopher-hein-4982b7216/",
   },
-  {
-    name: "Amber Yuan",
-    role: "Logistics",
-    image: AmberYuan,
-    linkedIn: "https://www.linkedin.com/in/amberyuan3/",
-  },
-  {
-    name: "Franny Trinidad",
-    role: "Marketing",
-    linkedIn: "https://www.linkedin.com/in/francesca-trinidad-3a8532210/",
-    image: FrannyTrinidad,
-  },
+
+  // Engineering
   {
     name: "Zack Traczyk",
-    role: "Engineering",
+    role: "Engineering Director",
     image: ZackTraczyk,
     linkedIn: "http://www.linkedin.com/in/zack-traczyk",
   },
@@ -137,27 +93,80 @@ export const organizers: Organizer[] = [
     image: SophieHan,
     linkedIn: "https://www.linkedin.com/in/sophie-han-10347324a/",
   },
+
+  // Logistics
   {
     name: "Mia Gallardo",
-    role: "Logistics",
+    role: "Logistics Director",
     image: MiaGallardo,
     linkedIn: "https://www.linkedin.com/in/mia-gallardo-9b05ba215/",
   },
   {
-    name: "Chris Hein",
-    role: "Design",
-    image: ChrisHein,
-    linkedIn: "https://www.linkedin.com/in/christopher-hein-4982b7216/",
+    name: "Amber Yuan",
+    role: "Logistics",
+    image: AmberYuan,
+    linkedIn: "https://www.linkedin.com/in/amberyuan3/",
   },
   {
-    name: "Oliver Pearce",
-    role: "Sponsorship",
-    linkedIn: "https://www.linkedin.com/in/oliverjpearce/",
+    name: "Anna Jansson",
+    role: "Logistics",
+    image: AnnaJansson,
+    linkedIn: "https://www.linkedin.com/in/anna-c-jansson",
+  },
+  {
+    name: "Audrey Ostrom",
+    role: "Logistics",
+    image: AudreyOstrom,
+    linkedIn: "https://www.linkedin.com/in/audrey-ostrom/",
   },
   {
     name: "Carmen Padilla",
     role: "Logistics",
     image: CarmenPadilla,
-    linkedIn: "",
+  },
+  {
+    name: "Edmund Xu",
+    role: "Logistics",
+    image: EdmunXu,
+    linkedIn: "https://www.linkedin.com/in/edmund-xu-22087623a/",
+  },
+
+  // Marketing
+  {
+    name: "Franny Trinidad",
+    role: "Marketing Director",
+    linkedIn: "https://www.linkedin.com/in/francesca-trinidad-3a8532210/",
+    image: FrannyTrinidad,
+  },
+  {
+    name: "Julia Ilada",
+    role: "Marketing",
+    image: JuliaYsabel,
+    linkedIn: "https://www.linkedin.com/in/jules-ysabel-965221285/",
+  },
+  {
+    name: "Maddison Lobo",
+    role: "Marketing",
+    image: MaddisonLobo,
+    linkedIn: "https://www.linkedin.com/in/maddison-lobo-007998285",
+  },
+
+  // Sponsorship
+  {
+    name: "Sohinee Saha",
+    role: "Sponsorship Director",
+    image: SohineeSaha,
+    linkedIn: "http://www.linkedin.com/in/%20sohinee-tiffany-saha",
+  },
+  {
+    name: "Debi Majumdar",
+    role: "Sponsorship",
+    image: DebiMajumdar,
+    linkedIn: "https://www.linkedin.com/in/debi-majumdar/",
+  },
+  {
+    name: "Oliver Pearce",
+    role: "Sponsorship",
+    linkedIn: "https://www.linkedin.com/in/oliverjpearce/",
   },
 ]
