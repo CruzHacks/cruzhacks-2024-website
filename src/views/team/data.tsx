@@ -66,11 +66,6 @@ export const organizers: Organizer[] = [
     linkedIn: "https://www.linkedin.com/in/edmund-xu-22087623a/",
   },
   {
-    name: "Harsh Dadhich",
-    role: "Logistics",
-    linkedIn: "https://www.linkedin.com/in/hdadhich01/",
-  },
-  {
     name: "Audrey Ostrom",
     role: "Logistics",
     image: AudreyOstrom,
@@ -113,19 +108,10 @@ export const organizers: Organizer[] = [
     linkedIn: "https://www.linkedin.com/in/amberyuan3/",
   },
   {
-    name: "Amisha Prasad",
-    role: "Marketing",
-    linkedIn: "https://www.linkedin.com/in/amisha-prasad",
-  },
-  {
     name: "Franny Trinidad",
-    role: "Marketing ",
-    image: FrannyTrinidad,
-  },
-  {
-    name: "Sri Seethammagari",
     role: "Marketing",
-    linkedIn: "https://www.linkedin.com/in/sri-seethammagari-088897252/",
+    linkedIn: "https://www.linkedin.com/in/francesca-trinidad-3a8532210/",
+    image: FrannyTrinidad,
   },
   {
     name: "Zack Traczyk",
@@ -153,7 +139,7 @@ export const organizers: Organizer[] = [
   },
   {
     name: "Mia Gallardo",
-    role: "Logistics ",
+    role: "Logistics",
     image: MiaGallardo,
     linkedIn: "https://www.linkedin.com/in/mia-gallardo-9b05ba215/",
   },

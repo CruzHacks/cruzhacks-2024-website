@@ -8,6 +8,8 @@ import Binary from "../../assets/Binary.jpg"
 import Lake from "../../assets/illustrations/Lake.svg"
 import LinkedIn from "../../assets/icons/LinkedIn.svg"
 import CruzHacksLogo from "../../assets/logos/CruzHacks.svg"
+import { AsyncImage } from "loadable-image"
+import Star from "../../components/Star"
 
 const TeamMember = ({ name, role, image, linkedIn }: Organizer) => {
   if (!image || image == "") {
@@ -16,10 +18,17 @@ const TeamMember = ({ name, role, image, linkedIn }: Organizer) => {
 
   return (
     <div className='flex flex-col items-center gap-3'>
-      <img
+      <AsyncImage
         src={image}
-        alt={name}
-        className='h-40 w-40 rounded-full border-4 border-white/20 object-cover'
+        alt={name + " profile picture"}
+        style={{
+          height: "10rem",
+          width: "10rem",
+          borderRadius: "9999px",
+          objectFit: "cover",
+          border: "4px solid rgb(211 218 244 / 0.2)",
+        }}
+        loader={<div className='h-8 w-8 bg-blue-imperial/50' />}
       />
       <h3 className='text-center font-title text-lg uppercase md:text-lg'>
         {name}
@@ -53,6 +62,17 @@ const Team = () => {
       >
         <Navbar />
         <div className='h-10' />
+
+        <Star
+          i={2}
+          className='absolute left-20 mt-36 h-4 md:left-40 md:mt-40 md:h-5 lg:left-80 lg:h-7'
+        />
+
+        <Star
+          i={3}
+          className='absolute left-12 mt-44 h-6 md:left-20 md:mt-52 md:h-7 lg:left-60 lg:h-10'
+        />
+
         <div className='flex flex-col items-center gap-6 py-10 md:py-20'>
           <h2 className='text-center font-title text-3xl uppercase md:text-5xl'>
             Our History
@@ -67,8 +87,13 @@ const Team = () => {
           </p>
         </div>
 
-        <div className='space-y-20'>
-          <h2 className='text-center font-title text-3xl uppercase md:text-5xl'>
+        <div className='relative'>
+          <Star
+            i={4}
+            className='absolute right-12 -mt-20 h-3 md:right-20 md:h-5'
+          />
+
+          <h2 className='pb-20 text-center font-title text-3xl uppercase md:text-5xl'>
             2024 Organizing Team
           </h2>
 
