@@ -123,6 +123,7 @@ export const organizers: Organizer[] = [
     name: "Carmen Padilla",
     role: "Logistics",
     image: CarmenPadilla,
+    linkedIn: "https://www.linkedin.com/in/carmen-padilla-556815250",
   },
   {
     name: "Edmund Xu",
