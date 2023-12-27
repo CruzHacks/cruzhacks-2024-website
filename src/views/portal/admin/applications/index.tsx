@@ -230,7 +230,13 @@ const ApplicationsAdmin = () => {
                           </td>
 
                           {/* Review Application Button */}
-                          <td className='relative py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-8 lg:pr-8'>
+                          <td
+                            className={classNames(
+                              loadingIdx !== LOADING_ENTRIES - 1 &&
+                                "border-b border-white/20",
+                              "relative py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-8 lg:pr-8"
+                            )}
+                          >
                             <button className='cursor-not-allowed text-pink/50'>
                               Review Application
                             </button>
