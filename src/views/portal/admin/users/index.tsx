@@ -9,6 +9,8 @@ import { ExclamationCircleIcon } from "@heroicons/react/24/solid"
 import Modal from "../../../../components/Modal"
 import Avatar from "../../../../components/Avatar"
 
+const LOADING_ENTRIES = 50
+
 const UsersAdmin = () => {
   const {
     auth: { user: currentUser },
@@ -95,11 +97,11 @@ const UsersAdmin = () => {
                     ? users &&
                       users.map((user, userIdx) => (
                         <tr key={user.email}>
+                          {/* Avatar, Full Name, Pronouns, Email */}
                           <td
                             className={classNames(
-                              userIdx !== users.length - 1
-                                ? "border-b border-white/20"
-                                : "",
+                              userIdx !== users.length - 1 &&
+                                "border-b border-white/20",
                               "whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 lg:pl-8"
                             )}
                           >
@@ -146,37 +148,39 @@ const UsersAdmin = () => {
                               </div>
                             </div>
                           </td>
+
+                          {/* Role */}
                           <td
                             className={classNames(
                               userIdx !== users.length - 1
                                 ? "border-b border-white/20"
                                 : "",
-                              user.email === currentUser?.email
-                                ? "text-orange"
-                                : "",
+                              user.email === currentUser?.email &&
+                                "text-orange",
                               "whitespace-nowrap py-4 pl-3 pr-4 text-sm capitalize sm:px-3"
                             )}
                           >
                             {user.role}
                           </td>
+
+                          {/* UID */}
                           <td
                             className={classNames(
-                              userIdx !== users.length - 1
-                                ? "border-b border-white/20"
-                                : "",
-                              user.email === currentUser?.email
-                                ? "text-orange"
-                                : "",
+                              userIdx !== users.length - 1 &&
+                                "border-b border-white/20",
+                              user.email === currentUser?.email &&
+                                "text-orange",
                               "hidden whitespace-nowrap py-4 font-subtext text-sm md:px-3 lg:table-cell"
                             )}
                           >
                             {user.uid}
                           </td>
+
+                          {/* Send Password Reset */}
                           <td
                             className={classNames(
-                              userIdx !== users.length - 1
-                                ? "border-b border-white/20"
-                                : "",
+                              userIdx !== users.length - 1 &&
+                                "border-b border-white/20",
                               "relative hidden whitespace-nowrap py-4 text-right text-sm font-medium sm:table-cell sm:pr-8 lg:pr-8"
                             )}
                           >
@@ -195,27 +199,55 @@ const UsersAdmin = () => {
                         </tr>
                       ))
                     : // Loading State
-                      [...Array(20).keys()].map(i => (
-                        <tr key={i}>
+                      [...Array(LOADING_ENTRIES).keys()].map(loadingIdx => (
+                        <tr key={loadingIdx}>
+                          {/* Avatar, Full Name, Pronouns, Email */}
                           <td
-                            key={i + 100}
-                            className='hidden py-4 pl-4 pr-3 text-sm font-medium sm:table-cell sm:pl-6 lg:pl-8'
+                            className={classNames(
+                              loadingIdx !== LOADING_ENTRIES - 1 &&
+                                "border-b border-white/20",
+                              "py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 lg:pl-8"
+                            )}
                           >
-                            <div className='h-6 w-40 animate-pulse rounded bg-white/30 '></div>
+                            <div className='flex items-center'>
+                              <div className='h-[40px] w-[40px] animate-pulse rounded-full bg-white/30 '></div>
+                              <div className='ml-4'>
+                                <div className='h-4 w-32 animate-pulse rounded bg-white/30'></div>
+                                <div className='mt-3 h-4 w-40 animate-pulse rounded bg-white/30'></div>
+                              </div>
+                            </div>
                           </td>
-                          <td key={i + 200} className='px-3 py-4'>
-                            <div className='h-6 w-40 animate-pulse rounded bg-white/30 '></div>
-                          </td>
-                          <td key={i + 300} className='px-3 py-4'>
+
+                          {/* Role */}
+                          <td
+                            className={classNames(
+                              loadingIdx !== LOADING_ENTRIES - 1 &&
+                                "border-b border-white/20",
+                              "px-3 py-4"
+                            )}
+                          >
                             <div className='h-6 w-16 animate-pulse rounded bg-white/30 '></div>
                           </td>
+
+                          {/* UID */}
                           <td
-                            key={i + 400}
-                            className='hidden px-3 py-4 md:table-cell'
+                            className={classNames(
+                              loadingIdx !== LOADING_ENTRIES - 1 &&
+                                "border-b border-white/20",
+                              "hidden py-4 md:px-3 lg:table-cell"
+                            )}
                           >
                             <div className='h-6 w-60 animate-pulse rounded bg-white/30 '></div>
                           </td>
-                          <td className='relative py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-8 lg:pr-8'>
+
+                          {/* Send Password Reset */}
+                          <td
+                            className={classNames(
+                              loadingIdx !== LOADING_ENTRIES - 1 &&
+                                "border-b border-white/20",
+                              "relative hidden py-4 pl-3 pr-4 text-right text-sm font-medium sm:table-cell sm:pr-8 lg:pr-8"
+                            )}
+                          >
                             <button className='cursor-not-allowed text-pink/50'>
                               Send Password Reset
                             </button>
