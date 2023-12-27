@@ -1,5 +1,5 @@
 import React from "react"
-import { sponsors } from "./data"
+import { specialThanks, sponsors } from "./data"
 
 const maxTierHeight = 10
 const minTierHeight = 8
@@ -47,6 +47,25 @@ const Sponsors = ({ id }: { id?: string }) => {
             </div>
           )
         })}
+      </div>
+
+      <div className='h-10' />
+
+      <h2 className='text-center font-title text-xl uppercase md:text-3xl'>
+        Special Thanks
+      </h2>
+      <div className='flex flex-col items-center justify-center md:flex-row md:gap-20'>
+        {specialThanks.map(({ name, url, icon }) => (
+          <a
+            key={name}
+            target='_blank'
+            rel='noopener noreferrer'
+            href={url}
+            className='flex-1'
+          >
+            <img src={icon} alt={`${name} Icon`} className='h-auto w-52' />
+          </a>
+        ))}
       </div>
     </div>
   )
