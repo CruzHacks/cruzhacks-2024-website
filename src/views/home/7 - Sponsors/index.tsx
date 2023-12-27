@@ -54,7 +54,7 @@ const Sponsors = ({ id }: { id?: string }) => {
       <h2 className='text-center font-title text-xl uppercase md:text-3xl'>
         Special Thanks
       </h2>
-      <div className='flex flex-col items-center justify-center md:flex-row md:gap-20'>
+      <div className='flex flex-col items-center justify-center gap-10 md:flex-row md:gap-20'>
         {specialThanks.map(({ name, url, icon }) => (
           <a
             key={name}
