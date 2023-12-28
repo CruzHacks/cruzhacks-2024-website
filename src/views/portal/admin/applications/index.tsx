@@ -77,8 +77,6 @@ const ApplicationsAdmin = () => {
     navigate(`/portal/admin/applications/review/${email_friendly}`)
   }
 
-  console.log(applications)
-
   return (
     <div className='overflow-x-clip px-4 sm:px-6 lg:px-8'>
       <div className='sm:flex sm:items-center'>
