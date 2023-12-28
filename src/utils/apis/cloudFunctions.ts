@@ -1,6 +1,5 @@
 import type { User } from "@firebase/auth"
 import {
-  ApplicationSchema,
   ApplicationSchemaDto,
   CheckRoleSynced,
   ErrorResponse,
@@ -163,42 +162,6 @@ export const getUsers = async (user: User, pageToken?: string) => {
     }
 
     return data.users as UserBasics[]
-  } catch (err) {
-    if (isAxiosError(err)) {
-      throw new Error(err.message)
-    }
-
-    throw err
-  }
-}
-
-/**
- * CruzHacks-2024-Backend API endpoint for retrieving a list of users
- * @param user Firebase User
- * @param pageToken OPTIONAL - The page token (used for pagination)
- * @returns The list of users if successful, otherwise an error message
- */
-export const getSubmittedApplications = async (user: User) => {
-  try {
-    const idToken = await user.getIdToken(false)
-
-    const response = await axios.get(`${API_URL}/application/export`, {
-      headers: {
-        Authorization: `Bearer ${idToken}`,
-      },
-    })
-
-    const { data, error } = response.data
-
-    if (error) {
-      throw new Error(error)
-    }
-
-    return data.submissions as {
-      name: string
-      email: string
-      submitted: Date
-    }[]
   } catch (err) {
     if (isAxiosError(err)) {
       throw new Error(err.message)

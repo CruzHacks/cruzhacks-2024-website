@@ -1,8 +1,14 @@
 import React from "react"
-import { classNames } from "../../../../utils/string"
+import {
+  classNames,
+  objectToCSV,
+  timestampFilename,
+} from "../../../../utils/string"
 import { useNavigate } from "react-router-dom"
 import useApplications from "../../../../hooks/useApplications"
-import type { ApplicationStatus } from "../../../../utils/types"
+import { ApplicationStatus } from "../../../../utils/types"
+import { ArrowDownTrayIcon } from "@heroicons/react/24/outline"
+import toast from "react-hot-toast"
 
 const LOADING_ENTRIES = 50
 
@@ -45,10 +51,33 @@ const ApplicationsAdmin = () => {
   const navigate = useNavigate()
   const { data: applications, error, isLoading, isError } = useApplications()
 
+  const downloadApplicationsCsv = () => {
+    if (!applications) {
+      toast.error("No applications to download")
+      return
+    }
+
+    const filename = timestampFilename("hacker_applications", "csv")
+    const csvData = objectToCSV(applications)
+
+    const blob = new Blob([csvData], { type: "text/csv" })
+    const url = window.URL.createObjectURL(blob)
+    const a = document.createElement("a")
+
+    a.setAttribute("hidden", "")
+    a.setAttribute("href", url)
+    a.setAttribute("download", filename)
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+  }
+
   const handleReviewApplication = (email: string) => {
     const email_friendly = encodeURIComponent(email.replace(/\./g, " "))
     navigate(`/portal/admin/applications/review/${email_friendly}`)
   }
+
+  console.log(applications)
 
   return (
     <div className='overflow-x-clip px-4 sm:px-6 lg:px-8'>
@@ -61,10 +90,17 @@ const ApplicationsAdmin = () => {
             Hacker applications for this years hackathon.
           </p>
         </div>
-        <div className='mt-4 sm:ml-16 sm:mt-0 sm:flex-none'>
+        <div className='mt-4 flex gap-2 sm:ml-16 sm:mt-0 sm:flex-none'>
           <p className='block rounded-md bg-blue-button/10 px-3 py-2 text-center font-subtext text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white'>
             {applications && applications?.length} Submissions
           </p>
+
+          <button
+            onClick={downloadApplicationsCsv}
+            className='block rounded-md bg-blue-button/10 px-3 py-2 text-center font-subtext text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white'
+          >
+            <ArrowDownTrayIcon className='h-4 w-4 text-pink' />
+          </button>
         </div>
       </div>
       <div className='mt-8 flow-root'>
