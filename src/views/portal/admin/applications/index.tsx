@@ -148,9 +148,8 @@ const ApplicationsAdmin = () => {
                           {/* Application Id */}
                           <td
                             className={classNames(
-                              applicationIdx !== applications.length - 1
-                                ? "border-b border-white/20"
-                                : "",
+                              applicationIdx !== applications.length - 1 &&
+                                "border-b border-white/20",
                               "hidden whitespace-nowrap py-4 pl-8 pr-3 font-subtext text-sm sm:table-cell"
                             )}
                           >
@@ -160,9 +159,8 @@ const ApplicationsAdmin = () => {
                           {/* Application Email */}
                           <td
                             className={classNames(
-                              applicationIdx !== applications.length - 1
-                                ? "border-b border-white/20"
-                                : "",
+                              applicationIdx !== applications.length - 1 &&
+                                "border-b border-white/20",
                               "max-w-[10rem] truncate whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-3"
                             )}
                           >
@@ -172,9 +170,8 @@ const ApplicationsAdmin = () => {
                           {/* Application Status */}
                           <td
                             className={classNames(
-                              applicationIdx !== applications.length - 1
-                                ? "border-b border-white/20"
-                                : "",
+                              applicationIdx !== applications.length - 1 &&
+                                "border-b border-white/20",
                               "whitespace-nowrap px-3 py-4 text-sm font-medium"
                             )}
                           >
@@ -184,9 +181,8 @@ const ApplicationsAdmin = () => {
                           {/* Application Time Submitted */}
                           <td
                             className={classNames(
-                              applicationIdx !== applications.length - 1
-                                ? "border-b border-white/20"
-                                : "",
+                              applicationIdx !== applications.length - 1 &&
+                                "border-b border-white/20",
                               "hidden whitespace-nowrap px-3 py-4 text-sm md:table-cell"
                             )}
                           >
@@ -196,9 +192,8 @@ const ApplicationsAdmin = () => {
                           {/* Review Application Button */}
                           <td
                             className={classNames(
-                              applicationIdx !== applications.length - 1
-                                ? "border-b border-white/20"
-                                : "",
+                              applicationIdx !== applications.length - 1 &&
+                                "border-b border-white/20",
                               "relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-8 lg:pr-8"
                             )}
                           >
@@ -264,7 +259,13 @@ const ApplicationsAdmin = () => {
                           </td>
 
                           {/* Review Application Button */}
-                          <td className='relative py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-8 lg:pr-8'>
+                          <td
+                            className={classNames(
+                              loadingIdx !== LOADING_ENTRIES - 1 &&
+                                "border-b border-white/20",
+                              "relative py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-8 lg:pr-8"
+                            )}
+                          >
                             <button className='cursor-not-allowed text-pink/50'>
                               Review Application
                             </button>
