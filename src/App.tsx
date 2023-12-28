@@ -31,6 +31,9 @@ import ApplicationsReviewAdmin from "./views/portal/admin/applications/Review"
 import ScrollToAnchor from "./components/scrollControl/ScrollToAnchor"
 import Team from "./views/team"
 import ApplicationClosed from "./views/ApplicationClosed"
+import Map from "./views/map"
+import Resources from "./views/resources"
+import FAQ from "./views/faq"
 
 const App: React.FC = () => {
   const {
@@ -67,6 +70,10 @@ const App: React.FC = () => {
         {/* These routes are accessible to everyone*/}
         <Route index element={<Home />} />
         <Route path='team' element={<Team />} />
+
+        <Route path='maps' element={<Map />} />
+        <Route path='resources' element={<Resources />} />
+        <Route path='faq' element={<FAQ />} />
 
         {/* You cannot be logged in to access these routes*/}
         <Route element={<UnauthenticatedRoute />}>
@@ -117,6 +124,11 @@ const App: React.FC = () => {
             />
             <Route path='teams' element={<TeamsAdmin />} />
             <Route path='users' element={<UsersAdmin />} />
+
+            {/* Resource Routes*/}
+            <Route path='maps' element={<Map />} />
+            <Route path='resources' element={<Resources />} />
+            <Route path='faq' element={<FAQ />} />
           </Route>
         </Route>
 
