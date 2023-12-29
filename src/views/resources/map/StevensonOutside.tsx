@@ -1,6 +1,6 @@
 import React from "react"
 
-import StevensonMapImg from "../../assets/maps/event_outside.png"
+import StevensonMapImg from "../../../assets/maps/event_outside.png"
 
 interface MapKeyItemInterface {
   color: string
@@ -18,7 +18,7 @@ const MapKeyItem: React.FC<MapKeyItemInterface> = ({ color, label }) => {
 
 const StevensonOutside: React.FC = () => {
   return (
-    <div className='rounded-xl bg-[#fff] p-5 md:p-5'>
+    <div className='flex h-full w-full max-w-4xl grow flex-col rounded-3xl bg-[#4659FF]/10 p-10'>
       <div className='flex flex-col gap-5 md:flex-row md:gap-10'>
         <img
           className='md:w-2/3'

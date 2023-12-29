@@ -7,7 +7,7 @@ const starterPack = (
     href='https://github.com/CruzHacks/Cruzhacks-Hacker-Packs'
     className='text-blue'
   >
-  &nbsp;starter packs
+    &nbsp;starter packs
   </a>
 )
 
@@ -101,22 +101,18 @@ export const FAQsInfo = [
   },
   {
     question: "How many people can be on my team?",
-    answer: (
-    <>
-      There is a maximum of 4 people per team.
-    </>
-    ),
+    answer: <>There is a maximum of 4 people per team.</>,
   },
   {
     question: "What if I don't know how to code?",
     answer: (
-    <>
-      No experience is required, if you&apos;re stuck reach out to our
-      mentors on slack to get some pointers. If you&apos;re looking to get 
-      started, we&apos;ve provided some code {starterPack}. 
-      Cruzhacks is all about learning and trying something new, be 
-      sure to attend some of our workshops listed in the schedule!
-    </>
+      <>
+        No experience is required, if you&apos;re stuck reach out to our mentors
+        on slack to get some pointers. If you&apos;re looking to get started,
+        we&apos;ve provided some code {starterPack}. Cruzhacks is all about
+        learning and trying something new, be sure to attend some of our
+        workshops listed in the schedule!
+      </>
     ),
   },
 ]

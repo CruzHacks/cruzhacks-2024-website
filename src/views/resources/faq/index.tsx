@@ -5,7 +5,7 @@ import Rules from "./Rules"
 
 const FAQ = () => {
   return (
-    <>
+    <div className='mx-auto max-w-screen-md p-10'>
       {/* <BackgroundHeader /> */}
 
       <div className='my-20 flex flex-col items-stretch justify-center gap-10'>
@@ -13,10 +13,10 @@ const FAQ = () => {
           FAQ & Rules
         </h1>
 
-        {/* <FAQCard />
-        <Rules /> */}
+        <FAQCard />
+        <Rules />
       </div>
-    </>
+    </div>
   )
 }
 

@@ -24,9 +24,9 @@ interface SidebarProps {
 }
 
 const resources: NavigationItem[] = [
-  { name: "Resources", href: "/portal/admin/resources", icon: AcademicCapIcon },
-  { name: "Maps", href: "/portal/admin/maps", icon: MapIcon },
-  { name: "FAQ", href: "/portal/admin/faq", icon: InformationCircleIcon },
+  { name: "Resources", href: "/resources/support", icon: AcademicCapIcon },
+  { name: "Maps", href: "/resources/maps", icon: MapIcon },
+  { name: "FAQ", href: "/portal/faq-and-rules", icon: InformationCircleIcon },
 ]
 
 const Sidebar = ({ navigation }: SidebarProps) => {

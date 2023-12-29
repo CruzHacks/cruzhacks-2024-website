@@ -35,10 +35,10 @@ const Navbar = () => {
             Prize Tracks
           </Link>
           <Link
-            to='/#qa'
+            to='/resources'
             className='transition-all hover:font-bold hover:text-pink '
           >
-            Q&A
+            Resources
           </Link>
         </div>
         <div className='right-10 lg:absolute'>

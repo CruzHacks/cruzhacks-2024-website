@@ -1,6 +1,6 @@
 import React from "react"
 
-import StevensonMapImg from "../../assets/maps/east_remote_lot.png"
+import StevensonMapImg from "../../../assets/maps/east_remote_lot.png"
 
 interface MapKeyItemInterface {
   color: string
@@ -11,14 +11,14 @@ const MapKeyItem: React.FC<MapKeyItemInterface> = ({ color, label }) => {
   return (
     <div className='flex items-center gap-5'>
       <div className={`mt-1 h-2 w-6 shrink-0 rounded-md md:h-6 ${color}`}></div>
-      <p className='font-subtext text-blue-imperial'>{label}</p>
+      <p className='font-subtext'>{label}</p>
     </div>
   )
 }
 
 const StevensonEastRemoteLot: React.FC = () => {
   return (
-    <div className='rounded-xl bg-[#fff] p-5 md:p-5'>
+    <div className='flex h-full w-full max-w-4xl grow flex-col rounded-3xl bg-[#4659FF]/10 p-10'>
       <div className='flex flex-col gap-5 md:flex-row md:gap-10'>
         <img
           className='md:w-2/3'

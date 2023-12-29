@@ -1,13 +1,12 @@
 import React from "react"
-import Button from "../../components/Button"
-import Card from "../../components/Card"
+import Button from "../../../components/Button"
 
 const TeamFinder: React.FC = () => {
   return (
-    <Card
-      introTitle="Don't Have a Team Yet?"
-      title='Find a Team to Join & Submit'
-    >
+    <div className='flex h-full w-full flex-col space-y-5 rounded-3xl bg-[#4659FF]/10 p-10'>
+      <h2 className='font-subtext'>Don&apos;t Have a Team Yet?</h2>
+      <h1 className='font-title text-2xl'>Find a Team to Join & Submit</h1>
+
       <ol className='font-nunito m-auto flex flex-col gap-5 md:w-5/6'>
         <li>
           1. Join our Slack channel{" "}
@@ -45,7 +44,7 @@ const TeamFinder: React.FC = () => {
           override='w-full md:w-1/2 m-auto'
         />
       </div>
-    </Card>
+    </div>
   )
 }
 

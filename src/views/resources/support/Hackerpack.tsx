@@ -1,13 +1,12 @@
 import React from "react"
-import Button from "../../components/Button"
-import Card from "../../components/Card"
+import Button from "../../../components/Button"
 
 const Hackerpack: React.FC = () => {
   return (
-    <Card
-      introTitle='Ready to Start Hacking?'
-      title='Hackerpack & Starter Pack'
-    >
+    <div className='flex h-full w-full flex-col space-y-5 rounded-3xl bg-[#4659FF]/10 p-10'>
+      <h2 className='font-subtext'>Ready to Start Hacking?</h2>
+      <h1 className='font-title text-2xl'>Hackerpack & Starter Pack</h1>
+
       <div className='flex flex-col items-center gap-3'>
         <p className='font-nunito mb-10 text-left md:w-5/6'>
           You can find everything you need to know in our Hacker Packet PDF. It
@@ -28,7 +27,7 @@ const Hackerpack: React.FC = () => {
           override='w-full md:w-1/2'
         />
       </div>
-    </Card>
+    </div>
   )
 }
 
