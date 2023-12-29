@@ -16,7 +16,7 @@ const Landing = ({ id }: { id?: string }) => {
       {/* Scroll Anchor*/}
       <div className='absolute -mt-28' id={id}></div>
 
-      <Cloud1 className='-left-10 top-10 md:top-16' />
+      <Cloud1 className='-left-10 top-0' />
 
       <Star
         i={2}
@@ -28,7 +28,7 @@ const Landing = ({ id }: { id?: string }) => {
         className='left-10 top-52 h-2 md:left-20 md:top-72 md:h-3 lg:left-40'
       />
 
-      <Cloud2 className='-right-6 top-16 md:-right-20 md:top-44' />
+      <Cloud2 className='-right-6 top-6 md:-right-20 md:top-20' />
 
       <Star i={3} className='right-4 top-96 h-6 md:right-32 md:top-80 md:h-7' />
       <Star
@@ -36,7 +36,7 @@ const Landing = ({ id }: { id?: string }) => {
         className='right-10 top-[23rem] h-3 md:right-28 md:top-[19.5rem] md:h-3'
       />
 
-      <Cloud3 className='-right-24 top-28 md:-right-52 md:top-[22rem]' />
+      <Cloud3 className='-right-24 top-28 md:-right-52 md:top-[20rem]' />
 
       <Transition
         appear={true}
@@ -45,7 +45,7 @@ const Landing = ({ id }: { id?: string }) => {
         enterFrom='opacity-0 scale-[90%]'
         enterTo='opacity-100 scale-100'
       >
-        <div className='-mb-24 flex h-[48rem] w-fit flex-col items-center justify-center pb-20 md:h-[62rem] md:items-start lg:h-[55rem]'>
+        <div className='-mb-24 flex h-[45.5rem] w-fit flex-col items-center justify-center pb-20 md:h-[59.5rem] md:items-start lg:h-[52.5rem]'>
           <h1 className='z-10 font-title text-6xl uppercase md:text-8xl lg:text-9xl'>
             Cruz
           </h1>
@@ -80,7 +80,7 @@ const Landing = ({ id }: { id?: string }) => {
         <img
           src={HackersOnLog}
           alt='Hackers on Log'
-          className='z-0 -ml-20 -mt-52 h-[20rem] w-auto md:-ml-28 md:mt-[-28rem] md:h-[34rem] lg:mt-[-27rem] lg:h-[40rem]'
+          className='z-10 -ml-20 -mt-52 h-[20rem] w-auto md:-ml-28 md:mt-[-28rem] md:h-[34rem] lg:mt-[-27rem] lg:h-[40rem]'
         />
         <img
           src={Fire}

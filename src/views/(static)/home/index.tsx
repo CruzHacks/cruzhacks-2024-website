@@ -12,7 +12,7 @@ import Star from "../../../components/Star"
 
 const Home = () => {
   return (
-    <div>
+    <>
       <Landing id='landing' />
       <div className='-z-30 -mx-40 flex h-10 items-center'>
         <img
@@ -58,7 +58,7 @@ const Home = () => {
           className='left-7 top-28 h-3 md:left-32 md:h-5 lg:left-44'
         />
       </div>
-    </div>
+    </>
   )
 }
 
