@@ -11,6 +11,13 @@ import NadaMiljkovic from "../../../assets/speakers/NadaMilkovic.jpg"
 import GregorVebleMikic from "../../../assets/speakers/GregorVebleMikie.jpg"
 import AlexanderWolf from "../../../assets/speakers/AlexanderWolf.jpg"
 import Star from "../../../components/Star"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "../../../components/Carousel"
 
 type Speaker = {
   image: string
@@ -64,7 +71,7 @@ const SpeakerCard = ({ image, name, blurb }: Speaker) => {
     <div className='flex w-80 flex-col items-center justify-center gap-3 rounded-xl bg-blue-royal p-5 ring-2 ring-inset ring-white/20'>
       <img
         src={image}
-        alt=''
+        alt={`${name} Headshot`}
         className='h-[15rem] w-[15rem] border border-turquoise object-cover'
       />
       <p className='text-center font-title text-2xl'>{name}</p>
@@ -90,19 +97,31 @@ const Speakers = ({ id }: { id?: string }) => {
         <img
           src={Mushrroms}
           alt=''
-          className='w-30 invisible absolute -right-5 overflow-hidden md:visible'
+          className='w-30 invisible absolute -right-5 z-[200] overflow-hidden md:visible'
         />
-        <div className='flex flex-wrap items-stretch justify-center gap-10 py-20'>
-          {speakerData.map(speaker => (
-            <SpeakerCard key={speaker.name} {...speaker} />
-          ))}
+        <div className='h-10' />
+        <div className='flex w-full items-center justify-center'>
+          <Carousel className='w-[21rem] md:w-[45rem] xl:w-[65rem]'>
+            <CarouselContent className='md:-ml-1'>
+              {speakerData.map(speaker => (
+                <CarouselItem
+                  key={speaker.name}
+                  className='pl-5 md:basis-1/2 xl:basis-1/3'
+                >
+                  <SpeakerCard {...speaker} />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className='text-pink' />
+            <CarouselNext className='text-pink' />
+          </Carousel>
         </div>
       </div>
       <div className='-mx-40 flex h-full items-center'>
         <img
           src={TreesBackgroundBig}
           alt=''
-          className='mt-[-20rem] h-auto w-screen md:mt-[-80rem]'
+          className='mt-[-40rem] h-auto max-h-[50rem] w-screen md:mt-[-60rem] lg:mt-[-50rem]'
         />
       </div>
     </>

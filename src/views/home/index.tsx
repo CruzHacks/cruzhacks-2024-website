@@ -3,7 +3,7 @@ import Navbar from "../../components/Navbar"
 import Landing from "./1 - Landing"
 import HeroBlurb from "./2 - Hero Blurb"
 import Milestones from "./4 - Milestones"
-// import Speakers from "./5 - Speakers"
+import Speakers from "./5 - Speakers"
 import QA from "./6 - Q&A"
 import Sponsors from "./7 - Sponsors"
 import Footer from "../../components/Footer"
@@ -39,7 +39,7 @@ const Home = () => {
         <HeroBlurb id='about' />
         <PrizeTracks id='prize-tracks' />
         <Milestones id='milestones' />
-        {/* <Speakers id='speakers' /> */}
+        <Speakers id='speakers' />
         <QA id='qa' />
         <Sponsors id='sponsors' />
         <div className='relative h-40 w-full'>
