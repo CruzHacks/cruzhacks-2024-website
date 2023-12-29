@@ -3,7 +3,7 @@ import { Navigate, Outlet, Route, Routes } from "react-router-dom"
 import RoleProtectedRoute from "./components/protectedRoutes/RoleProtectedRoute"
 import PortalRedirectRoute from "./components/protectedRoutes/PortalRedirectRoute"
 import UnauthenticatedRoute from "./components/protectedRoutes/UnauthenticatedRoute"
-import Home from "./views/home"
+import Home from "./views/(static)/home"
 import Login from "./views/Login"
 import Signup from "./views/Signup"
 import NotFound from "./views/NotFound"
@@ -29,12 +29,13 @@ import ReviewSection from "./views/apply/6 - Review"
 import { Toaster } from "react-hot-toast"
 import ApplicationsReviewAdmin from "./views/portal/admin/applications/Review"
 import ScrollToAnchor from "./components/scrollControl/ScrollToAnchor"
-import Team from "./views/team"
+import Team from "./views/(static)/team"
 import ApplicationClosed from "./views/ApplicationClosed"
-import Map from "./views/resources/map"
-import Support from "./views/resources/support"
-import FAQ from "./views/resources/faq"
-import Resources from "./views/resources"
+import Map from "./views/(static)/support/map"
+import Support from "./views/(static)/support/resources"
+import FAQ from "./views/(static)/support/faq"
+import Resources from "./views/(static)/support"
+import StaticWrapper from "./views/(static)"
 
 const App: React.FC = () => {
   const {
@@ -69,14 +70,16 @@ const App: React.FC = () => {
 
       <Routes>
         {/* These routes are accessible to everyone*/}
-        <Route index element={<Home />} />
-        <Route path='team' element={<Team />} />
+        <Route element={<StaticWrapper />}>
+          <Route index element={<Home />} />
+          <Route path='team' element={<Team />} />
 
-        <Route path='resources' element={<Outlet />}>
-          <Route index element={<Resources />} />
-          <Route path='maps' element={<Map />} />
-          <Route path='support' element={<Support />} />
-          <Route path='faq-and-rules' element={<FAQ />} />
+          <Route path='support' element={<Outlet />}>
+            <Route index element={<Resources />} />
+            <Route path='maps' element={<Map />} />
+            <Route path='resources' element={<Support />} />
+            <Route path='faq-and-rules' element={<FAQ />} />
+          </Route>
         </Route>
 
         {/* You cannot be logged in to access these routes*/}
