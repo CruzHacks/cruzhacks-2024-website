@@ -1,7 +1,14 @@
-import React from "react"
+import React from "react";
+import Announcements from "../../../components/Announcements";
 
 const HackerPortal = () => {
-  return <div>HackerPortal</div>
-}
+  return (
+    <div>
+      <h1>Welcome to HackerPortal</h1>
+      {/* Render the Notifications component */}
+      <Announcements />
+    </div>
+  );
+};
 
-export default HackerPortal
+export default HackerPortal;
