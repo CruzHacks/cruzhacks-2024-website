@@ -6,14 +6,14 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const DashboardAdmin = () => {
   const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [body, setBody] = useState('');
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
   };
 
-  const handleContentChange = (event) => {
-    setContent(event.target.value);
+  const handleBodyChange = (event) => {
+    setBody(event.target.value);
   };
 
   const handleSubmit = (event) => {
@@ -22,8 +22,8 @@ const DashboardAdmin = () => {
     // Example data to be added
     const newData = {
       title: title,
-      content: content,
-      timestamp: serverTimestamp(), // Include the current timestamp
+      body: body,
+      date: serverTimestamp(), // Include the current timestamp
     };
 
     // Reference to the "announcements" location in the database
@@ -42,7 +42,7 @@ const DashboardAdmin = () => {
         });
         // Clear input fields after successful submission
         setTitle('');
-        setContent('');
+        setBody('');
       })
       .catch((error) => {
         console.error("Error adding data to announcements:", error);
@@ -66,11 +66,11 @@ const DashboardAdmin = () => {
           />
         </div>
         <div>
-          <label htmlFor="content">Content:</label>
+          <label htmlFor="body">Body:</label>
           <textarea
-            id="content"
-            value={content}
-            onChange={handleContentChange}
+            id="body"
+            value={body}
+            onChange={handleBodyChange}
           />
         </div>
         <button type="submit">Add Announcement</button>
