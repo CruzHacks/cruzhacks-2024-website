@@ -1,85 +1,118 @@
-import React, { useState } from 'react';
-import { rtdb } from "../../../utils/firebaseapp";
-import { push, ref, set, serverTimestamp } from "firebase/database";
+import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { rtdb } from "../../../utils/firebaseapp";
+import { push, ref, set, serverTimestamp } from "firebase/database";
 
-const DashboardAdmin = () => {
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
+const AdminDash = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [notifyBody, setNotifyBody] = useState('');
 
-  const handleTitleChange = (event) => {
-    setTitle(event.target.value);
-  };
+  const handleOpen = () => setModalOpen(true);
+  const handleClose = () => setModalOpen(false);
 
-  const handleBodyChange = (event) => {
-    setBody(event.target.value);
-  };
+  const handleChange = (e) => setNotifyBody(e.target.value);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (notifyBody === '') {
+      toast.warning('An announcement must have a body... 😑');
+      return;
+    }
 
-    // Example data to be added
     const newData = {
-      title: title,
-      body: body,
-      date: serverTimestamp(), // Include the current timestamp
+      title: '',
+      body: notifyBody,
+      date: serverTimestamp(),
     };
 
-    // Reference to the "announcements" location in the database
     const announcementsRef = ref(rtdb, 'announcements');
-
-    // Push new data to the "announcements" location
     const newReference = push(announcementsRef);
-    
-    // Set the data at the generated reference
+
     set(newReference, newData)
       .then(() => {
-        console.log("Data added to announcements successfully!");
-        // Show success toast notification
-        toast.success('Announcement added!', {
-          autoClose: 3000, // Close the notification after 3 seconds
-        });
-        // Clear input fields after successful submission
-        setTitle('');
-        setBody('');
+        console.log('Data added to announcements successfully!');
+        toast.success('Successfully Delivered Announcement 😎');
+        setNotifyBody('');
       })
       .catch((error) => {
-        console.error("Error adding data to announcements:", error);
-        // Show error toast notification
-        toast.error('Failed to add announcement.');
+        console.error('Error adding data to announcements:', error);
+        toast.error('Unable to deliver message, please try again. 🤬');
       });
   };
 
+  const checkSize = () => {
+    if (window.innerWidth <= 500) {
+      return {
+        minWidth: '325px',
+        minHeight: '365px',
+        backgroundColor: '#FFFFFF',
+        outline: 'none',
+        borderRadius: '6px',
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+      };
+    } else {
+      return {
+        minWidth: '505px',
+        minHeight: '333px',
+        backgroundColor: '#FFFFFF',
+        outline: 'none',
+        borderRadius: '6px',
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+      };
+    }
+  };
+
   return (
-    <div>
-      <h1 className='font-title text-xl'>Dashboard</h1>
-
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="title">Title:</label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={handleTitleChange}
-          />
+    <div className="admindash__container">
+      <div className="admindash__container--top">
+        <div className="admindash__container--title">
+          <div className="admindash__container--text1">
+            Welcome back, User
+          </div>
+          <div className="admindash__container--text2">
+            What would you like to do today?
+          </div>
         </div>
-        <div>
-          <label htmlFor="body">Body:</label>
-          <textarea
-            id="body"
-            value={body}
-            onChange={handleBodyChange}
-          />
+        <div
+          className="admindash__container--announcement"
+          onClick={handleOpen}
+        >
+          <a>Make Live Announcement</a>
         </div>
-        <button type="submit">Add Announcement</button>
-      </form>
-
-      {/* ToastContainer for notifications */}
+        {modalOpen && (
+          <div className="modal" style={checkSize()}>
+            <div className="announcement-modal__container">
+              <div className="announcement-modal__container--title">
+                What do you want to say?
+              </div>
+              <textarea
+                className="announcement-modal__container--input"
+                value={notifyBody}
+                onChange={(e) => handleChange(e)}
+              />
+              <div
+                className="announcement-modal__container--submit"
+                onClick={handleSubmit}
+              >
+                <a>Submit</a>
+              </div>
+              <div className="modal-close" onClick={handleClose}>
+                <a>Close</a>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
       <ToastContainer />
     </div>
   );
 };
 
-export default DashboardAdmin;
+export default AdminDash;
