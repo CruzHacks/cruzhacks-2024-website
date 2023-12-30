@@ -47,7 +47,6 @@ const Navbar = () => {
           <a
             id='mlh-trust-badge'
             className='absolute right-24 top-0 hidden w-20 md:block'
-            // style='display:block;max-width:100px;min-width:60px;position:fixed;right:50px;top:0;width:10%;z-index:10000'
             href='https://mlh.io/na?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2024-season&utm_content=blue'
             target='_blank'
             rel='noreferrer'
@@ -83,7 +82,6 @@ const Navbar = () => {
       <a
         id='mlh-trust-badge'
         className='absolute right-5 top-8 z-10 block w-20 md:hidden'
-        // style='display:block;max-width:100px;min-width:60px;position:fixed;right:50px;top:0;width:10%;z-index:10000'
         href='https://mlh.io/na?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2024-season&utm_content=blue'
         target='_blank'
         rel='noreferrer'
