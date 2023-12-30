@@ -107,7 +107,7 @@ const App: React.FC = () => {
             {/* Hacker Portal sub-routes go here*/}
           </Route>
         </Route>
-        <Route element={<RoleProtectedRoute allowedRole='admin' />}>
+        {/* <Route element={<RoleProtectedRoute allowedRole='admin' />}> */}
           <Route path='portal/admin' element={<AdminPortal />}>
             <Route index element={<DashboardAdmin />} />
             <Route path='applications' element={<ApplicationsAdmin />} />
@@ -118,7 +118,7 @@ const App: React.FC = () => {
             <Route path='teams' element={<TeamsAdmin />} />
             <Route path='users' element={<UsersAdmin />} />
           </Route>
-        </Route>
+        {/* </Route> */}
 
         <Route path='*' element={<NotFound />} />
       </Routes>
