@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Card from "./Card";
-import { ref, onValue, getDatabase } from "firebase/database";
+import Card from "../components/Card";
+import { ref, onValue } from "firebase/database";
+import { rtdb } from "../utils/firebaseapp";
 
 export type Announcement = {
   body: string;
@@ -28,7 +29,7 @@ const Announcements: React.FC = () => {
 
   useEffect(() => {
     // Firebase Realtime Database reference
-    const dbRef = ref(getDatabase(), 'announcements');
+    const dbRef = ref(rtdb, 'announcements');
 
     // Listen for changes in the 'announcements' node
     onValue(dbRef, (snapshot) => {

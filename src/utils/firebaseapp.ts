@@ -26,7 +26,7 @@ if (import.meta.env.DEV) {
   connectAuthEmulator(auth, "http://localhost:9099")
   connectFirestoreEmulator(db, "localhost", 8080)
   connectFunctionsEmulator(funcs, "localhost", 5001)
-  //connectDatabaseEmulator(rtdb, "localhost", 9000)
+  connectDatabaseEmulator(rtdb, "localhost", 9000)
 
 }
 
