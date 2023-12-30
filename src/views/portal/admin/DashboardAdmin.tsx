@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { rtdb } from "../../../utils/firebaseapp";
-import { push, ref, set } from "firebase/database";
+import { push, ref, set, serverTimestamp } from "firebase/database";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const DashboardAdmin = () => {
   const [title, setTitle] = useState('');
@@ -21,6 +23,7 @@ const DashboardAdmin = () => {
     const newData = {
       title: title,
       content: content,
+      timestamp: serverTimestamp(), // Include the current timestamp
     };
 
     // Reference to the "announcements" location in the database
@@ -33,12 +36,18 @@ const DashboardAdmin = () => {
     set(newReference, newData)
       .then(() => {
         console.log("Data added to announcements successfully!");
+        // Show success toast notification
+        toast.success('Announcement added!', {
+          autoClose: 3000, // Close the notification after 3 seconds
+        });
         // Clear input fields after successful submission
         setTitle('');
         setContent('');
       })
       .catch((error) => {
         console.error("Error adding data to announcements:", error);
+        // Show error toast notification
+        toast.error('Failed to add announcement.');
       });
   };
 
@@ -66,6 +75,9 @@ const DashboardAdmin = () => {
         </div>
         <button type="submit">Add Announcement</button>
       </form>
+
+      {/* ToastContainer for notifications */}
+      <ToastContainer />
     </div>
   );
 };
