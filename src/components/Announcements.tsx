@@ -38,6 +38,8 @@ const Announcements: React.FC = () => {
         const announcementsArray = Object.keys(announcementsData).map((key) => {
           return announcementsData[key];
         });
+        // Sort the announcements by date in descending order
+        announcementsArray.sort((a, b) => b.date - a.date);
         setAnnouncements(announcementsArray);
       } else {
         setAnnouncements([]);
