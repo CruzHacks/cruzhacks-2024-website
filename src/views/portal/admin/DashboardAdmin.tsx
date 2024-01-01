@@ -11,9 +11,9 @@ const AdminDash = () => {
   const handleOpen = () => setModalOpen(true);
   const handleClose = () => setModalOpen(false);
 
-  const handleChange = (e) => setNotifyBody(e.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => setNotifyBody(e.target.value);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     if (notifyBody === '') {
       toast.warning('An announcement must have a body... 😑');
@@ -42,32 +42,31 @@ const AdminDash = () => {
   };
 
   const checkSize = () => {
+    const commonStyles = {
+      minWidth: '505px',
+      minHeight: '333px',
+      backgroundColor: '#FFFFFF',
+      outline: 'none',
+      borderRadius: '6px',
+      // Explicitly define the type for position
+      position: 'absolute' as 'absolute', // or use a more specific type
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+    };
+  
     if (window.innerWidth <= 500) {
+      // Adjust styles for smaller screens if needed
       return {
+        ...commonStyles,
         minWidth: '325px',
         minHeight: '365px',
-        backgroundColor: '#FFFFFF',
-        outline: 'none',
-        borderRadius: '6px',
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
       };
     } else {
-      return {
-        minWidth: '505px',
-        minHeight: '333px',
-        backgroundColor: '#FFFFFF',
-        outline: 'none',
-        borderRadius: '6px',
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-      };
+      return commonStyles;
     }
   };
+  
 
   return (
     <div className="admindash__container">
