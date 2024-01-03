@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { rtdb } from "../../../utils/firebaseapp";
@@ -49,12 +49,12 @@ const AdminDash = () => {
       outline: 'none',
       borderRadius: '6px',
       // Explicitly define the type for position
-      position: 'absolute' as 'absolute', // or use a more specific type
+      position: 'absolute' as const, // or use a more specific type
       top: '50%',
       left: '50%',
       transform: 'translate(-50%, -50%)',
     };
-  
+
     if (window.innerWidth <= 500) {
       // Adjust styles for smaller screens if needed
       return {
@@ -66,7 +66,7 @@ const AdminDash = () => {
       return commonStyles;
     }
   };
-  
+
 
   return (
     <div className="admindash__container">
@@ -79,12 +79,10 @@ const AdminDash = () => {
             What would you like to do today?
           </div>
         </div>
-        <div
-          className="admindash__container--announcement"
-          onClick={handleOpen}
-        >
-          <a>Make Live Announcement</a>
-        </div>
+        <button className="admindash__container--announcement" onClick={handleOpen}>
+          Make Live Announcement
+        </button>
+
         {modalOpen && (
           <div className="modal" style={checkSize()}>
             <div className="announcement-modal__container">
@@ -96,15 +94,22 @@ const AdminDash = () => {
                 value={notifyBody}
                 onChange={(e) => handleChange(e)}
               />
-              <div
-                className="announcement-modal__container--submit"
-                onClick={handleSubmit}
-              >
-                <a>Submit</a>
+              <div>
+                <div>
+                  <button
+                    className="announcement-modal__container--submit"
+                    onClick={handleSubmit}
+                  >
+                    Submit
+                  </button>
+                </div>
+                <div>
+                  <button className="modal-close" onClick={handleClose}>
+                    Close
+                  </button>
+                </div>
               </div>
-              <div className="modal-close" onClick={handleClose}>
-                <a>Close</a>
-              </div>
+
             </div>
           </div>
         )}

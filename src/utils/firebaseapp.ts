@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app"
 import { getFirestore, connectFirestoreEmulator } from "@firebase/firestore"
 import { getAuth, connectAuthEmulator } from "@firebase/auth"
 import { getFunctions, connectFunctionsEmulator } from "@firebase/functions"
-import { getDatabase, ref, onValue , connectDatabaseEmulator} from "firebase/database";
+import { getDatabase, connectDatabaseEmulator} from "firebase/database";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
