@@ -82,7 +82,7 @@ const DashboardApplicant = () => {
             <span
               className={classNames(
                 applicationStatus.status == "accepted" && "text-success",
-                applicationStatus.status == "rejected" && "text-error",
+                applicationStatus.status == "rejected" && "text-pink",
                 "capitalize"
               )}
             >
@@ -99,7 +99,7 @@ const DashboardApplicant = () => {
               <p className='font-subtext'>
                 <span
                   className={classNames(
-                    applicationStatus.rsvp === true && "text-success",
+                    applicationStatus.rsvp === true && "text-pink",
                     applicationStatus.rsvp === false && "text-error",
                     applicationStatus.rsvp === undefined && "text-white/50"
                   )}
