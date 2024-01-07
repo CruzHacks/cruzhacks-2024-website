@@ -47,6 +47,10 @@ const App: React.FC = () => {
         toastOptions={{
           className: "font-subtext",
           position: "bottom-right",
+          style: {
+            background: "#071162",
+            color: "#D3DAF4",
+          },
           success: {
             style: {
               background: "#4BB543",

@@ -57,6 +57,7 @@ const ApplicationsAdmin = () => {
       return
     }
 
+    console.log(applications)
     const filename = timestampFilename("hacker_applications", "csv")
     const csvData = objectToCSV(applications)
 
