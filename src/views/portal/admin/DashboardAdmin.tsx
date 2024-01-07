@@ -1,186 +1,122 @@
-import React from "react"
-// import { ApplicationSchemaDto } from "../../../utils/types"
-// import { submitApplicationUnauthed } from "../../../utils/apis/cloudFunctions"
+import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { rtdb } from "../../../utils/firebaseapp";
+import { push, ref, set, serverTimestamp } from "firebase/database";
 
-// const otherFields = {
-//   short_response: {
-//     why_cruzhacks: "",
-//     what_would_you_like_to_see: "",
-//     grand_invention: "",
-//     back_in_time_invention: "",
-//     one_plane_ticket_anywhere: "",
-//   },
-//   logistics: {
-//     need_travel_reimbursement: "",
-//     need_charter_bus: "",
-//     attendence_possible_wo_reimbursement: "",
-//     need_campus_parking_permit: "",
-//     travel_plan: "",
-//     tshirt_size: "M",
-//     dietary_restrictions: "none",
-//   },
-//   socials: {
-//     resume_drop_form: "No",
-//     linkedin: "",
-//     github: "",
-//     discord: "",
-//     cruzhacks_referral: "",
-//     cruzhacks_refferal_email: "",
-//     cruzhacks_refferal_organization: "",
-//     anything_else: "",
-//   },
-// }
+const AdminDash = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [notifyBody, setNotifyBody] = useState('');
 
-// const SampleApp1: ApplicationSchemaDto = {
-//   user: {
-//     email: "email1test@gmail.com",
-//     first_name: "Zack",
-//     last_name: "Traczyk",
-//     phone_number: "7085228604",
-//     password: "ginger98",
-//   },
-//   demographics: {
-//     age: 19,
-//     country: "United States",
-//     school: "University of California, Santa Cruz",
-//     ucsc_college_affiliation: "Porter",
-//     year_in_school: "Freshman",
-//     education_level: "undergaduate",
-//     graduation_year: "2024",
-//     area_of_study: "Computer and Information Sciences",
-//     first_cruzhacks: "Yes, this is my first CruzHacks",
-//     hackathon_experience: "0 / No",
-//     ethnic_background: "White",
-//     gender_identity_one: "Cisgender",
-//     gender_identity_two: "Man",
-//     sexual_orientation: "Gay or Lesbian",
-//     underepresented_group: "No",
+  const handleOpen = () => setModalOpen(true);
+  const handleClose = () => setModalOpen(false);
 
-//     tech_experience: "I do not have any tech experience", // DO NOT INCLUDE IN STATS
-//     pronouns: "he/him", // DO NOT INCLUDE IN STATS
-//   },
-//   ...otherFields,
-// }
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => setNotifyBody(e.target.value);
 
-// const SampleApp2: ApplicationSchemaDto = {
-//   user: {
-//     email: "email2test@gmail.com",
-//     first_name: "Zack",
-//     last_name: "Traczyk",
-//     phone_number: "7085228605",
-//     password: "ginger98",
-//   },
-//   demographics: {
-//     age: 18,
-//     country: "United States",
-//     school: "University of California, Santa Cruz",
-//     ucsc_college_affiliation: "Cowell",
-//     year_in_school: "Senior",
-//     education_level: "graduate",
-//     graduation_year: "2025",
-//     area_of_study: "Biology",
-//     first_cruzhacks: "No, this is not my first CruzHacks",
-//     hackathon_experience: "3",
-//     ethnic_background: "Asian Indian",
-//     gender_identity_one: "Transgender",
-//     gender_identity_two: "Woman",
-//     sexual_orientation: "Queer",
-//     underepresented_group: "Yes",
+  const handleSubmit = (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+    if (notifyBody === '') {
+      toast.warning('An announcement must have a body... 😑');
+      return;
+    }
 
-//     tech_experience: "I do not have any tech experience", // DO NOT INCLUDE IN STATS
-//     pronouns: "he/him", // DO NOT INCLUDE IN STATS
-//   },
-//   ...otherFields,
-// }
+    const newData = {
+      title: '',
+      body: notifyBody,
+      date: serverTimestamp(),
+    };
 
-// const SampleApp3: ApplicationSchemaDto = {
-//   user: {
-//     email: "email3test@gmail.com",
-//     first_name: "Zack",
-//     last_name: "Traczyk",
-//     phone_number: "7085228606",
-//     password: "ginger98",
-//   },
-//   demographics: {
-//     age: 18,
-//     country: "United States",
-//     school: "University of Wisconsin, Madison",
-//     ucsc_college_affiliation: "N/A (I don't attend UCSC)",
-//     year_in_school: "Freshman",
-//     education_level: "undergaduate",
-//     graduation_year: "2027",
-//     area_of_study: "Computer and Information Sciences",
-//     first_cruzhacks: "Yes, this is my first CruzHacks",
-//     hackathon_experience: "2",
-//     ethnic_background: "Black/African",
-//     gender_identity_one: "Cisgender",
-//     gender_identity_two: "Man",
-//     sexual_orientation: "Gay or Lesbian",
-//     underepresented_group: "No",
+    const announcementsRef = ref(rtdb, 'announcements');
+    const newReference = push(announcementsRef);
 
-//     tech_experience: "I do not have any tech experience", // DO NOT INCLUDE IN STATS
-//     pronouns: "he/him", // DO NOT INCLUDE IN STATS
-//   },
-//   ...otherFields,
-// }
+    set(newReference, newData)
+      .then(() => {
+        console.log('Data added to announcements successfully!');
+        toast.success('Successfully Delivered Announcement 😎');
+        setNotifyBody('');
+      })
+      .catch((error) => {
+        console.error('Error adding data to announcements:', error);
+        toast.error('Unable to deliver message, please try again. 🤬');
+      });
+  };
 
-// const SampleApp4: ApplicationSchemaDto = {
-//   user: {
-//     email: "email4test@gmail.com",
-//     first_name: "Zack",
-//     last_name: "Traczyk",
-//     phone_number: "7085228607",
-//     password: "ginger98",
-//   },
-//   demographics: {
-//     age: 21,
-//     country: "Canada",
-//     school: "Unviersity of California, Berkeley",
-//     ucsc_college_affiliation: "N/A (I don't attend UCSC)",
-//     year_in_school: "I am not currently in school",
-//     education_level: "N/A",
-//     graduation_year: "N/A",
-//     area_of_study: "Computer Engineering",
-//     first_cruzhacks: "No, this is not my first CruzHacks",
-//     hackathon_experience: "2",
-//     ethnic_background: "White",
-//     gender_identity_one: "Nonbinary",
-//     gender_identity_two: "Nonbinary",
-//     sexual_orientation: "Asexual",
-//     underepresented_group: "Yes",
+  const checkSize = () => {
+    const commonStyles = {
+      minWidth: '505px',
+      minHeight: '333px',
+      backgroundColor: '#FFFFFF',
+      outline: 'none',
+      borderRadius: '6px',
+      // Explicitly define the type for position
+      position: 'absolute' as const, // or use a more specific type
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+    };
 
-//     tech_experience: "I do not have any tech experience", // DO NOT INCLUDE IN STATS
-//     pronouns: "he/him", // DO NOT INCLUDE IN STATS
-//   },
-//   ...otherFields,
-// }
+    if (window.innerWidth <= 500) {
+      // Adjust styles for smaller screens if needed
+      return {
+        ...commonStyles,
+        minWidth: '325px',
+        minHeight: '365px',
+      };
+    } else {
+      return commonStyles;
+    }
+  };
 
-// const submitSampleApps = async () => {
-//   try {
-//     await submitApplicationUnauthed(SampleApp1)
-//     await submitApplicationUnauthed(SampleApp2)
-//     await submitApplicationUnauthed(SampleApp3)
-//     await submitApplicationUnauthed(SampleApp4)
-//   } catch (err) {
-//     console.error(err)
-//   }
-// }
 
-const DashboardAdmin = () => {
   return (
-    <div>
-      <h1 className='font-title text-xl'>Dashboard</h1>
+    <div className="admindash__container">
+      <div className="admindash__container--top">
+        <div className="admindash__container--title">
+          <div className="admindash__container--text1">
+            Welcome back, User
+          </div>
+          <div className="admindash__container--text2">
+            What would you like to do today?
+          </div>
+        </div>
+        <button className="admindash__container--announcement" onClick={handleOpen}>
+          Make Live Announcement
+        </button>
 
-      {/* TEMP */}
-      {/* <button
-        type='button'
-        onClick={() => submitSampleApps()}
-        className='mt-3 rounded-md bg-blue-button/10 p-3 font-bold'
-      >
-        Create sample apps
-      </button> */}
+        {modalOpen && (
+          <div className="modal" style={checkSize()}>
+            <div className="announcement-modal__container">
+              <div className="announcement-modal__container--title">
+                What do you want to say?
+              </div>
+              <textarea
+                className="announcement-modal__container--input"
+                value={notifyBody}
+                onChange={(e) => handleChange(e)}
+              />
+              <div>
+                <div>
+                  <button
+                    className="announcement-modal__container--submit"
+                    onClick={handleSubmit}
+                  >
+                    Submit
+                  </button>
+                </div>
+                <div>
+                  <button className="modal-close" onClick={handleClose}>
+                    Close
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        )}
+      </div>
+      <ToastContainer />
     </div>
-  )
-}
+  );
+};
 
-export default DashboardAdmin
+export default AdminDash;
