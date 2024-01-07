@@ -143,7 +143,7 @@ const DashboardApplicant = () => {
         <div className='space-y-10 pt-10'>
           <div className='space-y-3'>
             <h1 className='font-title text-2xl'>My Hackathon Checklist</h1>
-            <p>Make sure to get these tasks done before you start hacking!</p>
+            <p>Make sure to get these tasks done before the event!</p>
           </div>
 
           <div className='space-y-10'>
