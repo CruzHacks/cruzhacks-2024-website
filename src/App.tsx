@@ -13,7 +13,6 @@ import DashboardAdmin from "./views/portal/admin/DashboardAdmin"
 import ApplicationsAdmin from "./views/portal/admin/applications"
 import UsersAdmin from "./views/portal/admin/users"
 import TeamsAdmin from "./views/portal/admin/teams"
-import ApplicationApplicant from "./views/portal/applicant/Application"
 import PortalApplicant from "./views/portal/applicant"
 import DashboardApplicant from "./views/portal/applicant/DashboardApplicant"
 import useAuth from "./hooks/useAuth"
@@ -102,7 +101,6 @@ const App: React.FC = () => {
         <Route element={<RoleProtectedRoute allowedRole='applicant' />}>
           <Route path='portal/applicant' element={<PortalApplicant />}>
             <Route index element={<DashboardApplicant />} />
-            <Route path='application' element={<ApplicationApplicant />} />
           </Route>
         </Route>
 
