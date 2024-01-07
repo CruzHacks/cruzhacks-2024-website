@@ -63,7 +63,7 @@ const DashboardApplicant = () => {
         Icon={ExclamationCircleIcon}
         iconStyling='text-error'
         title='Confirm Decline Attendance'
-        description='Are you sure you want to decline your attendance to CruzHacks 2024?'
+        description='Are you sure you want to decline your attendance to CruzHacks 2024? This cannot be undone.'
         actionText='I will not be attending'
         actionFunc={handleDeclineAttendance}
         open={openDeclineModal}
