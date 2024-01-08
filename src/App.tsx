@@ -1,5 +1,5 @@
 import React from "react"
-import { Navigate, Route, Routes } from "react-router-dom"
+import { Navigate, Outlet, Route, Routes } from "react-router-dom"
 import RoleProtectedRoute from "./components/protectedRoutes/RoleProtectedRoute"
 import PortalRedirectRoute from "./components/protectedRoutes/PortalRedirectRoute"
 import UnauthenticatedRoute from "./components/protectedRoutes/UnauthenticatedRoute"
@@ -9,14 +9,14 @@ import Signup from "./views/Signup"
 import NotFound from "./views/NotFound"
 import HackerPortal from "./views/portal/hacker"
 import AdminPortal from "./views/portal/admin"
-import DashboardAdmin from "./views/portal/admin/DashboardAdmin"
+import DashboardAdmin from "./views/portal/admin/dashboard"
 import ApplicationsAdmin from "./views/portal/admin/applications"
 import UsersAdmin from "./views/portal/admin/users"
 import TeamsAdmin from "./views/portal/admin/teams"
-import ApplicationApplicant from "./views/portal/applicant/Application"
 import PortalApplicant from "./views/portal/applicant"
 import DashboardApplicant from "./views/portal/applicant/DashboardApplicant"
 import useAuth from "./hooks/useAuth"
+import UserSection from "./views/apply/0 - User"
 import Apply, {
   DemographicsSection,
   LogisticsSection,
@@ -24,10 +24,12 @@ import Apply, {
   SocialsSection,
   WaviersSection,
 } from "./views/apply"
-import { Toaster } from "react-hot-toast"
-import UserSection from "./views/apply/0 - User"
-import ApplicationsReviewAdmin from "./views/portal/admin/applications/Review"
 import ReviewSection from "./views/apply/6 - Review"
+import { Toaster } from "react-hot-toast"
+import ApplicationsReviewAdmin from "./views/portal/admin/applications/Review"
+import ScrollToAnchor from "./components/scrollControl/ScrollToAnchor"
+import Team from "./views/team"
+import ApplicationClosed from "./views/ApplicationClosed"
 
 const App: React.FC = () => {
   const {
@@ -44,6 +46,10 @@ const App: React.FC = () => {
         toastOptions={{
           className: "font-subtext",
           position: "bottom-right",
+          style: {
+            background: "#071162",
+            color: "#D3DAF4",
+          },
           success: {
             style: {
               background: "#4BB543",
@@ -58,15 +64,27 @@ const App: React.FC = () => {
           },
         }}
       />
+      <ScrollToAnchor />
+
       <Routes>
+        {/* These routes are accessible to everyone*/}
         <Route index element={<Home />} />
+        <Route path='team' element={<Team />} />
 
         {/* You cannot be logged in to access these routes*/}
         <Route element={<UnauthenticatedRoute />}>
           <Route path='login' element={<Login />} />
-          <Route path='signup' element={<Signup />} />
-          <Route path='apply' element={<Apply />}>
-            <Route index element={<Navigate replace to='/apply/user' />} />
+          <Route path='organizers-only/signup' element={<Signup />} />
+          <Route path='apply' element={<Outlet />}>
+            <Route index element={<ApplicationClosed />} />
+            <Route path='*' element={<ApplicationClosed />} />
+          </Route>
+
+          <Route path='j7hxc5p6ri/apply' element={<Apply />}>
+            <Route
+              index
+              element={<Navigate replace to='/j7hxc5p6ri/apply/user' />}
+            />
             <Route path='user' element={<UserSection />} />
             <Route path='demographics' element={<DemographicsSection />} />
             <Route path='short_response' element={<ShortResponseSection />} />
@@ -83,7 +101,6 @@ const App: React.FC = () => {
         <Route element={<RoleProtectedRoute allowedRole='applicant' />}>
           <Route path='portal/applicant' element={<PortalApplicant />}>
             <Route index element={<DashboardApplicant />} />
-            <Route path='application' element={<ApplicationApplicant />} />
           </Route>
         </Route>
 

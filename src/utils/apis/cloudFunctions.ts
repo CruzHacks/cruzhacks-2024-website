@@ -3,6 +3,7 @@ import {
   ApplicationSchemaDto,
   CheckRoleSynced,
   ErrorResponse,
+  RechartsStatistics,
   UserBasics,
 } from "../types"
 import axios, { isAxiosError } from "axios"
@@ -105,6 +106,38 @@ export const checkRoleSynced = async (user: User) => {
 }
 
 /**
+ * CruzHacks-2024-Backend API endpoint for subscribing to the mailing list
+ * @param email Email to subscribe
+ */
+export const mailchimpSubscribe = async (email: string) => {
+  try {
+    const response = await axios.post(`${API_URL}/email/subscribe`, null, {
+      params: {
+        email,
+      },
+    })
+
+    const { data, error } = response.data
+
+    if (error) {
+      throw new Error(error)
+    }
+
+    return data.message as string
+  } catch (err) {
+    if (isAxiosError(err)) {
+      if (err.response?.data?.error) {
+        throw new Error(err.response.data.error)
+      }
+      console.error(err)
+      throw new Error(err.message)
+    }
+
+    throw err
+  }
+}
+
+/**
  * CruzHacks-2024-Backend API endpoint for retrieving a list of users
  * @param user Firebase User
  * @param pageToken OPTIONAL - The page token (used for pagination)
@@ -136,48 +169,6 @@ export const getUsers = async (user: User, pageToken?: string) => {
     }
 
     throw err
-  }
-}
-
-/**
- * CruzHacks-2024-Backend API endpoint for submitting an application for an
- * authenticated user
- * @param user Firebase User
- * @param application Application data
- * @returns Success message if successful, otherwise an error message
- */
-export const submitApplicationAuthed = async (
-  user: User,
-  application: ApplicationSchemaDto
-) => {
-  try {
-    if (!user) throw new Error("No user provided")
-    if (!application) throw new Error("No application provided")
-
-    // Validate the application data (throws error if invalid)
-    const applicationParsed = ApplicationSchemaDto.parse(application)
-
-    const idToken = await user.getIdToken(false)
-    const response = await axios.post(
-      `${API_URL}/application/authenticated`,
-      applicationParsed,
-      {
-        headers: {
-          Authorization: `Bearer ${idToken}`,
-        },
-      }
-    )
-    const { data, error } = response.data
-
-    if (error) throw new Error(error)
-
-    return data.message as string
-  } catch (err) {
-    if (isAxiosError(err)) {
-      console.error(err)
-      throw new Error(err.message)
-    }
-    throw err as Error
   }
 }
 
@@ -228,7 +219,7 @@ export const generateStatistics = async () => {
     if (error) throw new Error(error)
 
     // TODO: type
-    return data
+    return data as RechartsStatistics
   } catch (err) {
     if (isAxiosError(err)) {
       if (err.response?.data?.data?.message) {

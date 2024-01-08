@@ -13,6 +13,7 @@ export type UserBasics = {
   displayName?: string
   email: string
   role: string
+  pronouns?: string
 }
 
 // Schema pulled from 2023 Hacker Application form:
@@ -25,9 +26,14 @@ export const ApplicationStatuses = [
 ] as const
 export type ApplicationStatus = (typeof ApplicationStatuses)[number]
 
+export const UserRoles = ["applicant", "hacker", "judge", "admin"] as const
+export type UserRole = (typeof UserRoles)[number]
+
 export const ApplicationSchema = z.object({
   status: z.enum(ApplicationStatuses),
+  rsvp: z.boolean().optional(),
   email: z.string().email("Invalid email address."),
+  fullname: z.string(),
   _submitted: z.any(),
   _last_committed: z.any(),
 })
@@ -180,3 +186,20 @@ export type HeroIcon = React.ForwardRefExoticComponent<
     titleId?: string | undefined
   } & React.RefAttributes<SVGSVGElement>
 >
+
+// Statistics Types
+export type ReChartsArray = { name: string; value: number }[]
+
+export type RechartsStatistics = {
+  submissions: {
+    per_day: ReChartsArray
+    total: number
+    accepted: number
+    rejected: number
+    approvalRate: number
+  }
+  // TODO: further specify these types
+  demographics: { [key: string]: ReChartsArray }
+  logistics: { [key: string]: ReChartsArray }
+  referral: { [key: string]: ReChartsArray }
+}
