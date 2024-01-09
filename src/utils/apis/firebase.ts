@@ -22,6 +22,7 @@ import {
 } from "../types"
 // eslint-disable-next-line import/named
 import { User } from "firebase/auth"
+import { Dispatch } from "react"
 
 /**
  * Function using Firebase sdk for checking if an application is
@@ -95,6 +96,25 @@ export const getApplications = async () => {
     const applications = querySnapshot.docs.map(doc => doc.data())
 
     return applications as ApplicationSchema[]
+  } catch (error) {
+    console.error(error)
+    throw error
+  }
+}
+
+/**
+ * Function using Firebase sdk to retrieve information about all applications
+ */
+export const getTeams = async () => {
+  try {
+    // NOTE: This query requires a Firestore index
+    // https://firebase.google.com/docs/firestore/query-data/queries#collection-group-query
+    const q = query(collectionGroup(db, "teams"), orderBy("teamName"))
+    const querySnapshot = await getDocs(q)
+
+    const teams = querySnapshot.docs.map(doc => doc.data())
+
+    return teams as TeamFormationProps[]
   } catch (error) {
     console.error(error)
     throw error
@@ -588,6 +608,119 @@ export const rsvpInvite = async (user: User, teamName: string, status: string) =
     }
 
 
+  } catch (error) {
+    console.error(error)
+    throw error
+  }
+}
+
+export const removeTeamMemberAdmin = async (email: string) => {
+  try {
+    if (!email) throw new Error("No email provided")
+    const oldMemberDocRef = doc(db, `users/${email}/user_items/team`)
+    const oldMemberDocSnap = await getDoc(oldMemberDocRef)
+    const oldMemberInvites = oldMemberDocSnap.data()?.invites
+    const userTeamName = oldMemberDocSnap.data()?.teamName
+    
+    let teamDocRef = doc(db, `teams/${userTeamName}`)
+    let teamDocSnap = await getDoc(teamDocRef)
+    const teamLeader = teamDocSnap.data()?.teamLeader
+    if (teamLeader === email) throw new Error("Cannot remove team leader")
+
+    const teamMembers = teamDocSnap.data()?.teamMembers
+
+    const newTeamMembers = teamMembers.filter((teamMember: TeamMemberProps) => teamMember.memberEmail !== email)
+
+    const invitedTeamMembers = teamDocSnap.data()?.invitedTeamMembers
+
+    const newInvitedTeamMembers = invitedTeamMembers.filter((teamMember: TeamMemberProps) => teamMember.memberEmail !== email)
+
+    await updateDoc(teamDocRef, {
+      teamMembers: newTeamMembers,
+      invitedTeamMembers: newInvitedTeamMembers
+    })
+
+    const newOldMemberInvites = oldMemberInvites.filter((invites: InvitationProps) => invites.teamName !== userTeamName)
+
+    await updateDoc(oldMemberDocRef, {
+      teamName: "",
+      teamLeader: "",
+      invites: newOldMemberInvites
+    })
+
+    teamDocRef = doc(db, `teams/${userTeamName}`)
+    teamDocSnap = await getDoc(teamDocRef)
+
+    return teamDocSnap.data() as any as TeamFormationProps
+  } catch (error) {
+    console.error(error)
+    throw error
+  }
+}
+
+/**
+ * Function using Firebase sdk for returning the team information of a user
+ * @param user Firebase User
+ * @returns teamProfile if email found, otherwise an error is thrown
+ *
+ */
+export const flipLockAdmin = async (teamName: string) => {
+  try {
+    if (!teamName || teamName == "") throw new Error("No team name provided")
+
+    let teamDocRef = doc(db, `teams/${teamName}`)
+    let teamDocSnap = await getDoc(teamDocRef)
+
+    const invitedTeamMembers = teamDocSnap.data()?.invitedTeamMembers
+    const lock = teamDocSnap.data()?.lockedIn
+
+    if (invitedTeamMembers.length > 0) throw new Error("All pending invites must be removed before lock in")
+
+    await updateDoc(teamDocRef, {
+      lockedIn: !lock,
+    })
+    
+    teamDocRef = doc(db, `teams/${teamName}`)
+    teamDocSnap = await getDoc(teamDocRef)
+
+    return teamDocSnap.data() as any as TeamFormationProps
+  } catch (error) {
+    console.error(error)
+    throw error
+  }
+}
+
+/**
+ * Function using Firebase sdk to remove a member of the team
+ * @param user Firebase User who is the team leader
+ * @param email Firebase User's Email to be removed
+ * @returns true if team deletion successful, error thrown otherwise
+ * 
+ */
+export const deleteTeamAdmin = async (teamName: string) => {
+  try {
+    if (!teamName || teamName == "") throw new Error("No team name provided")
+    
+    const teamDocRef = doc(db, `teams/${teamName}`)
+    const teamDocSnap = await getDoc(teamDocRef)
+
+    const teamLeader = teamDocSnap.data()?.teamLeader
+    const teamMembers = teamDocSnap.data()?.teamMembers
+    const teamInvites = teamDocSnap.data()?.invitedTeamMembers
+
+    if (teamMembers.length > 1) throw new Error("All other team members must be removed before deletion")
+    if (teamInvites.length >= 1) throw new Error("All pending invites must be removed before deletion")
+
+    const leaderDocRef = doc(db, `users/${teamLeader}/user_items/team`)
+
+    await updateDoc(leaderDocRef, {
+      teamName: "",
+      teamLeader: "",
+    })
+
+    await deleteDoc(doc(db, `teams/${teamName}`));
+    
+    return {} as TeamFormationProps
   } catch (error) {
     console.error(error)
     throw error

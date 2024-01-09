@@ -8,7 +8,7 @@ import Binary from "../../assets/Binary.jpg"
 import Lake from "../../assets/illustrations/Lake.svg"
 import LinkedIn from "../../assets/icons/LinkedIn.svg"
 import CruzHacksLogo from "../../assets/logos/CruzHacks.svg"
-import { AsyncImage } from "loadable-image"
+// import { AsyncImage } from "loadable-image"
 import Star from "../../components/Star"
 
 const TeamMember = ({ name, role, image, linkedIn }: Organizer) => {
@@ -18,7 +18,7 @@ const TeamMember = ({ name, role, image, linkedIn }: Organizer) => {
 
   return (
     <div className='flex flex-col items-center gap-3'>
-      <AsyncImage
+      {/* <AsyncImage
         src={image}
         alt={name + " profile picture"}
         style={{
@@ -29,7 +29,7 @@ const TeamMember = ({ name, role, image, linkedIn }: Organizer) => {
           border: "4px solid rgb(211 218 244 / 0.2)",
         }}
         loader={<div className='h-8 w-8 bg-blue-imperial/50' />}
-      />
+      /> */}
       <h3 className='text-center font-title text-lg uppercase md:text-lg'>
         {name}
       </h3>
