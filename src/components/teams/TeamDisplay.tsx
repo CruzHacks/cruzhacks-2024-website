@@ -183,4 +183,7 @@ const TeamMemberBadge = (props: BadgeProps) => {
                 INVITED
             </div>
         )
+    return (
+      <></>
+    )
 }
