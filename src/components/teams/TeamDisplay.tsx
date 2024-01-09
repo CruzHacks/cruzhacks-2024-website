@@ -142,7 +142,6 @@ const TeamMemberTag = (props: TeamMemberTagProps) => {
             removeTeamMember(
             user,
             props.email,
-            props.type
             ).then((newTeamPage: TeamFormationProps) => {
                 props.setTeamPage(newTeamPage)
                 toast.success("Team Member Removed")
