@@ -14,7 +14,6 @@ import ApplicationsAdmin from "./views/portal/admin/applications"
 import UsersAdmin from "./views/portal/admin/users"
 import TeamsHacker from "./views/portal/hacker/teams"
 import TeamAdmin from "./views/portal/admin/teams"
-import ApplicationApplicant from "./views/portal/applicant/Application"
 import PortalApplicant from "./views/portal/applicant"
 import DashboardApplicant from "./views/portal/applicant/DashboardApplicant"
 import useAuth from "./hooks/useAuth"
@@ -31,7 +30,6 @@ import { Toaster } from "react-hot-toast"
 import ApplicationsReviewAdmin from "./views/portal/admin/applications/Review"
 import ScrollToAnchor from "./components/scrollControl/ScrollToAnchor"
 import Team from "./views/team"
-import ApplicationClosed from "./views/ApplicationClosed"
 
 const App: React.FC = () => {
   const {
