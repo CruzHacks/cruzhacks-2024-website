@@ -153,7 +153,7 @@ const TeamMemberTag = (props: {
           Remove
         </button>
         ) : null}
-        <TeamMemberBadge type={type}></TeamMemberBadge>
+        <TeamMemberBadge type={type} />
       </div>
     </div>
   )
@@ -162,7 +162,6 @@ const TeamMemberTag = (props: {
 export interface BadgeProps {
     type: string
 }
-
 
 const TeamMemberBadge = (props: BadgeProps) => {
     if (props.type === 'LEADER')
@@ -183,10 +182,7 @@ const TeamMemberBadge = (props: BadgeProps) => {
                 INVITED
             </div>
         )
-    else {
-      return (
-        <div className='rounded-md border-2 border-[#FA4437] bg-[#FA4437] px-1.5 py-0.5 text-sm text-[#FFF]'>
-        </div>
-      )
-    }
+    return (
+      <></>
+    )
 }
