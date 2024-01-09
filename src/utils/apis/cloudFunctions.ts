@@ -165,6 +165,10 @@ export const getUsers = async (user: User, pageToken?: string) => {
     return data.users as UserBasics[]
   } catch (err) {
     if (isAxiosError(err)) {
+      if (err.response?.data?.data?.message) {
+        throw new Error(err.response.data.data.message)
+      }
+      console.error(err)
       throw new Error(err.message)
     }
 
@@ -222,8 +226,9 @@ export const generateStatistics = async () => {
     return data as RechartsStatistics
   } catch (err) {
     if (isAxiosError(err)) {
-      if (err.response?.data?.data?.message) {
-        throw new Error(err.response.data.data.message)
+      if (err.response?.data?.error) {
+        console.error(err.response.data.error)
+        throw new Error(err.response.data.error)
       }
       console.error(err)
       throw new Error(err.message)
