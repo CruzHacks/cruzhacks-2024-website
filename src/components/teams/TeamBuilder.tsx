@@ -115,7 +115,6 @@ const Invitation = (props: {
                 props.teamName,
                 "ACCEPTED",
             ).then((team) => {
-                console.log(team)
                 props.setTeamPage(team)
                 toast.success("Invited Accepted!")
             }).catch((error) => {
@@ -172,7 +171,7 @@ const CreateTeam = (props: {
                 />
                 <div className="flex flex-wrap place-content-center">
                     <button
-                        className='hover:border-blue-imperial/75 hover:text-blue-imperial/75 rounded-md border-2 border-[#89a1f9] px-3 py-1 text-sm text-[#89a1f9] '
+                        className='rounded-md border-2 border-[#89a1f9] px-3 py-1 text-sm text-[#89a1f9] hover:border-blue-imperial/75 hover:text-blue-imperial/75 '
                         onClick={() =>
                             createTeam(
                                 user,

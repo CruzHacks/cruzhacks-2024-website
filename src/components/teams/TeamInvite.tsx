@@ -11,19 +11,6 @@ export const TeamInvite = (props: TeamInviteProps) => {
 
     if (!user) throw new Error("User could not be fetched from session")
 
-    const invite = async (email: string) => {
-        try {
-              const team = await inviteTeamMember(user, email)
-                props.setTeamPage(team)
-                toast.success("Team Member Invited!")
-            } catch (err) {
-            toast.error("Error updating application")
-            console.error(err)
-          }
-
-    }
-
-
     const [invitedMemberEmail, setInvitedMemberEmail] = useState<string>("")
 
     return (
@@ -40,7 +27,7 @@ export const TeamInvite = (props: TeamInviteProps) => {
           />
           <div className="flex flex-wrap place-content-center">
             <button
-                className='border-blue-imperial text-blue-imperial hover:bg-blue-imperial rounded-md border-2 bg-[#FFF] px-1.5 py-0.5 text-center text-sm hover:text-[#FFF]'
+                className='rounded-md border-2 border-blue-imperial bg-[#FFF] px-1.5 py-0.5 text-center text-sm text-blue-imperial hover:bg-blue-imperial hover:text-[#FFF]'
                 onClick={() => {
 
                         inviteTeamMember(
