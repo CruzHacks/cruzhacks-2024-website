@@ -30,6 +30,7 @@ import { Toaster } from "react-hot-toast"
 import ApplicationsReviewAdmin from "./views/portal/admin/applications/Review"
 import ScrollToAnchor from "./components/scrollControl/ScrollToAnchor"
 import Team from "./views/team"
+import ApplicationClosed from "./views/ApplicationClosed"
 
 const App: React.FC = () => {
   const {
