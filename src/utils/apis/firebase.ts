@@ -22,7 +22,6 @@ import {
 } from "../types"
 // eslint-disable-next-line import/named
 import { User } from "firebase/auth"
-import { Dispatch } from "react"
 
 /**
  * Function using Firebase sdk for checking if an application is
@@ -229,7 +228,7 @@ export const updateApplicationRsvp = async (email: string, rsvp: boolean) => {
 /**
  * Function using Firebase sdk for returning the team information of a user
  * @param user Firebase User
- * @returns teamProfile if email found, otherwise an error is thrown
+ * @returns teamProfile if user found, otherwise an error is thrown
  *
  */
 export const getTeamProfile = async (user: User) => {
@@ -242,6 +241,7 @@ export const getTeamProfile = async (user: User) => {
     const userInvites = userDocSnap.data()?.invites
     const teamName = userDocSnap.data()?.teamName
 
+    // if user is not apart of a team, return their team invites
     if (teamName == "") return {invites: userInvites}
 
     const teamDocRef = doc(db, `teams/${teamName}`)
@@ -262,7 +262,7 @@ export const getTeamProfile = async (user: User) => {
  * Function using Firebase sdk to remove a member of the team
  * @param user Firebase User who is the team leader
  * @param email Firebase User's Email to be removed
- * @returns true if success, error thrown otherwise
+ * @returns updated team profile if success, error thrown otherwise
  * 
  */
 export const removeTeamMember = async (user: User, email: string) => {
@@ -286,10 +286,12 @@ export const removeTeamMember = async (user: User, email: string) => {
 
     const teamMembers = teamDocSnap.data()?.teamMembers
 
+      // get team members except for the one removed
     const newTeamMembers = teamMembers.filter((teamMember: TeamMemberProps) => teamMember.memberEmail !== email)
     
     const invitedTeamMembers = teamDocSnap.data()?.invitedTeamMembers
 
+    // get invited team members except for the one removed
     const newInvitedTeamMembers = invitedTeamMembers.filter((teamMember: TeamMemberProps) => teamMember.memberEmail !== email)
 
     await updateDoc(teamDocRef, {
@@ -300,6 +302,9 @@ export const removeTeamMember = async (user: User, email: string) => {
     const oldMemberDocRef = doc(db, `users/${email}/user_items/team`)
     const oldMemberDocSnap = await getDoc(oldMemberDocRef)
     const oldMemberInvites = oldMemberDocSnap.data()?.invites
+
+    // get invites except for the team removed
+    // NOTE: I dont think this is needed, invites could be set to [] as the use shouldn't have any invites if they have been on a team
     const newOldMemberInvites = oldMemberInvites.filter((invites: InvitationProps) => invites.teamName !== userTeamName)
 
 
@@ -320,10 +325,10 @@ export const removeTeamMember = async (user: User, email: string) => {
 }
 
 /**
- * Function using Firebase sdk to remove a member of the team
+ * Function using Firebase sdk to delete a team
  * @param user Firebase User who is the team leader
- * @param email Firebase User's Email to be removed
- * @returns true if team deletion successful, error thrown otherwise
+ * @param teamName Team to be removed
+ * @returns Empty team profile if team deletion successful, error thrown otherwise
  * 
  */
 export const deleteTeam = async (user: User, teamName: string) => {
@@ -365,9 +370,10 @@ export const deleteTeam = async (user: User, teamName: string) => {
 }
 
 /**
- * Function using Firebase sdk for returning the team information of a user
+ * Function using Firebase sdk for setting lockedIn value to true
  * @param user Firebase User
- * @returns teamProfile if email found, otherwise an error is thrown
+ * @param teamName Team to be locked
+ * @returns updated team profile if success, otherwise an error is thrown
  *
  */
 export const lockTeam = async (user: User, teamName: string) => {
@@ -410,9 +416,10 @@ export const lockTeam = async (user: User, teamName: string) => {
 }
 
 /**
- * Function using Firebase sdk for returning the team information of a user
+ * Function using Firebase sdk for creating a team in Firestore
  * @param user Firebase User
- * @returns teamProfile if email found, otherwise an error is thrown
+ * @param teamName Team name to be created
+ * @returns new teamProfile created, otherwise an error is thrown
  *
  */
 export const createTeam = async (user: User, teamName: string) => {
@@ -459,9 +466,10 @@ export const createTeam = async (user: User, teamName: string) => {
 }
 
 /**
- * Function using Firebase sdk for returning the team information of a user
+ * Function using Firebase sdk for inviting a team member to a team
  * @param user Firebase User
- * @returns teamProfile if email found, otherwise an error is thrown
+ * @param email Firebase User's Email to be invited
+ * @returns updated teamProfile if email found, otherwise an error is thrown
  *
  */
 export const inviteTeamMember = async (user: User, email: string) => {
@@ -476,7 +484,6 @@ export const inviteTeamMember = async (user: User, email: string) => {
 
     if (userTeamLeader !== user.email) throw new Error("User is not the team leader")
     if (email == user.email) throw new Error("Cannot invite yourself to the team")
-
 
     const otherUserDocRef = doc(db, `users/${email}/user_items/team`)
     const otherUserDocSnap = await getDoc(otherUserDocRef)
@@ -501,6 +508,8 @@ export const inviteTeamMember = async (user: User, email: string) => {
 
     if (lockedIn) throw new Error("Team is locked in, cannot invite new members")
     if (teamMembers.length + invitedTeamMembers.length >= 4) throw new Error("Team is full, remove a team member or univnite a member to invite a new member")
+
+    // check that the user has not been already invited to the team 
     if (otherUserDocSnap.data()?.invites !== undefined && otherUserDocSnap.data()?.invites.some((team: TeamProps) => team.teamName == teamName)) throw new Error("User has already been invited to the team")
     if (invitedTeamMembers !== undefined && invitedTeamMembers.some((member: TeamMemberProps) => member.memberEmail == email)) throw new Error("User has already been invited to the team")
     const invitedTeams = otherUserDocSnap.data()?.invites
@@ -528,9 +537,11 @@ export const inviteTeamMember = async (user: User, email: string) => {
 }
 
 /**
- * Function using Firebase sdk for returning the team information of a user
+ * Function using Firebase sdk for accepting or denying a team's invite
  * @param user Firebase User
- * @returns teamProfile if email found, otherwise an error is thrown
+ * @param teamName Team name that is inviting the user
+ * @param status ACCEPTED or DENIED response to invite
+ * @returns updated team profile depending on status, otherwise an error is thrown
  *
  */
 export const rsvpInvite = async (user: User, teamName: string, status: string) => {
@@ -545,6 +556,8 @@ export const rsvpInvite = async (user: User, teamName: string, status: string) =
     let teamDocSnap = await getDoc(teamDocRef)
     if (!teamDocSnap.exists()) throw new Error("Team does not exist")
     const invitedTeamMembers = teamDocSnap.data()?.invitedTeamMembers
+
+    // remove team member from the list of invitees of the team (doesn't matter if they accept or deny, they will need to be removed)
     const newInvitedTeamMembers = invitedTeamMembers.filter((teamMember: TeamMemberProps) => teamMember.memberEmail !== user.email)
 
     if (status === "ACCEPTED") {
@@ -558,7 +571,6 @@ export const rsvpInvite = async (user: User, teamName: string, status: string) =
       const userNameDocSnap = await getDoc(userNameDocRef)
       const fullName = userNameDocSnap.data()?.fullname
 
-
       await updateDoc(teamDocRef, {
         teamMembers: [...teamMembers, { memberName: fullName, memberEmail: user.email }],
         invitedTeamMembers: newInvitedTeamMembers
@@ -566,6 +578,7 @@ export const rsvpInvite = async (user: User, teamName: string, status: string) =
 
       const invitedTeams = userDocSnap.data()?.invites
 
+      // remove user from all other team's invite lists
       for (let i = 0; i < invitedTeams.length; i++) {
           if (invitedTeams[i].teamName != teamName) {
             const tempTeamDocRef = doc(db, `teams/${invitedTeams[i].teamName}`)
@@ -614,6 +627,12 @@ export const rsvpInvite = async (user: User, teamName: string, status: string) =
   }
 }
 
+/**
+ * Function using Firebase sdk for removing a team member from a team using admin access
+ * @param email email address to be removed from their team
+ * @returns updated team profile if successful remove, otherwise an error is thrown
+ *
+ */
 export const removeTeamMemberAdmin = async (email: string) => {
   try {
     if (!email) throw new Error("No email provided")
@@ -659,9 +678,9 @@ export const removeTeamMemberAdmin = async (email: string) => {
 }
 
 /**
- * Function using Firebase sdk for returning the team information of a user
- * @param user Firebase User
- * @returns teamProfile if email found, otherwise an error is thrown
+ * Function using Firebase sdk for removing or adding a lock in to a team
+ * @param teamName team to be locked or unlocked
+ * @returns updated team profile if successful, otherwise an error is thrown
  *
  */
 export const flipLockAdmin = async (teamName: string) => {
@@ -691,11 +710,10 @@ export const flipLockAdmin = async (teamName: string) => {
 }
 
 /**
- * Function using Firebase sdk to remove a member of the team
- * @param user Firebase User who is the team leader
- * @param email Firebase User's Email to be removed
- * @returns true if team deletion successful, error thrown otherwise
- * 
+ * Function using Firebase sdk for deleting a team using admin access
+ * @param teamName team to be deleted from the database
+ * @returns empty team profile if successful, otherwise an error is thrown
+ *
  */
 export const deleteTeamAdmin = async (teamName: string) => {
   try {

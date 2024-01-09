@@ -1,4 +1,4 @@
-import React, { Dispatch, useEffect, useReducer, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { TeamFormationProps } from "../../../../utils/types";
 import { getTeams } from "../../../../utils/apis/firebase";
 import useAuth from "../../../../hooks/useAuth";
@@ -18,7 +18,6 @@ const TeamsAdmin = () => {
         console.log(teams)
         setTeams(teams)
         setRender(true)
-
     })
   }, [])
 
@@ -26,23 +25,20 @@ const TeamsAdmin = () => {
     return (
         <div>
             <h1 className='font-title text-xl'>Team Formation</h1>
-            <div className='flex flex-col flex-wrap gap-4'>                    
             <div className="flex flex-row flex-wrap place-content-center justify-around rounded-xl border-2 border-[#DFDFF6] bg-[#FFF] p-5 drop-shadow-lg">
-                    {teams.map((team) => {
-                        return (
-                        <div key={team.teamName} className="w-full rounded-lg border-2 border-[#DFDFDF] bg-[#DFDFDF] drop-shadow-sm sm:mb-4 md:mb-4 lg:mb-0 lg:w-1/2">
-                            <TeamAdminDisplay teamPage={team} teamPages={teams} setTeamPages={setTeams}></TeamAdminDisplay>
-                        </div>
-                        )
-                    })}
-                </div>
-           </div>
+                {teams.map((team) => {
+                    return (
+                    <div key={team.teamName} className="w-full gap-4 rounded-lg border-2 border-[#DFDFDF] bg-[#DFDFDF] drop-shadow-sm sm:mb-4 md:mb-4 lg:mb-0 lg:w-1/2">
+                        <TeamAdminDisplay teamPage={team} teamPages={teams} setTeamPages={setTeams}></TeamAdminDisplay>
+                    </div>
+                    )
+                })}
+            </div>
         </div>
     )
   } else {
     return <div>loading</div>
   }
 }
-
 
 export default TeamsAdmin

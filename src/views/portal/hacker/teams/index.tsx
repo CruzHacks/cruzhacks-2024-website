@@ -20,6 +20,7 @@ const TeamHacker = () => {
     invites: []
   }
 
+  // reducer for teamPage to set all non-set fields in teamPage to initial fields
   const teamPageReducer = (
     state: TeamFormationProps,
     action: Partial<TeamFormationProps>
