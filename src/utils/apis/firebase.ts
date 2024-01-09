@@ -17,9 +17,11 @@ import {
   ApplicationStatus,
   InvitationProps,
   TeamFormationProps,
-  TeamMember,
+  TeamMemberProps,
   TeamProps,
 } from "../types"
+// eslint-disable-next-line import/named
+import { User } from "firebase/auth"
 
 /**
  * Function using Firebase sdk for checking if an application is
@@ -264,11 +266,11 @@ export const removeTeamMember = async (user: User, email: string) => {
 
     const teamMembers = teamDocSnap.data()?.teamMembers
 
-    const newTeamMembers = teamMembers.filter((teamMember: TeamMember) => teamMember.memberEmail !== email)
+    const newTeamMembers = teamMembers.filter((teamMember: TeamMemberProps) => teamMember.memberEmail !== email)
     
     const invitedTeamMembers = teamDocSnap.data()?.invitedTeamMembers
 
-    const newInvitedTeamMembers = invitedTeamMembers.filter((teamMember: TeamMember) => teamMember.memberEmail !== email)
+    const newInvitedTeamMembers = invitedTeamMembers.filter((teamMember: TeamMemberProps) => teamMember.memberEmail !== email)
 
     await updateDoc(teamDocRef, {
       teamMembers: newTeamMembers,
@@ -480,7 +482,7 @@ export const inviteTeamMember = async (user: User, email: string) => {
     if (lockedIn) throw new Error("Team is locked in, cannot invite new members")
     if (teamMembers.length + invitedTeamMembers.length >= 4) throw new Error("Team is full, remove a team member or univnite a member to invite a new member")
     if (otherUserDocSnap.data()?.invites !== undefined && otherUserDocSnap.data()?.invites.some((team: TeamProps) => team.teamName == teamName)) throw new Error("User has already been invited to the team")
-    if (invitedTeamMembers !== undefined && invitedTeamMembers.some((member: TeamMember) => member.memberEmail == email)) throw new Error("User has already been invited to the team")
+    if (invitedTeamMembers !== undefined && invitedTeamMembers.some((member: TeamMemberProps) => member.memberEmail == email)) throw new Error("User has already been invited to the team")
     const invitedTeams = otherUserDocSnap.data()?.invites
 
     await updateDoc(otherUserDocRef, {
@@ -523,7 +525,7 @@ export const rsvpInvite = async (user: User, teamName: string, status: string) =
     let teamDocSnap = await getDoc(teamDocRef)
     if (!teamDocSnap.exists()) throw new Error("Team does not exist")
     const invitedTeamMembers = teamDocSnap.data()?.invitedTeamMembers
-    const newInvitedTeamMembers = invitedTeamMembers.filter((teamMember: TeamMember) => teamMember.memberEmail !== user.email)
+    const newInvitedTeamMembers = invitedTeamMembers.filter((teamMember: TeamMemberProps) => teamMember.memberEmail !== user.email)
 
     if (status === "ACCEPTED") {
       const lockedIn = teamDocSnap.data()?.lockedIn
@@ -549,7 +551,7 @@ export const rsvpInvite = async (user: User, teamName: string, status: string) =
             const tempTeamDocRef = doc(db, `teams/${invitedTeams[i].teamName}`)
             const tempTeamDocSnap = await getDoc(tempTeamDocRef)
             const tempInvitedTeamMembers = tempTeamDocSnap.data()?.invitedTeamMembers
-            const tempNewInvitedTeamMembers = tempInvitedTeamMembers.filter((teamMember: TeamMember) => teamMember.memberEmail !== user.email)
+            const tempNewInvitedTeamMembers = tempInvitedTeamMembers.filter((teamMember: TeamMemberProps) => teamMember.memberEmail !== user.email)
             await updateDoc(tempTeamDocRef, {
               invitedTeamMembers: tempNewInvitedTeamMembers
             })
