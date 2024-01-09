@@ -16,6 +16,7 @@ import {
   AppShortResponseSchema,
   ApplicationSchema,
   ApplicationStatus,
+  InvitationProps,
   TeamFormationProps,
   TeamMember,
   TeamProps,
@@ -252,10 +253,15 @@ export const removeTeamMember = async (user: User, email: string) => {
     })
 
     const oldMemberDocRef = doc(db, `users/${email}/user_items/team`)
+    const oldMemberDocSnap = await getDoc(oldMemberDocRef)
+    const oldMemberInvites = oldMemberDocSnap.data()?.invites
+    const newOldMemberInvites = oldMemberInvites.filter((invites: InvitationProps) => invites.teamName !== userTeamName)
+
 
     await updateDoc(oldMemberDocRef, {
       teamName: "",
       teamLeader: "",
+      invites: newOldMemberInvites
     })
 
     teamDocRef = doc(db, `teams/${userTeamName}`)
@@ -293,9 +299,11 @@ export const deleteTeam = async (user: User, teamName: string) => {
 
     const teamLeader = teamDocSnap.data()?.teamLeader
     const teamMembers = teamDocSnap.data()?.teamMembers
+    const teamInvites = teamDocSnap.data()?.invitedTeamMembers
 
     if (teamLeader !== user.email) throw new Error("User is not team leader of the team being deleted")
     if (teamMembers.length > 1) throw new Error("All other team members must be removed before deletion")
+    if (teamInvites.length >= 1) throw new Error("All pending invites must be removed before deletion")
 
     await updateDoc(userDocRef, {
       teamName: "",
@@ -340,7 +348,7 @@ export const lockTeam = async (user: User, teamName: string) => {
 
     const invitedTeamMembers = teamDocSnap.data()?.invitedTeamMembers
 
-    if (invitedTeamMembers.length > 0) throw new Error("All invited team members must be removed before lock in")
+    if (invitedTeamMembers.length > 0) throw new Error("All pending invites must be removed before lock in")
 
     await updateDoc(teamDocRef, {
       lockedIn: true,
@@ -392,6 +400,7 @@ export const createTeam = async (user: User, teamName: string) => {
     await updateDoc(userDocRef, {
       teamName: teamName,
       teamLeader: user.email,
+      invites: []
     });
     
     teamDocRef = doc(db, `teams/${teamName}`)
@@ -413,11 +422,11 @@ export const createTeam = async (user: User, teamName: string) => {
 export const inviteTeamMember = async (user: User, email: string) => {
   try {
     if (!user) throw new Error("No user provided")
-    if (!email || email == "") throw new Error("No team name provided")
+    if (!email || email == "") throw new Error("No user email provided")
 
     const userDocRef = doc(db, `users/${user.email}/user_items/team`)
     const userDocSnap = await getDoc(userDocRef)
-
+    const userTeamName = userDocSnap.data()?.teamName
     const userTeamLeader = userDocSnap.data()?.teamLeader
 
     if (userTeamLeader !== user.email) throw new Error("User is not the team leader")
@@ -432,6 +441,7 @@ export const inviteTeamMember = async (user: User, email: string) => {
     const role = otherUserRoleDocSnap.data()?.role.toLowerCase()
 
     if (!otherUserDocSnap.exists()) throw new Error("Invited user does not exist")
+    if (otherUserDocSnap.data()?.teamName === userTeamName) throw new Error("User is already on the team")
     if (otherUserDocSnap.data()?.teamName !== "") throw new Error("Invited user is already on a team")
     if (role !== "hacker") throw new Error("Invited user is not a participant of the hackathon")
 
@@ -446,10 +456,8 @@ export const inviteTeamMember = async (user: User, email: string) => {
 
     if (lockedIn) throw new Error("Team is locked in, cannot invite new members")
     if (teamMembers.length + invitedTeamMembers.length >= 4) throw new Error("Team is full, remove a team member or univnite a member to invite a new member")
-    if (teamName == otherUserDocSnap.data()?.teamName) throw new Error("User is already on the team")
-    if (otherUserDocSnap.data()?.invites.some((team: TeamProps) => team.teamName == teamName)) throw new Error("User has already been invited to the team")
-    if (invitedTeamMembers.some((member: TeamMember) => member.memberEmail == email)) throw new Error("User has already been invited to the team")
-    
+    if (otherUserDocSnap.data()?.invites !== undefined && otherUserDocSnap.data()?.invites.some((team: TeamProps) => team.teamName == teamName)) throw new Error("User has already been invited to the team")
+    if (invitedTeamMembers !== undefined && invitedTeamMembers.some((member: TeamMember) => member.memberEmail == email)) throw new Error("User has already been invited to the team")
     const invitedTeams = otherUserDocSnap.data()?.invites
 
     await updateDoc(otherUserDocRef, {

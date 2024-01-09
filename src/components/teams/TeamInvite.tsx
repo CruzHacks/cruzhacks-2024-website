@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import useAuth from "../../hooks/useAuth"
 import { inviteTeamMember } from "../../utils/apis/firebase"
 import { TeamInviteProps } from "../../utils/types"
+import toast from "react-hot-toast"
 
 export const TeamInvite = (props: TeamInviteProps) => {
     const {
@@ -9,6 +10,19 @@ export const TeamInvite = (props: TeamInviteProps) => {
     } = useAuth()
 
     if (!user) throw new Error("User could not be fetched from session")
+
+    const invite = async (email: string) => {
+        try {
+              const team = await inviteTeamMember(user, email)
+                props.setTeamPage(team)
+                toast.success("Team Member Invited!")
+            } catch (err) {
+            toast.error("Error updating application")
+            console.error(err)
+          }
+
+    }
+
 
     const [invitedMemberEmail, setInvitedMemberEmail] = useState<string>("")
 
@@ -28,10 +42,17 @@ export const TeamInvite = (props: TeamInviteProps) => {
             <button
                 className='border-blue-imperial text-blue-imperial hover:bg-blue-imperial rounded-md border-2 bg-[#FFF] px-1.5 py-0.5 text-center text-sm hover:text-[#FFF]'
                 onClick={() => {
-                    inviteTeamMember(
-                    user,
-                    invitedMemberEmail,
-                    ).then((team) => props.setTeamPage(team))
+
+                        inviteTeamMember(
+                            user,
+                            invitedMemberEmail,
+                            ).then((team) => {
+                                props.setTeamPage(team)
+                                setInvitedMemberEmail("")
+                                toast.success("Team Member Invited!")
+                            }).catch((error) => {
+                                toast.error(error.message)
+                            })
                 }}
             >
             INVITE MEMBER

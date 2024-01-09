@@ -6,7 +6,7 @@ import useAuth from "../../../../hooks/useAuth";
 import { TeamBuilder } from "../../../../components/teams/TeamBuilder";
 import { TeamInvite } from "../../../../components/teams/TeamInvite";
 
-const TeamsAdmin = () => {
+const TeamHacker = () => {
     const {
         auth: { user },
       } = useAuth()
@@ -95,4 +95,4 @@ const TeamsAdmin = () => {
 }
 
 
-export default TeamsAdmin
+export default TeamHacker

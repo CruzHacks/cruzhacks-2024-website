@@ -5,6 +5,7 @@ import {
 } from "../../utils/apis/firebase"
 import { TeamBuilderProps, TeamFormationProps, InvitationMode, InvitationProps } from "../../utils/types"
 import useAuth from "../../hooks/useAuth"
+import toast from "react-hot-toast"
 
 
 export const TeamBuilder = (props: TeamBuilderProps) => {
@@ -72,7 +73,7 @@ const JoinTeam = (props: {
         <div className='flex flex-col px-5'>
             {props.invites.length === 0 ?
                (
-                <div className='border-blue-imperial text-blue-imperial rounded-md border-2 px-3 py-1 text-sm '>
+                <div className='rounded-md border-2 border-blue-imperial px-3 py-1 text-sm text-blue-imperial '>
 
                         No Pending Invitations
                 </div>
@@ -109,13 +110,16 @@ const Invitation = (props: {
         <button
           className='rounded-md border-2 border-[#10E926] px-1.5 py-0.5 text-sm text-[#10E926] hover:bg-[#10E926] hover:text-[#FFF]'
           onClick={() => {
-            rsvpInvite(
+                rsvpInvite(
                 user,
-              props.teamName,
-              "ACCEPTED",
+                props.teamName,
+                "ACCEPTED",
             ).then((team) => {
                 console.log(team)
                 props.setTeamPage(team)
+                toast.success("Invited Accepted!")
+            }).catch((error) => {
+                toast.error(error.message)
             })
           }}
         >
@@ -128,10 +132,12 @@ const Invitation = (props: {
                 user,
                 props.teamName,
                 "DECLINED",
-              ).then((team) => {
-                console.log(team)
+                ).then((team) => {
                 props.setTeamPage(team)
-              })
+                toast.success("Invited Declined")
+                }).catch((error) => {
+                toast.error(error.message)
+            })
           }}
         >
           Decline
@@ -171,9 +177,13 @@ const CreateTeam = (props: {
                             createTeam(
                                 user,
                                 teamNameInput,
-                            ).then((team) =>
-                                props.setTeamPage(team))
-                            }
+                            ).then((team) => {
+                                props.setTeamPage(team)
+                                toast.success("Team Created!")
+                            }).catch((error) => {
+                                    toast.error(error.message)
+                                })
+                        }
                     >
                         CREATE
                     </button>

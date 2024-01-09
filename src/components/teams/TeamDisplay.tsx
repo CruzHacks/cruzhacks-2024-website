@@ -2,45 +2,68 @@ import React, { useEffect, useState } from "react"
 import { TeamFormationProps, TeamMemberProps, TeamDisplayProps, TeamMemberTagProps } from "../../utils/types"
 import useAuth from "../../hooks/useAuth"
 import { deleteTeam, lockTeam, removeTeamMember } from "../../utils/apis/firebase"
-import { isInterfaceDeclaration } from "typescript"
-// import { ConfirmationModal } from "../../../Dashboard/components/ConfirmationModal/ConfirmationModal"
-// import { deleteTeam, lockTeam, removeTeamMember } from "../../api"
+import Modal from "../Modal"
+import { LockClosedIcon, TrashIcon } from "@heroicons/react/24/solid"
+import toast from "react-hot-toast"
+
 
 export const TeamDisplay = (props: TeamDisplayProps) => {
     const {
         auth: { user },
       } = useAuth()
       
-  const [open, setOpen] = useState<boolean>(false)
+  const [openConfirm, setOpenConfirm] = useState<boolean>(false)
+  const [openDelete, setOpenDelete] = useState<boolean>(false)
+
 
   if (!user) throw new Error("User could not be fetched from session")
-  console.log('from display', props.teamPage)
-
-
-  console.log('from team display', props.teamPage)
-
   return (
     <div>
-      {/* <ConfirmationModal
-        open={open}
-        setOpen={setOpen}
-        header='Lock In Team'
-        primaryButtonText='Lock In'
-        primaryButtonHandler={() => {
-          lockTeam(
-            props.teamPage.teamName,
-          )
+      <Modal
+        open={openConfirm}
+        setOpen={setOpenConfirm}
+        Icon={LockClosedIcon}
+        title={`Lock in ${props.teamPage.teamName}?`}
+        actionText='LOCK IN'
+        description='Are you sure you want to lock in your team? You will no longer be able to add or remove members.'
+        actionFunc={() => {
+                lockTeam(
+                    user,
+                    props.teamPage.teamName,
+                ).then((newTeamPage: TeamFormationProps) => {
+                    props.setTeamPage(newTeamPage)
+                    toast.success("Team Locked In")
+                }).catch((error) => {
+                    toast.error(error.message)
+                })
         }}
-        secondaryButtonText='Cancel'
-        secondaryButtonHandler={() => setOpen(false)}
-        body='Are you sure you want to lock in your team?'
-      /> */}
+      />
+      <Modal
+        open={openDelete}
+        setOpen={setOpenDelete}
+        Icon={TrashIcon}
+        title={`Delete ${props.teamPage.teamName}?`}
+        actionText='DELETE TEAM'
+        description='Are you sure you want to delete your team? This action cannot be undone.'
+        actionFunc={() => {
+            deleteTeam(
+                user,
+                props.teamPage.teamName,
+            ).then((newTeamPage: TeamFormationProps) => {
+                props.setTeamPage(newTeamPage)
+                props.setTeamStatus("JOIN")
+                toast.success("Team Deleted")
+            }).catch((error) => {
+                toast.error(error.message)
+            })
+        }}
+      />
     <div className='flex flex-col flex-wrap place-content-center py-3'>
         <div className='text-center text-lg text-[#192F6F]'>
           {props.teamPage.teamName || "<- No Team ->"}
         </div>
     </div>
-      <div className='flex flex-col gap-2 px-5'>
+      <div className='flex flex-col gap-2 px-5 pb-3'>
         {props.teamPage.teamMembers.map((member: TeamMemberProps) => {
           return (
             <TeamMemberTag
@@ -70,15 +93,7 @@ export const TeamDisplay = (props: TeamDisplayProps) => {
         <div className='flex w-full flex-row flex-wrap place-content-center gap-5 py-5'>
           <button
           className='rounded-md border-2 border-[#F81A16] bg-[#F81A16] px-1.5 py-0.5 text-sm text-[#FFF] hover:bg-[#FFF] hover:text-[#F81A16]'
-            onClick={() =>
-              deleteTeam(
-                user,
-                props.teamPage.teamName,
-              ).then((newTeamPage: TeamFormationProps) => {
-                props.setTeamPage(newTeamPage)
-                props.setTeamStatus("JOIN")
-              })
-            }
+            onClick={() => setOpenDelete(true)}
           >
             DELETE TEAM
           </button>
@@ -86,12 +101,7 @@ export const TeamDisplay = (props: TeamDisplayProps) => {
             {!props.teamPage.lockedIn ? (
                 <button
                 className='rounded-md border-2 border-[#10E926] bg-[#10E926] px-1.5 py-0.5 text-sm text-[#FFF] hover:bg-[#FFF] hover:text-[#10E926]'
-                onClick={() => lockTeam(
-                    user,
-                    props.teamPage.teamName,
-                ).then((newTeamPage: TeamFormationProps) => {
-                    props.setTeamPage(newTeamPage)
-                })}
+                onClick={() => setOpenConfirm(true)}
                 >
                 LOCK IN TEAM
                 </button>
@@ -130,11 +140,15 @@ const TeamMemberTag = (props: TeamMemberTagProps) => {
         className='rounded-md border-2 border-[#F81A16] px-1.5 py-0.5 text-sm text-[#F81A16] hover:bg-[#F81A16] hover:text-[#FFF]'
         onClick={() => {
             removeTeamMember(
-              user,
-              props.email,
-              ).then((newTeamPage: TeamFormationProps) => {
+            user,
+            props.email,
+            props.type
+            ).then((newTeamPage: TeamFormationProps) => {
                 props.setTeamPage(newTeamPage)
-              })
+                toast.success("Team Member Removed")
+            }).catch((error) => {
+                toast.error(error.message)
+            })
           }}
         >
           Remove
@@ -161,14 +175,13 @@ const TeamMemberBadge = (props: BadgeProps) => {
     else if (props.type === 'MEMBER')
         return (
             <div className='rounded-md border-2 border-[#139A43] bg-[#139A43] px-1.5 py-0.5 text-sm text-[#FFF]'>
-                    MEMBER
+                MEMBER
             </div>
-            
         )
     else if (props.type === 'INVITED')
         return (
             <div className='rounded-md border-2 border-[#FA4437] bg-[#FA4437] px-1.5 py-0.5 text-sm text-[#FFF]'>
-                    INVITED
+                INVITED
             </div>
         )
 }
