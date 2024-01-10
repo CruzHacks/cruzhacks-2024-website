@@ -1,196 +1,19 @@
 import React from "react"
-import { ApplicationSchemaDto, ReChartsArray } from "../../../../utils/types"
-import { submitApplicationUnauthed } from "../../../../utils/apis/cloudFunctions"
+import { ReChartsArray, Statistics } from "../../../../utils/types"
 import useStatistics from "../../../../hooks/useStatistics"
-import { AreaChart, BarChart, PieChart } from "../../../../components/Charts"
 import {
-  PolarAngleAxis,
-  RadialBar,
-  RadialBarChart,
-  ResponsiveContainer,
-  Label,
-  Text,
-} from "recharts"
-
-const otherFields = {
-  short_response: {
-    why_cruzhacks: "",
-    what_would_you_like_to_see: "",
-    grand_invention: "",
-    back_in_time_invention: "",
-    one_plane_ticket_anywhere: "",
-  },
-  logistics: {
-    need_travel_reimbursement: "",
-    need_charter_bus: "",
-    attendence_possible_wo_reimbursement: "",
-    need_campus_parking_permit: "",
-    travel_plan: "",
-    tshirt_size: "M",
-    dietary_restrictions: "none",
-  },
-  socials: {
-    resume_drop_form: "No",
-    linkedin: "",
-    github: "",
-    discord: "",
-    cruzhacks_referral: "",
-    cruzhacks_refferal_email: "",
-    cruzhacks_refferal_organization: "",
-    anything_else: "",
-  },
-}
-
-const SampleApp1: ApplicationSchemaDto = {
-  user: {
-    email: "email1test@gmail.com",
-    first_name: "Zack",
-    last_name: "Traczyk",
-    phone_number: "7085228604",
-    password: "ginger98",
-  },
-  demographics: {
-    age: 19,
-    country: "United States",
-    school: "University of California, Santa Cruz",
-    ucsc_college_affiliation: "Porter",
-    year_in_school: "Freshman",
-    education_level: "undergaduate",
-    graduation_year: "2024",
-    area_of_study: "Computer and Information Sciences",
-    first_cruzhacks: "Yes, this is my first CruzHacks",
-    hackathon_experience: "0 / No",
-    ethnic_background: "White",
-    gender_identity_one: "Cisgender",
-    gender_identity_two: "Man",
-    sexual_orientation: "Gay or Lesbian",
-    underepresented_group: "No",
-
-    tech_experience: "I do not have any tech experience", // DO NOT INCLUDE IN STATS
-    pronouns: "he/him", // DO NOT INCLUDE IN STATS
-  },
-  ...otherFields,
-}
-
-const SampleApp2: ApplicationSchemaDto = {
-  user: {
-    email: "email2test@gmail.com",
-    first_name: "Zack",
-    last_name: "Traczyk",
-    phone_number: "7085228605",
-    password: "ginger98",
-  },
-  demographics: {
-    age: 18,
-    country: "United States",
-    school: "University of California, Santa Cruz",
-    ucsc_college_affiliation: "Cowell",
-    year_in_school: "Senior",
-    education_level: "graduate",
-    graduation_year: "2025",
-    area_of_study: "Biology",
-    first_cruzhacks: "No, this is not my first CruzHacks",
-    hackathon_experience: "3",
-    ethnic_background: "Asian Indian",
-    gender_identity_one: "Transgender",
-    gender_identity_two: "Woman",
-    sexual_orientation: "Queer",
-    underepresented_group: "Yes",
-
-    tech_experience: "I do not have any tech experience", // DO NOT INCLUDE IN STATS
-    pronouns: "he/him", // DO NOT INCLUDE IN STATS
-  },
-  ...otherFields,
-}
-
-const SampleApp3: ApplicationSchemaDto = {
-  user: {
-    email: "email3test@gmail.com",
-    first_name: "Zack",
-    last_name: "Traczyk",
-    phone_number: "7085228606",
-    password: "ginger98",
-  },
-  demographics: {
-    age: 18,
-    country: "United States",
-    school: "University of Wisconsin, Madison",
-    ucsc_college_affiliation: "N/A (I don't attend UCSC)",
-    year_in_school: "Freshman",
-    education_level: "undergaduate",
-    graduation_year: "2027",
-    area_of_study: "Computer and Information Sciences",
-    first_cruzhacks: "Yes, this is my first CruzHacks",
-    hackathon_experience: "2",
-    ethnic_background: "Black/African",
-    gender_identity_one: "Cisgender",
-    gender_identity_two: "Man",
-    sexual_orientation: "Gay or Lesbian",
-    underepresented_group: "No",
-
-    tech_experience: "I do not have any tech experience", // DO NOT INCLUDE IN STATS
-    pronouns: "he/him", // DO NOT INCLUDE IN STATS
-  },
-  ...otherFields,
-}
-
-const SampleApp4: ApplicationSchemaDto = {
-  user: {
-    email: "email4test@gmail.com",
-    first_name: "Zack",
-    last_name: "Traczyk",
-    phone_number: "7085228607",
-    password: "ginger98",
-  },
-  demographics: {
-    age: 21,
-    country: "Canada",
-    school: "Unviersity of California, Berkeley",
-    ucsc_college_affiliation: "N/A (I don't attend UCSC)",
-    year_in_school: "I am not currently in school",
-    education_level: "N/A",
-    graduation_year: "N/A",
-    area_of_study: "Computer Engineering",
-    first_cruzhacks: "No, this is not my first CruzHacks",
-    hackathon_experience: "2",
-    ethnic_background: "White",
-    gender_identity_one: "Nonbinary",
-    gender_identity_two: "Nonbinary",
-    sexual_orientation: "Asexual",
-    underepresented_group: "Yes",
-
-    tech_experience: "I do not have any tech experience", // DO NOT INCLUDE IN STATS
-    pronouns: "he/him", // DO NOT INCLUDE IN STATS
-  },
-  ...otherFields,
-}
-
-const submitSampleApps = async () => {
-  try {
-    await submitApplicationUnauthed(SampleApp1)
-    await submitApplicationUnauthed(SampleApp2)
-    await submitApplicationUnauthed(SampleApp3)
-    await submitApplicationUnauthed(SampleApp4)
-  } catch (err) {
-    console.error(err)
-  }
-}
+  AreaChart,
+  BarChart,
+  PieChart,
+  SimpleTable,
+} from "../../../../components/Charts"
 
 const DashboardAdmin = () => {
   const { isError, isLoading, error, data: statistics } = useStatistics()
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col gap-10'>
       <h1 className='font-title text-xl'>Dashboard</h1>
-
-      {/* TEMP */}
-      <button
-        type='button'
-        onClick={() => submitSampleApps()}
-        className='mt-3 rounded-md bg-blue-button/10 p-3 font-bold'
-      >
-        Create sample apps
-      </button>
 
       {isLoading && (
         <div className='flex h-60 justify-center'>
@@ -233,7 +56,14 @@ const DashboardAdmin = () => {
       {!isError && !isLoading && statistics && (
         <div className='space-y-10'>
           <SubmissionsBreakdown submissions={statistics.submissions} />
-          <DemographicsBreakdown demographics={statistics.demographics} />
+          <DemographicsIdentityBreakdown
+            demographics={statistics.demographics}
+          />
+          <DemographicsEducationBreakdown
+            demographics={statistics.demographics}
+          />
+          <LogisticsBreakdown logistics={statistics.logistics} />
+          <ReferalBreakdown referral={statistics.referral} />
         </div>
       )}
     </div>
@@ -251,6 +81,8 @@ const SubmissionsBreakdown = ({
     approvalRate: number
   }
 }) => {
+  if (!submissions) return null
+
   let total_submissions = 0
 
   const total_submissions_over_time = submissions.per_day.map(entry => {
@@ -261,8 +93,8 @@ const SubmissionsBreakdown = ({
   })
 
   return (
-    <div className='rounded-3xl bg-[#4659FF]/10 p-10'>
-      <h2 className='font-title text-xl underline'>Submissions</h2>
+    <div className='space-y-10 rounded-3xl bg-[#4659FF]/10 p-10'>
+      <h2 className='font-title text-xl uppercase underline'>Submissions</h2>
 
       <div className='flex items-center justify-center'>
         <div className='flex w-full max-w-5xl flex-wrap items-center justify-center'>
@@ -271,50 +103,27 @@ const SubmissionsBreakdown = ({
             title='Total Applications Over Time'
             label='total apps'
           />
-          <div className='flex grow flex-col items-center p-10'>
-            <p className='w-full rounded-lg bg-blue-imperial px-10 py-5 text-center font-subtext text-xl font-bold text-pink ring-2 ring-inset ring-white/10'>
+          <div className='flex grow flex-col items-center gap-2 p-10'>
+            <p className='w-full rounded-lg bg-blue-imperial px-10 py-5 text-center font-subtext text-xl font-bold text-gold ring-2 ring-inset ring-white/10'>
               {submissions.total} Total Submissions
             </p>
-            <div className='flex w-full items-center justify-center'>
-              <p className='grow rounded-lg bg-blue-imperial p-5 text-center font-subtext text-xs font-bold text-turquoise ring-2 ring-inset ring-white/10'>
+            <div className='flex w-full items-center justify-center gap-2'>
+              <p className='grow rounded-lg bg-blue-imperial p-5 text-center font-subtext text-xs font-bold text-pink ring-2 ring-inset ring-white/10'>
                 {submissions.accepted} Accepted
               </p>
-              <p className='grow rounded-lg bg-blue-imperial p-5 text-center font-subtext text-xs font-bold text-gold ring-2 ring-inset ring-white/10'>
+              <p className='grow rounded-lg bg-blue-imperial p-5 text-center font-subtext text-xs font-bold text-turquoise ring-2 ring-inset ring-white/10'>
                 {submissions.rejected} Rejected
               </p>
             </div>
-            <div className='flex aspect-square grow rounded-lg bg-blue-imperial p-10 md:w-1/3 lg:w-full'>
-              <ResponsiveContainer width='100%' height='100%'>
-                <RadialBarChart
-                  innerRadius='90%'
-                  barSize={8}
-                  data={[
-                    {
-                      name: "Approval Rate",
-                      value: submissions.approvalRate,
-                    },
-                  ]}
-                  startAngle={225}
-                  endAngle={-45}
-                >
-                  <PolarAngleAxis
-                    type='number'
-                    domain={[0, 1]}
-                    angleAxisId={0}
-                    tick={false}
-                    fill='#D3DAF4'
-                    opacity={0.2}
-                  />
-                  <RadialBar
-                    background
-                    dataKey='value'
-                    cornerRadius={30 / 2}
-                    fill='#8925F1'
-                  />
-                </RadialBarChart>
-              </ResponsiveContainer>
+            <div className='flex w-full grow items-center justify-center rounded-lg bg-blue-imperial'>
+              <PieChart
+                data={[
+                  { name: "Accepted", value: submissions.accepted },
+                  { name: "Rejected", value: submissions.rejected },
+                ]}
+                width={310}
+              />
             </div>
-            <p>{Math.round(submissions.approvalRate * 100)}% Approval Rate</p>
           </div>
         </div>
       </div>
@@ -322,17 +131,21 @@ const SubmissionsBreakdown = ({
   )
 }
 
-const DemographicsBreakdown = ({
+const DemographicsIdentityBreakdown = ({
   demographics,
 }: {
-  demographics: { [key: string]: ReChartsArray }
+  demographics: Statistics["demographics"]
 }) => {
+  if (!demographics) return null
+
   return (
     <div className='space-y-20 rounded-3xl bg-[#4659FF]/10 p-10'>
-      <h2 className='font-title text-xl underline'>Demographics</h2>
+      <h2 className='font-title text-xl uppercase underline'>
+        Demographics - Identity
+      </h2>
 
-      <div className='space-y-20'>
-        <div className='flex w-full flex-wrap justify-center gap-20 md:gap-0'>
+      <div className='space-y-10'>
+        <div className='flex w-full flex-wrap justify-center gap-20 lg:gap-0'>
           <PieChart
             data={demographics.age}
             title='Age Groups'
@@ -344,7 +157,7 @@ const DemographicsBreakdown = ({
             label='years old'
           />
         </div>
-        <div className='flex w-full flex-wrap justify-center gap-20 md:gap-0'>
+        <div className='flex w-full flex-wrap justify-center gap-20 lg:gap-0'>
           <PieChart
             data={demographics.sexual_orientation}
             title='Sexual Orientation'
@@ -358,21 +171,38 @@ const DemographicsBreakdown = ({
           </div>
         </div>
 
-        <div className='flex w-full items-center justify-center'>
-          <div className='h-[40rem] w-full max-w-5xl '>
+        <div className='flex w-full flex-col items-center justify-center lg:flex-row'>
+          <div className='h-[40rem] w-full max-w-5xl py-10'>
             <BarChart
               data={demographics.ethnic_background}
               title='Ethnic Background'
             />
           </div>
+          <PieChart
+            data={demographics.underepresented_group}
+            title='Underrepresented Group'
+          />
         </div>
+      </div>
+    </div>
+  )
+}
 
-        <PieChart
-          data={demographics.underepresented_group}
-          title='Underrepresented Group'
-        />
+const DemographicsEducationBreakdown = ({
+  demographics,
+}: {
+  demographics: Statistics["demographics"]
+}) => {
+  if (!demographics) return null
 
-        <div className='flex w-full flex-wrap justify-center gap-20 md:gap-0'>
+  return (
+    <div className='space-y-20 rounded-3xl bg-[#4659FF]/10 p-10'>
+      <h2 className='font-title text-xl uppercase underline'>
+        Demographics - Education
+      </h2>
+
+      <div className='space-y-10'>
+        <div className='flex w-full flex-wrap justify-center gap-20 lg:gap-0'>
           <PieChart
             data={demographics.ucsc_vs_non_ucsc}
             title='UCSC vs Non-UCSC'
@@ -383,7 +213,7 @@ const DemographicsBreakdown = ({
           />
         </div>
 
-        <div className='flex w-full flex-wrap justify-center gap-20 md:gap-0'>
+        <div className='flex w-full flex-wrap justify-center gap-20 lg:gap-0'>
           <PieChart data={demographics.year_in_school} title='Year in School' />
           <PieChart
             data={demographics.graduation_year}
@@ -391,7 +221,7 @@ const DemographicsBreakdown = ({
           />
         </div>
 
-        <div className='flex w-full flex-wrap justify-center gap-20 md:gap-0'>
+        <div className='flex w-full flex-wrap justify-center gap-20 lg:gap-0'>
           <PieChart
             title='Area of Study'
             data={demographics.area_of_study_cs_ce_gd_other}
@@ -404,6 +234,85 @@ const DemographicsBreakdown = ({
             data={demographics.first_cruzhacks}
             title='First CruzHacks'
           />
+        </div>
+      </div>
+    </div>
+  )
+}
+const LogisticsBreakdown = ({
+  logistics,
+}: {
+  logistics: Statistics["logistics"]
+}) => {
+  if (!logistics) return null
+
+  return (
+    <div className='space-y-10 rounded-3xl bg-[#4659FF]/10 p-10'>
+      <h2 className='font-title text-xl uppercase underline'>Logistics</h2>
+
+      <div className='space-y-20 lg:space-y-10'>
+        <div className='flex w-full flex-wrap justify-center gap-20 lg:gap-0'>
+          <PieChart
+            data={logistics.need_travel_reimbursement}
+            title='Need Travel Reimbursement'
+          />
+          <PieChart
+            data={logistics.need_charter_bus}
+            title='Need Charter Bus'
+          />
+          <PieChart
+            data={logistics.need_campus_parking_permit}
+            title='Need Parking Permit'
+          />
+        </div>
+
+        <PieChart
+          data={logistics.attendence_possible_wo_reimbursement}
+          title='Will Attend Without Reimbursement'
+        />
+      </div>
+
+      <div className='flex flex-col items-start justify-center gap-10 md:flex-row'>
+        <SimpleTable
+          title='T-Shirt Sizes'
+          fields={["XS", "S", "M", "L", "XL", "XXL", "XXXL"]}
+          data={logistics.tshirt_size}
+          otherData={logistics.other_tshirt_size}
+        />
+        <SimpleTable
+          title='Dietary Restrictions'
+          fields={[
+            "Gluten-Free",
+            "Vegan",
+            "Vegetarian",
+            "No Beef",
+            "No Pork",
+            "Peanut Allergies",
+            "Lactose Intolerant",
+            "None",
+          ]}
+          data={logistics.dietary_restrictions}
+          otherData={logistics.other_dietary_restrictions}
+        />
+      </div>
+    </div>
+  )
+}
+
+const ReferalBreakdown = ({
+  referral,
+}: {
+  referral: { [key: string]: ReChartsArray }
+}) => {
+  if (!referral) return null
+
+  return (
+    <div className='space-y-10 rounded-3xl bg-[#4659FF]/10 p-10'>
+      <h2 className='font-title text-xl uppercase underline'>Referral</h2>
+
+      <div className='flex items-center justify-center'>
+        <div className='h-[40rem] w-full '>
+          <BarChart data={referral.cruzhacks_referral} />
         </div>
       </div>
     </div>

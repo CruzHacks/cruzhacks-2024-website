@@ -190,7 +190,7 @@ export type HeroIcon = React.ForwardRefExoticComponent<
 // Statistics Types
 export type ReChartsArray = { name: string; value: number }[]
 
-export type RechartsStatistics = {
+export type Statistics = {
   submissions: {
     per_day: ReChartsArray
     total: number
@@ -198,8 +198,37 @@ export type RechartsStatistics = {
     rejected: number
     approvalRate: number
   }
-  // TODO: further specify these types
-  demographics: { [key: string]: ReChartsArray }
-  logistics: { [key: string]: ReChartsArray }
-  referral: { [key: string]: ReChartsArray }
+  demographics: {
+    age: ReChartsArray
+    age_range_18_to_25: ReChartsArray
+    ethnic_background: ReChartsArray
+    sexual_orientation: ReChartsArray
+    gender_identity_one: ReChartsArray
+    gender_identity_two: ReChartsArray
+    underepresented_group: ReChartsArray
+
+    country: ReChartsArray
+    ucsc_vs_non_ucsc: ReChartsArray
+    ucsc_college_affiliation: ReChartsArray
+    year_in_school: ReChartsArray
+    graduation_year: ReChartsArray
+    area_of_study: ReChartsArray
+    area_of_study_cs_ce_gd_other: ReChartsArray
+    hackathon_experience: ReChartsArray
+    first_cruzhacks: ReChartsArray
+  }
+  logistics: {
+    need_travel_reimbursement: ReChartsArray
+    need_charter_bus: ReChartsArray
+    need_campus_parking_permit: ReChartsArray
+    attendence_possible_wo_reimbursement: ReChartsArray
+
+    tshirt_size: { [key: string]: number }
+    other_tshirt_size: ReChartsArray
+    dietary_restrictions: { [key: string]: number }
+    other_dietary_restrictions: ReChartsArray
+  }
+  referral: {
+    cruzhacks_referral: ReChartsArray
+  }
 }

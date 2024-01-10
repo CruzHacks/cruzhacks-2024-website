@@ -3,7 +3,7 @@ import {
   ApplicationSchemaDto,
   CheckRoleSynced,
   ErrorResponse,
-  RechartsStatistics,
+  Statistics,
   UserBasics,
 } from "../types"
 import axios, { isAxiosError } from "axios"
@@ -223,7 +223,31 @@ export const generateStatistics = async () => {
     if (error) throw new Error(error)
 
     // TODO: type
-    return data as RechartsStatistics
+    return data as Statistics
+  } catch (err) {
+    if (isAxiosError(err)) {
+      if (err.response?.data?.error) {
+        console.error(err.response.data.error)
+        throw new Error(err.response.data.error)
+      }
+      console.error(err)
+      throw new Error(err.message)
+    }
+    throw err as Error
+  }
+}
+
+/**
+ * CruzHacks-2024-Backend API endpoint for retrieving statistics
+ */
+export const getStatistics = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/statistics`)
+    const { data, error } = response.data
+
+    if (error) throw new Error(error)
+
+    return data as Statistics
   } catch (err) {
     if (isAxiosError(err)) {
       if (err.response?.data?.error) {

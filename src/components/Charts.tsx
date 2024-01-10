@@ -14,6 +14,9 @@ import {
   Line,
   CartesianGrid,
 } from "recharts"
+import { Disclosure, Transition } from "@headlessui/react"
+import { ChevronDownIcon } from "@heroicons/react/24/outline"
+import { classNames } from "../utils/string"
 
 const COLORS = [
   "#E558F4", // Pink
@@ -77,15 +80,6 @@ const rechartsArrayToPieChartData = (
       value: Number(rechartsObject.value) / total,
     }
   })
-}
-
-/**
- * Convert string to epoch
- * @param date date to convert
- * @returns epoch time
- */
-const dateToEpoch = (date: string) => {
-  return new Date(date).getTime() / 1000
 }
 
 /**
@@ -160,6 +154,7 @@ export const BarChart = ({
           layout='vertical'
           className='font-subtext text-xs'
         >
+          <CartesianGrid strokeDasharray='3 3' stroke='#D3DAF4' opacity={0.2} />
           <Tooltip content={BarCustomTooltip} cursor={false} />
           <YAxis type='category' dataKey='name' display='none' />
           <XAxis type='number' display='none' />
@@ -269,13 +264,13 @@ export const AreaChart = ({
   data: ReChartsArray
 }) => {
   return (
-    <div className='text-md flex flex-col items-center gap-5'>
+    <div className='text-md hidden flex-col items-center gap-5 md:flex'>
       {title && <h3 className='font-title capitalize'>{title}</h3>}
       <RechartsLineChart
         width={width}
         height={height}
         data={data}
-        className='font-subtext text-xs'
+        className='font-subtext text-xs '
       >
         <Tooltip
           content={props => <AreaCustomTooltip {...props} label={label} />}
@@ -295,6 +290,84 @@ export const AreaChart = ({
           strokeWidth={5}
         />
       </RechartsLineChart>
+    </div>
+  )
+}
+
+export const SimpleTable = ({
+  title,
+  fields,
+  data,
+  otherData,
+}: {
+  title: string
+  fields: (keyof typeof data)[]
+  data: { [key: string]: number }
+  otherData: ReChartsArray
+}) => {
+  return (
+    <div className='flex w-full max-w-xs grow flex-col items-center rounded-lg bg-blue-imperial px-10 py-5 ring-2 ring-inset ring-white/10'>
+      <div className='flex w-full max-w-xs flex-col gap-2'>
+        <p className='font-title underline'>{title}</p>
+        {fields.map(field => {
+          return (
+            <div
+              key={field}
+              className='flex w-full max-w-xs justify-between gap-5'
+            >
+              <p className='font-bold text-pink'>{field}</p>
+              <p>{data[field]}</p>
+            </div>
+          )
+        })}
+        <Disclosure>
+          {({ open }) => (
+            <>
+              <Disclosure.Button className='flex w-full max-w-xs justify-between gap-5'>
+                <p className='flex items-center justify-center gap-1 font-bold text-gold'>
+                  Other
+                  <ChevronDownIcon
+                    className={classNames(
+                      open && "rotate-180 transform",
+                      "h-4 w-4 text-gold transition-all"
+                    )}
+                  />
+                </p>
+                <p>{data["Other"]}</p>
+              </Disclosure.Button>
+              <Transition
+                enter='transition duration-100 ease-out'
+                enterFrom='transform scale-95 opacity-0'
+                enterTo='transform scale-100 opacity-100'
+                leave='transition duration-75 ease-out'
+                leaveFrom='transform scale-100 opacity-100'
+                leaveTo='transform scale-95 opacity-0'
+              >
+                <Disclosure.Panel
+                  as='ul'
+                  className='flex w-full flex-col justify-between gap-4 pl-6'
+                >
+                  {otherData &&
+                    otherData.map(entry => {
+                      return (
+                        <li
+                          key={entry.name}
+                          className='list-disc text-xs font-bold text-gold'
+                        >
+                          {entry.name}
+                        </li>
+                      )
+                    })}
+                </Disclosure.Panel>
+              </Transition>
+            </>
+          )}
+        </Disclosure>
+        <div className='flex w-full max-w-xs justify-between gap-5'>
+          <p className='font-bold text-turquoise'>No Answer</p>
+          <p>{data["No Answer"]}</p>
+        </div>
+      </div>
     </div>
   )
 }
