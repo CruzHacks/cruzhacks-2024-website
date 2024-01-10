@@ -107,7 +107,7 @@ const BarCustomTooltip = ({ active, payload, label }: any) => {
   )
 }
 
-const CustomBarLabel = ({ name, x, y, width, height, value }: any) => {
+const BarCustomLabel = ({ name, x, y, width, height, value }: any) => {
   return (
     <text
       x={width > 200 ? x + 20 : x + width + 5}
@@ -145,7 +145,7 @@ export const BarChart = ({
 
   return (
     <div className='text-md flex h-full w-full flex-col items-center'>
-      {title && <h3 className='font-title capitalize'>{title}</h3>}
+      {title && <h3 className='text-center font-title capitalize'>{title}</h3>}
       <ResponsiveContainer width='100%' height='100%'>
         <RechartBarChart
           width={700}
@@ -156,9 +156,9 @@ export const BarChart = ({
         >
           <CartesianGrid strokeDasharray='3 3' stroke='#D3DAF4' opacity={0.2} />
           <Tooltip content={BarCustomTooltip} cursor={false} />
-          <YAxis type='category' dataKey='name' display='none' />
+          <YAxis type='category' dataKey='name' display='none' width={0} />
           <XAxis type='number' display='none' />
-          <Bar dataKey='value' fill={COLORS[0]} label={CustomBarLabel}>
+          <Bar dataKey='value' fill={COLORS[0]} label={BarCustomLabel}>
             {barChartData.map(entry => (
               <Cell key={entry.name} fill={getBarColor(entry.name)} />
             ))}
@@ -207,7 +207,7 @@ export const PieChart = ({
 
   return (
     <div className='text-md flex flex-col items-center'>
-      {title && <h3 className='font-title capitalize'>{title}</h3>}
+      {title && <h3 className='text-center font-title capitalize'>{title}</h3>}
       <RechartsPieChart
         width={width}
         height={height}
@@ -235,7 +235,7 @@ export const PieChart = ({
   )
 }
 
-const AreaCustomTooltip = ({ active, payload, label }: any) => {
+const LineCustomTooltip = ({ active, payload, label }: any) => {
   if (!active || !payload || !payload.length) {
     return null
   }
@@ -250,12 +250,10 @@ const AreaCustomTooltip = ({ active, payload, label }: any) => {
   )
 }
 
-export const AreaChart = ({
+export const LineChart = ({
   data,
   title,
   label,
-  width = 600,
-  height = 400,
 }: {
   title?: string
   width?: number
@@ -264,32 +262,34 @@ export const AreaChart = ({
   data: ReChartsArray
 }) => {
   return (
-    <div className='text-md hidden flex-col items-center gap-5 md:flex'>
+    <div className='text-md hidden h-[30rem] w-full min-w-full flex-col items-center gap-5 md:flex'>
       {title && <h3 className='font-title capitalize'>{title}</h3>}
-      <RechartsLineChart
-        width={width}
-        height={height}
-        data={data}
-        className='font-subtext text-xs '
-      >
-        <Tooltip
-          content={props => <AreaCustomTooltip {...props} label={label} />}
-        />
-        <CartesianGrid strokeDasharray='3 3' stroke='#D3DAF4' opacity={0.2} />
-        <XAxis
-          dataKey='name'
-          stroke='#D3DAF4'
-          tickFormatter={dateTickFormatter}
-        />
-        <YAxis dataKey='value' stroke='#D3DAF4' />
-        <Line
-          type='monotone'
-          dataKey='value'
-          dot={false}
-          stroke={COLORS[0]}
-          strokeWidth={5}
-        />
-      </RechartsLineChart>
+      <ResponsiveContainer width='100%' height='100%'>
+        <RechartsLineChart
+          width={700}
+          height={400}
+          data={data}
+          className='font-subtext text-xs '
+        >
+          <Tooltip
+            content={props => <LineCustomTooltip {...props} label={label} />}
+          />
+          <CartesianGrid strokeDasharray='3 3' stroke='#D3DAF4' opacity={0.2} />
+          <XAxis
+            dataKey='name'
+            stroke='#D3DAF4'
+            tickFormatter={dateTickFormatter}
+          />
+          <YAxis dataKey='value' stroke='#D3DAF4' />
+          <Line
+            type='monotone'
+            dataKey='value'
+            dot={false}
+            stroke={COLORS[0]}
+            strokeWidth={5}
+          />
+        </RechartsLineChart>
+      </ResponsiveContainer>
     </div>
   )
 }

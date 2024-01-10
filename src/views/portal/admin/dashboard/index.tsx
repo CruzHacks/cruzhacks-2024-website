@@ -2,7 +2,7 @@ import React from "react"
 import { ReChartsArray, Statistics } from "../../../../utils/types"
 import useStatistics from "../../../../hooks/useStatistics"
 import {
-  AreaChart,
+  LineChart,
   BarChart,
   PieChart,
   SimpleTable,
@@ -93,17 +93,17 @@ const SubmissionsBreakdown = ({
   })
 
   return (
-    <div className='space-y-10 rounded-3xl bg-[#4659FF]/10 p-10'>
+    <div className='rounded-3xl bg-[#4659FF]/10 p-10 md:space-y-10'>
       <h2 className='font-title text-xl uppercase underline'>Submissions</h2>
 
       <div className='flex items-center justify-center'>
-        <div className='flex w-full max-w-5xl flex-wrap items-center justify-center'>
-          <AreaChart
+        <div className='flex w-full max-w-5xl flex-col items-center justify-center lg:flex-row'>
+          <LineChart
             data={total_submissions_over_time}
             title='Total Applications Over Time'
             label='total apps'
           />
-          <div className='flex grow flex-col items-center gap-2 p-10'>
+          <div className='flex flex-col items-center gap-2 p-10'>
             <p className='w-full rounded-lg bg-blue-imperial px-10 py-5 text-center font-subtext text-xl font-bold text-gold ring-2 ring-inset ring-white/10'>
               {submissions.total} Total Submissions
             </p>
@@ -115,7 +115,7 @@ const SubmissionsBreakdown = ({
                 {submissions.rejected} Rejected
               </p>
             </div>
-            <div className='flex w-full grow items-center justify-center rounded-lg bg-blue-imperial'>
+            <div className='flex w-full grow items-center justify-center rounded-lg bg-blue-imperial ring-2 ring-inset ring-white/10'>
               <PieChart
                 data={[
                   { name: "Accepted", value: submissions.accepted },
@@ -139,13 +139,13 @@ const DemographicsIdentityBreakdown = ({
   if (!demographics) return null
 
   return (
-    <div className='space-y-20 rounded-3xl bg-[#4659FF]/10 p-10'>
+    <div className='space-y-10 rounded-3xl bg-[#4659FF]/10 p-10 md:space-y-20'>
       <h2 className='font-title text-xl uppercase underline'>
         Demographics - Identity
       </h2>
 
       <div className='space-y-10'>
-        <div className='flex w-full flex-wrap justify-center gap-20 lg:gap-0'>
+        <div className='flex w-full flex-wrap justify-center gap-10 lg:gap-0'>
           <PieChart
             data={demographics.age}
             title='Age Groups'
@@ -157,14 +157,14 @@ const DemographicsIdentityBreakdown = ({
             label='years old'
           />
         </div>
-        <div className='flex w-full flex-wrap justify-center gap-20 lg:gap-0'>
+        <div className='flex w-full flex-wrap justify-center gap-10 lg:gap-0'>
           <PieChart
             data={demographics.sexual_orientation}
             title='Sexual Orientation'
           />
           <div className='flex flex-col items-center'>
             <h3 className='font-title capitalize'>Gender Expression</h3>
-            <div className='flex flex-wrap gap-20 md:flex-nowrap md:gap-0'>
+            <div className='flex flex-wrap gap-10 md:flex-nowrap md:gap-0'>
               <PieChart data={demographics.gender_identity_one} />
               <PieChart data={demographics.gender_identity_two} />
             </div>
@@ -202,7 +202,7 @@ const DemographicsEducationBreakdown = ({
       </h2>
 
       <div className='space-y-10'>
-        <div className='flex w-full flex-wrap justify-center gap-20 lg:gap-0'>
+        <div className='flex w-full flex-wrap justify-center gap-10 lg:gap-0'>
           <PieChart
             data={demographics.ucsc_vs_non_ucsc}
             title='UCSC vs Non-UCSC'
@@ -213,7 +213,7 @@ const DemographicsEducationBreakdown = ({
           />
         </div>
 
-        <div className='flex w-full flex-wrap justify-center gap-20 lg:gap-0'>
+        <div className='flex w-full flex-wrap justify-center gap-10 lg:gap-0'>
           <PieChart data={demographics.year_in_school} title='Year in School' />
           <PieChart
             data={demographics.graduation_year}
@@ -221,7 +221,7 @@ const DemographicsEducationBreakdown = ({
           />
         </div>
 
-        <div className='flex w-full flex-wrap justify-center gap-20 lg:gap-0'>
+        <div className='flex w-full flex-wrap justify-center gap-10 lg:gap-0'>
           <PieChart
             title='Area of Study'
             data={demographics.area_of_study_cs_ce_gd_other}
@@ -250,28 +250,6 @@ const LogisticsBreakdown = ({
     <div className='space-y-10 rounded-3xl bg-[#4659FF]/10 p-10'>
       <h2 className='font-title text-xl uppercase underline'>Logistics</h2>
 
-      <div className='space-y-20 lg:space-y-10'>
-        <div className='flex w-full flex-wrap justify-center gap-20 lg:gap-0'>
-          <PieChart
-            data={logistics.need_travel_reimbursement}
-            title='Need Travel Reimbursement'
-          />
-          <PieChart
-            data={logistics.need_charter_bus}
-            title='Need Charter Bus'
-          />
-          <PieChart
-            data={logistics.need_campus_parking_permit}
-            title='Need Parking Permit'
-          />
-        </div>
-
-        <PieChart
-          data={logistics.attendence_possible_wo_reimbursement}
-          title='Will Attend Without Reimbursement'
-        />
-      </div>
-
       <div className='flex flex-col items-start justify-center gap-10 md:flex-row'>
         <SimpleTable
           title='T-Shirt Sizes'
@@ -295,6 +273,28 @@ const LogisticsBreakdown = ({
           otherData={logistics.other_dietary_restrictions}
         />
       </div>
+
+      <div className='space-y-20 lg:space-y-10'>
+        <div className='flex w-full flex-wrap justify-center gap-10 lg:gap-0'>
+          <PieChart
+            data={logistics.need_travel_reimbursement}
+            title='Need Travel Reimbursement'
+          />
+          <PieChart
+            data={logistics.need_charter_bus}
+            title='Need Charter Bus'
+          />
+          <PieChart
+            data={logistics.need_campus_parking_permit}
+            title='Need Parking Permit'
+          />
+        </div>
+
+        <PieChart
+          data={logistics.attendence_possible_wo_reimbursement}
+          title='Will Attend Without Reimbursement'
+        />
+      </div>
     </div>
   )
 }
@@ -311,7 +311,7 @@ const ReferalBreakdown = ({
       <h2 className='font-title text-xl uppercase underline'>Referral</h2>
 
       <div className='flex items-center justify-center'>
-        <div className='h-[40rem] w-full '>
+        <div className='h-[40rem] w-full'>
           <BarChart data={referral.cruzhacks_referral} />
         </div>
       </div>
