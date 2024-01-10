@@ -1,18 +1,16 @@
 import React from "react"
 import { ApplicationSchemaDto, ReChartsArray } from "../../../../utils/types"
 import { submitApplicationUnauthed } from "../../../../utils/apis/cloudFunctions"
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Cell,
-  Legend,
-  Pie,
-  PieChart,
-  Tooltip,
-  XAxis,
-} from "recharts"
 import useStatistics from "../../../../hooks/useStatistics"
+import { AreaChart, BarChart, PieChart } from "../../../../components/Charts"
+import {
+  PolarAngleAxis,
+  RadialBar,
+  RadialBarChart,
+  ResponsiveContainer,
+  Label,
+  Text,
+} from "recharts"
 
 const otherFields = {
   short_response: {
@@ -178,36 +176,6 @@ const submitSampleApps = async () => {
   }
 }
 
-const COLORS = [
-  "#E558F4", // Pink
-  "#13E4CA", // Turquoise
-  "#5B1FED", // Purple-Han
-  "#F9A318", // Orange
-  "#1795EB", // Blue-Button
-  "#F9D318", // Gold
-]
-
-const statisticKeyToTitle = (statisticKey: string) => {
-  return statisticKey.replace(/_/g, " ")
-}
-
-const rechartsArrayToPieChartData = (
-  rechartsArray: ReChartsArray
-): ReChartsArray => {
-  const total = rechartsArray.reduce(
-    (accumulator, currentValue) => accumulator + Number(currentValue.value),
-    0
-  )
-
-  return rechartsArray.map(rechartsObject => {
-    console.log(rechartsObject.value, rechartsArray.length)
-    return {
-      name: rechartsObject.name,
-      value: Number(rechartsObject.value) / total,
-    }
-  })
-}
-
 const DashboardAdmin = () => {
   const { isError, isLoading, error, data: statistics } = useStatistics()
 
@@ -264,126 +232,180 @@ const DashboardAdmin = () => {
 
       {!isError && !isLoading && statistics && (
         <div className='space-y-10'>
-          <h2 className='font-title text-lg'>Demographics</h2>
-          <div className='space-y-5'>
-            <div className='flex w-full flex-wrap justify-center gap-10 '>
-              <FormattedPieChart
-                data={statistics?.demographics?.age}
-                title='Age Groups'
-                label='years old'
-              />
-              <FormattedPieChart
-                data={statistics?.demographics?.age_range_18_to_25}
-                title='Ages 18 - 25 Breakdown'
-                label='years old'
-              />
-            </div>
-            <div className='flex w-full flex-wrap justify-center gap-10'>
-              <FormattedPieChart
-                data={statistics.demographics.sexual_orientation}
-                title='Sexual Orientation'
-              />
-              <div className='flex flex-col items-center'>
-                <h3 className='font-title capitalize'>Gender Expression</h3>
-                <div className='flex gap-10'>
-                  <FormattedPieChart
-                    data={statistics.demographics.gender_identity_one}
-                  />
-                  <FormattedPieChart
-                    data={statistics.demographics.gender_identity_two}
-                  />
-                </div>
-              </div>
-            </div>
-            <BarChart
-              width={700}
-              height={200}
-              data={statistics.demographics.ethnic_background}
-            >
-              <CartesianGrid strokeDasharray='3 3' />
-              <Tooltip content={BarCustomTooltip} cursor={false} />
-              <Legend verticalAlign='bottom' height={2} />
-              <XAxis dataKey='name' />
-              <Bar dataKey='value' fill={COLORS[0]} />
-            </BarChart>
-          </div>
+          <SubmissionsBreakdown submissions={statistics.submissions} />
+          <DemographicsBreakdown demographics={statistics.demographics} />
         </div>
       )}
     </div>
   )
 }
 
-const FormattedPieChart = ({
-  data,
-  title,
-  label,
+const SubmissionsBreakdown = ({
+  submissions,
 }: {
-  data: ReChartsArray
-  title?: string
-  label?: string
+  submissions: {
+    per_day: ReChartsArray
+    total: number
+    accepted: number
+    rejected: number
+    approvalRate: number
+  }
 }) => {
-  if (!data) {
-    return (
-      <div className='flex h-[400px] w-[400px] items-center justify-center bg-error/10'>
-        <p className='text-center text-error'>No Data provided for {title}</p>
+  let total_submissions = 0
+
+  const total_submissions_over_time = submissions.per_day.map(entry => {
+    return {
+      name: entry.name,
+      value: (total_submissions += entry.value),
+    }
+  })
+
+  return (
+    <div className='rounded-3xl bg-[#4659FF]/10 p-10'>
+      <h2 className='font-title text-xl underline'>Submissions</h2>
+
+      <div className='flex items-center justify-center'>
+        <div className='flex w-full max-w-5xl flex-wrap items-center justify-center'>
+          <AreaChart
+            data={total_submissions_over_time}
+            title='Total Applications Over Time'
+            label='total apps'
+          />
+          <div className='flex grow flex-col items-center p-10'>
+            <p className='w-full rounded-lg bg-blue-imperial px-10 py-5 text-center font-subtext text-xl font-bold text-pink ring-2 ring-inset ring-white/10'>
+              {submissions.total} Total Submissions
+            </p>
+            <div className='flex w-full items-center justify-center'>
+              <p className='grow rounded-lg bg-blue-imperial p-5 text-center font-subtext text-xs font-bold text-turquoise ring-2 ring-inset ring-white/10'>
+                {submissions.accepted} Accepted
+              </p>
+              <p className='grow rounded-lg bg-blue-imperial p-5 text-center font-subtext text-xs font-bold text-gold ring-2 ring-inset ring-white/10'>
+                {submissions.rejected} Rejected
+              </p>
+            </div>
+            <div className='flex aspect-square grow rounded-lg bg-blue-imperial p-10 md:w-1/3 lg:w-full'>
+              <ResponsiveContainer width='100%' height='100%'>
+                <RadialBarChart
+                  innerRadius='90%'
+                  barSize={8}
+                  data={[
+                    {
+                      name: "Approval Rate",
+                      value: submissions.approvalRate,
+                    },
+                  ]}
+                  startAngle={225}
+                  endAngle={-45}
+                >
+                  <PolarAngleAxis
+                    type='number'
+                    domain={[0, 1]}
+                    angleAxisId={0}
+                    tick={false}
+                    fill='#D3DAF4'
+                    opacity={0.2}
+                  />
+                  <RadialBar
+                    background
+                    dataKey='value'
+                    cornerRadius={30 / 2}
+                    fill='#8925F1'
+                  />
+                </RadialBarChart>
+              </ResponsiveContainer>
+            </div>
+            <p>{Math.round(submissions.approvalRate * 100)}% Approval Rate</p>
+          </div>
+        </div>
       </div>
-    )
-  }
-  const pieChartData = rechartsArrayToPieChartData(data)
+    </div>
+  )
+}
 
-  console.log(pieChartData)
-
+const DemographicsBreakdown = ({
+  demographics,
+}: {
+  demographics: { [key: string]: ReChartsArray }
+}) => {
   return (
-    <div className='text-md flex flex-col items-center'>
-      {title && <h3 className='font-title capitalize'>{title}</h3>}
-      <PieChart width={450} height={300} className='text-white'>
-        <Tooltip
-          content={data => <PieCustomTooltip {...data} label={label} />}
+    <div className='space-y-20 rounded-3xl bg-[#4659FF]/10 p-10'>
+      <h2 className='font-title text-xl underline'>Demographics</h2>
+
+      <div className='space-y-20'>
+        <div className='flex w-full flex-wrap justify-center gap-20 md:gap-0'>
+          <PieChart
+            data={demographics.age}
+            title='Age Groups'
+            label='years old'
+          />
+          <PieChart
+            data={demographics.age_range_18_to_25}
+            title='Ages 18 - 25 Breakdown'
+            label='years old'
+          />
+        </div>
+        <div className='flex w-full flex-wrap justify-center gap-20 md:gap-0'>
+          <PieChart
+            data={demographics.sexual_orientation}
+            title='Sexual Orientation'
+          />
+          <div className='flex flex-col items-center'>
+            <h3 className='font-title capitalize'>Gender Expression</h3>
+            <div className='flex flex-wrap gap-20 md:flex-nowrap md:gap-0'>
+              <PieChart data={demographics.gender_identity_one} />
+              <PieChart data={demographics.gender_identity_two} />
+            </div>
+          </div>
+        </div>
+
+        <div className='flex w-full items-center justify-center'>
+          <div className='h-[40rem] w-full max-w-5xl '>
+            <BarChart
+              data={demographics.ethnic_background}
+              title='Ethnic Background'
+            />
+          </div>
+        </div>
+
+        <PieChart
+          data={demographics.underepresented_group}
+          title='Underrepresented Group'
         />
-        {/* <Legend verticalAlign='bottom' height={2} /> */}
-        <Pie
-          type='monotone'
-          data={pieChartData}
-          dataKey='value'
-          name='name'
-          stroke='none'
-          innerRadius={60}
-          outerRadius={80}
-          // paddingAngle={2}
-          label={entry => entry.name}
-        >
-          {data.map((_, index: number) => (
-            <Cell key={index} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-      </PieChart>
-    </div>
-  )
-}
 
-const BarCustomTooltip = ({ active, payload, label }: any) => {
-  if (!active || !payload || !payload.length) {
-    return null
-  }
+        <div className='flex w-full flex-wrap justify-center gap-20 md:gap-0'>
+          <PieChart
+            data={demographics.ucsc_vs_non_ucsc}
+            title='UCSC vs Non-UCSC'
+          />
+          <PieChart
+            data={demographics.ucsc_college_affiliation}
+            title='UCSC College Affiliation'
+          />
+        </div>
 
-  return (
-    <div className='rounded-md border-white/50 bg-blue-royal p-2'>
-      <p className='font-subtext text-white'>{`${payload[0].value}
-      ${label ? " " + label : ""}`}</p>
-    </div>
-  )
-}
+        <div className='flex w-full flex-wrap justify-center gap-20 md:gap-0'>
+          <PieChart data={demographics.year_in_school} title='Year in School' />
+          <PieChart
+            data={demographics.graduation_year}
+            title='Graduation Year'
+          />
+        </div>
 
-const PieCustomTooltip = ({ active, payload, label }: any) => {
-  if (!active || !payload || !payload.length) {
-    return null
-  }
-
-  return (
-    <div className='rounded-md border-white/50 bg-blue-royal p-2'>
-      <p className='font-subtext text-white'>{`${(
-        payload[0].value * 100
-      ).toFixed(2)}% ${payload[0].name}${label ? " " + label : ""}`}</p>
+        <div className='flex w-full flex-wrap justify-center gap-20 md:gap-0'>
+          <PieChart
+            title='Area of Study'
+            data={demographics.area_of_study_cs_ce_gd_other}
+          />
+          <PieChart
+            data={demographics.hackathon_experience}
+            title='Hackathon Experience'
+          />
+          <PieChart
+            data={demographics.first_cruzhacks}
+            title='First CruzHacks'
+          />
+        </div>
+      </div>
     </div>
   )
 }
