@@ -26,7 +26,7 @@ const HeroBlurb = ({ id }: { id?: string }) => {
           </p>
           <Link
             to='/team'
-            className='mt-2 flex items-center gap-2 text-blue-button'
+            className='mt-2 flex items-center gap-2 font-bold text-blue-button'
           >
             Meet the CruzHacks team
             <ArrowRightIcon className='h-4' />
