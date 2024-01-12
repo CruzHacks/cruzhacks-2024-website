@@ -31,7 +31,7 @@ const Support = () => {
     <div className='space-y-10 pb-20 pt-5 md:pb-0 md:pt-20'>
       <h1 className='font-title text-3xl uppercase md:text-5xl'>Support</h1>
 
-      <div className='flex flex-col gap-10 md:flex-row'>
+      <div className='flex flex-col gap-10 lg:flex-row'>
         <Schedule />
 
         <WorkshopsFood />
