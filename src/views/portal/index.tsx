@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from "react"
-import { Dialog, Menu, Transition } from "@headlessui/react"
+import { Dialog, Transition } from "@headlessui/react"
 import {
-  AcademicCapIcon,
   Bars3Icon,
   InformationCircleIcon,
   XMarkIcon,
@@ -11,7 +10,6 @@ import { Link, Outlet, useLocation } from "react-router-dom"
 import CruzHacksLogo from "../../assets/logos/CruzHacks - Orange.svg"
 import useAuth from "../../hooks/useAuth"
 import AvatarButton from "../../components/AvatarButton"
-import { MapIcon } from "@heroicons/react/24/solid"
 import { HeroIcon } from "../../utils/types"
 
 type NavigationItem = {
@@ -24,14 +22,8 @@ interface SidebarProps {
   navigation: NavigationItem[]
 }
 
-const resources: NavigationItem[] = [
-  { name: "Resources", href: "/support/resources", icon: AcademicCapIcon },
-  { name: "Maps", href: "/support/maps", icon: MapIcon },
-  { name: "FAQ", href: "/support/faq-and-rules", icon: InformationCircleIcon },
-]
-
 const Sidebar = ({ navigation }: SidebarProps) => {
-  const [sidebarOpen, setSidebarOpen] = useState(true) // TEMP
+  const [sidebarOpen, setSidebarOpen] = useState(false) // TEMP
   const {
     auth: { user, role },
   } = useAuth()
@@ -127,10 +119,11 @@ const Sidebar = ({ navigation }: SidebarProps) => {
                                 to={item.href}
                                 className={classNames(
                                   isActive(item)
-                                    ? "bg-blue-royal/60 font-semibold text-pink"
-                                    : "hover:bg-blue-royal/60 hover:text-pink",
-                                  "group flex gap-x-3 p-2 pl-10 text-sm font-semibold leading-6"
+                                    ? "border-white/5 text-orange"
+                                    : "border-transparent hover:text-orange",
+                                  "group flex gap-x-3 border-y-2 p-2 pl-10 text-sm leading-6 hover:bg-blue-royal/60"
                                 )}
+                                onClick={() => setSidebarOpen(false)}
                               >
                                 <item.icon
                                   className='h-6 w-6 shrink-0'
@@ -142,7 +135,16 @@ const Sidebar = ({ navigation }: SidebarProps) => {
                           ))}
                         </ul>
                       </li>
-                      <SupportButton />
+                      <Link
+                        to='/support'
+                        className='flex w-fit gap-2 self-center bg-white/5 px-8 py-4 ring-4 ring-inset ring-white/5 hover:text-orange'
+                      >
+                        <InformationCircleIcon
+                          className='h-6 w-6'
+                          aria-hidden='true'
+                        />
+                        Support
+                      </Link>
                     </ul>
                   </nav>
                 </div>
@@ -179,9 +181,9 @@ const Sidebar = ({ navigation }: SidebarProps) => {
                         to={item.href}
                         className={classNames(
                           isActive(item)
-                            ? "bg-blue-royal/60 font-semibold text-pink"
-                            : "hover:bg-blue-royal/60 hover:text-pink",
-                          "group flex gap-x-3 p-2 pl-10 text-sm font-semibold leading-6"
+                            ? "border-white/5 text-orange"
+                            : "border-transparent hover:text-orange",
+                          "group flex gap-x-3 border-y-2 p-2 pl-10 text-sm leading-6 hover:bg-blue-royal/60"
                         )}
                       >
                         <item.icon
@@ -194,7 +196,13 @@ const Sidebar = ({ navigation }: SidebarProps) => {
                   ))}
                 </ul>
               </li>
-              <SupportButton />
+              <Link
+                to='/support'
+                className='flex w-fit gap-2 self-center bg-white/5 px-8 py-4 ring-4 ring-inset ring-white/5 hover:text-orange'
+              >
+                <InformationCircleIcon className='h-6 w-6' aria-hidden='true' />
+                Support
+              </Link>
             </ul>
             <div className='-mx-3 mb-5 mt-auto flex items-center gap-5 font-subtext text-sm'>
               <AvatarButton email={user?.email || ""} direction={"left"} />
@@ -230,35 +238,6 @@ const Sidebar = ({ navigation }: SidebarProps) => {
         </div>
       </main>
     </div>
-  )
-}
-
-const SupportButton = () => {
-  return (
-    <Menu as='li' className='self-center'>
-      <Menu.Button className='flex w-fit gap-3 bg-white/5 px-8 py-4 ring-4 ring-inset ring-white/5'>
-        <InformationCircleIcon className='h-6 w-6' aria-hidden='true' />
-        Support
-      </Menu.Button>
-      <Menu.Items className='absolute z-10 -ml-3 mt-6 w-48 origin-top rounded-md bg-blue-imperial py-1 shadow-lg ring-4 ring-white/5 focus:outline-none'>
-        {resources.map(item => (
-          <Menu.Item key={item.name}>
-            {/* TODO: Change <a> to Next/Link without breaking Headless UI Menu */}
-            {({ active }) => (
-              <Link
-                to={item.href}
-                className={classNames(
-                  active ? "bg-blue-royal/60" : "",
-                  "block border-b-2 border-white/5 px-4 py-2 text-sm capitalize text-white"
-                )}
-              >
-                {item.name}
-              </Link>
-            )}
-          </Menu.Item>
-        ))}
-      </Menu.Items>
-    </Menu>
   )
 }
 
