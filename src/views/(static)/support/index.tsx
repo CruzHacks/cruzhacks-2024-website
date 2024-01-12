@@ -2,32 +2,92 @@ import React from "react"
 
 import { Link } from "react-router-dom"
 
+import MouseAndStars from "../../../assets/illustrations/Mouse and Stars.svg"
+import Maps from "../../../assets/illustrations/Maps.svg"
+import Clipboard from "../../../assets/illustrations/Clipboard.svg"
+import Schedule from "./Schedule"
+import WorkshopsFood from "./WorkshopsFood"
+
+const supportLinks = [
+  {
+    illustration: MouseAndStars,
+    title: "resources",
+    link: "resources",
+  },
+  {
+    illustration: Maps,
+    title: "maps",
+    link: "maps",
+  },
+  {
+    illustration: Clipboard,
+    title: "faqs",
+    link: "faq-and-rules",
+  },
+]
+
 const Support = () => {
   return (
-    <div className='space-y-10'>
-      <h1 className='font-title text-4xl'>Support</h1>
+    <div className='space-y-10 pb-20 pt-5 md:pb-0 md:pt-20'>
+      <h1 className='font-title text-3xl uppercase md:text-5xl'>Support</h1>
 
-      <ul className='list-disc space-y-5'>
-        <li className='underline'>
-          <Link className='text-blue-button' to='resources'>
-            Resources
-          </Link>
-        </li>
-        <li className='underline'>
-          <Link className='text-blue-button' to='maps'>
-            Maps
-          </Link>
-        </li>
-        <li className='underline'>
-          <Link className='text-blue-button' to='faq-and-rules'>
-            FAQ And Rules
-          </Link>
-        </li>
-        <li>
-          Join our discord and ask for help in the #help-and-questions channel
-        </li>
-        <li>Email us at contact@cruzhacks.com</li>
-      </ul>
+      <div className='flex flex-col gap-10 md:flex-row'>
+        <Schedule />
+
+        <WorkshopsFood />
+      </div>
+
+      <div className='font-subtext'>
+        <p>
+          Feel free to reach out to us at{" "}
+          <Link
+            to='mail:contact@cruzhacks.com'
+            className='text-blue-button hover:underline'
+          >
+            contact@cruzhacks.com
+          </Link>{" "}
+          for any questions.
+        </p>
+
+        <p>
+          Also please{" "}
+          <Link
+            to='https://discord.gg/tH9t6pQX'
+            className='text-blue-button hover:underline'
+          >
+            join our discord
+          </Link>{" "}
+          and ask for help in the #help-and-questions channel.
+        </p>
+      </div>
+
+      <div className='flex flex-col items-center gap-10 md:h-60 md:flex-row md:items-stretch'>
+        {supportLinks.map(link => (
+          <SupportLink key={link.title} {...link} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+const SupportLink = ({
+  illustration,
+  title,
+  link,
+}: {
+  illustration: string
+  title: string
+  link: string
+}) => {
+  return (
+    <div className='group flex h-60 w-full max-w-xs items-center justify-center md:h-full md:w-1/3 md:max-w-none'>
+      <Link
+        to={link}
+        className='flex h-full w-full flex-col items-center justify-center gap-5 rounded-lg bg-blue-royal px-20 py-5 ring-4 ring-inset ring-white/10 transition-all group-hover:h-5/6 group-hover:w-5/6 group-hover:bg-blue-imperial'
+      >
+        <img src={illustration} alt='' className='' />
+        <p className='font-subtext text-lg lowercase'>{title}</p>
+      </Link>
     </div>
   )
 }

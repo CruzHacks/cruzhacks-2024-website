@@ -22,7 +22,7 @@ const EventInfo: React.FC = () => {
           <p>
             Join our Discord{" "}
             <a
-              className='italic text-blue-button underline'
+              className='text-blue-button hover:underline'
               href='https://discord.gg/rGjDTCk3Nx'
             >
               here
