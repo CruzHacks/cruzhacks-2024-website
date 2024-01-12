@@ -260,3 +260,32 @@ export const getStatistics = async () => {
     throw err as Error
   }
 }
+
+/**
+ * CruzHacks-2024-Backend API endpoint for checking in a user
+ */
+export const checkInUser = async (uid: string) => {
+  try {
+    const response = await axios.post(`${API_URL}/auth/checkIn`, null, {
+      params: {
+        uid,
+      },
+    })
+
+    const { data, error } = response.data
+
+    if (error) throw new Error(error)
+
+    return data as User
+  } catch (err) {
+    if (isAxiosError(err)) {
+      if (err.response?.data?.error) {
+        console.error(err.response.data.error)
+        throw new Error(err.response.data.error)
+      }
+      console.error(err)
+      throw new Error(err.message)
+    }
+    throw err as Error
+  }
+}

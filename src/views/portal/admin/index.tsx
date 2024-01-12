@@ -31,7 +31,7 @@ const nav = [
   },
   {
     name: "QR Check-In",
-    href: "/portal/admin/QRCheckIn",
+    href: "/portal/admin/check-in",
     icon: CameraIcon,
   },
 ]

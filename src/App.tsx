@@ -32,6 +32,7 @@ import Team from "./views/team"
 import ApplicationClosed from "./views/ApplicationClosed"
 
 import QRCheckIn from "./views/portal/admin/QRCheckIn"
+import DashbaordHacker from "./views/portal/hacker/dashboard"
 
 const App: React.FC = () => {
   const {
@@ -75,8 +76,7 @@ const App: React.FC = () => {
 
         {/* You cannot be logged in to access these routes*/}
         <Route element={<UnauthenticatedRoute />}>
-          {/* <Route path='login' element={<Login />} /> */}
-          <Route path='login' element={<QRCheckIn />} /> 
+          <Route path='login' element={<Login />} />
           <Route path='organizers-only/signup' element={<Signup />} />
           <Route path='apply' element={<Outlet />}>
             <Route index element={<ApplicationClosed />} />
@@ -109,6 +109,7 @@ const App: React.FC = () => {
 
         <Route element={<RoleProtectedRoute allowedRole='hacker' />}>
           <Route path='portal/hacker' element={<HackerPortal />}>
+            <Route index element={<DashbaordHacker />} />
             {/* Hacker Portal sub-routes go here*/}
           </Route>
         </Route>
@@ -122,6 +123,7 @@ const App: React.FC = () => {
             />
             <Route path='teams' element={<TeamsAdmin />} />
             <Route path='users' element={<UsersAdmin />} />
+            <Route path='check-in' element={<QRCheckIn />} />
           </Route>
         </Route>
 
