@@ -32,6 +32,8 @@ import ScrollToAnchor from "./components/scrollControl/ScrollToAnchor"
 import Team from "./views/team"
 import ApplicationClosed from "./views/ApplicationClosed"
 
+import QRCheckIn from "./views/portal/admin/QRCheckIn"
+
 const App: React.FC = () => {
   const {
     auth: { loading },
@@ -70,7 +72,8 @@ const App: React.FC = () => {
 
         {/* You cannot be logged in to access these routes*/}
         <Route element={<UnauthenticatedRoute />}>
-          <Route path='login' element={<Login />} />
+          {/* <Route path='login' element={<Login />} /> */}
+          <Route path='login' element={<QRCheckIn />} /> 
           <Route path='organizers-only/signup' element={<Signup />} />
           <Route path='apply' element={<Outlet />}>
             <Route index element={<ApplicationClosed />} />
