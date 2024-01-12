@@ -1,12 +1,13 @@
 import React from "react"
+import Card from "../../../../components/Card"
 import Button from "../../../../components/Button"
 
 const TeamFinder: React.FC = () => {
   return (
-    <div className='flex h-full w-full flex-col space-y-5 rounded-3xl bg-[#4659FF]/10 p-10'>
-      <h2 className='font-subtext'>Don&apos;t Have a Team Yet?</h2>
-      <h1 className='font-title text-2xl'>Find a Team to Join & Submit</h1>
-
+    <Card
+      introTitle="Don't Have a Team Yet?"
+      title='Find a Team to Join and Submit'
+    >
       <ol className='font-nunito m-auto flex flex-col gap-5 md:w-5/6'>
         <li>
           1. Join our Slack channel{" "}
@@ -18,15 +19,30 @@ const TeamFinder: React.FC = () => {
           </a>{" "}
           to find your team of hackers!
         </li>
+        <p className='text-center font-bold uppercase text-blue-chinese'>
+          Team Formation Guidelines
+        </p>
         <li className='flex flex-col gap-2 md:px-5'>
-          <p>Team Formation Guidelines:</p>
-          <p className='font-thin'>- Must be compromised of 1-4 people</p>
-          <p className='font-thin'>
-            - The project must be completed at the event
-          </p>
-          <p className='font-thin'>
-            - All members must be an accepted applicant to CruzHacks 2023
-          </p>
+          <ol className='space-y-5'>
+            <li className='flex items-center gap-5'>
+              <p className='flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-chinese/20 font-title font-bold text-blue-chinese'>
+                1
+              </p>
+              Must be compromised of 1-4 people
+            </li>
+            <li className='flex items-center gap-5'>
+              <p className='flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-chinese/20 font-title font-bold text-blue-chinese'>
+                2
+              </p>
+              The project must be completed at the event
+            </li>
+            <li className='flex items-center gap-5'>
+              <p className='flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-chinese/20 font-title font-bold text-blue-chinese'>
+                3
+              </p>
+              All members must be an accepted applicant to CruzHacks 2024
+            </li>
+          </ol>
         </li>
         <li>
           2. Found your team? Log in and{" "}
@@ -44,7 +60,7 @@ const TeamFinder: React.FC = () => {
           override='w-full md:w-1/2 m-auto'
         />
       </div>
-    </div>
+    </Card>
   )
 }
 

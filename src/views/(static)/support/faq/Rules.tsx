@@ -1,11 +1,10 @@
 import React from "react"
 import Button from "../../../../components/Button"
+import Card from "../../../../components/Card"
 
 const Rules: React.FC = () => {
   return (
-    <div className='flex h-full w-full flex-col space-y-5 rounded-3xl bg-[#4659FF]/10 p-10'>
-      <h1 className='font-title text-2xl'>Event Info</h1>
-
+    <Card title='Rules and Policies'>
       <div className='md:px-10'>
         <p className='mb-10 font-subtext'>
           Cruzhacks values the importance of a safe and all-inclusive space. We
@@ -15,13 +14,13 @@ const Rules: React.FC = () => {
 
         <div className='flex flex-col items-stretch gap-5'>
           <Button
-            text='CruzHacks 2024 Rules'
-            link='https://github.com/CruzHacks/hackathon-rules/blob/master/Rules.md'
-            type='clear'
+            text='Code of Conduct'
+            link='https://static.mlh.io/docs/mlh-code-of-conduct.pdf'
+            type='full'
           />
           <Button
-            text='Code of Conduct 2024 Rules'
-            link='https://static.mlh.io/docs/mlh-code-of-conduct.pdf'
+            text='CruzHacks 2024 Rules'
+            link='https://github.com/CruzHacks/hackathon-rules/blob/master/Rules.md'
             type='clear'
           />
           <Button
@@ -36,7 +35,7 @@ const Rules: React.FC = () => {
           />
         </div>
       </div>
-    </div>
+    </Card>
   )
 }
 

@@ -7,6 +7,7 @@ import StevensonFloorPlan from "./StevensonFloorplan"
 import StevensonEastRemoteLot from "./StevensonEastRemoteLot"
 import StevensonJudgingMap from "./StevensonJudgingMap"
 import { ChevronDownIcon } from "@heroicons/react/24/outline"
+import BackgroundHeader from "../BackgroundHeader"
 
 const maps = [
   {
@@ -42,7 +43,7 @@ const Map: React.FC = () => {
 
   return (
     <div className='mx-auto max-w-screen-md p-10'>
-      {/* <BackgroundHeader /> */}
+      <BackgroundHeader />
 
       <div className='flex flex-col items-stretch justify-center gap-10'>
         <h1 className='text-center font-title text-4xl text-white md:py-10 lg:text-6xl'>

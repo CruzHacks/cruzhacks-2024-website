@@ -1,6 +1,7 @@
 import React from "react"
 
 import StevensonMapImg from "../../../../assets/maps/event_outside.png"
+import Card from "../../../../components/Card"
 
 interface MapKeyItemInterface {
   color: string
@@ -11,14 +12,14 @@ const MapKeyItem: React.FC<MapKeyItemInterface> = ({ color, label }) => {
   return (
     <div className='flex items-center gap-5'>
       <div className={`mt-1 h-2 w-6 shrink-0 rounded-md md:h-6 ${color}`}></div>
-      <p className='font-subtext text-blue-imperial'>{label}</p>
+      <p className='font-subtext text-black'>{label}</p>
     </div>
   )
 }
 
 const StevensonOutside: React.FC = () => {
   return (
-    <div className='flex h-full w-full max-w-4xl grow flex-col rounded-3xl bg-[#4659FF]/10 p-10'>
+    <Card>
       <div className='flex flex-col gap-5 md:flex-row md:gap-10'>
         <img
           className='md:w-2/3'
@@ -34,7 +35,7 @@ const StevensonOutside: React.FC = () => {
           <MapKeyItem color='bg-[#FBFF33]' label='Silverman Conference Room' />
         </div>
       </div>
-    </div>
+    </Card>
   )
 }
 
