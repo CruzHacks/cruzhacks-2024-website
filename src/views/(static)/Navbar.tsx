@@ -23,7 +23,7 @@ const Navbar = () => {
               alt='CruzHacks logo'
             />
           </Link>
-          <div className='flex grow items-center justify-evenly font-light uppercase md:grow-0 md:gap-10'>
+          <div className='flex grow items-center justify-evenly font-light uppercase md:grow-0 md:gap-10 lg:gap-16'>
             <Link
               to='/#about'
               className='transition-all hover:font-bold hover:text-pink'
@@ -35,6 +35,12 @@ const Navbar = () => {
               className='transition-all hover:font-bold hover:text-pink'
             >
               Prize Tracks
+            </Link>
+            <Link
+              to='/team'
+              className='hidden transition-all hover:font-bold hover:text-pink lg:block'
+            >
+              The Team
             </Link>
             <Link
               to='/support'

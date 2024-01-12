@@ -1,13 +1,17 @@
 import React from "react"
 import {
   classNames,
-  objectToCSV,
+  applicationToCSV,
   timestampFilename,
 } from "../../../../utils/string"
 import { useNavigate } from "react-router-dom"
 import useApplications from "../../../../hooks/useApplications"
 import { ApplicationStatus } from "../../../../utils/types"
-import { ArrowDownTrayIcon } from "@heroicons/react/24/outline"
+import {
+  ArrowDownTrayIcon,
+  CheckCircleIcon,
+  XCircleIcon,
+} from "@heroicons/react/24/outline"
 import toast from "react-hot-toast"
 
 const LOADING_ENTRIES = 50
@@ -58,7 +62,7 @@ const ApplicationsAdmin = () => {
     }
 
     const filename = timestampFilename("hacker_applications", "csv")
-    const csvData = objectToCSV(applications)
+    const csvData = applicationToCSV(applications)
 
     const blob = new Blob([csvData], { type: "text/csv" })
     const url = window.URL.createObjectURL(blob)
@@ -127,6 +131,12 @@ const ApplicationsAdmin = () => {
                   </th>
                   <th
                     scope='col'
+                    className='sticky top-[3.8rem] z-10 hidden border-b border-white/20 bg-blue-imperial/50 px-3 py-3.5 text-left text-sm font-semibold text-white backdrop-blur lg:top-0 lg:table-cell'
+                  >
+                    RSVP
+                  </th>
+                  <th
+                    scope='col'
                     className='sticky top-[3.8rem] z-10 hidden border-b border-white/20 bg-blue-imperial/50 px-3 py-3.5 text-left text-sm font-semibold text-white backdrop-blur sm:table-cell lg:top-0'
                   >
                     Time Submitted
@@ -176,6 +186,34 @@ const ApplicationsAdmin = () => {
                             )}
                           >
                             <AppStatus status={application.status} />
+                          </td>
+
+                          {/* Application RSVP */}
+                          <td
+                            className={classNames(
+                              applicationIdx !== applications.length - 1 &&
+                                "border-b border-white/20",
+                              "hidden whitespace-nowrap px-3 py-4 text-sm font-medium lg:table-cell"
+                            )}
+                          >
+                            {application.rsvp === undefined ? (
+                              <span className='text-white/50'>
+                                {application.status === "accepted" ? "TBD" : ""}
+                              </span>
+                            ) : (
+                              <span
+                                className={classNames(
+                                  application.rsvp === true && "text-success",
+                                  application.rsvp === false && "text-error"
+                                )}
+                              >
+                                {application.rsvp ? (
+                                  <CheckCircleIcon className='w-5' />
+                                ) : (
+                                  <XCircleIcon className='w-5' />
+                                )}
+                              </span>
+                            )}
                           </td>
 
                           {/* Application Time Submitted */}
@@ -245,6 +283,17 @@ const ApplicationsAdmin = () => {
                             )}
                           >
                             <div className='h-6 w-24 animate-pulse rounded bg-white/30 '></div>
+                          </td>
+
+                          {/* Application RSVP */}
+                          <td
+                            className={classNames(
+                              loadingIdx !== LOADING_ENTRIES - 1 &&
+                                "border-b border-white/20",
+                              "hidden px-3 py-4 lg:table-cell"
+                            )}
+                          >
+                            <div className='h-6 w-5 animate-pulse rounded bg-white/30 '></div>
                           </td>
 
                           {/* Application Time Submitted */}

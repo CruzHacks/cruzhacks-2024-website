@@ -22,22 +22,29 @@ export const isString = (value: any): value is string =>
  * @param {ApplicationSchema} applications array of application submissions
  * @returns csv string
  */
-export const objectToCSV = (applications: ApplicationSchema[]) => {
+export const applicationToCSV = (applications: ApplicationSchema[]) => {
   const headers = [
     "email",
     "fullname",
     "status",
+    "rsvp",
     "_submitted",
   ] as (keyof ApplicationSchema)[]
 
   const csvRows = []
-  csvRows.push("Email,Full Name,Status,Time Submitted")
+  csvRows.push("Email,Full Name,Status,Attending,Time Submitted")
 
   for (const row of applications) {
     const values = headers.map(header => {
       let val = row[header] ?? ""
       if (header === "_submitted") {
         val = val.toDate().toLocaleString()
+      }
+      if (header === "status" && isString(val)) {
+        val = val.toUpperCase()
+      }
+      if (header === "rsvp" && val !== "") {
+        val = val ? "YES" : "NO"
       }
 
       const escaped = ("" + val).replace(/"/g, '\\"')
