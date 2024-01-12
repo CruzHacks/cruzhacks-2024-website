@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuth"
 import CruzHacksLogo from "../../assets/logos/CruzHacks - Blue.svg"
 import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/solid"
 import AvatarButton from "../../components/AvatarButton"
+import { classNames } from "../../utils/string"
 
 const Navbar = () => {
   const {
@@ -46,7 +47,10 @@ const Navbar = () => {
           {/* Desktop MLH Trust Badge */}
           <a
             id='mlh-trust-badge'
-            className='absolute right-24 top-0 hidden w-20 md:block'
+            className={classNames(
+              isAuthenticated ? "right-24" : "right-52",
+              "absolute top-0 hidden w-20 md:block"
+            )}
             href='https://mlh.io/na?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2024-season&utm_content=blue'
             target='_blank'
             rel='noreferrer'
