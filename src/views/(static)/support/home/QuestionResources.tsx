@@ -1,6 +1,6 @@
 import React from "react"
-import Card from "../../../components/Card"
-import Button from "../../../components/Button"
+import Card from "../../../../components/Card"
+import Button from "../../../../components/Button"
 
 const QuestionResources: React.FC = () => {
   return (
@@ -13,13 +13,13 @@ const QuestionResources: React.FC = () => {
           organizer in person.
         </p>
         <Button
-          text='Join Our Slack'
+          text='Join Our Discord'
           link='https://www.google.com/url?q=https://join.slack.com/t/cruzhacks2023-7db8697/shared_invite/zt-1mqu9lds7-x6Lj7T126Bc2p1VkaZt05g&sa=D&source=editors&ust=1675319183050096&usg=AOvVaw1Fxo5ltmaqO1rdNPDcvCif'
           type='full'
           override='w-full'
         />
         <a
-          className='text-purple underline'
+          className='text-blue-button underline'
           href='https://docs.google.com/document/u/1/d/e/2PACX-1vTHyuHwcNdhtdovapKJCD5SAlRBkmFsfolBVPRDmoN1O9l6E-nQ0j8AAYWr5_edgVV6JgqdbIkhUYnQ/pub'
         >
           Go to Hack Pack

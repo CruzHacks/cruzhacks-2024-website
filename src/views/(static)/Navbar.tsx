@@ -1,10 +1,53 @@
-import React from "react"
+import React, { Fragment } from "react"
 import { Link } from "react-router-dom"
 import useAuth from "../../hooks/useAuth"
 import CruzHacksLogo from "../../assets/logos/CruzHacks - Blue.svg"
 import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/solid"
 import AvatarButton from "../../components/AvatarButton"
 import { classNames } from "../../utils/string"
+import {
+  ArchiveBoxIcon,
+  ChevronDownIcon,
+  InformationCircleIcon,
+  MapIcon,
+  QuestionMarkCircleIcon,
+} from "@heroicons/react/24/outline"
+import { Popover, Transition } from "@headlessui/react"
+
+const navigation = [
+  { name: "About", href: "/#about" },
+  { name: "Prize Tracks", href: "/#prize-tracks" },
+  // { name: "The Team", href: "/team" },
+  {
+    name: "Support",
+    sub_menu: [
+      {
+        name: "Support Hub",
+        description: "Support links, schedules, and more",
+        href: "/support",
+        icon: InformationCircleIcon,
+      },
+      {
+        name: "Resources",
+        description: "Resources for hackers",
+        href: "/support/resources",
+        icon: ArchiveBoxIcon,
+      },
+      {
+        name: "Maps",
+        description: "Venue and parking maps",
+        href: "/support/maps",
+        icon: MapIcon,
+      },
+      {
+        name: "FAQs",
+        description: "Frequently asked questions",
+        href: "/support/faq-and-rules",
+        icon: QuestionMarkCircleIcon,
+      },
+    ],
+  },
+]
 
 const Navbar = () => {
   const {
@@ -24,30 +67,69 @@ const Navbar = () => {
             />
           </Link>
           <div className='flex grow items-center justify-evenly font-light uppercase md:grow-0 md:gap-10 lg:gap-16'>
-            <Link
-              to='/#about'
-              className='transition-all hover:font-bold hover:text-pink'
-            >
-              ABOUT
-            </Link>
-            <Link
-              to='/#prize-tracks'
-              className='transition-all hover:font-bold hover:text-pink'
-            >
-              Prize Tracks
-            </Link>
-            <Link
-              to='/team'
-              className='hidden transition-all hover:font-bold hover:text-pink lg:block'
-            >
-              The Team
-            </Link>
-            <Link
-              to='/support'
-              className='transition-all hover:font-bold hover:text-pink '
-            >
-              Support
-            </Link>
+            {navigation.map(item => (
+              <div key={item.name}>
+                {!item.sub_menu ? (
+                  <Link
+                    to={item.href}
+                    className='font-subtext text-xs leading-6 hover:text-pink md:text-xl'
+                  >
+                    {item.name}
+                  </Link>
+                ) : (
+                  <Popover className='relative' key={item.name}>
+                    <Popover.Button className='inline-flex items-center gap-x-1 font-subtext text-xs uppercase leading-6 hover:text-pink focus:outline-none md:text-xl'>
+                      <span>{item.name}</span>
+                      <ChevronDownIcon className='h-5 w-5' aria-hidden='true' />
+                    </Popover.Button>
+
+                    <Transition
+                      as={Fragment}
+                      enter='transition ease-out duration-200'
+                      enterFrom='opacity-0 translate-y-1'
+                      enterTo='opacity-100 translate-y-0'
+                      leave='transition ease-in duration-150'
+                      leaveFrom='opacity-100 translate-y-0'
+                      leaveTo='opacity-0 translate-y-1'
+                    >
+                      <Popover.Panel className='absolute left-1/2 z-10 mt-6 flex w-screen max-w-max -translate-x-1/2 px-4'>
+                        {({ close }) => (
+                          <div className='w-screen max-w-sm flex-auto overflow-hidden rounded-3xl bg-blue-imperial text-sm leading-6 shadow-lg ring-2 ring-inset ring-white/5 focus:outline-none'>
+                            <div className='grid grid-cols-1 gap-x-6 gap-y-1 p-4'>
+                              {item.sub_menu.map(sub_item => (
+                                <Link
+                                  to={sub_item.href}
+                                  onClick={() => close()}
+                                  key={sub_item.name}
+                                >
+                                  <div className='group relative flex gap-x-6 rounded-lg p-4 hover:bg-blue-royal'>
+                                    <div className='bg-gray-50 mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg'>
+                                      <sub_item.icon
+                                        className='h-6 w-6 text-orange'
+                                        aria-hidden='true'
+                                      />
+                                    </div>
+                                    <div>
+                                      <p className='font-title font-semibold text-white'>
+                                        {sub_item.name}
+                                      </p>
+                                      <span className='absolute inset-0' />
+                                      <p className='mt-1 font-subtext text-white/80'>
+                                        {sub_item.description}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </Popover.Panel>
+                    </Transition>
+                  </Popover>
+                )}
+              </div>
+            ))}
           </div>
 
           {/* Desktop MLH Trust Badge */}

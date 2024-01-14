@@ -2,11 +2,12 @@ import React, { useState } from "react"
 import { Dietary, foodInfo } from "./foodInfo"
 import { workshopInfo } from "./workshopInfo"
 
-import GlutenFreeLogo from "../../../assets/icons/Gluten Free.svg"
-import VegetairanLogo from "../../../assets/icons/Vegetarian.svg"
-import VeganLogo from "../../../assets/icons/Vegan.svg"
-import PlusLogo from "../../../assets/icons/Plus.svg"
-import { classNames } from "../../../utils/string"
+import GlutenFreeLogo from "../../../../assets/icons/Gluten Free.svg"
+import VegetairanLogo from "../../../../assets/icons/Vegetarian.svg"
+import VeganLogo from "../../../../assets/icons/Vegan.svg"
+import PlusLogo from "../../../../assets/icons/Plus.svg"
+import { classNames } from "../../../../utils/string"
+import Card from "../../../../components/Card"
 
 const matchLogo = (symb: Dietary) => {
   switch (symb) {
@@ -33,9 +34,9 @@ const WorkshopsFood: React.FC = () => {
               <button
                 className={classNames(
                   workshopDay == i
-                    ? "bg-blue-royal text-orange"
-                    : "text-white/80",
-                  "text-thin cursor-pointer rounded-full border-2 border-white/80 p-1 px-3 text-sm hover:text-orange"
+                    ? "bg-blue-chinese text-white"
+                    : "text-black",
+                  "text-thin cursor-pointer rounded-full border-2 border-black/50 p-1 px-3 text-sm"
                 )}
                 onClick={() => setWorkshopDay(i)}
                 onKeyDown={() => setWorkshopDay(i)}
@@ -44,28 +45,28 @@ const WorkshopsFood: React.FC = () => {
               </button>
 
               {i != workshopInfo.length - 1 && (
-                <div className='h-0.5 w-5 bg-white/80' />
+                <div className='h-0.5 w-5 bg-black/50' />
               )}
             </div>
           )
         })}
       </div>
 
-      <div className='border-b-2 border-white/80' />
+      <div className='border-b-2 border-black/50' />
 
-      <ul className='flex h-72 flex-col gap-5 overflow-y-scroll lg:h-[30rem]'>
+      <ul className='flex h-72 flex-col gap-5 overflow-y-scroll'>
         {workshopInfo[workshopDay].events.map((workshop, i) => {
           return (
             <li className='flex items-center justify-between' key={i}>
               <div>
-                <p className='text-white'>{workshop.title}</p>
-                <p className='text-orange'>{workshop.location}</p>
+                <p className='text-black'>{workshop.title}</p>
+                <p className='text-[#696969]'>{workshop.location}</p>
                 <p className='text-[#A7A7A7]'>{workshop.hostedBy}</p>
               </div>
-              <div className='w-5 md:w-2/6' />
+              <div className='w-5 md:w-2/6'></div>
               <div className='text-thin shrink-0 text-right'>
-                <p className='text-pink'>{workshop.startTime}-</p>
-                <p className='text-pink'>{workshop.endTime}</p>
+                <p className='text-darkgray'>{workshop.startTime}-</p>
+                <p className='text-darkgray'>{workshop.endTime}</p>
               </div>
             </li>
           )
@@ -82,8 +83,8 @@ const WorkshopsFood: React.FC = () => {
             <div key={i} className='flex items-center'>
               <button
                 className={classNames(
-                  foodDay == i ? "bg-blue-royal text-orange" : "text-white/80",
-                  "text-thin cursor-pointer rounded-full border-2 border-white/80 p-1 px-3 text-sm hover:text-orange"
+                  foodDay == i ? "bg-blue-chinese text-white" : "text-black",
+                  "text-thin cursor-pointer rounded-full border-2 border-black/50 p-1 px-3 text-sm"
                 )}
                 onClick={() => setFoodDay(i)}
                 onKeyDown={() => setFoodDay(i)}
@@ -91,14 +92,14 @@ const WorkshopsFood: React.FC = () => {
                 {"Day " + (i + 1)}
               </button>
               {i != foodInfo.length - 1 && (
-                <div className='h-0.5 w-5 bg-white/80' />
+                <div className='h-0.5 w-5 bg-black/50' />
               )}
             </div>
           )
         })}
       </div>
 
-      <div className='border-b-2 border-white/80' />
+      <div className='border-b-2 border-black/50' />
 
       <div className='space-y-10'>
         <ul className='flex flex-col gap-5 overflow-y-scroll'>
@@ -106,7 +107,7 @@ const WorkshopsFood: React.FC = () => {
             return (
               <li className='flex items-center justify-between' key={i}>
                 <div>
-                  <p className='text-white'>{meal.title}</p>
+                  <p className='text-black'>{meal.title}</p>
                   {meal.items.map((item, j) => {
                     return (
                       <span key={j} className='flex items-center gap-2'>
@@ -128,14 +129,14 @@ const WorkshopsFood: React.FC = () => {
                 </div>
                 <div className='w-5 md:w-2/6'></div>
                 <div className='text-thin shrink-0 text-right'>
-                  <p className='text-pink'>{meal.time}</p>
+                  <p className='text-darkgray'>{meal.time}</p>
                 </div>
               </li>
             )
           })}
         </ul>
 
-        <div className='flex flex-col gap-2 rounded-lg bg-blue-royal p-5 text-white'>
+        <div className='flex flex-col gap-2 rounded-lg bg-gray p-5 text-black'>
           <span className='flex items-center gap-2'>
             <img
               className='w-5'
@@ -180,7 +181,7 @@ const WorkshopsFood: React.FC = () => {
   )
 
   return (
-    <div className='h-full w-full max-w-full flex-1 space-y-5 rounded-3xl px-10 py-5 md:p-10'>
+    <Card>
       <div className='flex flex-col items-center gap-10'>
         <div className='flex w-fit items-center justify-between rounded-xl text-sm text-blue-chinese lg:text-xl'>
           <button
@@ -206,12 +207,12 @@ const WorkshopsFood: React.FC = () => {
         </div>
       </div>
 
-      <h3 className='text-center text-white/80'>
+      <h3 className='my-5 text-center text-black'>
         {slider ? workshopInfo[workshopDay].date : foodInfo[foodDay].date}
       </h3>
 
       {slider ? workshop : food}
-    </div>
+    </Card>
   )
 }
 

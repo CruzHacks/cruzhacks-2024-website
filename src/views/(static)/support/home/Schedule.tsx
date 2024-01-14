@@ -1,5 +1,6 @@
 import React, { useState } from "react"
-import { classNames } from "../../../utils/string"
+import { classNames } from "../../../../utils/string"
+import Card from "../../../../components/Card"
 
 const scheduleInfo = [
   {
@@ -38,12 +39,12 @@ const Schedule: React.FC = () => {
   const [day, setDay] = useState(0)
 
   return (
-    <div className='h-full w-full max-w-full flex-1 space-y-5 rounded-3xl bg-[#4659FF]/10 px-10 py-5 md:p-10'>
-      <div>
-        <h2 className='text-center font-title text-2xl font-bold uppercase md:text-3xl'>
+    <Card>
+      <div className='mb-5'>
+        <h2 className='text-center font-title text-2xl font-bold uppercase text-blue-chinese md:text-3xl'>
           Schedule
         </h2>
-        <h3 className='text-center text-white/80'>{scheduleInfo[day].date}</h3>
+        <h3 className='text-center text-black'>{scheduleInfo[day].date}</h3>
       </div>
       <div className='flex flex-col gap-10'>
         <div className='flex justify-center'>
@@ -52,8 +53,8 @@ const Schedule: React.FC = () => {
               <div key={i} className='flex items-center'>
                 <button
                   className={classNames(
-                    day == i ? "bg-blue-royal text-orange" : "text-white/80",
-                    "text-thin cursor-pointer rounded-full border-2 border-white/80 p-1 px-3 text-sm hover:text-orange"
+                    day == i ? "bg-blue-chinese text-white" : "text-black",
+                    "text-thin cursor-pointer rounded-full border-2 border-black/50 p-1 px-3 text-sm"
                   )}
                   onClick={() => setDay(i)}
                   onKeyDown={() => setDay(i)}
@@ -61,40 +62,40 @@ const Schedule: React.FC = () => {
                   {"Day " + (i + 1)}
                 </button>
                 {i != scheduleInfo.length - 1 && (
-                  <div className='h-0.5 w-5 bg-white/80' />
+                  <div className='h-0.5 w-5 bg-black/50' />
                 )}
               </div>
             )
           })}
         </div>
 
-        <div className='border-b-2 border-white/80' />
-        <ul className='flex h-72 flex-col gap-5 lg:h-[30rem]'>
+        <div className='border-b-2 border-black/50' />
+        <ul className='flex h-72 flex-col gap-5'>
           <ul className='flex flex-col overflow-y-scroll'>
             {scheduleInfo[day].events.map((schedule, i) => {
               return (
                 <li className='flex w-full items-start justify-start' key={i}>
-                  <p className='-mt-1.5 w-20 shrink-0 text-right text-white/80'>
+                  <p className='-mt-1.5 w-20 shrink-0 text-right text-black/50'>
                     {schedule[1]}
                   </p>
 
                   <div>
                     <div className='flex flex-col items-center px-5'>
-                      <div className='h-3 w-3 rounded-full bg-orange' />
+                      <div className='h-3 w-3 rounded-full bg-blue-chinese' />
 
                       {i != scheduleInfo[day].events.length - 1 && (
-                        <div className='h-20 w-0.5 bg-orange' />
+                        <div className='h-20 w-0.5 bg-blue-chinese' />
                       )}
                     </div>
                   </div>
-                  <p className='-mt-1.5'>{schedule[0]}</p>
+                  <p className='-mt-1.5 text-black'>{schedule[0]}</p>
                 </li>
               )
             })}
           </ul>
         </ul>
       </div>
-    </div>
+    </Card>
   )
 }
 

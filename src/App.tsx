@@ -31,9 +31,9 @@ import ScrollToAnchor from "./components/scrollControl/ScrollToAnchor"
 import Team from "./views/(static)/team"
 import ApplicationClosed from "./views/apply/ApplicationClosed"
 import Map from "./views/(static)/support/map"
-import Support from "./views/(static)/support/resources"
+import Resources from "./views/(static)/support/resources"
 import FAQ from "./views/(static)/support/faq"
-import Resources from "./views/(static)/support"
+import Support from "./views/(static)/support/home"
 import StaticWrapper from "./views/(static)"
 
 const App: React.FC = () => {
@@ -78,9 +78,9 @@ const App: React.FC = () => {
           <Route path='team' element={<Team />} />
 
           <Route path='support' element={<Outlet />}>
-            <Route index element={<Resources />} />
+            <Route index element={<Support />} />
             <Route path='maps' element={<Map />} />
-            <Route path='resources' element={<Support />} />
+            <Route path='resources' element={<Resources />} />
             <Route path='faq-and-rules' element={<FAQ />} />
           </Route>
         </Route>
