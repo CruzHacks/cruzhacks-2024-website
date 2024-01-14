@@ -19,29 +19,39 @@ const QRCheckInContainer: React.FC = () => {
   }
 
   return (
-    <div className='ml-20 flex h-screen w-full flex-col items-center'>
-      <div className='mt-6'>
-        <div className='font-title text-3xl'>QR Code Check-In</div>
+    <div className='overflow-x-clip px-4 sm:px-6 lg:px-8'>
+      <div className='sm:flex sm:items-center'>
+        <div className='sm:flex-auto'>
+          <h1 className='font-title text-2xl font-semibold leading-6'>Check-In QR Code Scanner</h1>
+          <p className='text-gray-700 mt-2 text-sm'>
+            Scan a Hacker's QR Code in the camera box below to check them in at the beginning of the event.
+          </p>
+        </div>
       </div>
 
-      <div className=''>
-        <div className=''>
-          {/* QR Camera */}
-          <QrReader
-            constraints={{ facingMode: "environment" }}
-            containerStyle={{
-              width: "500px",
-            }}
-            onResult={(result, error) => {
-              if (result) {
-                handleScanUID(result.getText())
-              }
+      <div className='rounded-3xl bg-[#4659FF]/10 p-10 md:space-y-10 mt-8 items-center'>
+        <div className='sm:flex-auto'>
+          <p className='text-gray-700 mt-1 text-sm'>
+            When prompted, make sure to enable camera permissions.
+          </p>
+          <div>
+            {/* QR Camera */}
+            <QrReader
+              constraints={{ facingMode: "environment" }}
+              containerStyle={{
+                width: "65vw",
+              }}
+              onResult={(result, error) => {
+                if (result) {
+                  handleScanUID(result.getText())
+                }
 
-              if (error) {
-                console.info(error)
-              }
-            }}
-          />
+                if (error) {
+                  console.info(error)
+                }
+              }}
+            />
+          </div>
         </div>
       </div>
     </div>
