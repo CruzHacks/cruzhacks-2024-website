@@ -28,16 +28,22 @@ const supportLinks = [
 
 const Support = () => {
   return (
-    <div className='space-y-10 pb-20 pt-5 md:pb-0 md:pt-20'>
+    <div className='w-full space-y-10 pb-20 pt-5 md:pb-0 md:pt-20'>
       <h1 className='font-title text-3xl uppercase md:text-5xl'>Support</h1>
 
-      <div className='flex flex-col gap-10 lg:flex-row'>
+      <div className='flex flex-col items-center gap-10 md:h-60 md:flex-row md:items-stretch'>
+        {supportLinks.map(link => (
+          <SupportLink key={link.title} {...link} />
+        ))}
+      </div>
+
+      <div className='flex w-full flex-col gap-10 lg:flex-row'>
         <Schedule />
 
         <WorkshopsFood />
       </div>
 
-      <div className='font-subtext'>
+      <div className='text-subtext pb-20 font-subtext'>
         <p>
           Feel free to reach out to us at{" "}
           <Link
@@ -46,25 +52,10 @@ const Support = () => {
           >
             contact@cruzhacks.com
           </Link>{" "}
-          for any questions.
+          for any questions,
         </p>
 
-        <p>
-          Also please{" "}
-          <Link
-            to='https://discord.gg/tH9t6pQX'
-            className='text-blue-button hover:underline'
-          >
-            join our discord
-          </Link>{" "}
-          and ask for help in the #help-and-questions channel.
-        </p>
-      </div>
-
-      <div className='flex flex-col items-center gap-10 md:h-60 md:flex-row md:items-stretch'>
-        {supportLinks.map(link => (
-          <SupportLink key={link.title} {...link} />
-        ))}
+        <p>or ask for help in the #help-and-questions channel on Discord.</p>
       </div>
     </div>
   )
