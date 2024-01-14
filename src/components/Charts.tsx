@@ -312,6 +312,14 @@ export const DateLineChart = ({
   label?: string
   data: ReChartsArray
 }) => {
+  if (!data) {
+    return (
+      <div className='flex h-[30rem] w-full min-w-0 items-center justify-center bg-error/10'>
+        <p className='text-center text-error'>No Data provided for {title}</p>
+      </div>
+    )
+  }
+
   const lineChartData = rechartsArrayAddDate(data)
 
   const domain: [(dataMin: number) => number, (dataMin: number) => number] = [
@@ -373,6 +381,14 @@ export const SimpleTable = ({
   data: { [key: string]: number }
   otherData: ReChartsArray
 }) => {
+  if (!data) {
+    return (
+      <div className='flex h-[400px] w-full max-w-xs items-center justify-center bg-error/10'>
+        <p className='text-center text-error'>No Data provided for {title}</p>
+      </div>
+    )
+  }
+
   return (
     <div className='flex w-full max-w-xs grow flex-col items-center rounded-lg bg-blue-imperial px-10 py-5 ring-2 ring-inset ring-white/10'>
       <div className='flex w-full max-w-xs flex-col gap-2'>
