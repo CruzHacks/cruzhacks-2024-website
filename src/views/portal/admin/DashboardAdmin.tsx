@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import toast, { Toaster } from 'react-hot-toast'; // Import from react-hot-toast
 import { rtdb } from "../../../utils/firebaseapp";
 import { push, ref, set, serverTimestamp } from "firebase/database";
 
@@ -16,7 +15,7 @@ const AdminDash = () => {
   const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     if (notifyBody === '') {
-      toast.warning('An announcement must have a body... 😑');
+      toast.error('An announcement must have a body... 😑'); // Use toast.error for warning
       return;
     }
 
@@ -67,7 +66,6 @@ const AdminDash = () => {
     }
   };
 
-
   return (
     <div className="admindash__container">
       <div className="admindash__container--top">
@@ -109,12 +107,11 @@ const AdminDash = () => {
                   </button>
                 </div>
               </div>
-
             </div>
           </div>
         )}
       </div>
-      <ToastContainer />
+      <Toaster /> {/* Use Toaster instead of ToastContainer */}
     </div>
   );
 };
