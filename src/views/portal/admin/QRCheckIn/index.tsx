@@ -22,14 +22,17 @@ const QRCheckInContainer: React.FC = () => {
     <div className='overflow-x-clip px-4 sm:px-6 lg:px-8'>
       <div className='sm:flex sm:items-center'>
         <div className='sm:flex-auto'>
-          <h1 className='font-title text-2xl font-semibold leading-6'>Check-In QR Code Scanner</h1>
+          <h1 className='font-title text-2xl font-semibold leading-6'>
+            Check-In QR Code Scanner
+          </h1>
           <p className='text-gray-700 mt-2 text-sm'>
-            Scan a Hacker's QR Code in the camera box below to check them in at the beginning of the event.
+            Scan a Hacker&apos;s QR Code in the camera box below to check them
+            in at the beginning of the event.
           </p>
         </div>
       </div>
 
-      <div className='rounded-3xl bg-[#4659FF]/10 p-10 md:space-y-10 mt-8 items-center'>
+      <div className='mt-8 items-center rounded-3xl bg-[#4659FF]/10 p-10 md:space-y-10'>
         <div className='sm:flex-auto'>
           <p className='text-gray-700 mt-1 text-sm'>
             When prompted, make sure to enable camera permissions.

@@ -18,7 +18,7 @@ const QRCodeHacker = () => {
             </div>
         </div>
 
-        <div className='rounded-3xl bg-[#4659FF]/10 p-10 md:space-y-10 mt-8 items-center'>
+        <div className='mt-8 items-center rounded-3xl bg-[#4659FF]/10 p-10 md:space-y-10'>
                 {user ? (
                 <QRCode 
                     value={user.uid} 

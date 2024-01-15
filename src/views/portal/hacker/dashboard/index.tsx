@@ -1,11 +1,10 @@
 import React from "react"
-import QRCode from "react-qr-code"
-import useAuth from "../../../../hooks/useAuth"
+// import useAuth from "../../../../hooks/useAuth"
 
 const DashbaordHacker = () => {
-  const {
-    auth: { user },
-  } = useAuth()
+  // const {
+  //   auth: { user },
+  // } = useAuth()
 
   return (
     <div>
