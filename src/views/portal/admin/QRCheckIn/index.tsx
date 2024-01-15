@@ -51,6 +51,7 @@ const QRCheckInContainer: React.FC = () => {
 
                 if (error) {
                   console.info(error)
+                  toast.error(error.message)
                 }
               }}
             />
