@@ -1,8 +1,9 @@
-import React from "react"
+import React, { Fragment, useEffect } from "react"
 import {
   classNames,
   applicationToCSV,
   timestampFilename,
+  applicationFullToCSV,
 } from "../../../../utils/string"
 import { useNavigate } from "react-router-dom"
 import useApplications from "../../../../hooks/useApplications"
@@ -10,9 +11,13 @@ import { ApplicationStatus } from "../../../../utils/types"
 import {
   ArrowDownTrayIcon,
   CheckCircleIcon,
+  ChevronDownIcon,
   XCircleIcon,
 } from "@heroicons/react/24/outline"
 import toast from "react-hot-toast"
+import { Menu, Transition } from "@headlessui/react"
+import { collectionGroup, getDocs, orderBy, query } from "firebase/firestore"
+import { db } from "../../../../utils/firebaseapp"
 
 const LOADING_ENTRIES = 50
 
@@ -55,7 +60,24 @@ const ApplicationsAdmin = () => {
   const navigate = useNavigate()
   const { data: applications, error, isLoading, isError } = useApplications()
 
-  const downloadApplicationsCsv = () => {
+  useEffect(() => {
+    const getFire = async () => {
+      try {
+        const q = query(
+          collectionGroup(db, "sections"),
+          orderBy("cruzhacks_referral")
+        )
+        const querySnapshot = await getDocs(q)
+        console.log(querySnapshot.docs.map(doc => doc.data()))
+      } catch (e) {
+        console.error(e)
+      }
+    }
+
+    getFire()
+  }, [])
+
+  const downloadApplicationsTableCsv = () => {
     if (!applications) {
       toast.error("No applications to download")
       return
@@ -63,6 +85,29 @@ const ApplicationsAdmin = () => {
 
     const filename = timestampFilename("hacker_applications", "csv")
     const csvData = applicationToCSV(applications)
+
+    const blob = new Blob([csvData], { type: "text/csv" })
+    const url = window.URL.createObjectURL(blob)
+    const a = document.createElement("a")
+
+    a.setAttribute("hidden", "")
+    a.setAttribute("href", url)
+    a.setAttribute("download", filename)
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+  }
+
+  const downloadApplicationsFullCsv = () => {
+    if (!applications) {
+      toast.error("No applications to download")
+      return
+    }
+
+    // const applications_full =
+
+    const filename = timestampFilename("hacker_applications_full", "csv")
+    const csvData = applicationFullToCSV(applications_full)
 
     const blob = new Blob([csvData], { type: "text/csv" })
     const url = window.URL.createObjectURL(blob)
@@ -97,12 +142,55 @@ const ApplicationsAdmin = () => {
             {applications && applications?.length} Submissions
           </p>
 
-          <button
-            onClick={downloadApplicationsCsv}
-            className='block rounded-md bg-blue-button/10 px-3 py-2 text-center font-subtext text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white'
-          >
-            <ArrowDownTrayIcon className='h-4 w-4 text-pink' />
-          </button>
+          <Menu>
+            <Menu.Button className='block rounded-md bg-blue-button/10 px-3 py-2 text-center font-subtext text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white'>
+              <ChevronDownIcon className='inline h-4 w-4' />
+            </Menu.Button>
+
+            <Transition
+              as={Fragment}
+              enter='transition ease-out duration-200'
+              enterFrom='transform opacity-0 scale-95'
+              enterTo='transform opacity-100 scale-100'
+              leave='transition ease-in duration-75'
+              leaveFrom='transform opacity-100 scale-100'
+              leaveTo='transform opacity-0 scale-95'
+            >
+              <Menu.Items
+                as='div'
+                className='absolute z-[500] mt-12 w-48 origin-top-right rounded-md bg-blue-imperial py-1 shadow-lg ring-4 ring-white/5 focus:outline-none'
+              >
+                <Menu.Item>
+                  {({ active }) => (
+                    <button
+                      onClick={downloadApplicationsTableCsv}
+                      className={classNames(
+                        active && "bg-blue-royal/60",
+                        "flex w-full items-center gap-2 border-b-2 border-white/5 px-4 py-2 text-left text-sm capitalize text-pink"
+                      )}
+                    >
+                      <ArrowDownTrayIcon className='h-4 w-4 text-pink' />
+                      Table Preview
+                    </button>
+                  )}
+                </Menu.Item>
+                <Menu.Item>
+                  {({ active }) => (
+                    <button
+                      onClick={downloadApplicationsFullCsv}
+                      className={classNames(
+                        active && "bg-blue-royal/60",
+                        "flex w-full items-center gap-2 border-b-2 border-white/5 px-4 py-2 text-left text-sm capitalize text-pink"
+                      )}
+                    >
+                      <ArrowDownTrayIcon className='h-4 w-4 text-pink' />
+                      Full Applications
+                    </button>
+                  )}
+                </Menu.Item>
+              </Menu.Items>
+            </Transition>
+          </Menu>
         </div>
       </div>
       <div className='mt-8 flow-root'>

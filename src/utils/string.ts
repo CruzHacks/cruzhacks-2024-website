@@ -1,4 +1,8 @@
-import { ApplicationSchema } from "./types"
+import {
+  ApplicationSchema,
+  ApplicationSchemaDownload,
+  ApplicationSchemaDto,
+} from "./types"
 
 /**
  * Join an array of strings with a space (for use with tailwind classes)
@@ -37,6 +41,58 @@ export const applicationToCSV = (applications: ApplicationSchema[]) => {
   for (const row of applications) {
     const values = headers.map(header => {
       let val = row[header] ?? ""
+      if (header === "_submitted") {
+        val = val.toDate().toLocaleString()
+      }
+      if (header === "status" && isString(val)) {
+        val = val.toUpperCase()
+      }
+      if (header === "rsvp" && val !== "") {
+        val = val ? "YES" : "NO"
+      }
+
+      const escaped = ("" + val).replace(/"/g, '\\"')
+      return `"${escaped}"`
+    })
+    csvRows.push(values.join(","))
+  }
+
+  return csvRows.join("\n")
+}
+
+/**
+ * Convert an array of application submissions to a csv string
+ * @param {ApplicationSchema} applications array of application submissions
+ * @returns csv string
+ */
+export const applicationFullToCSV = (
+  applications: ApplicationSchemaDownload[]
+) => {
+  if (applications.length === 0) {
+    return
+  }
+
+  // Construct headers
+  const headers = []
+  for (const appSectionKey in applications[0]) {
+    if (appSectionKey in applications[0]) {
+      continue
+    }
+
+    const appSection =
+      applications[0][appSectionKey as keyof ApplicationSchemaDownload]
+
+    for (const appSectionKey in appSection) {
+      headers.push(appSectionKey)
+    }
+  }
+
+  const csvRows = []
+  csvRows.push(headers.join(","))
+
+  for (const row of applications) {
+    const values = headers.map(header => {
+      let val = row[section] ?? ""
       if (header === "_submitted") {
         val = val.toDate().toLocaleString()
       }
