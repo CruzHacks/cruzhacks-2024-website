@@ -33,6 +33,7 @@ import ApplicationClosed from "./views/ApplicationClosed"
 
 import QRCheckIn from "./views/portal/admin/QRCheckIn"
 import DashbaordHacker from "./views/portal/hacker/dashboard"
+import QRCodeHacker from "./views/portal/hacker/QRCode"
 
 const App: React.FC = () => {
   const {
@@ -111,6 +112,7 @@ const App: React.FC = () => {
           <Route path='portal/hacker' element={<HackerPortal />}>
             <Route index element={<DashbaordHacker />} />
             {/* Hacker Portal sub-routes go here*/}
+            <Route path='check-in' element={<QRCodeHacker />} />
           </Route>
         </Route>
         <Route element={<RoleProtectedRoute allowedRole='admin' />}>

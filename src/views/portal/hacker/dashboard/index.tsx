@@ -9,14 +9,7 @@ const DashbaordHacker = () => {
 
   return (
     <div>
-      <h1>Dashbaord</h1>
-
-      {user ? (
-        <QRCode value={user.uid} />
-      ) : (
-        // SHOULD NEVER HAPPEN
-        <p className='text-error'>No User</p>
-      )}
+      <h1 className='font-title text-3xl'>Dashboard</h1>
     </div>
   )
 }
