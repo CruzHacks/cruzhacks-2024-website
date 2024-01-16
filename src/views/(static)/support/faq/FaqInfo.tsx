@@ -26,12 +26,12 @@ export const FAQsInfo = [
     question: "What rules do I need to follow?",
     answer: (
       <>
-        All CruzHacks 2023 participants will need to follow the{" "}
+        All CruzHacks 2024 participants will need to follow the{" "}
         <a
           target='_blank'
           rel='noreferrer'
           href='https://static.mlh.io/docs/mlh-code-of-conduct.pdf'
-          className='text-blue'
+          className='text-blue-button underline'
         >
           MLH Code of Conduct
         </a>
@@ -40,27 +40,18 @@ export const FAQsInfo = [
           target='_blank'
           rel='noreferrer'
           href='https://docs.google.com/document/u/1/d/1298VyEqrSIvbzM3U8nvLQsLtY78Vi2mbndr3d5w0UKk/edit'
-          className='text-blue'
+          className='text-blue-button underline'
         >
-          CruzHacks 2023 Participant and Release Agreement
-        </a>
-        , the{" "}
-        <a
-          target='_blank'
-          rel='noreferrer'
-          href='https://github.com/CruzHacks/hackathon-rules/blob/master/Rules.md'
-          className='text-blue'
-        >
-          CruzHacks 2023 Rules
+          CruzHacks 2024 Participant and Release Agreement
         </a>
         , and the{" "}
         <a
           target='_blank'
           rel='noreferrer'
-          href='https://docs.google.com/document/u/1/d/1aq7xN3c8t8AWS-yDBcvqu4EMYmw0025HAoCFuOVld7c/edit'
-          className='text-blue'
+          href='https://github.com/CruzHacks/hackathon-rules/blob/master/Rules.md'
+          className='text-blue-button underline'
         >
-          CruzHacks 2023 COVID Safety Policy
+          CruzHacks 2024 Rules
         </a>
         .
       </>
@@ -70,32 +61,13 @@ export const FAQsInfo = [
     question: "What are the prize tracks?",
     answer: (
       <>
-        CruzHacks 2023 offers 4 main prize tracks (Health Hacks, Justice Hacks,
-        Sustainability Hacks, and Fintech Hacks). Hackers can submit their
+        CruzHacks 2024 offers 4 main prize tracks (Health Hacks, Justice Hacks,
+        Sustainability Hacks, and Education Hacks). Hackers can submit their
         project to one of these 4 main prize tracks. We also offer 4 category
-        prizes (Best Beginner, Best UI/UX, New Technologies, and Best Slug
-        Hack). Hackers can submit their project to any number of these 4
-        categories. There will also be sponsors hosting some of their own prize
-        tracks. Hackers can submit their project to any number of sponsored
-        prize tracks.
-      </>
-    ),
-  },
-  {
-    question: "What are CruzPoints?",
-    answer: (
-      <>
-        CruzPoints are CruzHacks 2023&apos;s point reward system for Hackers!
-        For more information,{" "}
-        <a
-          target='_blank'
-          rel='noreferrer'
-          href='https://docs.google.com/document/d/1kExaZxBGb4VveTr6TDdAOKWLCM7E22OmGRxP4htBTok'
-          className='text-blue'
-        >
-          click here
-        </a>
-        .
+        prizes (Best Beginner, Best UI/UX, Best AI, and Best Slug Hack). Hackers
+        can submit their project to any number of these 4 categories. There will
+        also be sponsors hosting some of their own prize tracks. Hackers can
+        submit their project to any number of sponsored prize tracks.
       </>
     ),
   },

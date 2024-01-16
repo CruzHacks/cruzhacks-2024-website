@@ -150,7 +150,7 @@ const Navbar = () => {
           <a
             id='mlh-trust-badge'
             className={classNames(
-              isAuthenticated ? "right-24" : "right-52",
+              isAuthenticated ? "right-24" : "right-[12.3rem]",
               "absolute top-0 hidden w-20 md:block"
             )}
             href='https://mlh.io/na?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2024-season&utm_content=blue'

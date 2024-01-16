@@ -1,35 +1,35 @@
 import React, { useState } from "react"
 // import BackgroundHeader from "../../components/BackgroundHeader"
 import StevensonOutside from "./StevensonOutside"
-import StevensonFloorPlan from "./StevensonFloorplan"
+// import StevensonFloorPlan from "./StevensonFloorplan"
 
 // import DropdownLogo from "../../assets/logo_dropdown-triangle-gray.svg"
 import StevensonEastRemoteLot from "./StevensonEastRemoteLot"
-import StevensonJudgingMap from "./StevensonJudgingMap"
+// import StevensonJudgingMap from "./StevensonJudgingMap"
 import { ChevronDownIcon } from "@heroicons/react/24/outline"
 import BackgroundHeader from "../BackgroundHeader"
 
 const maps = [
+  // {
+  //   id: 0,
+  //   title: "Judging Map",
+  //   map: <StevensonJudgingMap />,
+  // },
   {
     id: 0,
-    title: "Judging Map",
-    map: <StevensonJudgingMap />,
-  },
-  {
-    id: 1,
     title: "General Area - Stevenson College",
     map: <StevensonOutside />,
   },
-  {
-    id: 2,
-    title: "Stevenson Event Center Floorplan",
-    map: <StevensonFloorPlan />,
-  },
-  {
-    id: 3,
-    title: "East Remote Lot to Stevenson Event Center",
-    map: <StevensonEastRemoteLot />,
-  },
+  // {
+  //   id: 2,
+  //   title: "Stevenson Event Center Floorplan",
+  //   map: <StevensonFloorPlan />,
+  // },
+  // {
+  //   id: 1,
+  //   title: "East Remote Lot to Stevenson Event Center",
+  //   map: <StevensonEastRemoteLot />,
+  // },
 ]
 
 const Map: React.FC = () => {
@@ -50,7 +50,7 @@ const Map: React.FC = () => {
           Event Maps
         </h1>
 
-        <button
+        {/* <button
           onClick={() => setRevealSelections(!revealSelections)}
           onKeyDown={() => setRevealSelections(!revealSelections)}
           className='flex flex-col items-stretch justify-center gap-1 rounded-xl bg-blue-imperial p-5 shadow-md'
@@ -75,7 +75,7 @@ const Map: React.FC = () => {
                 </div>
               )
             })}
-        </button>
+        </button> */}
         {maps[selectedMapIdx].map}
       </div>
     </div>

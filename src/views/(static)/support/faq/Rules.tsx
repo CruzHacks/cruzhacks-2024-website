@@ -23,11 +23,11 @@ const Rules: React.FC = () => {
             link='https://github.com/CruzHacks/hackathon-rules/blob/master/Rules.md'
             type='clear'
           />
-          <Button
+          {/* <Button
             text='COVID Safety Policy'
             link='https://docs.google.com/document/u/1/d/1aq7xN3c8t8AWS-yDBcvqu4EMYmw0025HAoCFuOVld7c'
             type='clear'
-          />
+          /> */}
           <Button
             text='Participant & Release Agreement'
             link='https://docs.google.com/document/d/1298VyEqrSIvbzM3U8nvLQsLtY78Vi2mbndr3d5w0UKk'

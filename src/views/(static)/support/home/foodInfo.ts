@@ -12,7 +12,7 @@ export const foodInfo = [
         title: "Dinner",
         items: [
           {
-            name: "Panda Express",
+            name: "IKE's Sandwiches",
             dietary: [Dietary.Vegan, Dietary.GlutenFree],
           },
           {
@@ -24,7 +24,7 @@ export const foodInfo = [
             dietary: [],
           },
         ],
-        provider: "Panda Express",
+        provider: "Ike's Love & Sandwiches",
         time: "5:00 pm",
       },
     ],
@@ -44,7 +44,7 @@ export const foodInfo = [
             dietary: [],
           },
         ],
-        provider: "The Bagelry",
+        provider: "iHOP",
         time: "8:00 am",
       },
       {
@@ -70,7 +70,7 @@ export const foodInfo = [
             dietary: [],
           },
         ],
-        provider: "Costco",
+        provider: "Panda Express",
         time: "5:30 pm",
       },
     ],
@@ -101,7 +101,7 @@ export const foodInfo = [
             dietary: [Dietary.GlutenFree, Dietary.Vegan],
           },
         ],
-        provider: "Ike's",
+        provider: "Achilles by the Sea",
         time: "12:00 pm",
       },
     ],

@@ -1,6 +1,7 @@
 import React from "react"
 import Card from "../../../../components/Card"
 import Button from "../../../../components/Button"
+import { Link } from "react-router-dom"
 
 const TeamFinder: React.FC = () => {
   return (
@@ -10,10 +11,10 @@ const TeamFinder: React.FC = () => {
     >
       <ol className='font-nunito m-auto flex flex-col gap-5 md:w-5/6'>
         <li>
-          1. Join our Slack channel{" "}
+          1. Join our Discord channel{" "}
           <a
             className='text-blue underline'
-            href='https://cruzhacks23-attendees.slack.com/archives/C04HZQRR8NS'
+            href='https://discord.gg/rGjDTCk3Nx'
           >
             #team-formation
           </a>{" "}
@@ -46,16 +47,16 @@ const TeamFinder: React.FC = () => {
         </li>
         <li>
           2. Found your team? Log in and{" "}
-          <a className='text-blue' href='/'>
+          <Link className='text-blue-button underline' to='/portal/hacker/team'>
             submit your team in the CruzHacks portal
-          </a>{" "}
+          </Link>{" "}
           and get ready to start hacking!
         </li>
       </ol>
       <div className='flex w-full flex-col items-stretch pt-5'>
         <Button
           text='Submit Team'
-          link='https://cruzhacks.com/myPortal/?ext=team'
+          link='/portal/hacker/team'
           type='full'
           override='w-full md:w-1/2 m-auto'
         />

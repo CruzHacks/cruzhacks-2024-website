@@ -8,6 +8,7 @@ import Clipboard from "../../../../assets/illustrations/Clipboard.svg"
 import Schedule from "./Schedule"
 import WorkshopsFood from "./WorkshopsFood"
 import QuestionResources from "./QuestionResources"
+import BackgroundHeader from "../BackgroundHeader"
 
 const supportLinks = [
   {
@@ -29,7 +30,9 @@ const supportLinks = [
 
 const Support = () => {
   return (
-    <div className='mx-auto max-w-screen-md'>
+    <div className='mx-auto w-full max-w-screen-md pt-10 md:pt-0'>
+      <BackgroundHeader />
+
       <div className='mb-20 flex flex-col items-stretch justify-center gap-10 text-black'>
         <h1 className='font-title text-3xl text-white md:py-10 md:text-4xl lg:text-6xl'>
           Support
@@ -42,7 +45,7 @@ const Support = () => {
         </div>
 
         <Schedule />
-        <WorkshopsFood />
+        {/* <WorkshopsFood /> */}
         <QuestionResources />
       </div>
     </div>
@@ -59,13 +62,15 @@ const SupportLink = ({
   link: string
 }) => {
   return (
-    <div className='group flex h-60 w-full max-w-xs items-center justify-center md:h-full md:w-1/3 md:max-w-none'>
+    <div className='group flex h-60 w-full min-w-0 grow items-center justify-center md:h-full'>
       <Link
         to={link}
-        className='flex h-full w-full flex-col items-center justify-center gap-5 rounded-lg bg-blue-royal px-20 py-5 ring-4 ring-inset ring-white/10 transition-all group-hover:h-5/6 group-hover:w-5/6 group-hover:bg-blue-imperial'
+        className='flex h-full w-full flex-col items-center justify-center gap-5 rounded-lg bg-[#FFF] px-20 py-5 ring-4 ring-inset ring-white/10 transition-all group-hover:h-5/6 group-hover:w-5/6 group-hover:bg-blue-imperial'
       >
-        <img src={illustration} alt='' />
-        <p className='font-subtext text-lg lowercase text-white'>{title}</p>
+        <img src={illustration} alt='' className='h-2/3 w-full' />
+        <p className='font-title text-lg uppercase text-blue-chinese transition-all group-hover:text-sm group-hover:text-white'>
+          {title}
+        </p>
       </Link>
     </div>
   )

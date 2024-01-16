@@ -8,8 +8,7 @@ const scheduleInfo = [
     events: [
       ["Hacker Registration/ Dinner", "5:00 pm"],
       ["Opening Ceremony", "7:00 pm"],
-      ["Hacking Begins", "9:00 pm"],
-      ["Workshops Begin", "9:00 pm"],
+      ["Hacking / Workshops Begin", "9:00 pm"],
     ],
   },
   {
@@ -18,7 +17,7 @@ const scheduleInfo = [
       ["Breakfast", "8:00 am"],
       ["Workshops Continue", "9:00 am"],
       ["Lunch", "1:00 pm"],
-      ["Dinner", "5:30 pm"],
+      ["Dinner", "6:00 pm"],
       ["DevPost Soft Deadline", "10:00 pm"],
     ],
   },
@@ -30,7 +29,7 @@ const scheduleInfo = [
       ["Judging Begins", "11:30 am"],
       ["Lunch", "12:00 pm"],
       ["Closing Ceremony", "2:00 pm"],
-      ["CruzHacks 2023 concludes", "4:00 pm"],
+      ["CruzHacks 2024 Concludes", "4:00 pm"],
     ],
   },
 ]
@@ -70,8 +69,8 @@ const Schedule: React.FC = () => {
         </div>
 
         <div className='border-b-2 border-black/50' />
-        <ul className='flex h-72 flex-col gap-5'>
-          <ul className='flex flex-col overflow-y-scroll'>
+        <ul className='flex h-80 flex-col gap-5'>
+          <ul className='flex flex-col overflow-y-scroll py-2'>
             {scheduleInfo[day].events.map((schedule, i) => {
               return (
                 <li className='flex w-full items-start justify-start' key={i}>
