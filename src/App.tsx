@@ -9,11 +9,10 @@ import Signup from "./views/Signup"
 import NotFound from "./views/NotFound"
 import HackerPortal from "./views/portal/hacker"
 import AdminPortal from "./views/portal/admin"
-import DashboardAdmin from "./views/portal/admin/DashboardAdmin"
+import DashboardAdmin from "./views/portal/admin/dashboard"
 import ApplicationsAdmin from "./views/portal/admin/applications"
 import UsersAdmin from "./views/portal/admin/users"
 import TeamsAdmin from "./views/portal/admin/teams"
-import ApplicationApplicant from "./views/portal/applicant/Application"
 import PortalApplicant from "./views/portal/applicant"
 import DashboardApplicant from "./views/portal/applicant/DashboardApplicant"
 import useAuth from "./hooks/useAuth"
@@ -47,6 +46,10 @@ const App: React.FC = () => {
         toastOptions={{
           className: "font-subtext",
           position: "bottom-right",
+          style: {
+            background: "#071162",
+            color: "#D3DAF4",
+          },
           success: {
             style: {
               background: "#4BB543",
@@ -98,7 +101,6 @@ const App: React.FC = () => {
         <Route element={<RoleProtectedRoute allowedRole='applicant' />}>
           <Route path='portal/applicant' element={<PortalApplicant />}>
             <Route index element={<DashboardApplicant />} />
-            <Route path='application' element={<ApplicationApplicant />} />
           </Route>
         </Route>
 
