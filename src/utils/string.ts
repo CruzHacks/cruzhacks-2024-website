@@ -76,11 +76,7 @@ export const applicationToCSV = (applications: ApplicationSchema[]) => {
 export const applicationFullToCSV = (
   applications: ApplicationSchemaDownload[]
 ) => {
-  if (applications.length === 0) {
-    return
-  }
-
-  // Construct headers
+  // Construct CSV headers from schema
   const headers = []
   for (const appSectionKey in ApplicationSchemaDownload.shape) {
     for (const appSectionFieldKey in ApplicationSchemaDownload.shape[
@@ -89,8 +85,6 @@ export const applicationFullToCSV = (
       headers.push(appSectionFieldKey)
     }
   }
-
-  console.debug("Construct CSV Headers:", headers)
 
   const csvRows = []
   const headersRow = headers.map(header => toTitleCase(header))
