@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react"
+import React, { Fragment } from "react"
 import {
   classNames,
   applicationToCSV,
@@ -16,8 +16,8 @@ import {
 } from "@heroicons/react/24/outline"
 import toast from "react-hot-toast"
 import { Menu, Transition } from "@headlessui/react"
-import { collectionGroup, getDocs, orderBy, query } from "firebase/firestore"
-import { db } from "../../../../utils/firebaseapp"
+import { getFullHackerExport } from "../../../../utils/apis/cloudFunctions"
+import useAuth from "../../../../hooks/useAuth"
 
 const LOADING_ENTRIES = 50
 
@@ -57,25 +57,12 @@ const AppStatus = ({ status }: { status: ApplicationStatus }) => {
 // should be same as data styling (bug prone to require manual updates)
 
 const ApplicationsAdmin = () => {
+  const {
+    auth: { user },
+  } = useAuth()
+
   const navigate = useNavigate()
   const { data: applications, error, isLoading, isError } = useApplications()
-
-  useEffect(() => {
-    const getFire = async () => {
-      try {
-        const q = query(
-          collectionGroup(db, "sections"),
-          orderBy("cruzhacks_referral")
-        )
-        const querySnapshot = await getDocs(q)
-        console.log(querySnapshot.docs.map(doc => doc.data()))
-      } catch (e) {
-        console.error(e)
-      }
-    }
-
-    getFire()
-  }, [])
 
   const downloadApplicationsTableCsv = () => {
     if (!applications) {
@@ -98,27 +85,37 @@ const ApplicationsAdmin = () => {
     document.body.removeChild(a)
   }
 
-  const downloadApplicationsFullCsv = () => {
-    if (!applications) {
-      toast.error("No applications to download")
-      return
+  const downloadApplicationsFullCsv = async () => {
+    const getAndConstruct = async () => {
+      try {
+        if (!user) throw new Error("User not logged in")
+        if (!applications) throw new Error("No applications to download")
+
+        const applications_full = await getFullHackerExport(user)
+
+        const filename = timestampFilename("hacker_applications_full", "csv")
+        const csvData = applicationFullToCSV(applications_full)
+
+        const blob = new Blob([csvData], { type: "text/csv" })
+        const url = window.URL.createObjectURL(blob)
+        const a = document.createElement("a")
+
+        a.setAttribute("hidden", "")
+        a.setAttribute("href", url)
+        a.setAttribute("download", filename)
+        document.body.appendChild(a)
+        a.click()
+        document.body.removeChild(a)
+      } catch (error) {
+        console.error(error)
+      }
     }
 
-    // const applications_full =
-
-    const filename = timestampFilename("hacker_applications_full", "csv")
-    const csvData = applicationFullToCSV(applications_full)
-
-    const blob = new Blob([csvData], { type: "text/csv" })
-    const url = window.URL.createObjectURL(blob)
-    const a = document.createElement("a")
-
-    a.setAttribute("hidden", "")
-    a.setAttribute("href", url)
-    a.setAttribute("download", filename)
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
+    toast.promise(getAndConstruct(), {
+      loading: "Exporting all applications...",
+      success: "Applications downloaded",
+      error: "Error downloading and exporting applications",
+    })
   }
 
   const handleReviewApplication = (email: string) => {

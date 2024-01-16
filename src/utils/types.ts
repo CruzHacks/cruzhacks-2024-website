@@ -186,7 +186,7 @@ export const ApplicationSchemaDownload = z.object({
     email: z.string(),
     phone_number: z.string(),
     display_name: z.string(),
-    pronouns: z.string(),
+    checked_in: z.boolean().optional(),
   }),
   submission: z.object({
     status: z.enum(ApplicationStatuses),

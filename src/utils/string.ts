@@ -1,8 +1,4 @@
-import {
-  ApplicationSchema,
-  ApplicationSchemaDownload,
-  ApplicationSchemaDto,
-} from "./types"
+import { ApplicationSchema, ApplicationSchemaDownload } from "./types"
 
 /**
  * Join an array of strings with a space (for use with tailwind classes)
@@ -20,6 +16,18 @@ export const classNames = (...classes: (string | boolean | undefined)[]) => {
  */
 export const isString = (value: any): value is string =>
   typeof value === "string"
+
+/**
+ * Convert property name string to title case
+ * @param {string} str property name string
+ * @returns {string} title case string
+ */
+export const toTitleCase = (str: string) => {
+  return str
+    .split("_")
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ")
+}
 
 /**
  * Convert an array of application submissions to a csv string
@@ -74,38 +82,36 @@ export const applicationFullToCSV = (
 
   // Construct headers
   const headers = []
-  for (const appSectionKey in applications[0]) {
-    if (appSectionKey in applications[0]) {
-      continue
-    }
-
-    const appSection =
-      applications[0][appSectionKey as keyof ApplicationSchemaDownload]
-
-    for (const appSectionKey in appSection) {
-      headers.push(appSectionKey)
+  for (const appSectionKey in ApplicationSchemaDownload.shape) {
+    for (const appSectionFieldKey in ApplicationSchemaDownload.shape[
+      appSectionKey as keyof ApplicationSchemaDownload
+    ].shape) {
+      headers.push(appSectionFieldKey)
     }
   }
 
+  console.debug("Construct CSV Headers:", headers)
+
   const csvRows = []
-  csvRows.push(headers.join(","))
+  const headersRow = headers.map(header => toTitleCase(header))
+  csvRows.push(headersRow.join(","))
 
   for (const row of applications) {
-    const values = headers.map(header => {
-      let val = row[section] ?? ""
-      if (header === "_submitted") {
-        val = val.toDate().toLocaleString()
-      }
-      if (header === "status" && isString(val)) {
-        val = val.toUpperCase()
-      }
-      if (header === "rsvp" && val !== "") {
-        val = val ? "YES" : "NO"
-      }
+    const values = []
+    for (const appSectionKey in ApplicationSchemaDownload.shape) {
+      for (const appSectionFieldKey in ApplicationSchemaDownload.shape[
+        appSectionKey as keyof ApplicationSchemaDownload
+      ].shape) {
+        const valSection = row[appSectionKey as keyof typeof row]
+        const val =
+          valSection !== undefined
+            ? valSection[appSectionFieldKey as keyof typeof valSection] ?? ""
+            : ""
 
-      const escaped = ("" + val).replace(/"/g, '\\"')
-      return `"${escaped}"`
-    })
+        const escaped = ("" + val).replace(/"/g, "'").replace(/\n/g, " ")
+        values.push(`"${escaped}"`)
+      }
+    }
     csvRows.push(values.join(","))
   }
 
