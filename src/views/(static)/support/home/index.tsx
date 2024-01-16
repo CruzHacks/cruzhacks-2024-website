@@ -45,7 +45,7 @@ const Support = () => {
         </div>
 
         <Schedule />
-        {/* <WorkshopsFood /> */}
+        <WorkshopsFood />
         <QuestionResources />
       </div>
     </div>

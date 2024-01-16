@@ -5,7 +5,6 @@ import { workshopInfo } from "./workshopInfo"
 import GlutenFreeLogo from "../../../../assets/icons/Gluten Free.svg"
 import VegetairanLogo from "../../../../assets/icons/Vegetarian.svg"
 import VeganLogo from "../../../../assets/icons/Vegan.svg"
-import PlusLogo from "../../../../assets/icons/Plus.svg"
 import { classNames } from "../../../../utils/string"
 import Card from "../../../../components/Card"
 
@@ -108,23 +107,6 @@ const WorkshopsFood: React.FC = () => {
               <li className='flex items-center justify-between' key={i}>
                 <div>
                   <p className='text-black'>{meal.title}</p>
-                  {meal.items.map((item, j) => {
-                    return (
-                      <span key={j} className='flex items-center gap-2'>
-                        <p className='text-[#696969]'>{item.name}</p>
-                        {item.dietary.map((symb, k) => {
-                          return (
-                            <img
-                              key={k}
-                              className='w-5'
-                              src={matchLogo(symb)}
-                              alt='Dietary Restriction Logo'
-                            />
-                          )
-                        })}
-                      </span>
-                    )
-                  })}
                   <p className='text-[#A7A7A7]'>{meal.provider}</p>
                 </div>
                 <div className='w-5 md:w-2/6'></div>
@@ -136,46 +118,14 @@ const WorkshopsFood: React.FC = () => {
           })}
         </ul>
 
-        <div className='flex flex-col gap-2 rounded-lg bg-gray p-5 text-black'>
-          <span className='flex items-center gap-2'>
-            <img
-              className='w-5'
-              src={GlutenFreeLogo}
-              alt='Dietary Restriction Logo'
-            />
-            <p>Gluten Free</p>
-          </span>
-          <span className='flex items-center gap-2'>
-            <img
-              className='w-5'
-              src={VegetairanLogo}
-              alt='Dietary Restriction Logo'
-            />
-            <p>Vegetarian</p>
-          </span>
-          <span className='flex items-center gap-2'>
-            <img
-              className='w-5'
-              src={VeganLogo}
-              alt='Dietary Restriction Logo'
-            />
-            <p>Vegan</p>
-          </span>
-          <span className='flex items-center gap-2'>
-            <img
-              className='w-5'
-              src={PlusLogo}
-              alt='Dietary Restriction Logo'
-            />
-            <p>All Weekend Long:</p>
-          </span>
-          <ul className='list-disc pl-10'>
-            <li>Fruit Snacks</li>
-            <li>Oreos</li>
-            <li>Lays</li>
-            <li>Red Vines</li>
-          </ul>
-        </div>
+        <ul className='space-y-3 rounded-lg bg-gray p-5 text-black'>
+          <li>
+            All meals will have dietary accomedations (vegan, vegetarian,
+            dairy-free, egg-free, gluten-free, halal, nut-free, seed-free,
+            etc.).
+          </li>
+          <li>Snacks and drinks will be provided at each meal as well.</li>
+        </ul>
       </div>
     </div>
   )

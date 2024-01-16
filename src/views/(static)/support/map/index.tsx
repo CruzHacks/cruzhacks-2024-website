@@ -25,11 +25,11 @@ const maps = [
   //   title: "Stevenson Event Center Floorplan",
   //   map: <StevensonFloorPlan />,
   // },
-  // {
-  //   id: 1,
-  //   title: "East Remote Lot to Stevenson Event Center",
-  //   map: <StevensonEastRemoteLot />,
-  // },
+  {
+    id: 1,
+    title: "East Remote Lot to Stevenson Event Center",
+    map: <StevensonEastRemoteLot />,
+  },
 ]
 
 const Map: React.FC = () => {
@@ -50,7 +50,7 @@ const Map: React.FC = () => {
           Event Maps
         </h1>
 
-        {/* <button
+        <button
           onClick={() => setRevealSelections(!revealSelections)}
           onKeyDown={() => setRevealSelections(!revealSelections)}
           className='flex flex-col items-stretch justify-center gap-1 rounded-xl bg-blue-imperial p-5 shadow-md'
@@ -69,13 +69,13 @@ const Map: React.FC = () => {
                   tabIndex={i}
                   onClick={() => select(mapData.id)}
                   onKeyDown={() => select(mapData.id)}
-                  className='rounded-lg p-3 text-left hover:bg-[#E6E6E6]'
+                  className='rounded-lg p-3 text-left hover:bg-blue-royal'
                 >
                   {mapData.title}
                 </div>
               )
             })}
-        </button> */}
+        </button>
         {maps[selectedMapIdx].map}
       </div>
     </div>
