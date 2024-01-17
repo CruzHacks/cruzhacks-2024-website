@@ -49,10 +49,10 @@ const QRCheckInContainer: React.FC = () => {
           {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
           <video
             ref={ref}
-            className='max-w-80 h-full max-h-80 w-full bg-blue-imperial'
+            className='h-full max-h-80 w-full max-w-80 bg-blue-imperial'
           />
 
-          <p className='max-w-80 w-full text-center font-subtext text-sm text-white/70'>
+          <p className='w-full max-w-80 text-center font-subtext text-sm text-white/70'>
             When prompted, make sure to enable{" "}
             <CameraIcon className='-mt-0.5 inline-block h-4 w-4' /> permissions.
           </p>

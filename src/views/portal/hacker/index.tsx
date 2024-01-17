@@ -1,6 +1,6 @@
 import React from "react"
 import Sidebar from "../Sidebar"
-import { CameraIcon, HomeIcon } from "@heroicons/react/24/outline"
+import { CameraIcon, HomeIcon , UserGroupIcon } from "@heroicons/react/24/outline"
 
 const nav = [
   {
@@ -12,6 +12,11 @@ const nav = [
     name: "Check In",
     href: "/portal/hacker/check-in",
     icon: CameraIcon,
+  },
+  {
+    name: "Teams",
+    href: "/portal/hacker/teams",
+    icon: UserGroupIcon,
   },
 ]
 
