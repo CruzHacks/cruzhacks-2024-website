@@ -2,7 +2,7 @@ import React from "react"
 import { useZxing } from "react-zxing"
 import { checkInUser } from "../../../../utils/apis/cloudFunctions"
 import toast from "react-hot-toast"
-import { isString } from "../../../../utils/string"
+import { classNames, isString } from "../../../../utils/string"
 import { CameraIcon } from "@heroicons/react/24/outline"
 import type { User } from "firebase/auth"
 import useAuth from "../../../../hooks/useAuth"
@@ -21,14 +21,13 @@ const QRCheckInContainer: React.FC = () => {
       console.error(error)
     },
   })
-  const [lastScanned, setLastScanned] = React.useState<User>()
+  const [lastScanned, setLastScanned] = React.useState<User>(user)
 
   const handleScanUID = async (result: string) => {
     try {
       if (!user) throw "No user session found"
       const uid = result
       const hacker = await checkInUser(user, uid)
-      console.log("Scanned", hacker)
 
       setLastScanned(hacker)
       toast.success(`Successfully checked in ${hacker.displayName}`)
@@ -52,12 +51,12 @@ const QRCheckInContainer: React.FC = () => {
         </p>
       </div>
 
-      <div className='flex w-full flex-col items-center justify-center gap-5'>
-        <div className='flex w-fit flex-col items-center justify-center gap-3 rounded-3xl bg-[#4659FF]/10 p-5 md:p-10'>
+      <div className='flex w-full min-w-0 flex-col items-center justify-center gap-5 md:flex-row md:items-stretch'>
+        <div className='flex w-fit max-w-80 flex-col items-center justify-center gap-3 rounded-3xl bg-[#4659FF]/10 p-5 md:p-10'>
           {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
           <video
             ref={ref}
-            className='h-full max-h-80 w-full max-w-80 bg-blue-imperial'
+            className='aspect-square h-auto w-full bg-blue-imperial'
           />
 
           <p className='w-full max-w-80 text-center font-subtext text-sm text-white/70'>
@@ -66,13 +65,36 @@ const QRCheckInContainer: React.FC = () => {
           </p>
         </div>
         {lastScanned && (
-          <div className='flex w-fit flex-col items-center justify-center gap-3 rounded-3xl bg-[#4659FF]/10 p-5 md:p-10'>
-            <h2 className='font-title text-xs'>Last Scanned</h2>
-            <p>{lastScanned.email}</p>
-            <p>{lastScanned.displayName}</p>
+          <div className='flex w-full max-w-80 flex-col gap-3 rounded-3xl bg-[#4659FF]/10 p-5 md:max-w-none md:p-10'>
+            <h2 className='font-title'>Last Scanned</h2>
+            <ul className='list-disc space-y-3 ps-8'>
+              <li className='font-subtext font-semibold'>
+                Name:{" "}
+                <span
+                  className={classNames(
+                    !lastScanned.displayName
+                      ? "italic text-pink/70"
+                      : "text-pink",
+                    "font-normal"
+                  )}
+                >
+                  {lastScanned.displayName ?? "< NO NAME >"}
+                </span>
+              </li>
+              <li className='font-subtext font-semibold'>
+                Email:{" "}
+                <span
+                  className={classNames(
+                    !lastScanned.email ? "italic text-pink/90" : "text-pink",
+                    "font-normal"
+                  )}
+                >
+                  {lastScanned.email ?? "< NO NAME >"}
+                </span>
+              </li>
+            </ul>
           </div>
         )}
-        <pre>{JSON.stringify(lastScanned, null, 2)}</pre>
       </div>
     </div>
   )

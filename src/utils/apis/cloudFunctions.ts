@@ -311,7 +311,7 @@ export const checkInUser = async (userSession: User, uid: string) => {
 
     if (error) throw new Error(error)
 
-    return data as User
+    return data.userRecord as User
   } catch (err) {
     if (isAxiosError(err)) {
       if (err.response?.data?.error) {

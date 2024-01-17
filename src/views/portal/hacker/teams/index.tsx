@@ -42,7 +42,6 @@ const TeamHacker = () => {
   }, [])
 
   useEffect(() => {
-    console.log("fromt useEffect", teamPage)
     teamPage.teamName !== "" ? setTeamStatus("INTEAM") : setTeamStatus("JOIN")
   }, [teamPage])
 
