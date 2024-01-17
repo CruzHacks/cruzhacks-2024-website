@@ -21,7 +21,7 @@ const QRCheckInContainer: React.FC = () => {
       console.error(error)
     },
   })
-  const [lastScanned, setLastScanned] = React.useState<User>(user)
+  const [lastScanned, setLastScanned] = React.useState<User>()
 
   const handleScanUID = async (result: string) => {
     try {
