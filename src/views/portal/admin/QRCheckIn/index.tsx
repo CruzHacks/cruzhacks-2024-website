@@ -17,6 +17,7 @@ const QRCheckInContainer: React.FC = () => {
       console.log(result)
       handleScanUID(result.getText())
     },
+    timeBetweenDecodingAttempts: 100,
     onError: error => {
       console.error(error)
     },
