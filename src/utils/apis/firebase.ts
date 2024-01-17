@@ -9,7 +9,6 @@ import {
   updateDoc,
   deleteDoc,
   setDoc,
-  addDoc,
 } from "firebase/firestore"
 import { db } from "../firebaseapp"
 import {
