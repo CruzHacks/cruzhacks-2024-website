@@ -5,8 +5,13 @@ import toast from "react-hot-toast"
 import { isString } from "../../../../utils/string"
 import { CameraIcon } from "@heroicons/react/24/outline"
 import type { User } from "firebase/auth"
+import useAuth from "../../../../hooks/useAuth"
 
 const QRCheckInContainer: React.FC = () => {
+  const {
+    auth: { user },
+  } = useAuth()
+
   const { ref } = useZxing({
     onDecodeResult: result => {
       console.log(result)
@@ -20,8 +25,9 @@ const QRCheckInContainer: React.FC = () => {
 
   const handleScanUID = async (result: string) => {
     try {
+      if (!user) throw "No user session found"
       const uid = result
-      const hacker = await checkInUser(uid)
+      const hacker = await checkInUser(user, uid)
       setLastScanned(hacker)
       toast.success(`Successfully checked in ${hacker.displayName}`)
     } catch (error) {

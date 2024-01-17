@@ -294,11 +294,16 @@ export const getStatistics = async () => {
 /**
  * CruzHacks-2024-Backend API endpoint for checking in a user
  */
-export const checkInUser = async (uid: string) => {
+export const checkInUser = async (userSession: User, uid: string) => {
   try {
+    const idToken = await userSession.getIdToken(false)
+
     const response = await axios.post(`${API_URL}/auth/checkIn`, null, {
       params: {
         uid,
+      },
+      headers: {
+        Authorization: `Bearer ${idToken}`,
       },
     })
 
