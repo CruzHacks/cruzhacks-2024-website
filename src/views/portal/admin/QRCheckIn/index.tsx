@@ -28,6 +28,8 @@ const QRCheckInContainer: React.FC = () => {
       if (!user) throw "No user session found"
       const uid = result
       const hacker = await checkInUser(user, uid)
+      console.log("Scanned", hacker)
+
       setLastScanned(hacker)
       toast.success(`Successfully checked in ${hacker.displayName}`)
     } catch (error) {
@@ -50,7 +52,7 @@ const QRCheckInContainer: React.FC = () => {
         </p>
       </div>
 
-      <div className='flex w-full items-center justify-center'>
+      <div className='flex w-full flex-col items-center justify-center gap-5'>
         <div className='flex w-fit flex-col items-center justify-center gap-3 rounded-3xl bg-[#4659FF]/10 p-5 md:p-10'>
           {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
           <video
@@ -70,6 +72,7 @@ const QRCheckInContainer: React.FC = () => {
             <p>{lastScanned.displayName}</p>
           </div>
         )}
+        <pre>{JSON.stringify(lastScanned, null, 2)}</pre>
       </div>
     </div>
   )
