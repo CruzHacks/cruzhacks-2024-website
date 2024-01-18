@@ -13,6 +13,10 @@ const StatisticsDisplay = () => {
 
   return (
     <div className='space-y-10'>
+      <h2 className='text-center font-title text-4xl uppercase'>
+        CruzHacks 2024 Statistics
+      </h2>
+
       {isLoading && (
         <div className='flex h-60 justify-center'>
           <div
