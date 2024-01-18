@@ -1,5 +1,6 @@
 import type { User } from "@firebase/auth"
 import {
+  ApplicationSchemaDownload,
   ApplicationSchemaDto,
   CheckRoleSynced,
   ErrorResponse,
@@ -213,6 +214,35 @@ export const submitApplicationUnauthed = async (
 }
 
 /**
+ * CruzHacks-2024-Backend API endpoint for getting full hacker export
+ */
+export const getFullHackerExport = async (user: User) => {
+  try {
+    const idToken = await user.getIdToken(false)
+
+    const response = await axios.get(`${API_URL}/application/export`, {
+      headers: {
+        Authorization: `Bearer ${idToken}`,
+      },
+    })
+    const { data, error } = response.data
+
+    if (error) throw new Error(error)
+
+    return data.applications as ApplicationSchemaDownload[]
+  } catch (err) {
+    if (isAxiosError(err)) {
+      if (err.response?.data?.data?.message) {
+        throw new Error(err.response.data.data.message)
+      }
+      console.error(err)
+      throw new Error(err.message)
+    }
+    throw err as Error
+  }
+}
+
+/**
  * CruzHacks-2024-Backend API endpoint for genereating and retrieving statistics
  */
 export const generateStatistics = async () => {
@@ -248,6 +278,40 @@ export const getStatistics = async () => {
     if (error) throw new Error(error)
 
     return data as Statistics
+  } catch (err) {
+    if (isAxiosError(err)) {
+      if (err.response?.data?.error) {
+        console.error(err.response.data.error)
+        throw new Error(err.response.data.error)
+      }
+      console.error(err)
+      throw new Error(err.message)
+    }
+    throw err as Error
+  }
+}
+
+/**
+ * CruzHacks-2024-Backend API endpoint for checking in a user
+ */
+export const checkInUser = async (userSession: User, uid: string) => {
+  try {
+    const idToken = await userSession.getIdToken(false)
+
+    const response = await axios.post(`${API_URL}/auth/checkIn`, null, {
+      params: {
+        uid,
+      },
+      headers: {
+        Authorization: `Bearer ${idToken}`,
+      },
+    })
+
+    const { data, error } = response.data
+
+    if (error) throw new Error(error)
+
+    return data.userRecord as User
   } catch (err) {
     if (isAxiosError(err)) {
       if (err.response?.data?.error) {
