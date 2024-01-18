@@ -26,7 +26,7 @@ export const foodInfo = [
       {
         title: "Breakfast",
         provider: "iHOP",
-        time: "8:00 am",
+        time: "9:00 am",
       },
       {
         title: "Lunch",

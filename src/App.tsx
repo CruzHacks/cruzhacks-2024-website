@@ -12,7 +12,7 @@ import AdminPortal from "./views/portal/admin"
 import DashboardAdmin from "./views/portal/admin/dashboard"
 import ApplicationsAdmin from "./views/portal/admin/applications"
 import UsersAdmin from "./views/portal/admin/users"
-import TeamsHacker from "./views/portal/hacker/teams"
+import TeamsHacker from "./views/portal/hacker/team"
 import TeamAdmin from "./views/portal/admin/teams"
 import PortalApplicant from "./views/portal/applicant"
 import DashboardApplicant from "./views/portal/applicant/DashboardApplicant"
@@ -126,9 +126,8 @@ const App: React.FC = () => {
         <Route element={<RoleProtectedRoute allowedRole='hacker' />}>
           <Route path='portal/hacker' element={<HackerPortal />}>
             <Route index element={<DashbaordHacker />} />
-            {/* Hacker Portal sub-routes go here*/}
             <Route path='check-in' element={<QRCodeHacker />} />
-            <Route path='teams' element={<TeamsHacker />} />
+            <Route path='team' element={<TeamsHacker />} />
           </Route>
         </Route>
         <Route element={<RoleProtectedRoute allowedRole='admin' />}>

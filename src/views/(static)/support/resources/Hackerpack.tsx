@@ -17,7 +17,7 @@ const Hackerpack: React.FC = () => {
         </p>
         <Button
           text='View Hacker Packet'
-          link='https://docs.google.com/document/u/1/d/e/2PACX-1vTHyuHwcNdhtdovapKJCD5SAlRBkmFsfolBVPRDmoN1O9l6E-nQ0j8AAYWr5_edgVV6JgqdbIkhUYnQ/pub'
+          link='https://docs.google.com/document/d/e/2PACX-1vQMV0TiHt3CiEraUKBhTJ3a0lDoyawcQzLgqOhvDgAzS42WUX1AfDmFlYwgDySs9TmEkh1Cm0110qLx/pub'
           type='full'
           override='w-full md:w-1/2'
         />

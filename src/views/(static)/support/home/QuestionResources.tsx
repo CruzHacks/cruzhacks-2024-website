@@ -14,13 +14,13 @@ const QuestionResources: React.FC = () => {
         </p>
         <Button
           text='Join Our Discord'
-          link='https://www.google.com/url?q=https://join.slack.com/t/cruzhacks2023-7db8697/shared_invite/zt-1mqu9lds7-x6Lj7T126Bc2p1VkaZt05g&sa=D&source=editors&ust=1675319183050096&usg=AOvVaw1Fxo5ltmaqO1rdNPDcvCif'
+          link='https://discord.gg/rGjDTCk3Nx'
           type='full'
           override='w-full'
         />
         <a
           className='text-blue-button underline'
-          href='https://docs.google.com/document/u/1/d/e/2PACX-1vTHyuHwcNdhtdovapKJCD5SAlRBkmFsfolBVPRDmoN1O9l6E-nQ0j8AAYWr5_edgVV6JgqdbIkhUYnQ/pub'
+          href='https://docs.google.com/document/d/e/2PACX-1vQMV0TiHt3CiEraUKBhTJ3a0lDoyawcQzLgqOhvDgAzS42WUX1AfDmFlYwgDySs9TmEkh1Cm0110qLx/pub'
         >
           Go to Hack Pack
         </a>

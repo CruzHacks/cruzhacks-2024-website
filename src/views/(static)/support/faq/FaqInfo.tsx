@@ -58,20 +58,6 @@ export const FAQsInfo = [
     ),
   },
   {
-    question: "What are the prize tracks?",
-    answer: (
-      <>
-        CruzHacks 2024 offers 4 main prize tracks (Health Hacks, Justice Hacks,
-        Sustainability Hacks, and Education Hacks). Hackers can submit their
-        project to one of these 4 main prize tracks. We also offer 4 category
-        prizes (Best Beginner, Best UI/UX, Best AI, and Best Slug Hack). Hackers
-        can submit their project to any number of these 4 categories. There will
-        also be sponsors hosting some of their own prize tracks. Hackers can
-        submit their project to any number of sponsored prize tracks.
-      </>
-    ),
-  },
-  {
     question: "How many people can be on my team?",
     answer: <>There is a maximum of 4 people per team.</>,
   },

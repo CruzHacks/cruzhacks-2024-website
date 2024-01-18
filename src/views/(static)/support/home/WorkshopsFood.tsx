@@ -118,7 +118,7 @@ const WorkshopsFood: React.FC = () => {
           })}
         </ul>
 
-        <ul className='space-y-3 rounded-lg bg-gray p-5 text-black'>
+        <ul className='space-y-3 rounded-lg bg-[#dbdbdb] p-5 text-black'>
           <li>
             All meals will have dietary accomedations (vegan, vegetarian,
             dairy-free, egg-free, gluten-free, halal, nut-free, seed-free,
