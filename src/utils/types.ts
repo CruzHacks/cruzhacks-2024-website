@@ -1,3 +1,4 @@
+import { Dispatch } from "react"
 import { z } from "zod"
 
 export type ErrorResponse = { message: string }
@@ -179,6 +180,29 @@ export const ApplicationSchemaDto = z.object({
 })
 export type ApplicationSchemaDto = z.infer<typeof ApplicationSchemaDto>
 
+// Application Download Schema, used for downloading application data from the
+// database
+export const ApplicationSchemaDownload = z.object({
+  user: z.object({
+    email: z.string(),
+    phone_number: z.string(),
+    display_name: z.string(),
+    checked_in: z.boolean().optional(),
+  }),
+  submission: z.object({
+    status: z.enum(ApplicationStatuses),
+    rsvp: z.boolean().optional(),
+    _submitted: z.any(),
+  }),
+  demographics: AppDemographicsSchema,
+  short_response: AppShortResponseSchema,
+  logistics: AppLogisticsSchema,
+  socials: AppSocialsSchema,
+})
+export type ApplicationSchemaDownload = z.infer<
+  typeof ApplicationSchemaDownload
+>
+
 // Tailwindcss Heroicon
 export type HeroIcon = React.ForwardRefExoticComponent<
   Omit<React.SVGProps<SVGSVGElement>, "ref"> & {
@@ -186,6 +210,65 @@ export type HeroIcon = React.ForwardRefExoticComponent<
     titleId?: string | undefined
   } & React.RefAttributes<SVGSVGElement>
 >
+
+// Team Creation
+export type InvitationMode = "JOIN" | "CREATE" | "INTEAM"
+
+export interface TeamProps {
+  teamName: string
+  teamLeader: string
+  invites: Array<InvitationProps>
+}
+
+export interface TeamMemberProps {
+  memberName: string
+  memberEmail: string
+}
+
+export interface InvitationProps {
+  teamName: string
+}
+
+export interface TeamFormationProps {
+  teamName: string
+  teamMembers: Array<TeamMemberProps>
+  invitedTeamMembers: Array<TeamMemberProps>
+  teamLeader: string
+  lockedIn: boolean
+  invites: Array<InvitationProps>
+  devPostLink: string | undefined
+}
+
+export interface TeamDisplayProps {
+  teamPage: TeamFormationProps
+  setTeamPage: Dispatch<TeamFormationProps>
+  setTeamStatus: Dispatch<InvitationMode>
+}
+
+export interface TeamBuilderProps {
+  teamPage: TeamFormationProps
+  teamStatus: InvitationMode
+  setTeamPage: Dispatch<TeamFormationProps>
+  setTeamStatus: Dispatch<InvitationMode>
+}
+
+export interface TeamInviteProps {
+  teamPage: TeamFormationProps
+  setTeamPage: Dispatch<TeamFormationProps>
+}
+
+export interface TeamSubmitProps {
+  teamPage: TeamFormationProps
+  setTeamPage: Dispatch<TeamFormationProps>
+}
+
+export interface TeamMemberTagProps {
+  name: string
+  email: string
+  type: "INVITED" | "ACCEPTED"
+  teamLeader: string
+  setTeamPage: Dispatch<TeamFormationProps>
+}
 
 // Statistics Types
 export type ReChartsArray = { name: string; value: number }[]

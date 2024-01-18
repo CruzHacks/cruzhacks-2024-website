@@ -5,6 +5,7 @@ import {
   NewspaperIcon,
   UserGroupIcon,
   UsersIcon,
+  CameraIcon,
 } from "@heroicons/react/24/outline"
 
 const nav = [
@@ -14,9 +15,14 @@ const nav = [
     icon: HomeIcon,
   },
   {
-    name: "Applications",
-    href: "/portal/admin/applications",
-    icon: NewspaperIcon,
+    name: "QR Check-In",
+    href: "/portal/admin/check-in",
+    icon: CameraIcon,
+  },
+  {
+    name: "Teams",
+    href: "/portal/admin/teams",
+    icon: UserGroupIcon,
   },
   {
     name: "Users",
@@ -24,9 +30,9 @@ const nav = [
     icon: UsersIcon,
   },
   {
-    name: "Teams",
-    href: "/portal/admin/teams",
-    icon: UserGroupIcon,
+    name: "Applications",
+    href: "/portal/admin/applications",
+    icon: NewspaperIcon,
   },
 ]
 

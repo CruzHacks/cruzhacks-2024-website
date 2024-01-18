@@ -12,7 +12,8 @@ import AdminPortal from "./views/portal/admin"
 import DashboardAdmin from "./views/portal/admin/dashboard"
 import ApplicationsAdmin from "./views/portal/admin/applications"
 import UsersAdmin from "./views/portal/admin/users"
-import TeamsAdmin from "./views/portal/admin/teams"
+import TeamsHacker from "./views/portal/hacker/teams"
+import TeamAdmin from "./views/portal/admin/teams"
 import PortalApplicant from "./views/portal/applicant"
 import DashboardApplicant from "./views/portal/applicant/DashboardApplicant"
 import useAuth from "./hooks/useAuth"
@@ -35,6 +36,10 @@ import Resources from "./views/(static)/support/resources"
 import FAQ from "./views/(static)/support/faq"
 import Support from "./views/(static)/support/home"
 import StaticWrapper from "./views/(static)"
+
+import QRCheckIn from "./views/portal/admin/QRCheckIn"
+import DashbaordHacker from "./views/portal/hacker/dashboard"
+import QRCodeHacker from "./views/portal/hacker/QRCode"
 
 const App: React.FC = () => {
   const {
@@ -120,7 +125,10 @@ const App: React.FC = () => {
 
         <Route element={<RoleProtectedRoute allowedRole='hacker' />}>
           <Route path='portal/hacker' element={<HackerPortal />}>
+            <Route index element={<DashbaordHacker />} />
             {/* Hacker Portal sub-routes go here*/}
+            <Route path='check-in' element={<QRCodeHacker />} />
+            <Route path='teams' element={<TeamsHacker />} />
           </Route>
         </Route>
         <Route element={<RoleProtectedRoute allowedRole='admin' />}>
@@ -131,8 +139,9 @@ const App: React.FC = () => {
               path='applications/review/:email'
               element={<ApplicationsReviewAdmin />}
             />
-            <Route path='teams' element={<TeamsAdmin />} />
+            <Route path='teams' element={<TeamAdmin />} />
             <Route path='users' element={<UsersAdmin />} />
+            <Route path='check-in' element={<QRCheckIn />} />
           </Route>
         </Route>
 
