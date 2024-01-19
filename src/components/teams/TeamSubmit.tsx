@@ -5,13 +5,25 @@ import toast from "react-hot-toast"
 import TextInput from "../inputs/TextInput"
 import { LinkIcon } from "@heroicons/react/24/outline"
 import { TeamSubmitProps } from "../../utils/types"
+import { Combobox } from "@headlessui/react"
+import ComboboxInput from "../inputs/ComboboxInput"
+
 
 export const TeamSubmit = (props: TeamSubmitProps) => {
   const {
     auth: { user },
   } = useAuth()
 
+
+  type ComboboxInput = {
+    inputType: "combo"
+    field: string
+    options: string[]
+  }
+
   const [linkInput, setLinkInput] = useState(props.teamPage.devPostLink)
+  const [state, setState] = useState("")
+
 
   if (!user) throw new Error("User could not be fetched from session")
 
@@ -39,8 +51,17 @@ export const TeamSubmit = (props: TeamSubmitProps) => {
             setLinkInput(e.target.value),
         }}
       />
-
-      <button
+        <form>
+        <ComboboxInput
+                      query={state ||""}
+                      setQuery={val => setState(field) }
+                      name={state}
+                      options={["Justice", "Sustainability", "Health", "Education"]}
+                      control={control}
+                      error={error}
+                    />
+            <button
+            inputType="submit"
         className='-mt-5 flex h-16 w-full items-center justify-center rounded-md bg-white px-3 py-1.5 font-subtext text-2xl leading-6 text-blue-imperial shadow-sm transition-colors hover:bg-white/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-royal disabled:bg-white/50'
         onClick={() => {
           let tempLink = linkInput
@@ -48,7 +69,7 @@ export const TeamSubmit = (props: TeamSubmitProps) => {
             tempLink = "http://" + tempLink
             setLinkInput(tempLink)
           }
-          submitLink(user, tempLink)
+          submitLink(user, tempLink, )
             .then(team => {
               props.setTeamPage(team)
               toast.success("Link Submitted!")
@@ -60,6 +81,8 @@ export const TeamSubmit = (props: TeamSubmitProps) => {
       >
         SUBMIT
       </button>
+        </form>
+      
     </div>
   )
 }

@@ -21,6 +21,7 @@ const TeamHacker = () => {
     lockedIn: false,
     invites: [],
     devPostLink: "",
+    prizeTrack: "",
   }
 
   // reducer for teamPage to set all non-set fields in teamPage to initial fields
