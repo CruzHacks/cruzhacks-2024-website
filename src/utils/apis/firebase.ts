@@ -386,6 +386,7 @@ export const deleteTeam = async (user: User, teamName: string) => {
       lockedIn: false,
       invites: [],
       devPostLink: "",
+      prizeTrack: "",
     } as TeamFormationProps
   } catch (error) {
     console.error(error)
