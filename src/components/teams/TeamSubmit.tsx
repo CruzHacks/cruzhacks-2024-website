@@ -24,6 +24,18 @@ export const TeamSubmit = (props: TeamSubmitProps) => {
   const [linkInput, setLinkInput] = useState(props.teamPage.devPostLink)
   const [state, setState] = useState("")
 
+  const handleSubmit() = {
+    submitLink(user, tempLink, )
+    .then(team => {
+      props.setTeamPage(team)
+      toast.success("Link Submitted!")
+    })
+    .catch(error => {
+      toast.error(error.message)
+    })
+  }
+ 
+
 
   if (!user) throw new Error("User could not be fetched from session")
 
@@ -51,7 +63,7 @@ export const TeamSubmit = (props: TeamSubmitProps) => {
             setLinkInput(e.target.value),
         }}
       />
-        <form>
+        <form onSubmit={handleSubmit(handleLogin)} >
         <ComboboxInput
                       query={state ||""}
                       setQuery={val => setState(field) }
@@ -61,7 +73,7 @@ export const TeamSubmit = (props: TeamSubmitProps) => {
                       error={error}
                     />
             <button
-            inputType="submit"
+            type="submit"
         className='-mt-5 flex h-16 w-full items-center justify-center rounded-md bg-white px-3 py-1.5 font-subtext text-2xl leading-6 text-blue-imperial shadow-sm transition-colors hover:bg-white/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-royal disabled:bg-white/50'
         onClick={() => {
           let tempLink = linkInput
@@ -69,14 +81,7 @@ export const TeamSubmit = (props: TeamSubmitProps) => {
             tempLink = "http://" + tempLink
             setLinkInput(tempLink)
           }
-          submitLink(user, tempLink, )
-            .then(team => {
-              props.setTeamPage(team)
-              toast.success("Link Submitted!")
-            })
-            .catch(error => {
-              toast.error(error.message)
-            })
+          
         }}
       >
         SUBMIT
