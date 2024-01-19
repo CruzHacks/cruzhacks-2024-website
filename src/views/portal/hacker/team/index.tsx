@@ -6,7 +6,6 @@ import useAuth from "../../../../hooks/useAuth"
 import { TeamBuilder } from "../../../../components/teams/TeamBuilder"
 import { TeamInvite } from "../../../../components/teams/TeamInvite"
 import { classNames } from "../../../../utils/string"
-import { TeamSubmit } from "../../../../components/teams/TeamSubmit"
 
 const TeamHacker = () => {
   const {
@@ -116,11 +115,6 @@ const TeamHacker = () => {
                 </div>
               )}
             </div>
-            {teamPage.teamLeader === user?.email && teamPage.lockedIn && (
-              <div className='w-full min-w-fit rounded-3xl bg-[#4659FF]/10 p-5 md:p-10 xl:flex-1'>
-                <TeamSubmit teamPage={teamPage} setTeamPage={setTeamPage} />
-              </div>
-            )}
           </div>
         ) : (
           <div className='flex w-full min-w-0 max-w-2xl flex-row rounded-xl bg-[#4659FF]/10 p-5 drop-shadow-lg md:p-10'>
