@@ -12,54 +12,80 @@ import {
 } from "../../../../components/Carousel"
 import Star from "../../../../components/Star"
 
+import LinkedIn from "../../../../assets/icons/LinkedIn.svg"
+
+import AlexanderWolf from "../../../../assets/speakers/Alexander Wolf.jpg"
+import DougErickson from "../../../../assets/speakers/Doug Erickson.jpg"
+import MarkAdams from "../../../../assets/speakers/Mark Adams.jpg"
+import JohnathonChu from "../../../../assets/speakers/Johnathon Chu.jpg"
+import LilaTretikov from "../../../../assets/speakers/Lila Tretikov.jpg"
+import CooperNewby from "../../../../assets/speakers/Cooper Newby.jpg"
+import GuyKawasaki from "../../../../assets/speakers/Guy Kawasaki.jpg"
+import KarenMiga from "../../../../assets/speakers/Karen Miga.jpg"
+import { Link } from "react-router-dom"
+
 type Speaker = {
   image: string
   name: string
   blurb: string
+  linkedIn: string
 }
 
 const speakerData: Speaker[] = [
-  // {
-  //   image: MichaelLopp,
-  //   name: "Micheal Lopp",
-  //   blurb: "Senior Director of Engineering @ Apple; UCSC Alumni",
-  // },
-  // {
-  //   image: RaghavJandhyala,
-  //   name: "Raghav Jandhyala",
-  //   blurb: "Chief Product Officer, Microsoft Dynamics 365",
-  // },
-  // {
-  //   image: MarkAdams,
-  //   name: "Mark Adams",
-  //   blurb: `Co-founder of CruzHacks / OnePlus Amazon Account Manager`,
-  // },
-  // {
-  //   image: BrentHaddad,
-  //   name: "Brent Haddad",
-  //   blurb: `Brent Haddad, MBA, Ph.D.
-  //   Professor of Environmental Studies, UCSC
-  //   Co-founder, HackUCSC`,
-  // },
-  // {
-  //   image: NadaMiljkovic,
-  //   name: "Nada Miljkovic",
-  //   blurb: `Co-Founder @ GetVirtual; Project Manager for UCSC’s
-  //   Center for Innovation and Entrepreneurial Development`,
-  // },
-  // {
-  //   image: GregorVebleMikic,
-  //   name: "Gregor Veble Mikić",
-  //   blurb: "Chief Aerodynamicist at Joby Aviation",
-  // },
-  // {
-  //   image: AlexanderWolf,
-  //   name: "Alexander Wolf",
-  //   blurb: "Dean of the Baskin School of Engineering at UC Santa Cruz",
-  // },
+  {
+    image: LilaTretikov,
+    name: "Lila Tretikov",
+    blurb:
+      "Deputy Chief Technology Officer @ Microsoft, Founder of GrokDigital ",
+    linkedIn: "https://www.linkedin.com/in/lilatretikov",
+  },
+  {
+    image: GuyKawasaki,
+    name: "Guy Kawasaki",
+    blurb:
+      "Chief Evangelist of Canva, Creator of Remarkable People Podcast, Adjunct Professor of University of New South Wales, Chief Evangelist of Apple ",
+    linkedIn: "https://www.linkedin.com/in/guykawasaki",
+  },
+  {
+    image: CooperNewby,
+    name: "Cooper Newby",
+    blurb: "Co-Founder of Classet, Co-founder of BlueCrew",
+    linkedIn: "https://www.linkedin.com/in/coopernewby/",
+  },
+  {
+    image: DougErickson,
+    name: "Doug Erickson",
+    blurb: "Executive Director @ Santa Cruz Works",
+    linkedIn: "https://www.linkedin.com/in/ericksondoug/",
+  },
+  {
+    image: MarkAdams,
+    name: "Mark Adams",
+    blurb: "E-Commerce P&L Management",
+    linkedIn: "https://www.linkedin.com/in/adamsmarkrichard/",
+  },
+  {
+    image: JohnathonChu,
+    name: "Johnathon Chu",
+    blurb: "Director of Engineering  @ Rapid Robotics, Inc",
+    linkedIn: "https://www.linkedin.com/in/jmchuster/",
+  },
+  {
+    image: KarenMiga,
+    name: "Karen Miga",
+    blurb:
+      "Assistant Professor Biomolecular Engineering Department, Principal Investigator @ Miga Lab",
+    linkedIn: "https://www.linkedin.com/in/karen-miga-77335625",
+  },
+  {
+    image: AlexanderWolf,
+    name: "Alexander Wolf",
+    blurb: "Dean of the Baskin School of Engineering at UC Santa Cruz",
+    linkedIn: "https://www.linkedin.com/in/alexanderlwolf/",
+  },
 ]
 
-const SpeakerCard = ({ image, name, blurb }: Speaker) => {
+const SpeakerCard = ({ image, name, blurb, linkedIn }: Speaker) => {
   return (
     <div className='flex w-80 flex-col items-center justify-center gap-3 rounded-xl bg-blue-royal p-5 ring-2 ring-inset ring-white/20'>
       <img
@@ -69,6 +95,13 @@ const SpeakerCard = ({ image, name, blurb }: Speaker) => {
       />
       <p className='text-center font-title text-2xl'>{name}</p>
       <p className='text-center font-subtext'>{blurb}</p>
+      <Link
+        to={linkedIn}
+        target='_blank'
+        className='flex items-center gap-2 rounded-full bg-blue-imperial p-3'
+      >
+        <img src={LinkedIn} alt='LinkedIn' className='h-6 w-6' />
+      </Link>
     </div>
   )
 }
