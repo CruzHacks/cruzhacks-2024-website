@@ -1,3 +1,4 @@
+import { Dispatch } from "react"
 import { z } from "zod"
 
 export type ErrorResponse = { message: string }
@@ -31,7 +32,9 @@ export type UserRole = (typeof UserRoles)[number]
 
 export const ApplicationSchema = z.object({
   status: z.enum(ApplicationStatuses),
+  rsvp: z.boolean().optional(),
   email: z.string().email("Invalid email address."),
+  fullname: z.string(),
   _submitted: z.any(),
   _last_committed: z.any(),
 })
@@ -177,6 +180,29 @@ export const ApplicationSchemaDto = z.object({
 })
 export type ApplicationSchemaDto = z.infer<typeof ApplicationSchemaDto>
 
+// Application Download Schema, used for downloading application data from the
+// database
+export const ApplicationSchemaDownload = z.object({
+  user: z.object({
+    email: z.string(),
+    phone_number: z.string(),
+    display_name: z.string(),
+    checked_in: z.boolean().optional(),
+  }),
+  submission: z.object({
+    status: z.enum(ApplicationStatuses),
+    rsvp: z.boolean().optional(),
+    _submitted: z.any(),
+  }),
+  demographics: AppDemographicsSchema,
+  short_response: AppShortResponseSchema,
+  logistics: AppLogisticsSchema,
+  socials: AppSocialsSchema,
+})
+export type ApplicationSchemaDownload = z.infer<
+  typeof ApplicationSchemaDownload
+>
+
 // Tailwindcss Heroicon
 export type HeroIcon = React.ForwardRefExoticComponent<
   Omit<React.SVGProps<SVGSVGElement>, "ref"> & {
@@ -184,3 +210,113 @@ export type HeroIcon = React.ForwardRefExoticComponent<
     titleId?: string | undefined
   } & React.RefAttributes<SVGSVGElement>
 >
+
+// Team Creation
+export type InvitationMode = "JOIN" | "CREATE" | "INTEAM"
+
+export interface TeamProps {
+  teamName: string
+  teamLeader: string
+  invites: Array<InvitationProps>
+}
+
+export interface TeamMemberProps {
+  memberName: string
+  memberEmail: string
+}
+
+export interface InvitationProps {
+  teamName: string
+}
+
+export interface TeamFormationProps {
+  teamName: string
+  teamMembers: Array<TeamMemberProps>
+  invitedTeamMembers: Array<TeamMemberProps>
+  teamLeader: string
+  lockedIn: boolean
+  invites: Array<InvitationProps>
+  devPostLink: string | undefined
+  prizeTrack: string | undefined
+}
+
+export interface TeamDisplayProps {
+  teamPage: TeamFormationProps
+  setTeamPage: Dispatch<TeamFormationProps>
+  setTeamStatus: Dispatch<InvitationMode>
+}
+
+export interface TeamBuilderProps {
+  teamPage: TeamFormationProps
+  teamStatus: InvitationMode
+  setTeamPage: Dispatch<TeamFormationProps>
+  setTeamStatus: Dispatch<InvitationMode>
+}
+
+export interface TeamInviteProps {
+  teamPage: TeamFormationProps
+  setTeamPage: Dispatch<TeamFormationProps>
+}
+
+export interface TeamSubmitProps {
+  teamPage: TeamFormationProps
+  setTeamPage: Dispatch<TeamFormationProps>
+}
+
+export interface TeamMemberTagProps {
+  name: string
+  email: string
+  type: "INVITED" | "ACCEPTED"
+  teamLeader: string
+  setTeamPage: Dispatch<TeamFormationProps>
+}
+
+// Statistics Types
+export type ReChartsArray = { name: string; value: number }[]
+
+export type Statistics = {
+  submissions: {
+    per_day: ReChartsArray
+    total: number
+    accepted: number
+    rejected: number
+    approvalRate: number
+  }
+  demographics: {
+    age: ReChartsArray
+    age_range_18_to_25: ReChartsArray
+    ethnic_background: ReChartsArray
+    sexual_orientation: ReChartsArray
+    gender_identity_one: ReChartsArray
+    gender_identity_two: ReChartsArray
+    underepresented_group: ReChartsArray
+
+    country: ReChartsArray
+    ucsc_vs_non_ucsc: ReChartsArray
+    ucsc_college_affiliation: ReChartsArray
+    year_in_school: ReChartsArray
+    graduation_year: ReChartsArray
+    area_of_study: ReChartsArray
+    area_of_study_cs_ce_gd_other: ReChartsArray
+    hackathon_experience: ReChartsArray
+    first_cruzhacks: ReChartsArray
+  }
+  logistics: {
+    need_travel_reimbursement: ReChartsArray
+    need_charter_bus: ReChartsArray
+    need_campus_parking_permit: ReChartsArray
+    attendence_possible_wo_reimbursement: ReChartsArray
+
+    tshirt_size: { [key: string]: number }
+    rsvpd_tshirt_size: { [key: string]: number }
+    other_tshirt_size: ReChartsArray
+    rsvpd_other_tshirt_size: ReChartsArray
+    dietary_restrictions: { [key: string]: number }
+    rsvpd_dietary_restrictions: { [key: string]: number }
+    other_dietary_restrictions: ReChartsArray
+    rsvpd_other_dietary_restrictions: ReChartsArray
+  }
+  referral: {
+    cruzhacks_referral: ReChartsArray
+  }
+}

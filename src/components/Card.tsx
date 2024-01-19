@@ -16,21 +16,21 @@ const Card: React.FC<CardProps> = ({
   return (
     <div
       className={
-        "lg:p-50 rounded-xl bg-blue-royal/30 p-10 shadow-md md:p-20 " +
+        "lg:p-50 rounded-xl bg-[#FFF] p-10 shadow-md md:p-20 " +
         (introTitle && "md:p-10") +
         " " +
         override
       }
     >
       {introTitle && (
-        <h2 className='pb-5 text-sm font-bold uppercase md:pb-10 md:text-lg'>
+        <h2 className='pb-5 text-sm uppercase text-darkgray md:pb-10 md:text-lg'>
           {introTitle}
         </h2>
       )}
       {title && (
         <h1
           className={
-            "pb-5 font-title text-2xl uppercase text-white md:pb-10 md:text-3xl " +
+            "pb-5 text-2xl font-bold uppercase text-blue-chinese md:pb-10 md:text-3xl " +
             (introTitle ? "text-left md:text-center" : "text-center")
           }
         >
